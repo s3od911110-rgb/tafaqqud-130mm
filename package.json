@@ -1,0 +1,14 @@
+{
+  "name": "tafaqqud-130mm",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "gen:icons": "node generate-icons.mjs",
+    "build": "node build.mjs",
+    "dev": "npx serve dist"
+  },
+  "devDependencies": {
+    "sharp": "^0.33.5"
+  }
+}

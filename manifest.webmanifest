@@ -1,0 +1,33 @@
+{
+  "name": "تفقد دوام الـ130مم",
+  "short_name": "تفقد 130مم",
+  "description": "نظام التفقد والمناوبات الميداني للكتيبة الأولى مدفعية 130مم (Offline-First PWA)",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "dir": "rtl",
+  "lang": "ar",
+  "background_color": "#131e1d",
+  "theme_color": "#152121",
+  "icons": [
+    {
+      "src": "/icons/eagle-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icons/eagle-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icons/eagle-maskable.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}
