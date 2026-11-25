@@ -29,4 +29,4 @@ for (const file of ['manifest.webmanifest', 'sw.js']) {
   }
 }
 
-console.log('Build completed successfully -> dist/');
+console.log('Build v2.0.0 completed successfully -> dist/');

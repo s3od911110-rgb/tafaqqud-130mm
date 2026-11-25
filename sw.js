@@ -1,4 +1,4 @@
-const CACHE_NAME = 'tafaqqud-130mm-v1.0.0';
+const CACHE_NAME = 'tafaqqud-130mm-v2.0.0';
 const CORE_ASSETS = [
   '/',
   '/index.html',
