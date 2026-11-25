@@ -1,7 +1,7 @@
 {
   "name": "تفقد دوام الـ130مم",
   "short_name": "تفقد 130مم",
-  "description": "نظام التفقد والمناوبات الميداني للكتيبة الأولى مدفعية 130مم (Offline-First PWA)",
+  "description": "نظام التفقد والهيكلية والمناوبات والجاهزية الميدانية (Offline-First PWA)",
   "start_url": "/",
   "scope": "/",
   "display": "standalone",

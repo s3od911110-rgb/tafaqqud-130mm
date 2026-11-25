@@ -18,9 +18,9 @@
       --bg-deep: #0c1414;
       --bg-panel: #152121;
       --bg-card: #1b2a29;
-      --bg-elevated: #223533;
+      --bg-elevated: #233735;
       --border: rgba(205, 186, 161, 0.18);
-      --border-strong: rgba(205, 186, 161, 0.36);
+      --border-strong: rgba(205, 186, 161, 0.4);
       --gold: #cdbaa1;
       --gold-light: #e7d8c2;
       --gold-dark: #977f5f;
@@ -29,201 +29,293 @@
       --ok: #22c55e;
       --warn: #f59e0b;
       --danger: #ef4444;
+      --danger-deep: #dc2626;
       --info: #38bdf8;
-      --purple: #a78bfa;
       --radius: 14px;
     }
     * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
     html, body {
       margin: 0; padding: 0;
-      background: radial-gradient(circle at top center, #1d2e2b 0%, var(--bg-deep) 60%);
+      background: radial-gradient(circle at top center, #1d2e2b 0%, var(--bg-deep) 62%);
       color: var(--text-main);
       font-family: 'Cairo', system-ui, -apple-system, 'Segoe UI', Tahoma, sans-serif;
       min-height: 100vh;
       overflow-x: hidden;
     }
     button, input, select, textarea { font-family: inherit; }
-    .app-shell { max-width: 1120px; margin: 0 auto; padding-bottom: 84px; }
+    .app-shell { max-width: 1160px; margin: 0 auto; padding-bottom: 86px; }
 
-    /* Header */
+    /* Topbar */
     .topbar {
       position: sticky; top: 0; z-index: 30;
-      background: rgba(15, 24, 24, 0.92);
+      background: rgba(14, 22, 22, 0.94);
       backdrop-filter: blur(12px);
       border-bottom: 1px solid var(--border);
-      padding: 10px 14px;
-      display: flex; align-items: center; justify-content: space-between; gap: 10px;
+      padding: 9px 12px;
+      display: flex; align-items: center; justify-content: space-between; gap: 8px;
+      flex-wrap: wrap;
     }
-    .brand { display: flex; align-items: center; gap: 10px; }
+    .brand { display: flex; align-items: center; gap: 9px; }
     .brand-logo {
-      width: 42px; height: 42px; border-radius: 11px;
+      width: 40px; height: 40px; border-radius: 11px;
       background: linear-gradient(145deg, #253834, #121c1b);
       border: 1px solid var(--border-strong);
       display: flex; align-items: center; justify-content: center; flex-shrink: 0;
     }
-    .brand-title { font-size: 16px; font-weight: 800; color: var(--gold-light); line-height: 1.2; }
+    .brand-title { font-size: 15px; font-weight: 800; color: var(--gold-light); line-height: 1.2; }
     .brand-sub { font-size: 11px; color: var(--text-muted); }
-    .top-actions { display: flex; align-items: center; gap: 6px; }
+    .top-actions { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+
+    /* Battalion Selector Bar */
+    .bat-bar {
+      background: rgba(21, 33, 33, 0.92);
+      border-bottom: 1px solid var(--border);
+      padding: 8px 14px;
+      display: flex; align-items: center; justify-content: space-between; gap: 8px; flex-wrap: wrap;
+    }
+    .bat-select-wrap { display: flex; align-items: center; gap: 8px; flex: 1 1 220px; }
+    .bat-select {
+      background: var(--bg-deep); color: var(--gold-light);
+      border: 1px solid var(--border-strong); border-radius: 10px;
+      padding: 6px 10px; font-size: 13px; font-weight: 800; flex: 1;
+    }
 
     .pill {
-      display: inline-flex; align-items: center; gap: 5px;
-      padding: 4px 10px; border-radius: 999px; font-size: 11px; font-weight: 700;
+      display: inline-flex; align-items: center; gap: 4px;
+      padding: 3px 9px; border-radius: 999px; font-size: 11px; font-weight: 700;
       border: 1px solid var(--border); background: var(--bg-card); color: var(--text-main);
+      white-space: nowrap;
     }
     .pill.online { border-color: rgba(34,197,94,.4); color: #86efac; background: rgba(34,197,94,.12); }
     .pill.offline { border-color: rgba(245,158,11,.4); color: #fde68a; background: rgba(245,158,11,.12); }
-    .pill.gold { border-color: var(--border-strong); color: var(--gold-light); background: rgba(205,186,161,.12); }
+    .pill.gold { border-color: var(--border-strong); color: var(--gold-light); background: rgba(205,186,161,.14); }
+    .pill.red { border-color: rgba(239,68,68,.55); color: #fecaca; background: rgba(239,68,68,.22); }
+    .pill.green { border-color: rgba(34,197,94,.5); color: #bbf7d0; background: rgba(34,197,94,.18); }
+    .pill.blue { border-color: rgba(56,189,248,.5); color: #bae6fd; background: rgba(56,189,248,.18); }
+    .pill.clickable { cursor: pointer; }
+    .pill.clickable:hover { filter: brightness(1.15); }
 
     .btn {
       border: 1px solid var(--border); background: var(--bg-card); color: var(--text-main);
-      padding: 8px 13px; border-radius: 10px; font-size: 13px; font-weight: 700;
-      cursor: pointer; display: inline-flex; align-items: center; justify-content: center; gap: 6px;
-      transition: transform .12s ease, background .15s ease, border-color .15s ease;
+      padding: 8px 12px; border-radius: 10px; font-size: 12.5px; font-weight: 700;
+      cursor: pointer; display: inline-flex; align-items: center; justify-content: center; gap: 5px;
+      transition: transform .12s ease, filter .15s ease;
     }
     .btn:active { transform: scale(0.97); }
-    .btn-primary {
-      background: linear-gradient(135deg, #d7c4aa, #a68c69);
-      color: #111b1a; border-color: transparent;
-    }
-    .btn-primary:hover { filter: brightness(1.06); }
-    .btn-danger { background: rgba(239,68,68,.15); border-color: rgba(239,68,68,.4); color: #fca5a5; }
-    .btn-ok { background: rgba(34,197,94,.15); border-color: rgba(34,197,94,.4); color: #86efac; }
-    .btn-sm { padding: 5px 10px; font-size: 12px; border-radius: 8px; }
-    .btn-icon { width: 38px; height: 38px; padding: 0; border-radius: 10px; }
+    .btn-primary { background: linear-gradient(135deg, #d7c4aa, #a68c69); color: #111b1a; border-color: transparent; }
+    .btn-danger { background: rgba(239,68,68,.2); border-color: rgba(239,68,68,.55); color: #fecaca; }
+    .btn-danger-solid { background: linear-gradient(135deg, #ef4444, #b91c1c); color: #fff; border-color: transparent; }
+    .btn-ok { background: rgba(34,197,94,.16); border-color: rgba(34,197,94,.45); color: #86efac; }
+    .btn-info { background: rgba(56,189,248,.16); border-color: rgba(56,189,248,.45); color: #bae6fd; }
+    .btn-sm { padding: 5px 9px; font-size: 11.5px; border-radius: 8px; }
+    .btn-xs { padding: 3px 7px; font-size: 11px; border-radius: 7px; }
+    .btn-icon { width: 34px; height: 34px; padding: 0; border-radius: 9px; }
 
-    .container { padding: 14px; }
+    .container { padding: 12px 14px; }
     .card {
       background: var(--bg-panel);
       border: 1px solid var(--border);
       border-radius: var(--radius);
-      padding: 14px;
+      padding: 13px;
       margin-bottom: 12px;
       box-shadow: 0 8px 24px rgba(0,0,0,0.22);
     }
+    .card-danger {
+      border-color: rgba(239,68,68,.45);
+      background: linear-gradient(180deg, rgba(127,29,29,.22), var(--bg-panel));
+    }
     .card-title {
       font-size: 14px; font-weight: 800; color: var(--gold-light);
-      margin: 0 0 10px; display: flex; align-items: center; justify-content: space-between; gap: 8px;
+      margin: 0 0 10px; display: flex; align-items: center; justify-content: space-between; gap: 8px; flex-wrap: wrap;
     }
 
     /* Shift Banner */
     .shift-banner {
-      display: grid; grid-template-columns: 1fr auto; gap: 12px; align-items: center;
-      background: linear-gradient(135deg, rgba(205,186,161,.14), rgba(21,33,33,.95));
+      display: grid; grid-template-columns: 1fr auto; gap: 10px; align-items: center;
+      background: linear-gradient(135deg, rgba(205,186,161,.15), rgba(21,33,33,.95));
       border: 1px solid var(--border-strong);
     }
-    .shift-meta { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 6px; }
+    .shift-meta { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px; }
     .date-input {
       background: var(--bg-deep); color: var(--gold-light); border: 1px solid var(--border-strong);
       border-radius: 10px; padding: 7px 10px; font-size: 13px; font-weight: 700;
     }
 
-    /* KPI Grid */
-    .kpi-grid {
-      display: grid; grid-template-columns: repeat(auto-fit, minmax(105px, 1fr)); gap: 8px;
-      margin-bottom: 12px;
-    }
-    .kpi {
-      background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px;
-      padding: 10px; text-align: center;
-    }
-    .kpi-val { font-size: 22px; font-weight: 900; line-height: 1.2; }
-    .kpi-lbl { font-size: 11px; color: var(--text-muted); font-weight: 600; margin-top: 2px; }
+    /* KPIs */
+    .kpi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(96px, 1fr)); gap: 8px; margin-bottom: 12px; }
+    .kpi { background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; padding: 9px 6px; text-align: center; }
+    .kpi-val { font-size: 21px; font-weight: 900; line-height: 1.2; }
+    .kpi-lbl { font-size: 11px; color: var(--text-muted); font-weight: 700; margin-top: 2px; }
 
-    /* Filters */
-    .filters {
-      display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 12px;
-    }
+    /* Filters & Inputs */
+    .filters { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; }
+    .filters > * { flex: 1 1 140px; }
     .input-field, select.input-field, textarea.input-field {
       background: var(--bg-deep); color: var(--text-main);
       border: 1px solid var(--border); border-radius: 10px;
-      padding: 9px 11px; font-size: 13px; outline: none; width: 100%;
+      padding: 8px 10px; font-size: 13px; outline: none; width: 100%;
     }
     .input-field:focus { border-color: var(--gold); }
-    .filters > * { flex: 1 1 150px; }
+    .label { display: block; font-size: 12px; font-weight: 700; color: var(--gold); margin-bottom: 4px; }
+    .form-grid { display: grid; gap: 10px; }
+    .row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
 
-    /* Personnel List */
+    /* Attendance Cards */
     .person-card {
       background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px;
-      padding: 11px 12px; margin-bottom: 8px;
-      display: flex; flex-direction: column; gap: 8px;
+      padding: 10px 12px; margin-bottom: 8px; display: flex; flex-direction: column; gap: 8px;
     }
     .person-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; }
     .person-name { font-size: 14px; font-weight: 800; color: var(--text-main); }
     .person-meta { font-size: 11.5px; color: var(--text-muted); margin-top: 2px; }
     .status-row { display: flex; flex-wrap: wrap; gap: 5px; }
     .st-btn {
-      flex: 1 1 auto; min-width: 60px; padding: 6px 8px; border-radius: 8px;
+      flex: 1 1 auto; min-width: 58px; padding: 6px 7px; border-radius: 8px;
       border: 1px solid var(--border); background: var(--bg-deep); color: var(--text-muted);
       font-size: 11.5px; font-weight: 700; cursor: pointer;
     }
     .st-btn.active-PRESENT { background: rgba(34,197,94,.22); border-color: #22c55e; color: #bbf7d0; }
     .st-btn.active-LEAVE { background: rgba(56,189,248,.22); border-color: #38bdf8; color: #bae6fd; }
-    .st-btn.active-MISSION { background: rgba(167,139,250,.22); border-color: #a78bfa; color: #ddd6fe; }
     .st-btn.active-SICK { background: rgba(245,158,11,.22); border-color: #f59e0b; color: #fde68a; }
-    .st-btn.active-ABSENT { background: rgba(239,68,68,.24); border-color: #ef4444; color: #fecaca; }
+    .st-btn.active-INACTIVE { background: rgba(239,68,68,.30); border-color: #ef4444; color: #ffffff; box-shadow: 0 0 0 1px rgba(239,68,68,.45); }
+    .st-btn.active-ABSENT { background: rgba(185,28,28,.34); border-color: #dc2626; color: #fecaca; }
+
+    /* Force / Structure Accordion Cards */
+    .comp-block {
+      background: var(--bg-card); border: 1px solid var(--border-strong); border-radius: 13px;
+      margin-bottom: 12px; overflow: hidden;
+    }
+    .comp-head {
+      background: linear-gradient(135deg, rgba(205,186,161,.14), rgba(27,42,41,.95));
+      padding: 11px 13px; display: flex; justify-content: space-between; align-items: center; gap: 8px; flex-wrap: wrap;
+      border-bottom: 1px solid var(--border);
+    }
+    .comp-body { padding: 10px; }
+    .group-block {
+      background: rgba(12, 20, 20, 0.72); border: 1px solid var(--border); border-radius: 11px;
+      margin-bottom: 9px; overflow: hidden;
+    }
+    .group-head {
+      background: rgba(35, 55, 53, 0.65); padding: 9px 11px;
+      display: flex; justify-content: space-between; align-items: center; gap: 6px; flex-wrap: wrap;
+      border-bottom: 1px solid var(--border);
+    }
+    .group-members { padding: 8px; display: grid; gap: 6px; }
+    .member-row {
+      background: var(--bg-panel); border: 1px solid var(--border); border-radius: 9px;
+      padding: 8px 10px; display: flex; justify-content: space-between; align-items: center; gap: 8px; flex-wrap: wrap;
+    }
+
+    /* Hierarchy Tree Styling */
+    .org-root {
+      border: 2px solid var(--gold);
+      background: linear-gradient(145deg, rgba(205,186,161,.18), #14201f);
+      border-radius: 16px; padding: 14px; text-align: center; position: relative;
+      margin-bottom: 14px;
+    }
+    .org-branches {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 12px;
+    }
+    .org-dept {
+      background: var(--bg-card); border: 1px solid var(--border-strong); border-radius: 14px;
+      overflow: hidden; display: flex; flex-direction: column;
+    }
+    .org-dept-head {
+      background: linear-gradient(135deg, #243835, #182625);
+      border-bottom: 1px solid var(--border-strong);
+      padding: 10px 12px; display: flex; justify-content: space-between; align-items: flex-start; gap: 8px;
+    }
+    .org-dept-body { padding: 10px; display: flex; flex-direction: column; gap: 8px; }
+    .org-group {
+      background: rgba(12, 20, 20, 0.72); border: 1px solid var(--border);
+      border-right: 3px solid var(--gold); border-radius: 10px; padding: 9px;
+    }
+    .org-member {
+      display: flex; justify-content: space-between; align-items: center; gap: 6px;
+      padding: 5px 7px; border-radius: 7px; background: rgba(27,42,41,.65); margin-top: 5px;
+      font-size: 12px;
+    }
+    .org-member.is-leader { border: 1px solid rgba(205,186,161,.55); background: rgba(205,186,161,.12); }
 
     /* Tables */
     .table-wrap { overflow-x: auto; border-radius: 10px; border: 1px solid var(--border); }
-    table { width: 100%; border-collapse: collapse; font-size: 12.5px; }
-    th, td { padding: 9px 10px; text-align: right; border-bottom: 1px solid var(--border); white-space: nowrap; }
+    table { width: 100%; border-collapse: collapse; font-size: 12px; }
+    th, td { padding: 8px 9px; text-align: right; border-bottom: 1px solid var(--border); white-space: nowrap; }
     th { background: var(--bg-elevated); color: var(--gold-light); font-weight: 800; }
     tr:last-child td { border-bottom: none; }
 
-    /* Bottom Nav */
+    /* Bottom Nav (6 Tabs) */
     .bottom-nav {
       position: fixed; bottom: 0; left: 0; right: 0; z-index: 40;
-      background: rgba(13, 21, 21, 0.96);
+      background: rgba(12, 20, 20, 0.97);
       backdrop-filter: blur(12px);
       border-top: 1px solid var(--border);
-      display: grid; grid-template-columns: repeat(5, 1fr);
-      padding: 6px 4px calc(6px + env(safe-area-inset-bottom));
+      display: grid; grid-template-columns: repeat(6, 1fr);
+      padding: 5px 2px calc(5px + env(safe-area-inset-bottom));
     }
     .nav-btn {
       background: none; border: none; color: var(--text-muted);
-      display: flex; flex-direction: column; align-items: center; gap: 3px;
-      padding: 5px 2px; font-size: 11px; font-weight: 700; cursor: pointer;
+      display: flex; flex-direction: column; align-items: center; gap: 2px;
+      padding: 4px 1px; font-size: 10px; font-weight: 700; cursor: pointer;
     }
     .nav-btn.active { color: var(--gold-light); }
-    .nav-btn .ico { font-size: 18px; line-height: 1; }
+    .nav-btn .ico { font-size: 17px; line-height: 1.1; }
 
     /* Chat */
     .chat-list { display: flex; flex-direction: column; gap: 8px; max-height: 52vh; overflow-y: auto; padding: 4px 0; }
-    .chat-msg {
-      background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; padding: 10px 12px;
-    }
+    .chat-msg { background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; padding: 10px 12px; }
     .chat-head { display: flex; justify-content: space-between; font-size: 11px; color: var(--gold); margin-bottom: 4px; }
     .chat-bar { display: flex; gap: 6px; margin-top: 10px; }
 
-    /* Modal */
+    /* Modals */
     .modal-backdrop {
       position: fixed; inset: 0; z-index: 60;
-      background: rgba(0,0,0,0.76); backdrop-filter: blur(5px);
-      display: flex; align-items: center; justify-content: center; padding: 16px;
+      background: rgba(0,0,0,0.78); backdrop-filter: blur(5px);
+      display: flex; align-items: center; justify-content: center; padding: 14px;
     }
     .modal {
-      width: 100%; max-width: 420px; background: var(--bg-panel);
-      border: 1px solid var(--border-strong); border-radius: 16px; padding: 18px;
+      width: 100%; max-width: 480px; background: var(--bg-panel);
+      border: 1px solid var(--border-strong); border-radius: 16px; padding: 16px;
       max-height: 90vh; overflow-y: auto;
     }
+    .modal.modal-lg { max-width: 680px; }
+
+    /* Full-Screen Block Overlay */
+    #block-overlay {
+      position: fixed; inset: 0; z-index: 9999;
+      background: radial-gradient(circle at center, #2d0b0b 0%, #0d0505 70%);
+      display: flex; align-items: center; justify-content: center; padding: 20px; text-align: center;
+    }
+    .block-box {
+      max-width: 430px; width: 100%;
+      background: rgba(24, 10, 10, 0.94);
+      border: 2px solid #ef4444; border-radius: 20px; padding: 24px 20px;
+      box-shadow: 0 20px 60px rgba(0,0,0,.75);
+    }
+
     .hidden { display: none !important; }
     .toast {
-      position: fixed; bottom: 78px; left: 50%; transform: translateX(-50%); z-index: 80;
+      position: fixed; bottom: 74px; left: 50%; transform: translateX(-50%); z-index: 90;
       background: #1f3330; color: var(--gold-light); border: 1px solid var(--gold);
-      padding: 9px 16px; border-radius: 999px; font-size: 13px; font-weight: 700;
-      box-shadow: 0 10px 30px rgba(0,0,0,.45);
+      padding: 9px 16px; border-radius: 999px; font-size: 12.5px; font-weight: 700;
+      box-shadow: 0 10px 30px rgba(0,0,0,.5); max-width: 92vw; text-align: center;
     }
-    .form-grid { display: grid; gap: 10px; }
-    .label { display: block; font-size: 12px; font-weight: 700; color: var(--gold); margin-bottom: 4px; }
 
-    /* Print / Official PDF Mode */
+    /* Bulk Edit Table */
+    .bulk-row {
+      display: grid; grid-template-columns: 28px 1.4fr 1fr 0.9fr 0.9fr; gap: 6px; align-items: center;
+      margin-bottom: 6px;
+    }
+    @media (max-width: 600px) {
+      .bulk-row { grid-template-columns: 1fr 1fr; border: 1px solid var(--border); padding: 8px; border-radius: 10px; background: var(--bg-card); }
+    }
+
+    /* Print / Official PDF */
     #print-sheet { display: none; }
     @media print {
       body { background: #fff !important; color: #000 !important; }
-      .app-shell, .bottom-nav, .modal-backdrop, .toast { display: none !important; }
-      #print-sheet {
-        display: block !important; direction: rtl; font-family: 'Cairo', Tahoma, sans-serif;
-        padding: 12px; color: #111;
-      }
+      .app-shell, .bottom-nav, .modal-backdrop, .toast, #block-overlay { display: none !important; }
+      #print-sheet { display: block !important; direction: rtl; font-family: 'Cairo', Tahoma, sans-serif; padding: 12px; color: #111; }
       #print-sheet table { width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 11px; }
       #print-sheet th, #print-sheet td { border: 1px solid #333; padding: 5px 7px; text-align: right; color: #000; }
       #print-sheet th { background: #e8e2d8 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
@@ -240,13 +332,30 @@
     };
   </script>
 
+  <!-- FULL-SCREEN BLOCK OVERLAY -->
+  <div id="block-overlay" class="hidden">
+    <div class="block-box">
+      <div style="margin-bottom:12px">
+        <svg width="64" height="64" viewBox="0 0 256 256"><path d="M30,120L41,119L57,102L59,103L58,106L34,132L41,132L47,129L63,108L65,109L65,111L40,144L49,143L54,138L70,113L72,114L46,156L53,155L58,152L78,117L80,118L80,120L62,153L66,153L72,150L86,119L88,120L88,123L76,151L82,150L85,147L95,121L97,122L88,149L95,147L98,143L103,123L105,122L106,126L101,146L107,142L109,131L111,129L116,136L115,140L104,152L104,156L97,164L80,165L80,170L84,166L87,166L88,168L85,171L87,173L87,170L93,166L99,172L101,170L98,166L103,160L109,159L117,154L117,158L97,185L106,183L109,180L114,168L117,167L118,169L108,191L116,189L119,184L121,172L124,169L125,175L123,182L123,191L125,193L130,192L130,195L134,189L131,174L132,169L135,171L137,184L140,189L148,191L138,169L139,167L142,168L147,180L150,183L160,185L138,156L139,154L153,160L158,166L155,170L157,173L157,171L163,166L166,167L170,173L171,171L168,168L169,166L172,166L176,169L176,165L161,165L153,157L153,153L141,139L144,129L146,128L149,142L152,145L156,146L150,125L151,123L154,124L157,139L161,147L168,149L159,124L160,122L162,122L171,147L175,150L180,151L168,123L168,120L170,119L184,150L190,153L194,153L176,120L176,118L178,117L197,151L201,154L209,156L186,120L184,114L187,114L204,141L211,144L216,144L192,113L191,109L194,109L211,131L221,131L197,104L198,102L215,119L226,120L183,76L179,74L165,75L163,77L163,88L160,95L149,102L141,102L138,100L136,80L132,77L123,76L112,81L112,86L115,84L119,84L121,86L121,92L117,101L107,102L102,100L95,93L93,87L93,77L90,74L76,74L72,76Z M145,58L148,61L145,67L150,66L153,70L153,66L158,63L154,61L153,57L151,59Z M98,63L103,65L103,70L107,66L112,67L109,63L111,58L106,59L103,56L103,60Z M121,55L125,59L124,64L128,61L133,64L132,58L136,55L131,55L128,50L126,55Z" fill="#ef4444" /></svg>
+      </div>
+      <div style="font-size:21px;font-weight:900;color:#fca5a5;margin-bottom:8px">⛔ تم حظر الوصول إلى التطبيق</div>
+      <p id="block-reason-text" style="font-size:14px;color:#f4efe8;line-height:1.7;margin:0 0 14px">
+        تم إيقاف صلاحية استخدام التطبيق لهذا الجهاز بأمر القيادة.
+      </p>
+      <div style="background:rgba(239,68,68,.12);border:1px solid rgba(239,68,68,.35);border-radius:10px;padding:8px;font-size:12px;color:#fecaca;margin-bottom:16px">
+        معرّف الجهاز: <strong id="block-device-id" style="letter-spacing:1px"></strong>
+      </div>
+      <button class="btn btn-sm" id="btn-owner-override" style="border-color:rgba(205,186,161,.35);color:var(--gold)">
+        🔑 فك الحظر بصلاحية المالك (رمز القيادة)
+      </button>
+    </div>
+  </div>
+
   <div class="app-shell">
     <header class="topbar">
       <div class="brand">
         <div class="brand-logo" aria-hidden="true">
-          <svg width="32" height="32" viewBox="0 0 256 256">
-            <path d="M30,120L41,119L57,102L59,103L58,106L34,132L41,132L47,129L63,108L65,109L65,111L40,144L49,143L54,138L70,113L72,114L46,156L53,155L58,152L78,117L80,118L80,120L62,153L66,153L72,150L86,119L88,120L88,123L76,151L82,150L85,147L95,121L97,122L88,149L95,147L98,143L103,123L105,122L106,126L101,146L107,142L109,131L111,129L116,136L115,140L104,152L104,156L97,164L80,165L80,170L84,166L87,166L88,168L85,171L87,173L87,170L93,166L99,172L101,170L98,166L103,160L109,159L117,154L117,158L97,185L106,183L109,180L114,168L117,167L118,169L108,191L116,189L119,184L121,172L124,169L125,175L123,182L123,191L125,193L130,192L130,195L134,189L131,174L132,169L135,171L137,184L140,189L148,191L138,169L139,167L142,168L147,180L150,183L160,185L138,156L139,154L153,160L158,166L155,170L157,173L157,171L163,166L166,167L170,173L171,171L168,168L169,166L172,166L176,169L176,165L161,165L153,157L153,153L141,139L144,129L146,128L149,142L152,145L156,146L150,125L151,123L154,124L157,139L161,147L168,149L159,124L160,122L162,122L171,147L175,150L180,151L168,123L168,120L170,119L184,150L190,153L194,153L176,120L176,118L178,117L197,151L201,154L209,156L186,120L184,114L187,114L204,141L211,144L216,144L192,113L191,109L194,109L211,131L221,131L197,104L198,102L215,119L226,120L183,76L179,74L165,75L163,77L163,88L160,95L149,102L141,102L138,100L136,80L132,77L123,76L112,81L112,86L115,84L119,84L121,86L121,92L117,101L107,102L102,100L95,93L93,87L93,77L90,74L76,74L72,76Z M145,58L148,61L145,67L150,66L153,70L153,66L158,63L154,61L153,57L151,59Z M98,63L103,65L103,70L107,66L112,67L109,63L111,58L106,59L103,56L103,60Z M121,55L125,59L124,64L128,61L133,64L132,58L136,55L131,55L128,50L126,55Z" fill="#cdbaa1" />
-          </svg>
+          <svg width="30" height="30" viewBox="0 0 256 256"><path d="M30,120L41,119L57,102L59,103L58,106L34,132L41,132L47,129L63,108L65,109L65,111L40,144L49,143L54,138L70,113L72,114L46,156L53,155L58,152L78,117L80,118L80,120L62,153L66,153L72,150L86,119L88,120L88,123L76,151L82,150L85,147L95,121L97,122L88,149L95,147L98,143L103,123L105,122L106,126L101,146L107,142L109,131L111,129L116,136L115,140L104,152L104,156L97,164L80,165L80,170L84,166L87,166L88,168L85,171L87,173L87,170L93,166L99,172L101,170L98,166L103,160L109,159L117,154L117,158L97,185L106,183L109,180L114,168L117,167L118,169L108,191L116,189L119,184L121,172L124,169L125,175L123,182L123,191L125,193L130,192L130,195L134,189L131,174L132,169L135,171L137,184L140,189L148,191L138,169L139,167L142,168L147,180L150,183L160,185L138,156L139,154L153,160L158,166L155,170L157,173L157,171L163,166L166,167L170,173L171,171L168,168L169,166L172,166L176,169L176,165L161,165L153,157L153,153L141,139L144,129L146,128L149,142L152,145L156,146L150,125L151,123L154,124L157,139L161,147L168,149L159,124L160,122L162,122L171,147L175,150L180,151L168,123L168,120L170,119L184,150L190,153L194,153L176,120L176,118L178,117L197,151L201,154L209,156L186,120L184,114L187,114L204,141L211,144L216,144L192,113L191,109L194,109L211,131L221,131L197,104L198,102L215,119L226,120L183,76L179,74L165,75L163,77L163,88L160,95L149,102L141,102L138,100L136,80L132,77L123,76L112,81L112,86L115,84L119,84L121,86L121,92L117,101L107,102L102,100L95,93L93,87L93,77L90,74L76,74L72,76Z M145,58L148,61L145,67L150,66L153,70L153,66L158,63L154,61L153,57L151,59Z M98,63L103,65L103,70L107,66L112,67L109,63L111,58L106,59L103,56L103,60Z M121,55L125,59L124,64L128,61L133,64L132,58L136,55L131,55L128,50L126,55Z" fill="#cdbaa1" /></svg>
         </div>
         <div>
           <div class="brand-title" id="hdr-title">تفقد دوام الـ130مم</div>
@@ -260,6 +369,17 @@
       </div>
     </header>
 
+    <!-- GLOBAL ACTIVE BATTALION BAR -->
+    <div class="bat-bar">
+      <div class="bat-select-wrap">
+        <span style="font-size:12px;font-weight:800;color:var(--gold)">الكتيبة النشطة:</span>
+        <select id="global-battalion-select" class="bat-select"></select>
+      </div>
+      <div style="display:flex;gap:6px;flex-wrap:wrap">
+        <button class="btn btn-primary btn-sm" id="btn-quick-add-bat">+ كتيبة جديدة</button>
+      </div>
+    </div>
+
     <main class="container">
       <!-- TAB 1: ATTENDANCE -->
       <section id="tab-attendance" class="tab-view">
@@ -268,7 +388,7 @@
             <div style="font-size:15px;font-weight:900;color:var(--gold-light)" id="shift-headline">الوجبة أ — اليوم 1 من 10</div>
             <div class="shift-meta">
               <span class="pill gold" id="shift-remaining">متبقي 10 أيام</span>
-              <span class="pill" id="shift-crews-lbl">الطواقم المناوبة: الطاقم الأول والثاني</span>
+              <span class="pill" id="shift-crews-lbl">المناوبون اليوم حسب الهيكلية المعتمدة</span>
             </div>
           </div>
           <div>
@@ -287,18 +407,18 @@
             </div>
           </div>
           <div class="filters">
-            <input id="flt-search" class="input-field" placeholder="ابحث بالاسم أو الرقم الذاتي أو الاختصاص..." />
+            <input id="flt-search" class="input-field" placeholder="ابحث بالاسم أو الرقم الذاتي أو الجماعة..." />
             <select id="flt-company" class="input-field"></select>
             <select id="flt-scope" class="input-field">
               <option value="DUTY">المقررون بالدوام اليوم فقط</option>
-              <option value="ALL">كامل القوة البشرية</option>
+              <option value="ALL">كامل قوة الكتيبة</option>
             </select>
             <select id="flt-status" class="input-field">
               <option value="ALL">كل الحالات</option>
               <option value="PRESENT">حاضر</option>
               <option value="LEAVE">إجازة</option>
-              <option value="MISSION">مهمة</option>
               <option value="SICK">مرضية</option>
+              <option value="INACTIVE">غير فعال</option>
               <option value="ABSENT">غياب</option>
             </select>
           </div>
@@ -306,41 +426,79 @@
         </div>
       </section>
 
-      <!-- TAB 2: KASHF AL-SAAIQ -->
-      <section id="tab-saaiq" class="tab-view hidden">
+      <!-- TAB 2: READINESS (كشف الجاهزية) -->
+      <section id="tab-readiness" class="tab-view hidden">
         <div class="card">
           <div class="card-title">
-            <span>كشف الصاعق والجاهزية الميدانية</span>
-            <button class="btn btn-primary btn-sm" id="btn-copy-wa">📋 نسخ ملخص واتساب</button>
+            <span>⚡ كشف الجاهزية الميدانية</span>
+            <div style="display:flex;gap:6px;flex-wrap:wrap">
+              <button class="btn btn-primary btn-sm" id="btn-share-readiness-img">📸 مشاركة صورة الصفحة كاملة</button>
+              <button class="btn btn-sm" id="btn-dl-readiness-img">💾 حفظ الصورة</button>
+              <button class="btn btn-ok btn-sm" id="btn-copy-wa">📋 نسخ ملخص واتساب</button>
+            </div>
           </div>
-          <div class="table-wrap" id="saaiq-table-wrap"></div>
+          <div class="kpi-grid" id="readiness-kpi-bar"></div>
+          <div class="table-wrap" id="readiness-table-wrap"></div>
         </div>
         <div class="card">
-          <div class="card-title"><span>تنبيهات الغياب والإجازات والمهام لليوم</span></div>
-          <div id="saaiq-exceptions"></div>
+          <div class="card-title">
+            <span>حالات «غير فعال» والغياب والإجازات لليوم</span>
+            <span class="pill red" id="readiness-exc-count">0 حالة</span>
+          </div>
+          <div id="readiness-exceptions"></div>
         </div>
       </section>
 
-      <!-- TAB 3: PERSONNEL -->
+      <!-- TAB 3: PERSONNEL & FULL FORCE CONTROL (القوة) -->
       <section id="tab-personnel" class="tab-view hidden">
         <div class="card">
           <div class="card-title">
-            <span>إدارة القوة البشرية (<span id="roster-count">0</span>)</span>
-            <button class="btn btn-primary btn-sm" id="btn-add-person">+ إضافة عنصر</button>
+            <span>🪖 إدارة القوة والتشكيل الكامل (<span id="roster-count">0</span> فرد)</span>
+            <div style="display:flex;gap:6px;flex-wrap:wrap">
+              <button class="btn btn-primary btn-sm" id="btn-add-battalion">+ إدراج كتيبة</button>
+              <button class="btn btn-ok btn-sm" id="btn-add-company">+ إضافة سرية</button>
+              <button class="btn btn-info btn-sm" id="btn-add-person">+ إضافة فرد</button>
+            </div>
           </div>
+
+          <!-- Active Battalion Summary + Edit/Delete -->
+          <div id="active-bat-card" class="person-card" style="border-color:var(--border-strong);background:rgba(205,186,161,.08)"></div>
+
           <div class="filters">
-            <input id="roster-search" class="input-field" placeholder="بحث في القوة البشرية..." />
+            <input id="roster-search" class="input-field" placeholder="ابحث باسم فرد، جماعة، رقم ذاتي، اختصاص..." />
             <select id="roster-company" class="input-field"></select>
           </div>
-          <div id="roster-list"></div>
+
+          <!-- Hierarchical Editable Force View: Companies -> Groups (10 members) -> Members -->
+          <div id="force-tree-list"></div>
         </div>
       </section>
 
-      <!-- TAB 4: CHAT -->
+      <!-- TAB 4: HIERARCHY & AUTO-SHIFT ROSTER (الهيكلية) -->
+      <section id="tab-hierarchy" class="tab-view hidden">
+        <div class="card" style="border-color:var(--border-strong)">
+          <div class="card-title">
+            <span>🏛️ الهيكلية التنظيمية واعتماد المناوبات التلقائي</span>
+            <div style="display:flex;gap:6px;flex-wrap:wrap">
+              <button class="btn btn-primary btn-sm" id="btn-auto-shifts">⚡ فرز المناوبات تلقائياً (أ / ب)</button>
+              <button class="btn btn-ok btn-sm" id="btn-commit-shifts">✓ اعتماد التشكيل للتفقد</button>
+              <button class="btn btn-sm" id="btn-share-hierarchy-img">📸 مشاركة صورة الهيكلية</button>
+            </div>
+          </div>
+          <div class="kpi-grid" id="hierarchy-shift-summary"></div>
+          <div style="font-size:12px;color:var(--text-muted)">
+            💡 انقر على شارة الوجبة بجانب أي جماعة أو فرد داخل الهيكلية لتبديل مناوبته فوراً (الوجبة أ ↔ الوجبة ب ↔ دوام دائم)، أو اضغط <strong>فرز المناوبات تلقائياً</strong> لتوزيع متوازن 50/50.
+          </div>
+        </div>
+
+        <div id="hierarchy-canvas"></div>
+      </section>
+
+      <!-- TAB 5: CHAT -->
       <section id="tab-chat" class="tab-view hidden">
         <div class="card">
           <div class="card-title">
-            <span>غرفة التواصل الميداني (نصي وصوتي)</span>
+            <span>🎙️ غرفة التواصل الميداني (نصي وصوتي)</span>
             <span class="pill" id="chat-count">0 رسالة</span>
           </div>
           <div class="chat-list" id="chat-list"></div>
@@ -355,23 +513,25 @@
         </div>
       </section>
 
-      <!-- TAB 5: SETTINGS (LOCKED BY PIN) -->
+      <!-- TAB 6: SETTINGS (LOCKED BY PIN) -->
       <section id="tab-settings" class="tab-view hidden">
         <div class="card">
           <div class="card-title">
-            <span>الإعدادات العامة ونظام المناوبات (10/10)</span>
+            <span>⚙️ الإعدادات العامة ونظام المناوبات (10/10)</span>
             <button class="btn btn-sm" id="btn-lock-settings">🔒 قفل الإعدادات</button>
           </div>
           <div class="form-grid">
-            <div>
-              <label class="label">اسم التطبيق</label>
-              <input id="set-title" class="input-field" />
+            <div class="row-2">
+              <div>
+                <label class="label">اسم التطبيق</label>
+                <input id="set-title" class="input-field" />
+              </div>
+              <div>
+                <label class="label">اسم الوحدة الرئيسية</label>
+                <input id="set-unit" class="input-field" />
+              </div>
             </div>
-            <div>
-              <label class="label">اسم الوحدة / الكتيبة</label>
-              <input id="set-unit" class="input-field" />
-            </div>
-            <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+            <div class="row-2">
               <div>
                 <label class="label">تاريخ بداية الدورة (الوجبة أ)</label>
                 <input id="set-shift-start" type="date" class="input-field" />
@@ -381,7 +541,7 @@
                 <input id="set-shift-days" type="number" min="1" max="30" class="input-field" />
               </div>
             </div>
-            <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+            <div class="row-2">
               <div>
                 <label class="label">اسم المستخدم الحالي</label>
                 <input id="set-user-name" class="input-field" />
@@ -399,13 +559,56 @@
           </div>
         </div>
 
-        <div class="card">
-          <div class="card-title"><span>السرايا ونظام الطواقم (قيادة الكتيبة بدون طواقم)</span></div>
-          <div id="companies-settings-list"></div>
+        <!-- ACCESS CONTROL & APP BLOCKING (OWNER ONLY) -->
+        <div class="card card-danger" id="access-control-card">
+          <div class="card-title" style="color:#fecaca">
+            <span>🛡️ حظر التطبيق والتحكم بالوصول عن بُعد</span>
+            <span class="pill red" id="my-device-id-pill">جهازي: ...</span>
+          </div>
+          <div id="access-owner-only-note" class="hidden" style="color:#fca5a5;font-size:12px;margin-bottom:8px">
+            أدوات الحظر محصورة بصلاحية المالك (OWNER) فقط.
+          </div>
+          <div id="access-control-body" class="form-grid">
+            <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;background:rgba(0,0,0,.28);padding:10px;border-radius:10px;border:1px solid rgba(239,68,68,.35)">
+              <div>
+                <div style="font-size:13px;font-weight:800;color:#fecaca">الإيقاف الشامل للتطبيق (عن الجميع عدا المالك)</div>
+                <div style="font-size:11px;color:var(--text-muted)">يمنع جميع الأجهزة والمستخدمين الآخرين من فتح التطبيق فوراً</div>
+              </div>
+              <button class="btn btn-danger-solid btn-sm" id="btn-toggle-global-block">⛔ تفعيل الحظر الشامل</button>
+            </div>
+
+            <div>
+              <label class="label" style="color:#fecaca">رسالة الحظر الظاهرة للمحظور</label>
+              <input id="set-block-msg" class="input-field" placeholder="تم حظر الوصول إلى التطبيق بأمر القيادة." />
+            </div>
+
+            <div style="border-top:1px solid rgba(239,68,68,.25);padding-top:10px">
+              <div style="font-size:13px;font-weight:800;color:#fecaca;margin-bottom:6px">حظر شخص أو جهاز محدد</div>
+              <div class="row-2" style="margin-bottom:6px">
+                <input id="ban-target-input" class="input-field" placeholder="اسم الشخص أو معرّف الجهاز (DEV-...)" />
+                <input id="ban-reason-input" class="input-field" placeholder="سبب الحظر (اختياري)" />
+              </div>
+              <div style="display:flex;gap:6px;flex-wrap:wrap">
+                <button class="btn btn-danger-solid btn-sm" id="btn-add-ban">🚫 تنفيذ الحظر الآن</button>
+                <button class="btn btn-danger btn-sm" id="btn-lock-this-device">🔒 حظر هذا الجهاز فوراً</button>
+                <button class="btn btn-sm" id="btn-refresh-access">🔄 تحديث قائمة الأجهزة من السحابة</button>
+              </div>
+            </div>
+
+            <div>
+              <div style="font-size:12px;font-weight:800;color:var(--gold);margin-bottom:5px">قائمة المحظورين حالياً:</div>
+              <div id="blocked-list-wrap"></div>
+            </div>
+
+            <div>
+              <div style="font-size:12px;font-weight:800;color:var(--gold);margin-bottom:5px">الأجهزة المتصلة بالتطبيق (اضغط حظر لأي جهاز):</div>
+              <div id="registered-devices-wrap"></div>
+            </div>
+          </div>
         </div>
 
         <div class="card">
-          <div class="card-title"><span>الأمان وتغيير رمز القفل (PIN)</span></div>
+          <div class="card-title"><span>🔐 تغيير رمز قفل الإعدادات (PIN)</span></div>
           <div style="display:flex;gap:8px">
             <input id="set-new-pin" type="password" inputmode="numeric" class="input-field" placeholder="أدخل الرمز الجديد (4 أرقام فأكثر)" />
             <button class="btn btn-primary" id="btn-change-pin">تحديث الرمز</button>
@@ -413,11 +616,12 @@
         </div>
 
         <div class="card">
-          <div class="card-title"><span>المزامنة السحابية والنسخ الاحتياطي (Supabase + JSON)</span></div>
+          <div class="card-title"><span>☁️ المزامنة السحابية والنسخ الاحتياطي (Supabase + JSON)</span></div>
           <div id="supa-status" style="font-size:12px;color:var(--text-muted);margin-bottom:10px"></div>
           <div style="display:flex;flex-wrap:wrap;gap:8px">
-            <button class="btn btn-primary btn-sm" id="btn-sync-cloud">☁️ مزامنة سحابية الآن</button>
-            <button class="btn btn-sm" id="btn-backup-json">💾 تصدير نسخة احتياطية JSON</button>
+            <button class="btn btn-primary btn-sm" id="btn-sync-cloud">☁️ رفع ومزامنة للسحابة</button>
+            <button class="btn btn-info btn-sm" id="btn-pull-cloud">⬇️ جلب آخر نسخة من السحابة</button>
+            <button class="btn btn-sm" id="btn-backup-json">💾 تصدير JSON</button>
             <label class="btn btn-sm" style="cursor:pointer">
               📂 استيراد JSON
               <input id="inp-import-json" type="file" accept=".json" class="hidden" />
@@ -426,18 +630,19 @@
         </div>
 
         <div class="card">
-          <div class="card-title"><span>سجل التراجع السريع (آخر 5 تعديلات)</span></div>
+          <div class="card-title"><span>↶ سجل التراجع السريع (آخر 5 تعديلات)</span></div>
           <div id="undo-history-list"></div>
         </div>
       </section>
     </main>
   </div>
 
-  <!-- BOTTOM NAV -->
+  <!-- BOTTOM NAV (6 TABS) -->
   <nav class="bottom-nav">
     <button class="nav-btn active" data-tab="attendance"><span class="ico">📋</span><span>التفقد</span></button>
-    <button class="nav-btn" data-tab="saaiq"><span class="ico">⚡</span><span>كشف الصاعق</span></button>
+    <button class="nav-btn" data-tab="readiness"><span class="ico">⚡</span><span>الجاهزية</span></button>
     <button class="nav-btn" data-tab="personnel"><span class="ico">🪖</span><span>القوة</span></button>
+    <button class="nav-btn" data-tab="hierarchy"><span class="ico">🏛️</span><span>الهيكلية</span></button>
     <button class="nav-btn" data-tab="chat"><span class="ico">🎙️</span><span>التواصل</span></button>
     <button class="nav-btn" data-tab="settings"><span class="ico">⚙️</span><span>الإعدادات</span></button>
   </nav>
@@ -448,7 +653,7 @@
       <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px">
         <div style="display:flex;align-items:center;gap:8px">
           <svg width="28" height="28" viewBox="0 0 256 256"><path d="M30,120L41,119L57,102L59,103L58,106L34,132L41,132L47,129L63,108L65,109L65,111L40,144L49,143L54,138L70,113L72,114L46,156L53,155L58,152L78,117L80,118L80,120L62,153L66,153L72,150L86,119L88,120L88,123L76,151L82,150L85,147L95,121L97,122L88,149L95,147L98,143L103,123L105,122L106,126L101,146L107,142L109,131L111,129L116,136L115,140L104,152L104,156L97,164L80,165L80,170L84,166L87,166L88,168L85,171L87,173L87,170L93,166L99,172L101,170L98,166L103,160L109,159L117,154L117,158L97,185L106,183L109,180L114,168L117,167L118,169L108,191L116,189L119,184L121,172L124,169L125,175L123,182L123,191L125,193L130,192L130,195L134,189L131,174L132,169L135,171L137,184L140,189L148,191L138,169L139,167L142,168L147,180L150,183L160,185L138,156L139,154L153,160L158,166L155,170L157,173L157,171L163,166L166,167L170,173L171,171L168,168L169,166L172,166L176,169L176,165L161,165L153,157L153,153L141,139L144,129L146,128L149,142L152,145L156,146L150,125L151,123L154,124L157,139L161,147L168,149L159,124L160,122L162,122L171,147L175,150L180,151L168,123L168,120L170,119L184,150L190,153L194,153L176,120L176,118L178,117L197,151L201,154L209,156L186,120L184,114L187,114L204,141L211,144L216,144L192,113L191,109L194,109L211,131L221,131L197,104L198,102L215,119L226,120L183,76L179,74L165,75L163,77L163,88L160,95L149,102L141,102L138,100L136,80L132,77L123,76L112,81L112,86L115,84L119,84L121,86L121,92L117,101L107,102L102,100L95,93L93,87L93,77L90,74L76,74L72,76Z M145,58L148,61L145,67L150,66L153,70L153,66L158,63L154,61L153,57L151,59Z M98,63L103,65L103,70L107,66L112,67L109,63L111,58L106,59L103,56L103,60Z M121,55L125,59L124,64L128,61L133,64L132,58L136,55L131,55L128,50L126,55Z" fill="#cdbaa1" /></svg>
-          <strong style="color:var(--gold-light)">قفل الإعدادات</strong>
+          <strong id="pin-modal-title" style="color:var(--gold-light)">قفل الإعدادات</strong>
         </div>
         <button class="btn btn-sm" id="btn-close-pin">✕</button>
       </div>
@@ -457,17 +662,168 @@
         <input id="pin-input" type="password" inputmode="numeric" autocomplete="off"
           placeholder="••••" class="input-field" style="text-align:center;font-size:20px;letter-spacing:0.4em" />
         <div id="pin-error" class="hidden" style="color:#fca5a5;font-size:12px;text-align:center;background:rgba(239,68,68,.15);padding:7px;border-radius:8px"></div>
-        <button type="submit" class="btn btn-primary">فتح الإعدادات</button>
+        <button type="submit" class="btn btn-primary">تأكيد الرمز</button>
       </form>
     </div>
   </div>
 
-  <!-- PERSON MODAL -->
+  <!-- BATTALION MODAL -->
+  <div id="battalion-modal" class="modal-backdrop hidden">
+    <div class="modal">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px">
+        <strong id="bat-modal-title" style="color:var(--gold-light)">إدراج كتيبة جديدة مع سراياها</strong>
+        <button class="btn btn-sm" data-close="battalion-modal">✕</button>
+      </div>
+      <form id="battalion-form" class="form-grid">
+        <input type="hidden" id="bm-id" />
+        <div>
+          <label class="label">اسم الكتيبة</label>
+          <input id="bm-name" class="input-field" placeholder="مثال: الكتيبة الثانية مدفعية 130مم" required />
+        </div>
+        <div class="row-2">
+          <div>
+            <label class="label">رمز الكتيبة</label>
+            <input id="bm-code" class="input-field" placeholder="مثال: 130-2" />
+          </div>
+          <div>
+            <label class="label">قائد الكتيبة</label>
+            <input id="bm-commander" class="input-field" placeholder="الاسم أو الصفة" />
+          </div>
+        </div>
+        <div>
+          <label class="label">الموقع / ملاحظات</label>
+          <input id="bm-notes" class="input-field" placeholder="مثال: ثكنة اللواء 137" />
+        </div>
+        <div id="bm-companies-wrap">
+          <label class="label">السرايا المدرجة مع الكتيبة (سطر لكل سرية)</label>
+          <textarea id="bm-companies" rows="5" class="input-field">قيادة الكتيبة
+السرية الأولى
+السرية الثانية
+السرية الثالثة
+سرية التأمين الإداري</textarea>
+          <label style="display:flex;align-items:center;gap:8px;margin-top:8px;font-size:12.5px;cursor:pointer">
+            <input type="checkbox" id="bm-auto-groups" checked />
+            <span>إنشاء جماعتين (10 أفراد لكل جماعة) تلقائياً لكل سرية من السرايا</span>
+          </label>
+        </div>
+        <button type="submit" class="btn btn-primary">حفظ الكتيبة وتشكيلها</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- COMPANY MODAL -->
+  <div id="company-modal" class="modal-backdrop hidden">
+    <div class="modal">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px">
+        <strong id="comp-modal-title" style="color:var(--gold-light)">إضافة سرية جديدة</strong>
+        <button class="btn btn-sm" data-close="company-modal">✕</button>
+      </div>
+      <form id="company-form" class="form-grid">
+        <input type="hidden" id="cm-id" />
+        <div>
+          <label class="label">اسم السرية</label>
+          <input id="cm-name" class="input-field" placeholder="مثال: سرية الرصد والإشارة" required />
+        </div>
+        <div class="row-2">
+          <div>
+            <label class="label">قائد السرية</label>
+            <input id="cm-commander" class="input-field" placeholder="اسم قائد السرية" />
+          </div>
+          <div>
+            <label class="label">نظام الدوام</label>
+            <select id="cm-has-crews" class="input-field">
+              <option value="true">مناوبات 10/10 (وجبة أ / ب)</option>
+              <option value="false">دوام دائم (بدون طواقم)</option>
+            </select>
+          </div>
+        </div>
+        <div id="cm-init-groups-wrap" class="row-2">
+          <div>
+            <label class="label">عدد الجماعات المبدئي</label>
+            <input id="cm-groups-count" type="number" min="0" max="12" value="2" class="input-field" />
+          </div>
+          <div>
+            <label class="label">أفراد كل جماعة</label>
+            <input id="cm-group-size" type="number" min="0" max="30" value="10" class="input-field" />
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary">حفظ السرية</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- GROUP MODAL -->
+  <div id="group-modal" class="modal-backdrop hidden">
+    <div class="modal">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px">
+        <strong id="grp-modal-title" style="color:var(--gold-light)">إضافة جماعة جديدة (10 أفراد)</strong>
+        <button class="btn btn-sm" data-close="group-modal">✕</button>
+      </div>
+      <form id="group-form" class="form-grid">
+        <input type="hidden" id="gm-id" />
+        <input type="hidden" id="gm-company-id" />
+        <div>
+          <label class="label">اسم الجماعة</label>
+          <input id="gm-name" class="input-field" placeholder="مثال: الجماعة الأولى / جماعة مدفع 1" required />
+        </div>
+        <div class="row-2">
+          <div>
+            <label class="label">قائد الجماعة</label>
+            <input id="gm-leader" class="input-field" placeholder="اسم قائد الجماعة" />
+          </div>
+          <div>
+            <label class="label">الوجبة / المناوبة</label>
+            <select id="gm-batch" class="input-field">
+              <option value="A">الوجبة أ (المناوبة الأولى)</option>
+              <option value="B">الوجبة ب (المناوبة الثانية)</option>
+              <option value="PERMANENT">دوام دائم</option>
+            </select>
+          </div>
+        </div>
+        <div class="row-2">
+          <div>
+            <label class="label">العدد المقرر للجماعة</label>
+            <input id="gm-capacity" type="number" min="1" max="50" value="10" class="input-field" />
+          </div>
+          <div id="gm-autofill-wrap" style="display:flex;align-items:flex-end;padding-bottom:6px">
+            <label style="display:flex;align-items:center;gap:6px;font-size:12px;cursor:pointer">
+              <input type="checkbox" id="gm-autofill" checked />
+              <span>إنشاء 10 أفراد تلقائياً للتعديل</span>
+            </label>
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary">حفظ الجماعة</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- BULK EDIT GROUP MEMBERS MODAL (10 MEMBERS FAST EDIT) -->
+  <div id="bulk-group-modal" class="modal-backdrop hidden">
+    <div class="modal modal-lg">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px">
+        <strong id="bulk-modal-title" style="color:var(--gold-light)">تعديل جماعي سريع لأفراد الجماعة</strong>
+        <button class="btn btn-sm" data-close="bulk-group-modal">✕</button>
+      </div>
+      <div style="font-size:12px;color:var(--text-muted);margin-bottom:10px">
+        عدّل أسماء ومسميات وأرقام جميع أفراد الجماعة دفعة واحدة ثم اضغط حفظ.
+      </div>
+      <form id="bulk-group-form">
+        <input type="hidden" id="bg-group-id" />
+        <div id="bulk-members-rows" style="max-height:58vh;overflow-y:auto;padding-left:2px"></div>
+        <div style="display:flex;gap:8px;margin-top:12px;justify-content:flex-end">
+          <button type="button" class="btn btn-sm" data-close="bulk-group-modal">إلغاء</button>
+          <button type="submit" class="btn btn-primary">✓ حفظ جميع التعديلات</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- PERSON MODAL (FULL CONTROL) -->
   <div id="person-modal" class="modal-backdrop hidden">
     <div class="modal">
       <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px">
-        <strong id="person-modal-title" style="color:var(--gold-light)">إضافة عنصر</strong>
-        <button class="btn btn-sm" id="btn-close-person">✕</button>
+        <strong id="person-modal-title" style="color:var(--gold-light)">إضافة / تعديل فرد</strong>
+        <button class="btn btn-sm" data-close="person-modal">✕</button>
       </div>
       <form id="person-form" class="form-grid">
         <input type="hidden" id="pm-id" />
@@ -475,40 +831,58 @@
           <label class="label">الاسم الكامل</label>
           <input id="pm-name" class="input-field" required />
         </div>
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+        <div class="row-2">
           <div>
             <label class="label">الرقم الذاتي</label>
             <input id="pm-serial" class="input-field" />
           </div>
           <div>
-            <label class="label">الاختصاص / الوظيفة</label>
-            <input id="pm-job" class="input-field" />
+            <label class="label">الصفة / الرتبة</label>
+            <input id="pm-rank" class="input-field" placeholder="قائد / رامي / فرد..." />
           </div>
         </div>
-        <div>
-          <label class="label">السرية</label>
-          <select id="pm-company" class="input-field"></select>
-        </div>
-        <div id="pm-crew-wrap">
-          <label class="label">الطاقم</label>
-          <select id="pm-crew" class="input-field">
-            <option value="الطاقم الأول">الطاقم الأول (وجبة أ)</option>
-            <option value="الطاقم الثاني">الطاقم الثاني (وجبة أ)</option>
-            <option value="الطاقم الثالث">الطاقم الثالث (وجبة ب)</option>
-            <option value="الطاقم الرابع">الطاقم الرابع (وجبة ب)</option>
-          </select>
-        </div>
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+        <div class="row-2">
           <div>
-            <label class="label">الفصيل / المجموعة</label>
-            <input id="pm-squad" class="input-field" placeholder="قيادة / مدفع 1..." />
+            <label class="label">المسمى الوظيفي / الاختصاص</label>
+            <input id="pm-job" class="input-field" placeholder="قائد مدفع / سائق / إداري..." />
           </div>
           <div>
             <label class="label">رقم الهاتف</label>
             <input id="pm-phone" class="input-field" inputmode="tel" />
           </div>
         </div>
-        <button type="submit" class="btn btn-primary">حفظ البيانات</button>
+        <div class="row-2">
+          <div>
+            <label class="label">السرية</label>
+            <select id="pm-company" class="input-field"></select>
+          </div>
+          <div>
+            <label class="label">الجماعة</label>
+            <select id="pm-group" class="input-field"></select>
+          </div>
+        </div>
+        <div class="row-2">
+          <div>
+            <label class="label">تخصيص المناوبة</label>
+            <select id="pm-batch" class="input-field">
+              <option value="INHERIT">تلقائي (يتبع الجماعة)</option>
+              <option value="A">الوجبة أ</option>
+              <option value="B">الوجبة ب</option>
+              <option value="PERMANENT">دوام دائم</option>
+            </select>
+          </div>
+          <div style="display:flex;align-items:flex-end;padding-bottom:6px">
+            <label style="display:flex;align-items:center;gap:6px;font-size:12.5px;cursor:pointer">
+              <input type="checkbox" id="pm-is-leader" />
+              <span>★ تعيين كقائد في الهيكلية</span>
+            </label>
+          </div>
+        </div>
+        <div>
+          <label class="label">ملاحظات إضافية</label>
+          <input id="pm-notes" class="input-field" placeholder="أي تفاصيل أخرى..." />
+        </div>
+        <button type="submit" class="btn btn-primary">حفظ بيانات الفرد</button>
       </form>
     </div>
   </div>
@@ -518,7 +892,7 @@
     <div class="modal">
       <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px">
         <strong style="color:var(--gold-light)">حفظ ومشاركة تقرير التفقد</strong>
-        <button class="btn btn-sm" id="btn-close-export">✕</button>
+        <button class="btn btn-sm" data-close="export-modal">✕</button>
       </div>
       <div id="export-role-warn" class="hidden" style="color:#fca5a5;font-size:12.5px;background:rgba(239,68,68,.15);padding:10px;border-radius:10px;margin-bottom:10px">
         صلاحيات الحفظ والمشاركة محصورة بالمالك (OWNER) والمشرفين (ADMIN) فقط.
@@ -526,13 +900,12 @@
       <div class="form-grid" id="export-buttons">
         <button class="btn btn-primary" id="btn-exp-excel">📊 حفظ ملف Excel (.xls)</button>
         <button class="btn btn-primary" id="btn-exp-pdf">📄 طباعة / حفظ PDF رسمي</button>
-        <button class="btn btn-primary" id="btn-exp-png">🖼️ حفظ صورة PNG عالية الدقة</button>
+        <button class="btn btn-primary" id="btn-exp-png">🖼️ حفظ صورة PNG للتفقد كامل</button>
         <button class="btn btn-ok" id="btn-exp-share">📤 مشاركة الصورة مباشرة (واتساب / تيليغرام)</button>
       </div>
     </div>
   </div>
 
-  <!-- PRINT SHEET -->
   <div id="print-sheet"></div>
   <div id="toast" class="toast hidden"></div>
 
@@ -542,6 +915,8 @@
     const DB_VER = 1;
     const FAIL_KEY = 'tafaqqud_pin_fails_v1';
     const PIN_KEY = 'tafaqqud_pin_sha256';
+    const DEV_ID_KEY = 'tafaqqud_device_id_v2';
+    const LOCAL_BAN_KEY = 'tafaqqud_local_ban_v2';
     const MAX_FAILS = 5;
     const LOCK_MS = 15 * 60 * 1000;
     const EAGLE_PATH = 'M30,120L41,119L57,102L59,103L58,106L34,132L41,132L47,129L63,108L65,109L65,111L40,144L49,143L54,138L70,113L72,114L46,156L53,155L58,152L78,117L80,118L80,120L62,153L66,153L72,150L86,119L88,120L88,123L76,151L82,150L85,147L95,121L97,122L88,149L95,147L98,143L103,123L105,122L106,126L101,146L107,142L109,131L111,129L116,136L115,140L104,152L104,156L97,164L80,165L80,170L84,166L87,166L88,168L85,171L87,173L87,170L93,166L99,172L101,170L98,166L103,160L109,159L117,154L117,158L97,185L106,183L109,180L114,168L117,167L118,169L108,191L116,189L119,184L121,172L124,169L125,175L123,182L123,191L125,193L130,192L130,195L134,189L131,174L132,169L135,171L137,184L140,189L148,191L138,169L139,167L142,168L147,180L150,183L160,185L138,156L139,154L153,160L158,166L155,170L157,173L157,171L163,166L166,167L170,173L171,171L168,168L169,166L172,166L176,169L176,165L161,165L153,157L153,153L141,139L144,129L146,128L149,142L152,145L156,146L150,125L151,123L154,124L157,139L161,147L168,149L159,124L160,122L162,122L171,147L175,150L180,151L168,123L168,120L170,119L184,150L190,153L194,153L176,120L176,118L178,117L197,151L201,154L209,156L186,120L184,114L187,114L204,141L211,144L216,144L192,113L191,109L194,109L211,131L221,131L197,104L198,102L215,119L226,120L183,76L179,74L165,75L163,77L163,88L160,95L149,102L141,102L138,100L136,80L132,77L123,76L112,81L112,86L115,84L119,84L121,86L121,92L117,101L107,102L102,100L95,93L93,87L93,77L90,74L76,74L72,76Z M145,58L148,61L145,67L150,66L153,70L153,66L158,63L154,61L153,57L151,59Z M98,63L103,65L103,70L107,66L112,67L109,63L111,58L106,59L103,56L103,60Z M121,55L125,59L124,64L128,61L133,64L132,58L136,55L131,55L128,50L126,55Z';
@@ -549,47 +924,209 @@
     const STATUS_LABELS = {
       PRESENT: 'حاضر',
       LEAVE: 'إجازة',
-      MISSION: 'مهمة',
       SICK: 'مرضية',
+      INACTIVE: 'غير فعال',
       ABSENT: 'غياب'
+    };
+    const BATCH_LABELS = {
+      A: 'الوجبة أ',
+      B: 'الوجبة ب',
+      PERMANENT: 'دوام دائم',
+      INHERIT: 'يتبع الجماعة'
     };
     const ROLE_LABELS = { OWNER: 'مالك', ADMIN: 'مشرف', VIEWER: 'مشاهد' };
 
-    const INITIAL_STATE = {
-      settings: {
-        app_title: 'تفقد دوام الـ130مم',
-        unit_name: 'الكتيبة الأولى مدفعية 130مم',
-        shift_start: '2026-11-24',
-        shift_days: 10,
-        user_name: 'شيخ أبو سعيد',
-        user_role: 'OWNER'
-      },
-      companies: [
-        { code: '0', name: 'قيادة الكتيبة', has_crews: false, batch_a_crews: null, batch_b_crews: null },
-        { code: '1', name: 'السرية الأولى', has_crews: true, batch_a_crews: ['الطاقم الأول', 'الطاقم الثاني'], batch_b_crews: ['الطاقم الثالث', 'الطاقم الرابع'] },
-        { code: '2', name: 'السرية الثانية', has_crews: true, batch_a_crews: ['الطاقم الأول', 'الطاقم الثاني'], batch_b_crews: ['الطاقم الثالث', 'الطاقم الرابع'] },
-        { code: '3', name: 'السرية الثالثة', has_crews: true, batch_a_crews: ['الطاقم الأول', 'الطاقم الثاني'], batch_b_crews: ['الطاقم الثالث', 'الطاقم الرابع'] },
-        { code: '4', name: 'سرية التأمين الإداري', has_crews: true, batch_a_crews: ['الطاقم الأول', 'الطاقم الثاني'], batch_b_crews: ['الطاقم الثالث', 'الطاقم الرابع'] }
-      ],
-      personnel: [
-        { id: 'p_1', serial: 'c137001', name: 'قائد الكتيبة الأولى مدفعية 130', company_code: '0', crew: null, squad: 'القيادة', job: 'قائد كتيبة', phone: '' },
-        { id: 'p_2', serial: 'c137903', name: 'مجد محمد رضوان الموسى', company_code: '4', crew: 'الطاقم الأول', squad: 'الإدارة', job: 'مستثمر حاسوب', phone: '' },
-        { id: 'p_3', serial: 'c137101', name: 'رئيس الطاقم الأول — السرية 1', company_code: '1', crew: 'الطاقم الأول', squad: 'مدفع 1', job: 'قائد مدفع', phone: '' },
-        { id: 'p_4', serial: 'c137102', name: 'عنصر الطاقم الثالث — السرية 1', company_code: '1', crew: 'الطاقم الثالث', squad: 'مدفع 3', job: 'رامي', phone: '' }
-      ],
-      attendance: {}, // key: YYYY-MM-DD -> { [personId]: { status, note, updatedAt } }
-      chat: [],
-      undoStack: []
-    };
+    function getOrCreateDeviceId() {
+      let id = localStorage.getItem(DEV_ID_KEY);
+      if (!id) {
+        const rand = () => Math.random().toString(16).slice(2, 6).toUpperCase();
+        id = `DEV-${rand()}-${rand()}`;
+        localStorage.setItem(DEV_ID_KEY, id);
+      }
+      return id;
+    }
+
+    function uid(prefix) {
+      return `${prefix}_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 6)}`;
+    }
+
+    function buildDefaultState() {
+      const batId = 'bat_1';
+      return {
+        schemaVersion: 2,
+        settings: {
+          app_title: 'تفقد دوام الـ130مم',
+          unit_name: 'الكتيبة الأولى مدفعية 130مم',
+          active_battalion_id: batId,
+          shift_start: '2026-11-24',
+          shift_days: 10,
+          user_name: 'شيخ أبو سعيد',
+          user_role: 'OWNER'
+        },
+        accessControl: {
+          globalBlock: false,
+          blockMessage: 'تم حظر الوصول إلى هذا التطبيق من قبل قيادة الكتيبة.',
+          blockedDevices: [],
+          registeredDevices: []
+        },
+        battalions: [
+          {
+            id: batId,
+            name: 'الكتيبة الأولى مدفعية 130مم',
+            code: '130-1',
+            commander: 'قائد الكتيبة الأولى مدفعية 130',
+            notes: 'ثكنة اللواء 137'
+          }
+        ],
+        companies: [
+          { id: 'comp_0', battalion_id: batId, code: '0', name: 'قيادة الكتيبة', commander: 'قائد الكتيبة الأولى مدفعية 130', has_crews: false },
+          { id: 'comp_1', battalion_id: batId, code: '1', name: 'السرية الأولى', commander: '', has_crews: true },
+          { id: 'comp_2', battalion_id: batId, code: '2', name: 'السرية الثانية', commander: '', has_crews: true },
+          { id: 'comp_3', battalion_id: batId, code: '3', name: 'السرية الثالثة', commander: '', has_crews: true },
+          { id: 'comp_4', battalion_id: batId, code: '4', name: 'سرية التأمين الإداري', commander: '', has_crews: true }
+        ],
+        groups: [
+          { id: 'grp_0_1', battalion_id: batId, company_id: 'comp_0', name: 'جماعة القيادة والأركان', leader: 'قائد الكتيبة الأولى مدفعية 130', shift_batch: 'PERMANENT', capacity: 10 },
+          { id: 'grp_1_1', battalion_id: batId, company_id: 'comp_1', name: 'الجماعة الأولى', leader: 'رئيس الطاقم الأول', shift_batch: 'A', capacity: 10 },
+          { id: 'grp_1_2', battalion_id: batId, company_id: 'comp_1', name: 'الجماعة الثانية', leader: '', shift_batch: 'B', capacity: 10 },
+          { id: 'grp_2_1', battalion_id: batId, company_id: 'comp_2', name: 'الجماعة الأولى', leader: '', shift_batch: 'A', capacity: 10 },
+          { id: 'grp_2_2', battalion_id: batId, company_id: 'comp_2', name: 'الجماعة الثانية', leader: '', shift_batch: 'B', capacity: 10 },
+          { id: 'grp_3_1', battalion_id: batId, company_id: 'comp_3', name: 'الجماعة الأولى', leader: '', shift_batch: 'A', capacity: 10 },
+          { id: 'grp_3_2', battalion_id: batId, company_id: 'comp_3', name: 'الجماعة الثانية', leader: '', shift_batch: 'B', capacity: 10 },
+          { id: 'grp_4_1', battalion_id: batId, company_id: 'comp_4', name: 'جماعة الإدارة والتأمين', leader: 'مجد محمد رضوان الموسى', shift_batch: 'A', capacity: 10 }
+        ],
+        personnel: [
+          { id: 'p_1', battalion_id: batId, company_id: 'comp_0', group_id: 'grp_0_1', serial: 'c137001', name: 'قائد الكتيبة الأولى مدفعية 130', rank: 'قائد كتيبة', job: 'قائد كتيبة', is_leader: true, shift_batch: 'PERMANENT', phone: '', notes: '' },
+          { id: 'p_2', battalion_id: batId, company_id: 'comp_4', group_id: 'grp_4_1', serial: 'c137903', name: 'مجد محمد رضوان الموسى', rank: 'إداري', job: 'مستثمر حاسوب', is_leader: true, shift_batch: 'INHERIT', phone: '', notes: '' },
+          { id: 'p_3', battalion_id: batId, company_id: 'comp_1', group_id: 'grp_1_1', serial: 'c137101', name: 'رئيس الطاقم الأول — السرية 1', rank: 'قائد جماعة', job: 'قائد مدفع', is_leader: true, shift_batch: 'INHERIT', phone: '', notes: '' },
+          { id: 'p_4', battalion_id: batId, company_id: 'comp_1', group_id: 'grp_1_2', serial: 'c137102', name: 'عنصر الجماعة الثانية — السرية 1', rank: 'فرد', job: 'رامي', is_leader: false, shift_batch: 'INHERIT', phone: '', notes: '' }
+        ],
+        attendance: {},
+        chat: [],
+        undoStack: []
+      };
+    }
+
+    // Automatic Migration from v1 -> v2 without losing any saved data
+    function migrateState(raw) {
+      if (!raw || typeof raw !== 'object') return buildDefaultState();
+      const def = buildDefaultState();
+      if (raw.schemaVersion === 2 && Array.isArray(raw.battalions) && raw.battalions.length) {
+        // Ensure MISSION -> INACTIVE conversion & accessControl presence
+        const migratedAtt = {};
+        for (const [dt, map] of Object.entries(raw.attendance || {})) {
+          migratedAtt[dt] = {};
+          for (const [pid, entry] of Object.entries(map || {})) {
+            migratedAtt[dt][pid] = {
+              ...entry,
+              status: entry.status === 'MISSION' ? 'INACTIVE' : (entry.status || 'PRESENT')
+            };
+          }
+        }
+        return {
+          ...def,
+          ...raw,
+          settings: { ...def.settings, ...(raw.settings || {}) },
+          accessControl: { ...def.accessControl, ...(raw.accessControl || {}) },
+          attendance: migratedAtt
+        };
+      }
+
+      // Upgrade v1 state
+      const batId = 'bat_1';
+      const batName = (raw.settings && raw.settings.unit_name) || def.battalions[0].name;
+      const battalions = [{ id: batId, name: batName, code: '130-1', commander: '', notes: '' }];
+
+      const compCodeToId = {};
+      const companies = (raw.companies || def.companies).map((c, idx) => {
+        const cid = c.id || ('comp_' + (c.code !== undefined ? c.code : idx));
+        compCodeToId[String(c.code)] = cid;
+        return {
+          id: cid,
+          battalion_id: batId,
+          code: String(c.code !== undefined ? c.code : idx),
+          name: c.name,
+          commander: c.commander || '',
+          has_crews: c.has_crews !== false
+        };
+      });
+
+      const groups = [];
+      const groupKeyMap = {};
+      for (const c of companies) {
+        if (!c.has_crews) {
+          const gid = 'grp_' + c.code + '_perm';
+          groups.push({ id: gid, battalion_id: batId, company_id: c.id, name: 'جماعة ' + c.name, leader: '', shift_batch: 'PERMANENT', capacity: 10 });
+          groupKeyMap[c.id + '|PERMANENT'] = gid;
+        } else {
+          const gA = 'grp_' + c.code + '_a';
+          const gB = 'grp_' + c.code + '_b';
+          groups.push({ id: gA, battalion_id: batId, company_id: c.id, name: 'الجماعة الأولى', leader: '', shift_batch: 'A', capacity: 10 });
+          groups.push({ id: gB, battalion_id: batId, company_id: c.id, name: 'الجماعة الثانية', leader: '', shift_batch: 'B', capacity: 10 });
+          groupKeyMap[c.id + '|A'] = gA;
+          groupKeyMap[c.id + '|B'] = gB;
+        }
+      }
+
+      const personnel = (raw.personnel || []).map((p) => {
+        const cid = compCodeToId[String(p.company_code)] || companies[0].id;
+        const comp = companies.find((x) => x.id === cid);
+        let batch = 'PERMANENT';
+        if (comp && comp.has_crews) {
+          batch = (p.crew === 'الطاقم الثالث' || p.crew === 'الطاقم الرابع') ? 'B' : 'A';
+        }
+        const gid = groupKeyMap[cid + '|' + batch] || (groups.find((g) => g.company_id === cid) || {}).id || null;
+        return {
+          id: p.id || uid('p'),
+          battalion_id: batId,
+          company_id: cid,
+          group_id: gid,
+          serial: p.serial || '',
+          name: p.name || 'عنصر',
+          rank: p.rank || '',
+          job: p.job || '',
+          is_leader: Boolean(p.is_leader || (p.job && p.job.includes('قائد'))),
+          shift_batch: comp && !comp.has_crews ? 'PERMANENT' : 'INHERIT',
+          phone: p.phone || '',
+          notes: p.squad ? `ملاحظة سابقة: ${p.squad}` : ''
+        };
+      });
+
+      const attendance = {};
+      for (const [dt, map] of Object.entries(raw.attendance || {})) {
+        attendance[dt] = {};
+        for (const [pid, entry] of Object.entries(map || {})) {
+          attendance[dt][pid] = {
+            ...entry,
+            status: entry.status === 'MISSION' ? 'INACTIVE' : (entry.status || 'PRESENT')
+          };
+        }
+      }
+
+      return {
+        schemaVersion: 2,
+        settings: { ...def.settings, ...(raw.settings || {}), active_battalion_id: batId },
+        accessControl: def.accessControl,
+        battalions,
+        companies,
+        groups,
+        personnel,
+        attendance,
+        chat: raw.chat || [],
+        undoStack: []
+      };
+    }
 
     let db = null;
-    let state = structuredClone(INITIAL_STATE);
+    let state = buildDefaultState();
     let activeDate = new Date().toISOString().slice(0, 10);
     let settingsUnlocked = false;
+    let pinModalMode = 'SETTINGS'; // 'SETTINGS' | 'UNLOCK_BLOCK'
     let mediaRecorder = null;
     let voiceChunks = [];
+    const MY_DEVICE_ID = getOrCreateDeviceId();
 
-    // IndexedDB helpers
+    // IndexedDB
     function openDB() {
       return new Promise((resolve, reject) => {
         const req = indexedDB.open(DB_NAME, DB_VER);
@@ -601,7 +1138,6 @@
         req.onerror = () => reject(req.error);
       });
     }
-
     function dbGet(key) {
       return new Promise((resolve, reject) => {
         const tx = db.transaction('kv', 'readonly');
@@ -610,7 +1146,6 @@
         req.onerror = () => reject(req.error);
       });
     }
-
     function dbPut(key, val) {
       return new Promise((resolve, reject) => {
         const tx = db.transaction('kv', 'readwrite');
@@ -628,7 +1163,9 @@
           time: new Date().toLocaleTimeString('ar-SY', { hour: '2-digit', minute: '2-digit' }),
           data: JSON.stringify({
             settings: state.settings,
+            battalions: state.battalions,
             companies: state.companies,
+            groups: state.groups,
             personnel: state.personnel,
             attendance: state.attendance
           })
@@ -643,10 +1180,38 @@
       el.textContent = msg;
       el.classList.remove('hidden');
       clearTimeout(window.__toastTimer);
-      window.__toastTimer = setTimeout(() => el.classList.add('hidden'), 2600);
+      window.__toastTimer = setTimeout(() => el.classList.add('hidden'), 2800);
     }
 
-    // Shift Engine (10/10)
+    function escapeHtml(s) {
+      return String(s || '').replace(/[&<>"']/g, (m) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[m]));
+    }
+    function escapeXml(s) {
+      return String(s || '').replace(/[&<>"']/g, (m) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&apos;' }[m]));
+    }
+
+    // Active Battalion Helpers
+    function getActiveBattalion() {
+      const bat = state.battalions.find((b) => b.id === state.settings.active_battalion_id) || state.battalions[0];
+      if (bat && state.settings.active_battalion_id !== bat.id) {
+        state.settings.active_battalion_id = bat.id;
+      }
+      return bat;
+    }
+    function getActiveCompanies() {
+      const bat = getActiveBattalion();
+      return bat ? state.companies.filter((c) => c.battalion_id === bat.id) : [];
+    }
+    function getActiveGroups() {
+      const bat = getActiveBattalion();
+      return bat ? state.groups.filter((g) => g.battalion_id === bat.id) : [];
+    }
+    function getActivePersonnel() {
+      const bat = getActiveBattalion();
+      return bat ? state.personnel.filter((p) => p.battalion_id === bat.id) : [];
+    }
+
+    // Shift Engine (Driven directly by Hierarchy Groups & Companies)
     function getShiftInfo(dateIso) {
       const start = new Date(state.settings.shift_start + 'T00:00:00Z');
       const curr = new Date(dateIso + 'T00:00:00Z');
@@ -660,112 +1225,231 @@
       return {
         activeBatch: isA ? 'A' : 'B',
         batchLabel: isA ? 'الوجبة أ' : 'الوجبة ب',
-        crewsLabel: isA ? 'الطاقم الأول والثاني' : 'الطاقم الثالث والرابع',
         dayInBatch,
         daysPerBatch,
         remaining
       };
     }
 
+    function resolvePersonBatch(person) {
+      const comp = state.companies.find((c) => c.id === person.company_id);
+      if (comp && !comp.has_crews) return 'PERMANENT';
+      if (person.shift_batch && person.shift_batch !== 'INHERIT') return person.shift_batch;
+      const grp = state.groups.find((g) => g.id === person.group_id);
+      if (grp && grp.shift_batch) return grp.shift_batch;
+      return 'A';
+    }
+
     function isScheduledOnDuty(person, dateIso) {
-      const comp = state.companies.find((c) => c.code === person.company_code);
-      if (!comp || !comp.has_crews) return true; // قيادة الكتيبة بدون طواقم = دوام دائم
+      const eff = resolvePersonBatch(person);
+      if (eff === 'PERMANENT') return true;
       const shift = getShiftInfo(dateIso);
-      const activeCrews = shift.activeBatch === 'A' ? (comp.batch_a_crews || []) : (comp.batch_b_crews || []);
-      if (!person.crew) return true;
-      return activeCrews.includes(person.crew);
+      return eff === shift.activeBatch;
     }
 
     function getAttendanceEntry(dateIso, personId) {
       const dayMap = state.attendance[dateIso] || {};
-      return dayMap[personId] || { status: 'PRESENT', note: '' };
+      const entry = dayMap[personId] || { status: 'PRESENT', note: '' };
+      if (entry.status === 'MISSION') entry.status = 'INACTIVE';
+      return entry;
     }
 
-    async function setAttendanceStatus(personId, status, note) {
+    async function setAttendanceStatus(personId, status) {
       const p = state.personnel.find((x) => x.id === personId);
       await persistState(`تحديث حالة ${p ? p.name : personId} إلى ${STATUS_LABELS[status]}`);
       if (!state.attendance[activeDate]) state.attendance[activeDate] = {};
       const prev = state.attendance[activeDate][personId] || { status: 'PRESENT', note: '' };
-      state.attendance[activeDate][personId] = {
-        status,
-        note: note !== undefined ? note : prev.note,
-        updatedAt: new Date().toISOString()
-      };
+      state.attendance[activeDate][personId] = { status, note: prev.note || '', updatedAt: new Date().toISOString() };
       await dbPut('app_state', state);
       renderAll();
     }
 
-    // Rendering
+    // ACCESS CONTROL & REMOTE BLOCK ENGINE
+    function evaluateBlockStatus() {
+      const overlay = document.getElementById('block-overlay');
+      const localBan = localStorage.getItem(LOCAL_BAN_KEY);
+      const ac = state.accessControl || {};
+      const myName = (state.settings.user_name || '').trim().toLowerCase();
+      const isOwner = state.settings.user_role === 'OWNER';
+
+      let blocked = false;
+      let reason = ac.blockMessage || 'تم حظر الوصول إلى التطبيق من قبل قيادة الكتيبة.';
+
+      if (localBan) {
+        blocked = true;
+        reason = localBan;
+      } else {
+        const matched = (ac.blockedDevices || []).find((b) => {
+          const target = (b.target || '').trim().toLowerCase();
+          return target && (target === MY_DEVICE_ID.toLowerCase() || (myName && target === myName));
+        });
+        if (matched) {
+          blocked = true;
+          reason = matched.reason || reason;
+        } else if (ac.globalBlock && !isOwner) {
+          blocked = true;
+        }
+      }
+
+      document.getElementById('block-reason-text').textContent = reason;
+      document.getElementById('block-device-id').textContent = MY_DEVICE_ID;
+      overlay.classList.toggle('hidden', !blocked);
+    }
+
+    async function syncAccessControlFromCloud(registerSelf = true) {
+      const env = window.__TAFAQ_ENV__ || {};
+      if (!env.VITE_SUPABASE_URL || !env.VITE_SUPABASE_ANON_KEY || !navigator.onLine) return;
+      try {
+        const res = await fetch(`${env.VITE_SUPABASE_URL}/rest/v1/app_access_control?id=eq.primary_130mm&select=*`, {
+          headers: {
+            'apikey': env.VITE_SUPABASE_ANON_KEY,
+            'Authorization': `Bearer ${env.VITE_SUPABASE_ANON_KEY}`
+          }
+        });
+        if (!res.ok) return;
+        const rows = await res.json();
+        if (rows && rows.length) {
+          const remote = rows[0];
+          state.accessControl.globalBlock = Boolean(remote.global_block);
+          state.accessControl.blockMessage = remote.block_message || state.accessControl.blockMessage;
+          state.accessControl.blockedDevices = Array.isArray(remote.blocked_devices) ? remote.blocked_devices : [];
+          state.accessControl.registeredDevices = Array.isArray(remote.registered_devices) ? remote.registered_devices : [];
+
+          if (registerSelf) {
+            const others = state.accessControl.registeredDevices.filter((d) => d.deviceId !== MY_DEVICE_ID);
+            others.unshift({
+              deviceId: MY_DEVICE_ID,
+              userName: state.settings.user_name || 'مستخدم',
+              role: state.settings.user_role || 'VIEWER',
+              lastSeen: new Date().toLocaleString('ar-SY')
+            });
+            state.accessControl.registeredDevices = others.slice(0, 60);
+            await pushAccessControlToCloud(true);
+          }
+          await dbPut('app_state', state);
+          evaluateBlockStatus();
+          if (settingsUnlocked) renderAccessControl();
+        }
+      } catch (_) {}
+    }
+
+    async function pushAccessControlToCloud(silent = false) {
+      const env = window.__TAFAQ_ENV__ || {};
+      if (!env.VITE_SUPABASE_URL || !env.VITE_SUPABASE_ANON_KEY || !navigator.onLine) {
+        if (!silent) showToast('تم الحفظ محلياً — سيتم تطبيق الحظر سحابياً عند توفر الإنترنت');
+        return;
+      }
+      try {
+        const res = await fetch(`${env.VITE_SUPABASE_URL}/rest/v1/app_access_control`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'apikey': env.VITE_SUPABASE_ANON_KEY,
+            'Authorization': `Bearer ${env.VITE_SUPABASE_ANON_KEY}`,
+            'Prefer': 'resolution=merge-duplicates'
+          },
+          body: JSON.stringify({
+            id: 'primary_130mm',
+            global_block: Boolean(state.accessControl.globalBlock),
+            block_message: state.accessControl.blockMessage,
+            blocked_devices: state.accessControl.blockedDevices || [],
+            registered_devices: state.accessControl.registeredDevices || [],
+            updated_at: new Date().toISOString()
+          })
+        });
+        if (!res.ok) throw new Error('تأكد من تنفيذ ملف supabase-setup.sql المحدّث في Supabase');
+        if (!silent) showToast('✓ تم تحديث قواعد الحظر سحابياً بنجاح');
+      } catch (err) {
+        if (!silent) showToast(err.message || 'تعذر رفع قواعد الحظر للسحابة');
+      }
+    }
+
+    // RENDERING
     function renderHeader() {
+      const bat = getActiveBattalion();
       document.getElementById('hdr-title').textContent = state.settings.app_title;
-      document.getElementById('hdr-unit').textContent = state.settings.unit_name;
+      document.getElementById('hdr-unit').textContent = bat ? bat.name : state.settings.unit_name;
       document.getElementById('role-pill').textContent = ROLE_LABELS[state.settings.user_role] || 'مالك';
+
       const net = document.getElementById('net-pill');
       if (navigator.onLine) {
         net.textContent = '● متصل';
         net.className = 'pill online';
       } else {
-        net.textContent = '● محلي (أوفلاين)';
+        net.textContent = '● محلي';
         net.className = 'pill offline';
       }
+
+      const batSel = document.getElementById('global-battalion-select');
+      batSel.innerHTML = state.battalions.map((b) =>
+        `<option value="${b.id}">${escapeHtml(b.name)} ${b.code ? '(' + escapeHtml(b.code) + ')' : ''}</option>`
+      ).join('');
+      if (bat) batSel.value = bat.id;
     }
 
     function populateCompanySelects() {
+      const comps = getActiveCompanies();
       const optsAll = ['<option value="ALL">جميع السرايا</option>']
-        .concat(state.companies.map((c) => `<option value="${c.code}">${c.name}</option>`))
+        .concat(comps.map((c) => `<option value="${c.id}">${escapeHtml(c.name)}</option>`))
         .join('');
       for (const id of ['flt-company', 'roster-company']) {
         const sel = document.getElementById(id);
         const cur = sel.value || 'ALL';
         sel.innerHTML = optsAll;
-        sel.value = cur;
+        sel.value = comps.some((c) => c.id === cur) ? cur : 'ALL';
       }
-      const pmSel = document.getElementById('pm-company');
-      const pmCur = pmSel.value || '0';
-      pmSel.innerHTML = state.companies.map((c) => `<option value="${c.code}">${c.name}</option>`).join('');
-      pmSel.value = pmCur;
+    }
+
+    function computeStats() {
+      const people = getActivePersonnel();
+      const dutyPeople = people.filter((p) => isScheduledOnDuty(p, activeDate));
+      let present = 0, leave = 0, sick = 0, inactive = 0, absent = 0;
+      for (const p of dutyPeople) {
+        const st = getAttendanceEntry(activeDate, p.id).status;
+        if (st === 'PRESENT') present++;
+        else if (st === 'LEAVE') leave++;
+        else if (st === 'SICK') sick++;
+        else if (st === 'INACTIVE') inactive++;
+        else if (st === 'ABSENT') absent++;
+      }
+      const onDuty = dutyPeople.length;
+      const readiness = onDuty ? Math.round((present / onDuty) * 100) : 0;
+      return { total: people.length, onDuty, present, leave, sick, inactive, absent, readiness };
     }
 
     function getFilteredRows() {
       const q = (document.getElementById('flt-search').value || '').trim().toLowerCase();
-      const comp = document.getElementById('flt-company').value || 'ALL';
+      const compId = document.getElementById('flt-company').value || 'ALL';
       const scope = document.getElementById('flt-scope').value || 'DUTY';
       const stFlt = document.getElementById('flt-status').value || 'ALL';
 
-      return state.personnel
+      return getActivePersonnel()
         .filter((p) => {
-          if (comp !== 'ALL' && p.company_code !== comp) return false;
+          if (compId !== 'ALL' && p.company_id !== compId) return false;
           const onDuty = isScheduledOnDuty(p, activeDate);
           if (scope === 'DUTY' && !onDuty) return false;
           const entry = getAttendanceEntry(activeDate, p.id);
           if (stFlt !== 'ALL' && entry.status !== stFlt) return false;
           if (q) {
-            const hay = `${p.name} ${p.serial || ''} ${p.job || ''} ${p.squad || ''}`.toLowerCase();
+            const g = state.groups.find((x) => x.id === p.group_id);
+            const hay = `${p.name} ${p.serial || ''} ${p.job || ''} ${p.rank || ''} ${g ? g.name : ''}`.toLowerCase();
             if (!hay.includes(q)) return false;
           }
           return true;
         })
         .map((p) => {
-          const c = state.companies.find((x) => x.code === p.company_code);
+          const c = state.companies.find((x) => x.id === p.company_id);
+          const g = state.groups.find((x) => x.id === p.group_id);
           const entry = getAttendanceEntry(activeDate, p.id);
-          return { ...p, companyName: c ? c.name : '-', onDuty: isScheduledOnDuty(p, activeDate), ...entry };
+          return {
+            ...p,
+            companyName: c ? c.name : '-',
+            groupName: g ? g.name : 'بدون جماعة',
+            effectiveBatch: resolvePersonBatch(p),
+            onDuty: isScheduledOnDuty(p, activeDate),
+            ...entry
+          };
         });
-    }
-
-    function computeStats() {
-      const dutyPeople = state.personnel.filter((p) => isScheduledOnDuty(p, activeDate));
-      let present = 0, leave = 0, absent = 0, mission = 0, sick = 0;
-      for (const p of dutyPeople) {
-        const st = getAttendanceEntry(activeDate, p.id).status;
-        if (st === 'PRESENT') present++;
-        else if (st === 'LEAVE') leave++;
-        else if (st === 'ABSENT') absent++;
-        else if (st === 'MISSION') mission++;
-        else if (st === 'SICK') sick++;
-      }
-      const onDuty = dutyPeople.length;
-      const readiness = onDuty ? Math.round(((present + mission) / onDuty) * 100) : 0;
-      return { total: state.personnel.length, onDuty, present, leave, absent, mission, sick, readiness };
     }
 
     function renderAttendance() {
@@ -773,15 +1457,16 @@
       document.getElementById('active-date').value = activeDate;
       document.getElementById('shift-headline').textContent = `${shift.batchLabel} — اليوم ${shift.dayInBatch} من ${shift.daysPerBatch}`;
       document.getElementById('shift-remaining').textContent = `متبقي ${shift.remaining} أيام للتبديل`;
-      document.getElementById('shift-crews-lbl').textContent = `المناوبون: ${shift.crewsLabel} + القيادة`;
+      document.getElementById('shift-crews-lbl').textContent = `المناوبون اليوم: ${shift.batchLabel} + الدوام الدائم`;
 
       const stats = computeStats();
       document.getElementById('kpi-bar').innerHTML = `
         <div class="kpi"><div class="kpi-val" style="color:var(--gold-light)">${stats.onDuty}</div><div class="kpi-lbl">مقرر اليوم / ${stats.total}</div></div>
         <div class="kpi"><div class="kpi-val" style="color:var(--ok)">${stats.present}</div><div class="kpi-lbl">حاضر</div></div>
         <div class="kpi"><div class="kpi-val" style="color:var(--info)">${stats.leave}</div><div class="kpi-lbl">إجازة</div></div>
-        <div class="kpi"><div class="kpi-val" style="color:var(--danger)">${stats.absent}</div><div class="kpi-lbl">غياب</div></div>
-        <div class="kpi"><div class="kpi-val" style="color:var(--purple)">${stats.readiness}%</div><div class="kpi-lbl">الجاهزية</div></div>
+        <div class="kpi"><div class="kpi-val" style="color:#ef4444">${stats.inactive}</div><div class="kpi-lbl" style="color:#fca5a5">غير فعال</div></div>
+        <div class="kpi"><div class="kpi-val" style="color:#dc2626">${stats.absent}</div><div class="kpi-lbl">غياب</div></div>
+        <div class="kpi"><div class="kpi-val" style="color:var(--gold)">${stats.readiness}%</div><div class="kpi-lbl">الجاهزية</div></div>
       `;
 
       const rows = getFilteredRows();
@@ -795,15 +1480,14 @@
         <div class="person-card">
           <div class="person-top">
             <div>
-              <div class="person-name">${i + 1}. ${escapeHtml(r.name)}</div>
+              <div class="person-name">${i + 1}. ${r.is_leader ? '★ ' : ''}${escapeHtml(r.name)}</div>
               <div class="person-meta">
-                ${escapeHtml(r.companyName)}
-                ${r.crew ? ' • ' + escapeHtml(r.crew) : ' • دوام دائم'}
+                ${escapeHtml(r.companyName)} • ${escapeHtml(r.groupName)}
                 ${r.job ? ' • ' + escapeHtml(r.job) : ''}
                 ${r.serial ? ' • ' + escapeHtml(r.serial) : ''}
               </div>
             </div>
-            <span class="pill ${r.onDuty ? 'gold' : ''}">${r.onDuty ? 'مناوب' : 'استراحة'}</span>
+            <span class="pill ${r.onDuty ? 'gold' : ''}">${BATCH_LABELS[r.effectiveBatch] || ''}</span>
           </div>
           <div class="status-row">
             ${Object.entries(STATUS_LABELS).map(([k, lbl]) => `
@@ -814,27 +1498,51 @@
       `).join('');
     }
 
-    function renderSaaiq() {
-      const rows = state.companies.map((c) => {
-        const members = state.personnel.filter((p) => p.company_code === c.code);
+    function getReadinessCompanyRows() {
+      return getActiveCompanies().map((c) => {
+        const members = getActivePersonnel().filter((p) => p.company_id === c.id);
         const duty = members.filter((p) => isScheduledOnDuty(p, activeDate));
-        let present = 0, leave = 0, absent = 0, mission = 0, sick = 0;
+        let present = 0, leave = 0, sick = 0, inactive = 0, absent = 0;
         for (const p of duty) {
           const st = getAttendanceEntry(activeDate, p.id).status;
           if (st === 'PRESENT') present++;
           else if (st === 'LEAVE') leave++;
-          else if (st === 'ABSENT') absent++;
-          else if (st === 'MISSION') mission++;
           else if (st === 'SICK') sick++;
+          else if (st === 'INACTIVE') inactive++;
+          else if (st === 'ABSENT') absent++;
         }
-        const pct = duty.length ? Math.round(((present + mission) / duty.length) * 100) : 0;
-        return { name: c.name, total: members.length, duty: duty.length, present, leave, mission, sick, absent, pct };
+        const pct = duty.length ? Math.round((present / duty.length) * 100) : 0;
+        return { name: c.name, commander: c.commander || '-', total: members.length, duty: duty.length, present, leave, sick, inactive, absent, pct };
       });
+    }
 
-      document.getElementById('saaiq-table-wrap').innerHTML = `
+    function getReadinessExceptions() {
+      return getActivePersonnel()
+        .filter((p) => isScheduledOnDuty(p, activeDate))
+        .map((p) => {
+          const c = state.companies.find((x) => x.id === p.company_id);
+          const g = state.groups.find((x) => x.id === p.group_id);
+          return { p, compName: c ? c.name : '-', groupName: g ? g.name : '-', e: getAttendanceEntry(activeDate, p.id) };
+        })
+        .filter((x) => x.e.status !== 'PRESENT');
+    }
+
+    function renderReadiness() {
+      const stats = computeStats();
+      document.getElementById('readiness-kpi-bar').innerHTML = `
+        <div class="kpi"><div class="kpi-val" style="color:var(--gold-light)">${stats.total}</div><div class="kpi-lbl">إجمالي القوة</div></div>
+        <div class="kpi"><div class="kpi-val" style="color:var(--gold)">${stats.onDuty}</div><div class="kpi-lbl">مقرر اليوم</div></div>
+        <div class="kpi"><div class="kpi-val" style="color:var(--ok)">${stats.present}</div><div class="kpi-lbl">حاضر فعّال</div></div>
+        <div class="kpi" style="border-color:rgba(239,68,68,.5)"><div class="kpi-val" style="color:#ef4444">${stats.inactive}</div><div class="kpi-lbl" style="color:#fca5a5">غير فعال</div></div>
+        <div class="kpi"><div class="kpi-val" style="color:#dc2626">${stats.absent}</div><div class="kpi-lbl">غياب</div></div>
+        <div class="kpi"><div class="kpi-val" style="color:var(--ok)">${stats.readiness}%</div><div class="kpi-lbl">الجاهزية</div></div>
+      `;
+
+      const rows = getReadinessCompanyRows();
+      document.getElementById('readiness-table-wrap').innerHTML = `
         <table>
           <thead>
-            <tr><th>السرية</th><th>القوة</th><th>مقرر</th><th>حاضر</th><th>مهمة</th><th>إجازة</th><th>غياب</th><th>الجاهزية</th></tr>
+            <tr><th>السرية</th><th>القوة</th><th>مقرر</th><th>حاضر</th><th>إجازة</th><th>مرضية</th><th style="color:#fca5a5">غير فعال</th><th>غياب</th><th>الجاهزية</th></tr>
           </thead>
           <tbody>
             ${rows.map((r) => `
@@ -843,9 +1551,10 @@
                 <td>${r.total}</td>
                 <td>${r.duty}</td>
                 <td style="color:var(--ok);font-weight:800">${r.present}</td>
-                <td style="color:var(--purple)">${r.mission}</td>
                 <td style="color:var(--info)">${r.leave}</td>
-                <td style="color:${r.absent ? 'var(--danger)' : 'var(--text-muted)'};font-weight:800">${r.absent}</td>
+                <td style="color:var(--warn)">${r.sick}</td>
+                <td style="color:${r.inactive ? '#ef4444' : 'var(--text-muted)'};font-weight:900">${r.inactive}</td>
+                <td style="color:${r.absent ? '#dc2626' : 'var(--text-muted)'};font-weight:800">${r.absent}</td>
                 <td><span class="pill gold">${r.pct}%</span></td>
               </tr>
             `).join('')}
@@ -853,51 +1562,265 @@
         </table>
       `;
 
-      const exceptions = state.personnel
-        .filter((p) => isScheduledOnDuty(p, activeDate))
-        .map((p) => ({ p, e: getAttendanceEntry(activeDate, p.id) }))
-        .filter((x) => x.e.status !== 'PRESENT');
-
-      document.getElementById('saaiq-exceptions').innerHTML = exceptions.length
-        ? exceptions.map(({ p, e }) => {
-            const c = state.companies.find((x) => x.code === p.company_code);
-            return `<div class="person-card" style="flex-direction:row;justify-content:space-between;align-items:center">
+      const exceptions = getReadinessExceptions();
+      document.getElementById('readiness-exc-count').textContent = `${exceptions.length} حالة`;
+      document.getElementById('readiness-exceptions').innerHTML = exceptions.length
+        ? exceptions.map(({ p, compName, groupName, e }) => {
+            const isRed = e.status === 'INACTIVE' || e.status === 'ABSENT';
+            const cls = isRed ? 'red' : (e.status === 'LEAVE' ? 'blue' : 'gold');
+            return `<div class="person-card" style="flex-direction:row;justify-content:space-between;align-items:center;${isRed ? 'border-color:rgba(239,68,68,.5)' : ''}">
               <div>
                 <div class="person-name">${escapeHtml(p.name)}</div>
-                <div class="person-meta">${escapeHtml(c ? c.name : '')} ${p.crew ? '• ' + escapeHtml(p.crew) : ''}</div>
+                <div class="person-meta">${escapeHtml(compName)} • ${escapeHtml(groupName)} ${p.job ? '• ' + escapeHtml(p.job) : ''}</div>
               </div>
-              <span class="pill" style="border-color:var(--danger);color:#fecaca">${STATUS_LABELS[e.status]}</span>
+              <span class="pill ${cls}">${STATUS_LABELS[e.status]}</span>
             </div>`;
           }).join('')
-        : '<div style="color:var(--ok);font-weight:700;padding:8px">✓ لا يوجد غياب أو استثناءات بين المقررين اليوم.</div>';
+        : '<div style="color:var(--ok);font-weight:700;padding:8px">✓ كامل القوة المقررة حاضرة وجاهزة 100% دون غياب أو حالات غير فعالة.</div>';
     }
 
-    function renderRoster() {
+    // TAB 3: FULL FORCE MANAGEMENT (BATTALIONS -> COMPANIES -> GROUPS (10 MEMBERS) -> MEMBERS)
+    function renderForceManagement() {
+      const bat = getActiveBattalion();
+      const people = getActivePersonnel();
+      const comps = getActiveCompanies();
+      const grps = getActiveGroups();
+      document.getElementById('roster-count').textContent = people.length;
+
+      document.getElementById('active-bat-card').innerHTML = bat ? `
+        <div class="person-top">
+          <div>
+            <div class="person-name" style="color:var(--gold-light)">🏛️ ${escapeHtml(bat.name)} ${bat.code ? '(' + escapeHtml(bat.code) + ')' : ''}</div>
+            <div class="person-meta">
+              القائد: ${escapeHtml(bat.commander || 'غير محدد')} • السرايا: ${comps.length} • الجماعات: ${grps.length} • القوة: ${people.length} فرد
+              ${bat.notes ? ' • ' + escapeHtml(bat.notes) : ''}
+            </div>
+          </div>
+          <div style="display:flex;gap:5px;flex-wrap:wrap">
+            <button class="btn btn-sm" data-act="edit-bat" data-id="${bat.id}">✎ تعديل الكتيبة</button>
+            ${state.battalions.length > 1 ? `<button class="btn btn-danger btn-sm" data-act="del-bat" data-id="${bat.id}">حذف</button>` : ''}
+          </div>
+        </div>
+      ` : '';
+
       const q = (document.getElementById('roster-search').value || '').trim().toLowerCase();
-      const comp = document.getElementById('roster-company').value || 'ALL';
-      const list = state.personnel.filter((p) => {
-        if (comp !== 'ALL' && p.company_code !== comp) return false;
-        if (q && !`${p.name} ${p.serial || ''} ${p.job || ''}`.toLowerCase().includes(q)) return false;
-        return true;
-      });
-      document.getElementById('roster-count').textContent = state.personnel.length;
-      document.getElementById('roster-list').innerHTML = list.map((p) => {
-        const c = state.companies.find((x) => x.code === p.company_code);
+      const compFlt = document.getElementById('roster-company').value || 'ALL';
+      const visibleComps = comps.filter((c) => compFlt === 'ALL' || c.id === compFlt);
+
+      const treeEl = document.getElementById('force-tree-list');
+      if (!visibleComps.length) {
+        treeEl.innerHTML = '<div style="text-align:center;color:var(--text-muted);padding:20px">لا توجد سرايا بعد. اضغط «+ إضافة سرية» للبدء.</div>';
+        return;
+      }
+
+      treeEl.innerHTML = visibleComps.map((c) => {
+        const compGroups = grps.filter((g) => g.company_id === c.id);
+        const compPeople = people.filter((p) => p.company_id === c.id);
+        const ungrouped = compPeople.filter((p) => !compGroups.some((g) => g.id === p.group_id));
+
+        const groupsHtml = compGroups.map((g) => {
+          let gMembers = compPeople.filter((p) => p.group_id === g.id);
+          if (q) {
+            const gMatches = g.name.toLowerCase().includes(q) || (g.leader || '').toLowerCase().includes(q);
+            if (!gMatches) {
+              gMembers = gMembers.filter((p) => `${p.name} ${p.serial || ''} ${p.job || ''} ${p.rank || ''} ${p.phone || ''}`.toLowerCase().includes(q));
+              if (!gMembers.length) return '';
+            }
+          }
+          const cap = g.capacity || 10;
+          const totalInG = compPeople.filter((p) => p.group_id === g.id).length;
+          const batchCls = g.shift_batch === 'A' ? 'green' : g.shift_batch === 'B' ? 'blue' : 'gold';
+
+          return `
+            <div class="group-block">
+              <div class="group-head">
+                <div>
+                  <strong style="color:var(--gold-light);font-size:13px">👥 ${escapeHtml(g.name)}</strong>
+                  <span class="pill ${batchCls}" style="margin-right:4px">${BATCH_LABELS[g.shift_batch] || 'الوجبة أ'}</span>
+                  <span class="pill">${totalInG} / ${cap} أفراد</span>
+                  ${g.leader ? `<div class="person-meta">قائد الجماعة: ${escapeHtml(g.leader)}</div>` : ''}
+                </div>
+                <div style="display:flex;gap:4px;flex-wrap:wrap">
+                  <button class="btn btn-primary btn-xs" data-act="bulk-group" data-id="${g.id}">✎ تعديل الكل</button>
+                  <button class="btn btn-ok btn-xs" data-act="add-person-grp" data-comp="${c.id}" data-grp="${g.id}">+ فرد</button>
+                  ${totalInG < cap ? `<button class="btn btn-info btn-xs" data-act="fill-group-10" data-id="${g.id}">+ إكمال لـ ${cap}</button>` : ''}
+                  <button class="btn btn-xs" data-act="edit-group" data-id="${g.id}">⚙️</button>
+                  <button class="btn btn-danger btn-xs" data-act="del-group" data-id="${g.id}">🗑</button>
+                </div>
+              </div>
+              <div class="group-members">
+                ${gMembers.length ? gMembers.map((p, idx) => `
+                  <div class="member-row">
+                    <div>
+                      <div style="font-size:13px;font-weight:800">${idx + 1}. ${p.is_leader ? '★ ' : ''}${escapeHtml(p.name)}</div>
+                      <div class="person-meta">
+                        ${p.rank ? escapeHtml(p.rank) + ' • ' : ''}${escapeHtml(p.job || 'بدون مسمى')}
+                        ${p.serial ? ' • ' + escapeHtml(p.serial) : ''}
+                        ${p.phone ? ' • 📞 ' + escapeHtml(p.phone) : ''}
+                      </div>
+                    </div>
+                    <div style="display:flex;gap:4px">
+                      <button class="btn btn-xs" data-act="edit-person" data-id="${p.id}">تعديل</button>
+                      <button class="btn btn-danger btn-xs" data-act="del-person" data-id="${p.id}">حذف</button>
+                    </div>
+                  </div>
+                `).join('') : '<div style="font-size:12px;color:var(--text-muted);padding:6px;text-align:center">الجماعة فارغة — اضغط «+ إكمال لـ 10» أو «+ فرد».</div>'}
+              </div>
+            </div>
+          `;
+        }).join('');
+
+        const ungroupedFiltered = q
+          ? ungrouped.filter((p) => `${p.name} ${p.serial || ''} ${p.job || ''}`.toLowerCase().includes(q))
+          : ungrouped;
+
+        const ungroupedHtml = ungroupedFiltered.length ? `
+          <div class="group-block">
+            <div class="group-head"><strong style="font-size:12.5px;color:var(--text-muted)">أفراد بدون جماعة (${ungroupedFiltered.length})</strong></div>
+            <div class="group-members">
+              ${ungroupedFiltered.map((p) => `
+                <div class="member-row">
+                  <div>
+                    <div style="font-size:13px;font-weight:800">${escapeHtml(p.name)}</div>
+                    <div class="person-meta">${escapeHtml(p.job || '-')} ${p.serial ? '• ' + escapeHtml(p.serial) : ''}</div>
+                  </div>
+                  <div style="display:flex;gap:4px">
+                    <button class="btn btn-xs" data-act="edit-person" data-id="${p.id}">تعديل</button>
+                    <button class="btn btn-danger btn-xs" data-act="del-person" data-id="${p.id}">حذف</button>
+                  </div>
+                </div>
+              `).join('')}
+            </div>
+          </div>
+        ` : '';
+
         return `
-          <div class="person-card">
-            <div class="person-top">
+          <div class="comp-block">
+            <div class="comp-head">
               <div>
-                <div class="person-name">${escapeHtml(p.name)}</div>
-                <div class="person-meta">${escapeHtml(c ? c.name : '-')} ${p.crew ? '• ' + escapeHtml(p.crew) : '• بدون طاقم'} ${p.job ? '• ' + escapeHtml(p.job) : ''} ${p.serial ? '• ' + escapeHtml(p.serial) : ''}</div>
+                <div style="font-size:14.5px;font-weight:900;color:var(--gold-light)">🛡️ ${escapeHtml(c.name)}</div>
+                <div class="person-meta">
+                  القائد: ${escapeHtml(c.commander || 'غير محدد')} • ${c.has_crews ? 'مناوبات 10/10' : 'دوام دائم'} • ${compGroups.length} جماعات • ${compPeople.length} فرد
+                </div>
               </div>
-              <div style="display:flex;gap:5px">
-                <button class="btn btn-sm" data-act="edit-person" data-id="${p.id}">تعديل</button>
-                <button class="btn btn-danger btn-sm" data-act="del-person" data-id="${p.id}">حذف</button>
+              <div style="display:flex;gap:5px;flex-wrap:wrap">
+                <button class="btn btn-primary btn-xs" data-act="add-group" data-comp="${c.id}">+ إضافة جماعة (10 أفراد)</button>
+                <button class="btn btn-xs" data-act="edit-comp" data-id="${c.id}">تعديل السرية</button>
+                <button class="btn btn-danger btn-xs" data-act="del-comp" data-id="${c.id}">حذف</button>
               </div>
+            </div>
+            <div class="comp-body">
+              ${groupsHtml || (!ungroupedHtml ? '<div style="font-size:12px;color:var(--text-muted);text-align:center;padding:10px">لا توجد جماعات في هذه السرية بعد — اضغط «+ إضافة جماعة (10 أفراد)».</div>' : '')}
+              ${ungroupedHtml}
             </div>
           </div>
         `;
-      }).join('') || '<div style="text-align:center;color:var(--text-muted);padding:16px">لا توجد بيانات.</div>';
+      }).join('');
+    }
+
+    // TAB 4: HIERARCHY & AUTO-SHIFT ROSTER (الهيكلية)
+    function renderHierarchy() {
+      const bat = getActiveBattalion();
+      const comps = getActiveCompanies();
+      const grps = getActiveGroups();
+      const people = getActivePersonnel();
+      const shift = getShiftInfo(activeDate);
+
+      let cntA = 0, cntB = 0, cntP = 0;
+      for (const p of people) {
+        const b = resolvePersonBatch(p);
+        if (b === 'A') cntA++;
+        else if (b === 'B') cntB++;
+        else cntP++;
+      }
+      const todayDuty = people.filter((p) => isScheduledOnDuty(p, activeDate)).length;
+
+      document.getElementById('hierarchy-shift-summary').innerHTML = `
+        <div class="kpi"><div class="kpi-val" style="color:var(--ok)">${cntA}</div><div class="kpi-lbl">الوجبة أ</div></div>
+        <div class="kpi"><div class="kpi-val" style="color:var(--info)">${cntB}</div><div class="kpi-lbl">الوجبة ب</div></div>
+        <div class="kpi"><div class="kpi-val" style="color:var(--gold)">${cntP}</div><div class="kpi-lbl">دوام دائم</div></div>
+        <div class="kpi"><div class="kpi-val" style="color:var(--gold-light)">${todayDuty}</div><div class="kpi-lbl">مناوبو اليوم (${shift.batchLabel})</div></div>
+      `;
+
+      const canvasEl = document.getElementById('hierarchy-canvas');
+      if (!bat) { canvasEl.innerHTML = ''; return; }
+
+      const branchesHtml = comps.map((c) => {
+        const cGroups = grps.filter((g) => g.company_id === c.id);
+        const cPeople = people.filter((p) => p.company_id === c.id);
+
+        return `
+          <div class="org-dept">
+            <div class="org-dept-head">
+              <div>
+                <div style="font-size:14px;font-weight:900;color:var(--gold-light)">${escapeHtml(c.name)}</div>
+                <div class="person-meta">القائد: ${escapeHtml(c.commander || 'غير محدد')} • القوة: ${cPeople.length}</div>
+              </div>
+              <div style="display:flex;gap:4px">
+                <button class="btn btn-xs" data-act="add-group" data-comp="${c.id}">+ جماعة</button>
+                <button class="btn btn-xs" data-act="edit-comp" data-id="${c.id}">✎</button>
+              </div>
+            </div>
+            <div class="org-dept-body">
+              ${cGroups.map((g) => {
+                const gPeople = cPeople.filter((p) => p.group_id === g.id);
+                const bCls = g.shift_batch === 'A' ? 'green' : g.shift_batch === 'B' ? 'blue' : 'gold';
+                return `
+                  <div class="org-group">
+                    <div style="display:flex;justify-content:space-between;align-items:center;gap:6px;flex-wrap:wrap">
+                      <div>
+                        <strong style="font-size:13px;color:var(--gold-light)">${escapeHtml(g.name)}</strong>
+                        <span style="font-size:11px;color:var(--text-muted)">(${gPeople.length}/${g.capacity || 10})</span>
+                        ${g.leader ? `<div style="font-size:11px;color:var(--gold)">★ قائد الجماعة: ${escapeHtml(g.leader)}</div>` : ''}
+                      </div>
+                      <div style="display:flex;gap:4px;align-items:center">
+                        <button class="pill clickable ${bCls}" data-act="cycle-group-batch" data-id="${g.id}" title="اضغط لتبديل الوجبة">${BATCH_LABELS[g.shift_batch] || 'الوجبة أ'} ↻</button>
+                        <button class="btn btn-xs" data-act="edit-group" data-id="${g.id}">✎</button>
+                      </div>
+                    </div>
+                    <div>
+                      ${gPeople.map((p) => {
+                        const eff = resolvePersonBatch(p);
+                        const pCls = eff === 'A' ? 'green' : eff === 'B' ? 'blue' : 'gold';
+                        return `
+                          <div class="org-member ${p.is_leader ? 'is-leader' : ''}">
+                            <div>
+                              <strong>${p.is_leader ? '★ ' : ''}${escapeHtml(p.name)}</strong>
+                              <span style="color:var(--text-muted)">${p.job ? ' — ' + escapeHtml(p.job) : ''}</span>
+                            </div>
+                            <div style="display:flex;gap:4px;align-items:center">
+                              <button class="pill clickable ${pCls}" style="font-size:10px;padding:2px 6px" data-act="cycle-person-batch" data-id="${p.id}" title="تخصيص وجبة الفرد">${BATCH_LABELS[eff]}</button>
+                              <button class="btn btn-xs" data-act="edit-person" data-id="${p.id}">✎</button>
+                            </div>
+                          </div>
+                        `;
+                      }).join('') || '<div style="font-size:11.5px;color:var(--text-muted);margin-top:5px">لا يوجد أفراد في الجماعة</div>'}
+                    </div>
+                  </div>
+                `;
+              }).join('') || '<div style="font-size:12px;color:var(--text-muted);text-align:center">لا توجد جماعات</div>'}
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      canvasEl.innerHTML = `
+        <div class="org-root">
+          <div style="display:flex;justify-content:center;align-items:center;gap:10px;margin-bottom:4px">
+            <svg width="34" height="34" viewBox="0 0 256 256"><path d="${EAGLE_PATH}" fill="#cdbaa1" /></svg>
+            <div style="font-size:18px;font-weight:900;color:var(--gold-light)">${escapeHtml(bat.name)}</div>
+          </div>
+          <div style="font-size:13px;color:var(--gold)">★ قائد الكتيبة: ${escapeHtml(bat.commander || 'غير محدد')}</div>
+          <div style="margin-top:8px;display:flex;justify-content:center;gap:6px;flex-wrap:wrap">
+            <span class="pill gold">${comps.length} سرايا</span>
+            <span class="pill">${grps.length} جماعات</span>
+            <span class="pill">${people.length} فرد</span>
+            <button class="btn btn-xs" data-act="edit-bat" data-id="${bat.id}">✎ تعديل الكتيبة</button>
+            <button class="btn btn-primary btn-xs" data-act="add-comp-quick">+ إضافة سرية</button>
+          </div>
+        </div>
+        <div class="org-branches">${branchesHtml}</div>
+      `;
     }
 
     function renderChat() {
@@ -916,6 +1839,52 @@
       el.scrollTop = el.scrollHeight;
     }
 
+    function renderAccessControl() {
+      const isOwner = state.settings.user_role === 'OWNER';
+      document.getElementById('my-device-id-pill').textContent = `جهازي: ${MY_DEVICE_ID}`;
+      document.getElementById('access-owner-only-note').classList.toggle('hidden', isOwner);
+      document.getElementById('access-control-body').classList.toggle('hidden', !isOwner);
+
+      const ac = state.accessControl || {};
+      document.getElementById('set-block-msg').value = ac.blockMessage || '';
+      const gBtn = document.getElementById('btn-toggle-global-block');
+      gBtn.textContent = ac.globalBlock ? '✅ فك الحظر الشامل (التطبيق محظور الآن)' : '⛔ تفعيل الحظر الشامل';
+      gBtn.className = ac.globalBlock ? 'btn btn-ok btn-sm' : 'btn btn-danger-solid btn-sm';
+
+      const blocked = ac.blockedDevices || [];
+      document.getElementById('blocked-list-wrap').innerHTML = blocked.length
+        ? blocked.map((b) => `
+            <div class="member-row" style="margin-bottom:5px;border-color:rgba(239,68,68,.45)">
+              <div>
+                <strong style="color:#fecaca">🚫 ${escapeHtml(b.target)}</strong>
+                <div class="person-meta">${escapeHtml(b.reason || 'بدون سبب')} • ${escapeHtml(b.blockedAt || '')}</div>
+              </div>
+              <button class="btn btn-ok btn-xs" data-act="unban-target" data-id="${b.id}">فك الحظر</button>
+            </div>
+          `).join('')
+        : '<div style="font-size:12px;color:var(--text-muted)">لا يوجد أشخاص أو أجهزة محظورة حالياً.</div>';
+
+      const devs = ac.registeredDevices || [];
+      document.getElementById('registered-devices-wrap').innerHTML = devs.length
+        ? devs.map((d) => {
+            const isMe = d.deviceId === MY_DEVICE_ID;
+            const isBanned = blocked.some((b) => (b.target || '').toLowerCase() === (d.deviceId || '').toLowerCase());
+            return `
+              <div class="member-row" style="margin-bottom:5px">
+                <div>
+                  <strong>${escapeHtml(d.userName || 'مستخدم')}</strong> ${isMe ? '<span class="pill gold">جهازي</span>' : ''}
+                  <div class="person-meta">${escapeHtml(d.deviceId)} • ${ROLE_LABELS[d.role] || d.role} • آخر ظهور: ${escapeHtml(d.lastSeen || '')}</div>
+                </div>
+                ${!isMe ? (isBanned
+                  ? `<span class="pill red">محظور</span>`
+                  : `<button class="btn btn-danger btn-xs" data-act="quick-ban-dev" data-dev="${escapeHtml(d.deviceId)}" data-name="${escapeHtml(d.userName || '')}">🚫 حظر</button>`)
+                : ''}
+              </div>
+            `;
+          }).join('')
+        : '<div style="font-size:12px;color:var(--text-muted)">اضغط «تحديث قائمة الأجهزة من السحابة» لعرض الأجهزة المتصلة.</div>';
+    }
+
     function renderSettings() {
       document.getElementById('set-title').value = state.settings.app_title;
       document.getElementById('set-unit').value = state.settings.unit_name;
@@ -924,94 +1893,297 @@
       document.getElementById('set-user-name').value = state.settings.user_name;
       document.getElementById('set-user-role').value = state.settings.user_role;
 
-      document.getElementById('companies-settings-list').innerHTML = state.companies.map((c) => `
-        <div class="person-card" style="flex-direction:row;justify-content:space-between;align-items:center">
-          <div>
-            <strong>${escapeHtml(c.name)}</strong>
-            <div class="person-meta">${c.has_crews ? 'نظام طواقم 10/10 (أ/ب)' : 'دوام دائم — بدون طواقم'}</div>
-          </div>
-          <button class="btn btn-sm" data-act="toggle-crews" data-code="${c.code}">
-            ${c.has_crews ? 'إلغاء الطواقم' : 'تفعيل الطواقم'}
-          </button>
-        </div>
-      `).join('');
+      renderAccessControl();
 
       const env = window.__TAFAQ_ENV__ || {};
       document.getElementById('supa-status').textContent = env.VITE_SUPABASE_URL
         ? `مرتبط مع Supabase: ${env.VITE_SUPABASE_URL}`
-        : 'يعمل في الوضع المحلي المستقل (Offline-First) — لم يُضبط رابط Supabase في البيئة.';
+        : 'يعمل في الوضع المحلي المستقل (Offline-First).';
 
       document.getElementById('undo-history-list').innerHTML = (state.undoStack || []).length
         ? state.undoStack.map((u, idx) => `
-            <div class="person-card" style="flex-direction:row;justify-content:space-between;align-items:center">
+            <div class="member-row" style="margin-bottom:5px">
               <div>
-                <div style="font-size:13px;font-weight:700">${escapeHtml(u.label)}</div>
+                <div style="font-size:12.5px;font-weight:700">${escapeHtml(u.label)}</div>
                 <div class="person-meta">${escapeHtml(u.time)}</div>
               </div>
-              ${idx === 0 ? '<button class="btn btn-sm btn-primary" data-act="do-undo">تراجع الآن</button>' : ''}
+              ${idx === 0 ? '<button class="btn btn-xs btn-primary" data-act="do-undo">تراجع الآن</button>' : ''}
             </div>
           `).join('')
-        : '<div style="color:var(--text-muted);font-size:12.5px">لا توجد تعديلات مسجلة للتراجع بعد.</div>';
+        : '<div style="color:var(--text-muted);font-size:12px">لا توجد تعديلات مسجلة للتراجع بعد.</div>';
     }
 
     function renderAll() {
       renderHeader();
       populateCompanySelects();
       renderAttendance();
-      renderSaaiq();
-      renderRoster();
+      renderReadiness();
+      renderForceManagement();
+      renderHierarchy();
       renderChat();
       if (settingsUnlocked) renderSettings();
+      evaluateBlockStatus();
     }
 
-    // Security & PIN Lock (SHA-256 + 5 attempts / 15-min lock, NO hints)
-    async function sha256Hex(str) {
-      const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(str));
-      return Array.from(new Uint8Array(buf)).map((b) => b.toString(16).padStart(2, '0')).join('');
+    // HIGH-RES FULL-PAGE PNG GENERATORS (100% OFFLINE & CRISP RTL ARABIC)
+    function downloadBlob(blob, filename) {
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url; a.download = filename;
+      document.body.appendChild(a); a.click(); a.remove();
+      setTimeout(() => URL.revokeObjectURL(url), 1500);
     }
 
-    function getLockState() {
-      try { return JSON.parse(localStorage.getItem(FAIL_KEY) || '{"count":0,"lockedUntil":0}'); }
-      catch { return { count: 0, lockedUntil: 0 }; }
-    }
-
-    function openPinModal() {
-      document.getElementById('pin-input').value = '';
-      document.getElementById('pin-error').classList.add('hidden');
-      document.getElementById('pin-modal').classList.remove('hidden');
-      setTimeout(() => document.getElementById('pin-input').focus(), 80);
-    }
-
-    document.getElementById('pin-form').addEventListener('submit', async (e) => {
-      e.preventDefault();
-      const errEl = document.getElementById('pin-error');
-      const lock = getLockState();
-      if (lock.lockedUntil > Date.now()) {
-        errEl.textContent = 'تم تقييد المحاولات مؤقتاً لمدة 15 دقيقة';
-        errEl.classList.remove('hidden');
-        return;
+    async function shareOrDownloadPng(blob, filename, title) {
+      const file = new File([blob], filename, { type: 'image/png' });
+      try {
+        if (navigator.canShare && navigator.canShare({ files: [file] })) {
+          await navigator.share({ title, files: [file] });
+          return;
+        }
+      } catch (err) {
+        if (err && err.name === 'AbortError') return;
       }
-      const val = document.getElementById('pin-input').value.trim();
-      if (!val) return;
-      const hex = await sha256Hex(val);
-      const expected = localStorage.getItem(PIN_KEY) || (window.__TAFAQ_ENV__ && window.__TAFAQ_ENV__.VITE_OFFLINE_PIN_HASH) || '';
-      if (expected && hex === expected) {
-        localStorage.removeItem(FAIL_KEY);
-        settingsUnlocked = true;
-        document.getElementById('pin-modal').classList.add('hidden');
-        switchTab('settings', true);
-        renderSettings();
-        showToast('تم فتح الإعدادات');
-        return;
-      }
-      const nextCount = (lock.count || 0) + 1;
-      const lockedUntil = nextCount >= MAX_FAILS ? Date.now() + LOCK_MS : 0;
-      localStorage.setItem(FAIL_KEY, JSON.stringify({ count: nextCount, lockedUntil }));
-      errEl.textContent = lockedUntil ? 'تم تقييد المحاولات مؤقتاً لمدة 15 دقيقة' : 'رمز الدخول غير صحيح';
-      errEl.classList.remove('hidden');
-    });
+      downloadBlob(blob, filename);
+      showToast('✓ تم حفظ الصورة بنجاح (يمكنك مشاركتها عبر واتساب أو تيليغرام)');
+    }
 
-    // RBAC-guarded Exports (Excel / PDF / PNG / Share)
+    function drawCanvasHeader(ctx, w, titleText, subText) {
+      ctx.fillStyle = '#101a19';
+      ctx.fillRect(0, 0, w, 175);
+      ctx.fillStyle = '#1a2a28';
+      ctx.fillRect(24, 20, w - 48, 134);
+      ctx.strokeStyle = '#cdbaa1';
+      ctx.lineWidth = 2.5;
+      ctx.strokeRect(24, 20, w - 48, 134);
+
+      ctx.save();
+      ctx.translate(44, 30);
+      ctx.scale(0.44, 0.44);
+      ctx.fillStyle = '#cdbaa1';
+      ctx.fill(new Path2D(EAGLE_PATH));
+      ctx.restore();
+
+      ctx.direction = 'rtl';
+      ctx.textAlign = 'right';
+      ctx.fillStyle = '#e7d8c2';
+      ctx.font = 'bold 32px Cairo, Tahoma, sans-serif';
+      ctx.fillText(titleText, w - 50, 76);
+      ctx.font = 'bold 20px Cairo, Tahoma, sans-serif';
+      ctx.fillStyle = '#9eb0ab';
+      ctx.fillText(subText, w - 50, 120);
+    }
+
+    // 1) FULL-PAGE READINESS IMAGE (كشف الجاهزية كاملة)
+    async function renderFullReadinessPng() {
+      const bat = getActiveBattalion();
+      const shift = getShiftInfo(activeDate);
+      const stats = computeStats();
+      const compRows = getReadinessCompanyRows();
+      const exceptions = getReadinessExceptions();
+
+      const w = 1140;
+      const rowH = 42;
+      const excH = 38;
+      const h = 340 + (compRows.length * rowH) + 95 + (Math.max(1, exceptions.length) * excH) + 80;
+
+      const canvas = document.createElement('canvas');
+      canvas.width = w; canvas.height = h;
+      const ctx = canvas.getContext('2d');
+
+      ctx.fillStyle = '#0e1717';
+      ctx.fillRect(0, 0, w, h);
+
+      drawCanvasHeader(
+        ctx, w,
+        `كشف الجاهزية الميدانية — ${bat ? bat.name : state.settings.unit_name}`,
+        `التاريخ: ${activeDate}  •  ${shift.batchLabel} (اليوم ${shift.dayInBatch} من ${shift.daysPerBatch})  •  القائد: ${bat && bat.commander ? bat.commander : '-'}`
+      );
+
+      // KPI Boxes
+      const kpis = [
+        { lbl: 'إجمالي القوة', val: stats.total, col: '#e7d8c2' },
+        { lbl: 'مقرر اليوم', val: stats.onDuty, col: '#cdbaa1' },
+        { lbl: 'حاضر فعّال', val: stats.present, col: '#22c55e' },
+        { lbl: 'إجازة', val: stats.leave, col: '#38bdf8' },
+        { lbl: 'غير فعال', val: stats.inactive, col: '#ef4444' },
+        { lbl: 'غياب', val: stats.absent, col: '#dc2626' },
+        { lbl: 'الجاهزية', val: stats.readiness + '%', col: '#22c55e' }
+      ];
+      const boxW = (w - 48 - (kpis.length - 1) * 10) / kpis.length;
+      kpis.forEach((k, idx) => {
+        const x = w - 24 - (idx + 1) * boxW - idx * 10;
+        ctx.fillStyle = '#182625';
+        ctx.fillRect(x, 174, boxW, 82);
+        ctx.strokeStyle = k.lbl === 'غير فعال' ? '#ef4444' : 'rgba(205,186,161,0.35)';
+        ctx.lineWidth = 1.5;
+        ctx.strokeRect(x, 174, boxW, 82);
+        ctx.textAlign = 'center';
+        ctx.fillStyle = k.col;
+        ctx.font = 'bold 30px Cairo, Tahoma, sans-serif';
+        ctx.fillText(String(k.val), x + boxW / 2, 214);
+        ctx.fillStyle = k.lbl === 'غير فعال' ? '#fca5a5' : '#9eb0ab';
+        ctx.font = 'bold 15px Cairo, Tahoma, sans-serif';
+        ctx.fillText(k.lbl, x + boxW / 2, 242);
+      });
+
+      // Readiness Table
+      let y = 278;
+      ctx.fillStyle = '#233735';
+      ctx.fillRect(24, y, w - 48, 44);
+      ctx.fillStyle = '#e7d8c2';
+      ctx.font = 'bold 18px Cairo, Tahoma, sans-serif';
+      ctx.textAlign = 'right';
+      const cols = [
+        { lbl: 'السرية', x: w - 40 },
+        { lbl: 'القوة', x: w - 340 },
+        { lbl: 'مقرر', x: w - 430 },
+        { lbl: 'حاضر', x: w - 520 },
+        { lbl: 'إجازة', x: w - 620 },
+        { lbl: 'مرضية', x: w - 720 },
+        { lbl: 'غير فعال', x: w - 820, col: '#fca5a5' },
+        { lbl: 'غياب', x: w - 940 },
+        { lbl: 'الجاهزية', x: w - 1030 }
+      ];
+      cols.forEach((c) => {
+        ctx.fillStyle = c.col || '#e7d8c2';
+        ctx.fillText(c.lbl, c.x, y + 29);
+      });
+
+      y += 44;
+      compRows.forEach((r, idx) => {
+        ctx.fillStyle = idx % 2 === 0 ? '#152121' : '#1a2928';
+        ctx.fillRect(24, y, w - 48, rowH);
+        ctx.font = 'bold 17px Cairo, Tahoma, sans-serif';
+        ctx.fillStyle = '#f4efe8'; ctx.fillText(r.name.slice(0, 24), cols[0].x, y + 27);
+        ctx.fillStyle = '#cbd5e1'; ctx.fillText(String(r.total), cols[1].x, y + 27);
+        ctx.fillText(String(r.duty), cols[2].x, y + 27);
+        ctx.fillStyle = '#86efac'; ctx.fillText(String(r.present), cols[3].x, y + 27);
+        ctx.fillStyle = '#7dd3fc'; ctx.fillText(String(r.leave), cols[4].x, y + 27);
+        ctx.fillStyle = '#fcd34d'; ctx.fillText(String(r.sick), cols[5].x, y + 27);
+        ctx.fillStyle = r.inactive ? '#ef4444' : '#64748b'; ctx.fillText(String(r.inactive), cols[6].x, y + 27);
+        ctx.fillStyle = r.absent ? '#dc2626' : '#64748b'; ctx.fillText(String(r.absent), cols[7].x, y + 27);
+        ctx.fillStyle = '#cdbaa1'; ctx.fillText(r.pct + '%', cols[8].x, y + 27);
+        y += rowH;
+      });
+
+      // Exceptions Section
+      y += 28;
+      ctx.fillStyle = '#2a1616';
+      ctx.fillRect(24, y, w - 48, 42);
+      ctx.strokeStyle = 'rgba(239,68,68,0.5)';
+      ctx.strokeRect(24, y, w - 48, 42);
+      ctx.fillStyle = '#fecaca';
+      ctx.font = 'bold 19px Cairo, Tahoma, sans-serif';
+      ctx.fillText(`تفصيل الحالات غير الحاضرة (غير فعال / غياب / إجازات): ${exceptions.length} حالة`, w - 42, y + 28);
+      y += 48;
+
+      if (!exceptions.length) {
+        ctx.fillStyle = '#86efac';
+        ctx.font = 'bold 18px Cairo, Tahoma, sans-serif';
+        ctx.fillText('✓ لا يوجد غياب أو حالات غير فعالة بين المقررين اليوم — الجاهزية مكتملة.', w - 42, y + 24);
+        y += excH;
+      } else {
+        exceptions.forEach((ex, idx) => {
+          ctx.fillStyle = idx % 2 === 0 ? '#162121' : '#1b2828';
+          ctx.fillRect(24, y, w - 48, excH - 4);
+          ctx.fillStyle = '#f4efe8';
+          ctx.font = 'bold 16px Cairo, Tahoma, sans-serif';
+          ctx.fillText(`${idx + 1}. ${ex.p.name}  (${ex.compName} • ${ex.groupName})`, w - 42, y + 23);
+          const isRed = ex.e.status === 'INACTIVE' || ex.e.status === 'ABSENT';
+          ctx.fillStyle = isRed ? '#ef4444' : (ex.e.status === 'LEAVE' ? '#38bdf8' : '#f59e0b');
+          ctx.fillText(STATUS_LABELS[ex.e.status], 180, y + 23);
+          y += excH;
+        });
+      }
+
+      // Footer
+      ctx.fillStyle = '#9eb0ab';
+      ctx.font = '15px Cairo, Tahoma, sans-serif';
+      ctx.fillText(`منظم الكشف: ${state.settings.user_name}  |  نظام تفقد دوام الـ130مم`, w - 36, h - 24);
+
+      return new Promise((resolve) => canvas.toBlob(resolve, 'image/png'));
+    }
+
+    // 2) FULL HIERARCHY IMAGE (صورة الهيكلية كاملة)
+    async function renderFullHierarchyPng() {
+      const bat = getActiveBattalion();
+      const comps = getActiveCompanies();
+      const grps = getActiveGroups();
+      const people = getActivePersonnel();
+
+      const lines = [];
+      for (const c of comps) {
+        lines.push({ type: 'COMP', text: `🛡️ ${c.name}  —  القائد: ${c.commander || 'غير محدد'} (${people.filter((p) => p.company_id === c.id).length} فرد)` });
+        const cGrps = grps.filter((g) => g.company_id === c.id);
+        for (const g of cGrps) {
+          const gPeople = people.filter((p) => p.group_id === g.id);
+          lines.push({
+            type: 'GRP',
+            text: `👥 ${g.name} [${BATCH_LABELS[g.shift_batch]}] — القائد: ${g.leader || '-'} (${gPeople.length}/${g.capacity || 10})`,
+            batch: g.shift_batch
+          });
+          gPeople.forEach((p, idx) => {
+            lines.push({
+              type: 'MEM',
+              text: `${idx + 1}. ${p.is_leader ? '★ ' : ''}${p.name}${p.job ? ' — ' + p.job : ''}${p.serial ? ' (' + p.serial + ')' : ''}`,
+              batch: resolvePersonBatch(p),
+              leader: p.is_leader
+            });
+          });
+        }
+      }
+
+      const w = 1100;
+      const lineH = 34;
+      const h = 230 + Math.max(1, lines.length) * lineH + 55;
+      const canvas = document.createElement('canvas');
+      canvas.width = w; canvas.height = h;
+      const ctx = canvas.getContext('2d');
+
+      ctx.fillStyle = '#0e1717';
+      ctx.fillRect(0, 0, w, h);
+
+      drawCanvasHeader(
+        ctx, w,
+        `الهيكلية التنظيمية والمناوبات — ${bat ? bat.name : ''}`,
+        `القائد: ${bat && bat.commander ? bat.commander : '-'}  •  السرايا: ${comps.length}  •  الجماعات: ${grps.length}  •  القوة: ${people.length} فرد`
+      );
+
+      let y = 195;
+      for (const ln of lines) {
+        if (ln.type === 'COMP') {
+          ctx.fillStyle = '#233735';
+          ctx.fillRect(24, y, w - 48, lineH - 2);
+          ctx.fillStyle = '#e7d8c2';
+          ctx.font = 'bold 19px Cairo, Tahoma, sans-serif';
+          ctx.fillText(ln.text, w - 40, y + 23);
+        } else if (ln.type === 'GRP') {
+          ctx.fillStyle = '#182524';
+          ctx.fillRect(42, y, w - 84, lineH - 3);
+          ctx.fillStyle = ln.batch === 'A' ? '#86efac' : ln.batch === 'B' ? '#7dd3fc' : '#cdbaa1';
+          ctx.font = 'bold 17px Cairo, Tahoma, sans-serif';
+          ctx.fillText(ln.text, w - 58, y + 22);
+        } else {
+          ctx.fillStyle = ln.leader ? '#212b22' : '#131d1d';
+          ctx.fillRect(68, y, w - 136, lineH - 4);
+          ctx.fillStyle = ln.leader ? '#f6e7cb' : '#e2e8f0';
+          ctx.font = (ln.leader ? 'bold ' : '') + '16px Cairo, Tahoma, sans-serif';
+          ctx.fillText(ln.text, w - 84, y + 21);
+          ctx.fillStyle = ln.batch === 'A' ? '#86efac' : ln.batch === 'B' ? '#7dd3fc' : '#cdbaa1';
+          ctx.fillText(BATCH_LABELS[ln.batch], 180, y + 21);
+        }
+        y += lineH;
+      }
+
+      ctx.fillStyle = '#9eb0ab';
+      ctx.font = '15px Cairo, Tahoma, sans-serif';
+      ctx.fillText(`التاريخ: ${activeDate}  |  نظام تفقد دوام الـ130مم`, w - 36, h - 20);
+
+      return new Promise((resolve) => canvas.toBlob(resolve, 'image/png'));
+    }
+
+    // 3) ATTENDANCE EXPORTS (RBAC Protected)
     function assertExportRole() {
       const role = state.settings.user_role;
       if (role !== 'OWNER' && role !== 'ADMIN') {
@@ -1021,6 +2193,7 @@
 
     function exportExcel() {
       assertExportRole();
+      const bat = getActiveBattalion();
       const rows = getFilteredRows();
       const stats = computeStats();
       const shift = getShiftInfo(activeDate);
@@ -1030,7 +2203,8 @@
           <Cell><Data ss:Type="String">${escapeXml(r.serial || '-')}</Data></Cell>
           <Cell><Data ss:Type="String">${escapeXml(r.name)}</Data></Cell>
           <Cell><Data ss:Type="String">${escapeXml(r.companyName)}</Data></Cell>
-          <Cell><Data ss:Type="String">${escapeXml(r.crew || 'دوام دائم')}</Data></Cell>
+          <Cell><Data ss:Type="String">${escapeXml(r.groupName)}</Data></Cell>
+          <Cell><Data ss:Type="String">${escapeXml(BATCH_LABELS[r.effectiveBatch] || '-')}</Data></Cell>
           <Cell><Data ss:Type="String">${escapeXml(r.job || '-')}</Data></Cell>
           <Cell><Data ss:Type="String">${escapeXml(STATUS_LABELS[r.status])}</Data></Cell>
         </Row>`).join('');
@@ -1044,15 +2218,16 @@
         </Styles>
         <Worksheet ss:Name="تفقد ${activeDate}" ss:RightToLeft="1">
           <Table>
-            <Row><Cell ss:StyleID="title"><Data ss:Type="String">${escapeXml(state.settings.unit_name)} — ${escapeXml(state.settings.app_title)} (${activeDate} | ${shift.batchLabel})</Data></Cell></Row>
-            <Row><Cell><Data ss:Type="String">مقرر: ${stats.onDuty} | حاضر: ${stats.present} | إجازة: ${stats.leave} | غياب: ${stats.absent} | الجاهزية: ${stats.readiness}%</Data></Cell></Row>
+            <Row><Cell ss:StyleID="title"><Data ss:Type="String">${escapeXml(bat ? bat.name : state.settings.unit_name)} — ${escapeXml(state.settings.app_title)} (${activeDate} | ${shift.batchLabel})</Data></Cell></Row>
+            <Row><Cell><Data ss:Type="String">مقرر: ${stats.onDuty} | حاضر: ${stats.present} | إجازة: ${stats.leave} | غير فعال: ${stats.inactive} | غياب: ${stats.absent} | الجاهزية: ${stats.readiness}%</Data></Cell></Row>
             <Row></Row>
             <Row>
               <Cell ss:StyleID="hdr"><Data ss:Type="String">#</Data></Cell>
               <Cell ss:StyleID="hdr"><Data ss:Type="String">الرقم الذاتي</Data></Cell>
               <Cell ss:StyleID="hdr"><Data ss:Type="String">الاسم الكامل</Data></Cell>
               <Cell ss:StyleID="hdr"><Data ss:Type="String">السرية</Data></Cell>
-              <Cell ss:StyleID="hdr"><Data ss:Type="String">الطاقم</Data></Cell>
+              <Cell ss:StyleID="hdr"><Data ss:Type="String">الجماعة</Data></Cell>
+              <Cell ss:StyleID="hdr"><Data ss:Type="String">الوجبة</Data></Cell>
               <Cell ss:StyleID="hdr"><Data ss:Type="String">الاختصاص</Data></Cell>
               <Cell ss:StyleID="hdr"><Data ss:Type="String">الحالة</Data></Cell>
             </Row>
@@ -1060,32 +2235,31 @@
           </Table>
         </Worksheet>
       </Workbook>`;
-
-      const blob = new Blob(['\uFEFF', xls], { type: 'application/vnd.ms-excel;charset=utf-8' });
-      downloadBlob(blob, `tafaqqud-130mm-${activeDate}.xls`);
-      showToast('تم حفظ ملف Excel بنجاح');
+      downloadBlob(new Blob(['\uFEFF', xls], { type: 'application/vnd.ms-excel;charset=utf-8' }), `tafaqqud-${activeDate}.xls`);
+      showToast('✓ تم حفظ ملف Excel بنجاح');
     }
 
     function exportPdf() {
       assertExportRole();
+      const bat = getActiveBattalion();
       const rows = getFilteredRows();
       const stats = computeStats();
       const shift = getShiftInfo(activeDate);
       document.getElementById('print-sheet').innerHTML = `
         <div style="display:flex;justify-content:space-between;align-items:center;border-bottom:2px solid #152121;padding-bottom:8px">
           <div>
-            <h2 style="margin:0">${escapeHtml(state.settings.unit_name)}</h2>
-            <div>${escapeHtml(state.settings.app_title)} — التاريخ: ${activeDate} (${shift.batchLabel} — اليوم ${shift.dayInBatch}/${shift.daysPerBatch})</div>
+            <h2 style="margin:0">${escapeHtml(bat ? bat.name : state.settings.unit_name)}</h2>
+            <div>كشف التفقد والجاهزية — التاريخ: ${activeDate} (${shift.batchLabel} — اليوم ${shift.dayInBatch}/${shift.daysPerBatch})</div>
           </div>
           <svg width="56" height="56" viewBox="0 0 256 256"><path d="${EAGLE_PATH}" fill="#152121"/></svg>
         </div>
         <div style="margin:10px 0;font-weight:700">
-          إجمالي القوة: ${stats.total} | المقرر اليوم: ${stats.onDuty} | حاضر: ${stats.present} | إجازة: ${stats.leave} | مهمة: ${stats.mission} | غياب: ${stats.absent} | الجاهزية: ${stats.readiness}%
+          القوة: ${stats.total} | مقرر: ${stats.onDuty} | حاضر: ${stats.present} | إجازة: ${stats.leave} | <span style="color:#b91c1c">غير فعال: ${stats.inactive}</span> | غياب: ${stats.absent} | الجاهزية: ${stats.readiness}%
         </div>
         <table>
-          <thead><tr><th>#</th><th>الرقم الذاتي</th><th>الاسم</th><th>السرية</th><th>الطاقم</th><th>الاختصاص</th><th>الحالة</th></tr></thead>
+          <thead><tr><th>#</th><th>الرقم الذاتي</th><th>الاسم</th><th>السرية</th><th>الجماعة</th><th>الوجبة</th><th>الحالة</th></tr></thead>
           <tbody>
-            ${rows.map((r, i) => `<tr><td>${i + 1}</td><td>${escapeHtml(r.serial || '-')}</td><td>${escapeHtml(r.name)}</td><td>${escapeHtml(r.companyName)}</td><td>${escapeHtml(r.crew || 'دائم')}</td><td>${escapeHtml(r.job || '-')}</td><td><strong>${STATUS_LABELS[r.status]}</strong></td></tr>`).join('')}
+            ${rows.map((r, i) => `<tr><td>${i + 1}</td><td>${escapeHtml(r.serial || '-')}</td><td>${escapeHtml(r.name)}</td><td>${escapeHtml(r.companyName)}</td><td>${escapeHtml(r.groupName)}</td><td>${BATCH_LABELS[r.effectiveBatch]}</td><td style="${r.status === 'INACTIVE' || r.status === 'ABSENT' ? 'color:#b91c1c;font-weight:900' : ''}"><strong>${STATUS_LABELS[r.status]}</strong></td></tr>`).join('')}
           </tbody>
         </table>
         <div style="margin-top:26px;display:flex;justify-content:space-between;font-weight:700">
@@ -1097,99 +2271,231 @@
       setTimeout(() => window.print(), 150);
     }
 
-    async function renderPngBlob() {
+    async function renderAttendancePng() {
       assertExportRole();
-      const rows = getFilteredRows().slice(0, 40);
+      const bat = getActiveBattalion();
+      const rows = getFilteredRows();
       const stats = computeStats();
       const shift = getShiftInfo(activeDate);
       const rowH = 34;
-      const w = 1080;
-      const h = 290 + rows.length * rowH + 60;
+      const w = 1120;
+      const h = 290 + Math.max(1, rows.length) * rowH + 60;
       const canvas = document.createElement('canvas');
       canvas.width = w; canvas.height = h;
       const ctx = canvas.getContext('2d');
 
-      ctx.fillStyle = '#121c1b';
+      ctx.fillStyle = '#0e1717';
       ctx.fillRect(0, 0, w, h);
-      ctx.fillStyle = '#1b2b29';
-      ctx.fillRect(24, 24, w - 48, 130);
-      ctx.strokeStyle = '#cdbaa1';
-      ctx.lineWidth = 2;
-      ctx.strokeRect(24, 24, w - 48, 130);
 
-      // Draw Eagle path on left
-      ctx.save();
-      ctx.translate(46, 36);
-      ctx.scale(0.42, 0.42);
-      ctx.fillStyle = '#cdbaa1';
-      ctx.fill(new Path2D(EAGLE_PATH));
-      ctx.restore();
+      drawCanvasHeader(
+        ctx, w,
+        bat ? bat.name : state.settings.unit_name,
+        `${state.settings.app_title} • ${activeDate} • ${shift.batchLabel} (اليوم ${shift.dayInBatch}/${shift.daysPerBatch})`
+      );
 
-      ctx.direction = 'rtl';
-      ctx.textAlign = 'right';
-      ctx.fillStyle = '#e7d8c2';
-      ctx.font = 'bold 30px Cairo, Tahoma, sans-serif';
-      ctx.fillText(state.settings.unit_name, w - 50, 74);
-      ctx.font = 'bold 20px Cairo, Tahoma, sans-serif';
-      ctx.fillStyle = '#9eb0ab';
-      ctx.fillText(`${state.settings.app_title} • ${activeDate} • ${shift.batchLabel} (اليوم ${shift.dayInBatch}/${shift.daysPerBatch})`, w - 50, 114);
-
-      // KPI Strip
       ctx.fillStyle = '#182625';
-      ctx.fillRect(24, 170, w - 48, 56);
+      ctx.fillRect(24, 174, w - 48, 52);
       ctx.fillStyle = '#f4efe8';
-      ctx.font = 'bold 21px Cairo, Tahoma, sans-serif';
-      ctx.fillText(`مقرر: ${stats.onDuty}    |    حاضر: ${stats.present}    |    إجازة: ${stats.leave}    |    غياب: ${stats.absent}    |    الجاهزية: ${stats.readiness}%`, w - 50, 206);
+      ctx.font = 'bold 20px Cairo, Tahoma, sans-serif';
+      ctx.fillText(`مقرر: ${stats.onDuty}  |  حاضر: ${stats.present}  |  إجازة: ${stats.leave}  |  غير فعال: ${stats.inactive}  |  غياب: ${stats.absent}  |  الجاهزية: ${stats.readiness}%`, w - 44, 207);
 
-      // Table Header
-      let y = 246;
+      let y = 242;
       ctx.fillStyle = '#243835';
       ctx.fillRect(24, y, w - 48, 38);
       ctx.fillStyle = '#cdbaa1';
-      ctx.font = 'bold 18px Cairo, Tahoma, sans-serif';
-      ctx.fillText('#', w - 46, y + 25);
-      ctx.fillText('الاسم الكامل', w - 95, y + 25);
-      ctx.fillText('السرية', w - 470, y + 25);
-      ctx.fillText('الطاقم', w - 700, y + 25);
-      ctx.fillText('الحالة', w - 910, y + 25);
-
+      ctx.font = 'bold 17px Cairo, Tahoma, sans-serif';
+      ctx.fillText('#', w - 42, y + 25);
+      ctx.fillText('الاسم الكامل', w - 88, y + 25);
+      ctx.fillText('السرية', w - 450, y + 25);
+      ctx.fillText('الجماعة', w - 680, y + 25);
+      ctx.fillText('الحالة', w - 940, y + 25);
       y += 38;
+
       rows.forEach((r, idx) => {
         ctx.fillStyle = idx % 2 === 0 ? '#152121' : '#1a2928';
         ctx.fillRect(24, y, w - 48, rowH);
         ctx.fillStyle = '#f4efe8';
-        ctx.font = '17px Cairo, Tahoma, sans-serif';
-        ctx.fillText(String(idx + 1), w - 46, y + 23);
-        ctx.fillText(r.name.slice(0, 32), w - 95, y + 23);
-        ctx.fillText(r.companyName.slice(0, 20), w - 470, y + 23);
-        ctx.fillText((r.crew || 'دائم').slice(0, 16), w - 700, y + 23);
-        ctx.fillStyle = r.status === 'PRESENT' ? '#86efac' : r.status === 'ABSENT' ? '#fca5a5' : '#bae6fd';
-        ctx.fillText(STATUS_LABELS[r.status], w - 910, y + 23);
+        ctx.font = '16px Cairo, Tahoma, sans-serif';
+        ctx.fillText(String(idx + 1), w - 42, y + 23);
+        ctx.fillText(r.name.slice(0, 30), w - 88, y + 23);
+        ctx.fillText(r.companyName.slice(0, 18), w - 450, y + 23);
+        ctx.fillText(r.groupName.slice(0, 18), w - 680, y + 23);
+        ctx.fillStyle = r.status === 'PRESENT' ? '#86efac' : (r.status === 'INACTIVE' || r.status === 'ABSENT') ? '#ef4444' : '#7dd3fc';
+        ctx.font = 'bold 16px Cairo, Tahoma, sans-serif';
+        ctx.fillText(STATUS_LABELS[r.status], w - 940, y + 23);
         y += rowH;
       });
 
       return new Promise((resolve) => canvas.toBlob(resolve, 'image/png'));
     }
 
-    function downloadBlob(blob, filename) {
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url; a.download = filename;
-      document.body.appendChild(a); a.click(); a.remove();
-      setTimeout(() => URL.revokeObjectURL(url), 1500);
+    // MODALS HELPERS
+    function openBattalionModal(batId) {
+      const bat = batId ? state.battalions.find((b) => b.id === batId) : null;
+      document.getElementById('bat-modal-title').textContent = bat ? 'تعديل بيانات الكتيبة' : 'إدراج كتيبة جديدة مع سراياها';
+      document.getElementById('bm-id').value = bat ? bat.id : '';
+      document.getElementById('bm-name').value = bat ? bat.name : '';
+      document.getElementById('bm-code').value = bat ? (bat.code || '') : '';
+      document.getElementById('bm-commander').value = bat ? (bat.commander || '') : '';
+      document.getElementById('bm-notes').value = bat ? (bat.notes || '') : '';
+      document.getElementById('bm-companies-wrap').classList.toggle('hidden', Boolean(bat));
+      document.getElementById('battalion-modal').classList.remove('hidden');
     }
 
-    // Supabase Cloud Sync (REST)
-    async function syncWithSupabase() {
+    function openCompanyModal(compId) {
+      const comp = compId ? state.companies.find((c) => c.id === compId) : null;
+      document.getElementById('comp-modal-title').textContent = comp ? 'تعديل بيانات السرية' : 'إضافة سرية جديدة';
+      document.getElementById('cm-id').value = comp ? comp.id : '';
+      document.getElementById('cm-name').value = comp ? comp.name : '';
+      document.getElementById('cm-commander').value = comp ? (comp.commander || '') : '';
+      document.getElementById('cm-has-crews').value = comp ? String(comp.has_crews) : 'true';
+      document.getElementById('cm-init-groups-wrap').classList.toggle('hidden', Boolean(comp));
+      document.getElementById('company-modal').classList.remove('hidden');
+    }
+
+    function openGroupModal(companyId, groupId) {
+      const grp = groupId ? state.groups.find((g) => g.id === groupId) : null;
+      const comp = state.companies.find((c) => c.id === (grp ? grp.company_id : companyId));
+      document.getElementById('grp-modal-title').textContent = grp ? 'تعديل بيانات الجماعة' : `إضافة جماعة في ${comp ? comp.name : ''}`;
+      document.getElementById('gm-id').value = grp ? grp.id : '';
+      document.getElementById('gm-company-id').value = grp ? grp.company_id : companyId;
+      const existingCount = state.groups.filter((g) => g.company_id === (grp ? grp.company_id : companyId)).length;
+      document.getElementById('gm-name').value = grp ? grp.name : `الجماعة ${existingCount + 1}`;
+      document.getElementById('gm-leader').value = grp ? (grp.leader || '') : '';
+      document.getElementById('gm-batch').value = grp ? grp.shift_batch : (comp && !comp.has_crews ? 'PERMANENT' : (existingCount % 2 === 0 ? 'A' : 'B'));
+      document.getElementById('gm-capacity').value = grp ? (grp.capacity || 10) : 10;
+      document.getElementById('gm-autofill-wrap').classList.toggle('hidden', Boolean(grp));
+      document.getElementById('group-modal').classList.remove('hidden');
+    }
+
+    function openBulkGroupModal(groupId) {
+      const grp = state.groups.find((g) => g.id === groupId);
+      if (!grp) return;
+      const members = state.personnel.filter((p) => p.group_id === groupId);
+      document.getElementById('bulk-modal-title').textContent = `تعديل جماعي — ${grp.name} (${members.length} أفراد)`;
+      document.getElementById('bg-group-id').value = groupId;
+      document.getElementById('bulk-members-rows').innerHTML = members.map((p, idx) => `
+        <div class="bulk-row" data-pid="${p.id}">
+          <strong style="color:var(--gold)">${idx + 1}</strong>
+          <input class="input-field bg-name" value="${escapeHtml(p.name)}" placeholder="الاسم الكامل" />
+          <input class="input-field bg-job" value="${escapeHtml(p.job || '')}" placeholder="المسمى / الاختصاص" />
+          <input class="input-field bg-serial" value="${escapeHtml(p.serial || '')}" placeholder="الرقم الذاتي" />
+          <input class="input-field bg-phone" value="${escapeHtml(p.phone || '')}" placeholder="الهاتف" />
+        </div>
+      `).join('') || '<div style="text-align:center;color:var(--text-muted);padding:14px">لا يوجد أفراد في الجماعة بعد.</div>';
+      document.getElementById('bulk-group-modal').classList.remove('hidden');
+    }
+
+    function syncPersonGroupSelect(compId, selectedGroupId) {
+      const grps = state.groups.filter((g) => g.company_id === compId);
+      const sel = document.getElementById('pm-group');
+      sel.innerHTML = ['<option value="">بدون جماعة</option>']
+        .concat(grps.map((g) => `<option value="${g.id}">${escapeHtml(g.name)} (${BATCH_LABELS[g.shift_batch]})</option>`))
+        .join('');
+      sel.value = selectedGroupId && grps.some((g) => g.id === selectedGroupId) ? selectedGroupId : (grps[0] ? grps[0].id : '');
+    }
+
+    function openPersonModal(personId, presetCompId, presetGroupId) {
+      const comps = getActiveCompanies();
+      if (!comps.length) {
+        showToast('أضف سرية أولاً قبل إضافة الأفراد');
+        return;
+      }
+      const p = personId ? state.personnel.find((x) => x.id === personId) : null;
+      document.getElementById('person-modal-title').textContent = p ? 'تعديل كافة تفاصيل الفرد' : 'إضافة فرد جديد';
+      document.getElementById('pm-id').value = p ? p.id : '';
+      document.getElementById('pm-name').value = p ? p.name : '';
+      document.getElementById('pm-serial').value = p ? (p.serial || '') : '';
+      document.getElementById('pm-rank').value = p ? (p.rank || '') : '';
+      document.getElementById('pm-job').value = p ? (p.job || '') : '';
+      document.getElementById('pm-phone').value = p ? (p.phone || '') : '';
+      document.getElementById('pm-notes').value = p ? (p.notes || '') : '';
+      document.getElementById('pm-is-leader').checked = p ? Boolean(p.is_leader) : false;
+      document.getElementById('pm-batch').value = p ? (p.shift_batch || 'INHERIT') : 'INHERIT';
+
+      const compSel = document.getElementById('pm-company');
+      compSel.innerHTML = comps.map((c) => `<option value="${c.id}">${escapeHtml(c.name)}</option>`).join('');
+      const targetComp = p ? p.company_id : (presetCompId || comps[0].id);
+      compSel.value = targetComp;
+      syncPersonGroupSelect(targetComp, p ? p.group_id : presetGroupId);
+      document.getElementById('person-modal').classList.remove('hidden');
+    }
+
+    function createAutoMembersForGroup(batId, compId, groupId, groupName, count, startIndex) {
+      const created = [];
+      for (let i = startIndex; i < startIndex + count; i++) {
+        created.push({
+          id: uid('p'),
+          battalion_id: batId,
+          company_id: compId,
+          group_id: groupId,
+          serial: '',
+          name: i === 1 ? `قائد ${groupName}` : `فرد ${i} — ${groupName}`,
+          rank: i === 1 ? 'قائد جماعة' : 'فرد',
+          job: i === 1 ? 'قائد جماعة' : 'مقاتل / رامي',
+          is_leader: i === 1,
+          shift_batch: 'INHERIT',
+          phone: '',
+          notes: ''
+        });
+      }
+      return created;
+    }
+
+    // PIN SECURITY
+    async function sha256Hex(str) {
+      const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(str));
+      return Array.from(new Uint8Array(buf)).map((b) => b.toString(16).padStart(2, '0')).join('');
+    }
+    function getLockState() {
+      try { return JSON.parse(localStorage.getItem(FAIL_KEY) || '{"count":0,"lockedUntil":0}'); }
+      catch { return { count: 0, lockedUntil: 0 }; }
+    }
+    function openPinModal(mode = 'SETTINGS') {
+      pinModalMode = mode;
+      document.getElementById('pin-modal-title').textContent = mode === 'UNLOCK_BLOCK' ? 'فك الحظر بصلاحية المالك' : 'قفل الإعدادات';
+      document.getElementById('pin-input').value = '';
+      document.getElementById('pin-error').classList.add('hidden');
+      document.getElementById('pin-modal').classList.remove('hidden');
+      setTimeout(() => document.getElementById('pin-input').focus(), 80);
+    }
+
+    function switchTab(tabId, bypassPin = false) {
+      if (tabId === 'settings' && !settingsUnlocked && !bypassPin) {
+        openPinModal('SETTINGS');
+        return;
+      }
+      document.querySelectorAll('.tab-view').forEach((el) => el.classList.add('hidden'));
+      document.getElementById('tab-' + tabId).classList.remove('hidden');
+      document.querySelectorAll('.nav-btn').forEach((b) => b.classList.toggle('active', b.dataset.tab === tabId));
+      if (tabId === 'settings') renderSettings();
+      if (tabId === 'hierarchy') renderHierarchy();
+      if (tabId === 'readiness') renderReadiness();
+    }
+
+    async function performUndo() {
+      if (!state.undoStack || !state.undoStack.length) {
+        showToast('لا توجد عملية للتراجع عنها');
+        return;
+      }
+      const last = state.undoStack.shift();
+      const restored = JSON.parse(last.data);
+      state.settings = restored.settings;
+      state.battalions = restored.battalions;
+      state.companies = restored.companies;
+      state.groups = restored.groups;
+      state.personnel = restored.personnel;
+      state.attendance = restored.attendance;
+      await dbPut('app_state', state);
+      renderAll();
+      showToast(`تم التراجع: ${last.label}`);
+    }
+
+    // SUPABASE SNAPSHOT SYNC
+    async function pushSnapshotCloud() {
       const env = window.__TAFAQ_ENV__ || {};
-      if (!env.VITE_SUPABASE_URL || !env.VITE_SUPABASE_ANON_KEY) {
-        showToast('لم يُضبط رابط Supabase بعد');
-        return;
-      }
-      if (!navigator.onLine) {
-        showToast('لا يوجد اتصال إنترنت حالياً — بياناتك محفوظة محلياً');
-        return;
-      }
+      if (!env.VITE_SUPABASE_URL || !env.VITE_SUPABASE_ANON_KEY) { showToast('لم يُضبط رابط Supabase'); return; }
+      if (!navigator.onLine) { showToast('لا يوجد إنترنت — بياناتك محفوظة محلياً'); return; }
       try {
         const res = await fetch(`${env.VITE_SUPABASE_URL}/rest/v1/app_snapshots`, {
           method: 'POST',
@@ -1202,63 +2508,97 @@
           body: JSON.stringify({
             id: 'primary_130mm',
             payload: {
+              schemaVersion: 2,
               settings: state.settings,
+              battalions: state.battalions,
               companies: state.companies,
+              groups: state.groups,
               personnel: state.personnel,
               attendance: state.attendance
             },
             updated_at: new Date().toISOString()
           })
         });
-        if (!res.ok) throw new Error('تأكد من تشغيل ملف supabase-setup.sql في Supabase أولاً');
-        showToast('✓ تمت المزامنة السحابية مع Supabase بنجاح');
+        if (!res.ok) throw new Error('تأكد من تشغيل supabase-setup.sql في Supabase');
+        await pushAccessControlToCloud(true);
+        showToast('✓ تمت المزامنة السحابية بنجاح');
       } catch (err) {
         showToast(err.message || 'تعذر الاتصال بـ Supabase');
       }
     }
 
-    function switchTab(tabId, bypassPin = false) {
-      if (tabId === 'settings' && !settingsUnlocked && !bypassPin) {
-        openPinModal();
+    async function pullSnapshotCloud() {
+      const env = window.__TAFAQ_ENV__ || {};
+      if (!env.VITE_SUPABASE_URL || !env.VITE_SUPABASE_ANON_KEY || !navigator.onLine) {
+        showToast('تحقق من الاتصال بالإنترنت وإعداد Supabase');
         return;
       }
-      document.querySelectorAll('.tab-view').forEach((el) => el.classList.add('hidden'));
-      document.getElementById('tab-' + tabId).classList.remove('hidden');
-      document.querySelectorAll('.nav-btn').forEach((b) => b.classList.toggle('active', b.dataset.tab === tabId));
-      if (tabId === 'settings') renderSettings();
-    }
-
-    function escapeHtml(s) {
-      return String(s || '').replace(/[&<>"']/g, (m) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[m]));
-    }
-    function escapeXml(s) {
-      return String(s || '').replace(/[&<>"']/g, (m) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&apos;' }[m]));
-    }
-
-    async function performUndo() {
-      if (!state.undoStack || !state.undoStack.length) {
-        showToast('لا توجد عملية للتراجع عنها');
-        return;
+      try {
+        const res = await fetch(`${env.VITE_SUPABASE_URL}/rest/v1/app_snapshots?id=eq.primary_130mm&select=payload`, {
+          headers: { 'apikey': env.VITE_SUPABASE_ANON_KEY, 'Authorization': `Bearer ${env.VITE_SUPABASE_ANON_KEY}` }
+        });
+        const rows = await res.json();
+        if (!rows || !rows.length || !rows[0].payload) { showToast('لا توجد نسخة محفوظة في السحابة بعد'); return; }
+        await persistState('جلب نسخة سحابية من Supabase');
+        state = migrateState({ ...rows[0].payload, chat: state.chat, undoStack: state.undoStack, accessControl: state.accessControl });
+        await dbPut('app_state', state);
+        renderAll();
+        showToast('✓ تم جلب أحدث بيانات من السحابة');
+      } catch {
+        showToast('فشل جلب البيانات من السحابة');
       }
-      const last = state.undoStack.shift();
-      const restored = JSON.parse(last.data);
-      state.settings = restored.settings;
-      state.companies = restored.companies;
-      state.personnel = restored.personnel;
-      state.attendance = restored.attendance;
-      await dbPut('app_state', state);
-      renderAll();
-      showToast(`تم التراجع: ${last.label}`);
     }
 
-    // Event bindings
+    // EVENT BINDINGS
     function bindEvents() {
-      document.querySelectorAll('.nav-btn').forEach((b) =>
-        b.addEventListener('click', () => switchTab(b.dataset.tab))
+      document.querySelectorAll('.nav-btn').forEach((b) => b.addEventListener('click', () => switchTab(b.dataset.tab)));
+      document.querySelectorAll('[data-close]').forEach((b) =>
+        b.addEventListener('click', () => document.getElementById(b.dataset.close).classList.add('hidden'))
       );
-      document.getElementById('btn-close-pin').addEventListener('click', () =>
-        document.getElementById('pin-modal').classList.add('hidden')
-      );
+      document.getElementById('btn-close-pin').addEventListener('click', () => document.getElementById('pin-modal').classList.add('hidden'));
+      document.getElementById('btn-owner-override').addEventListener('click', () => openPinModal('UNLOCK_BLOCK'));
+
+      document.getElementById('pin-form').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const errEl = document.getElementById('pin-error');
+        const lock = getLockState();
+        if (lock.lockedUntil > Date.now()) {
+          errEl.textContent = 'تم تقييد المحاولات مؤقتاً لمدة 15 دقيقة';
+          errEl.classList.remove('hidden');
+          return;
+        }
+        const val = document.getElementById('pin-input').value.trim();
+        if (!val) return;
+        const hex = await sha256Hex(val);
+        const expected = localStorage.getItem(PIN_KEY) || (window.__TAFAQ_ENV__ && window.__TAFAQ_ENV__.VITE_OFFLINE_PIN_HASH) || '';
+        if (expected && hex === expected) {
+          localStorage.removeItem(FAIL_KEY);
+          document.getElementById('pin-modal').classList.add('hidden');
+          if (pinModalMode === 'UNLOCK_BLOCK') {
+            localStorage.removeItem(LOCAL_BAN_KEY);
+            state.settings.user_role = 'OWNER';
+            state.accessControl.blockedDevices = (state.accessControl.blockedDevices || []).filter(
+              (b) => (b.target || '').toLowerCase() !== MY_DEVICE_ID.toLowerCase()
+            );
+            await dbPut('app_state', state);
+            evaluateBlockStatus();
+            renderAll();
+            showToast('✓ تم فك الحظر بصلاحية المالك');
+          } else {
+            settingsUnlocked = true;
+            switchTab('settings', true);
+            renderSettings();
+            showToast('تم فتح الإعدادات');
+          }
+          return;
+        }
+        const nextCount = (lock.count || 0) + 1;
+        const lockedUntil = nextCount >= MAX_FAILS ? Date.now() + LOCK_MS : 0;
+        localStorage.setItem(FAIL_KEY, JSON.stringify({ count: nextCount, lockedUntil }));
+        errEl.textContent = lockedUntil ? 'تم تقييد المحاولات مؤقتاً لمدة 15 دقيقة' : 'رمز الدخول غير صحيح';
+        errEl.classList.remove('hidden');
+      });
+
       document.getElementById('btn-lock-settings').addEventListener('click', () => {
         settingsUnlocked = false;
         switchTab('attendance');
@@ -1266,55 +2606,360 @@
       });
       document.getElementById('btn-undo-top').addEventListener('click', performUndo);
 
+      // Active Battalion Switch
+      document.getElementById('global-battalion-select').addEventListener('change', async (e) => {
+        state.settings.active_battalion_id = e.target.value;
+        await dbPut('app_state', state);
+        renderAll();
+      });
+      document.getElementById('btn-quick-add-bat').addEventListener('click', () => openBattalionModal(null));
+      document.getElementById('btn-add-battalion').addEventListener('click', () => openBattalionModal(null));
+      document.getElementById('btn-add-company').addEventListener('click', () => openCompanyModal(null));
+      document.getElementById('btn-add-person').addEventListener('click', () => openPersonModal(null));
+
+      // Date & Filters
       document.getElementById('active-date').addEventListener('change', (e) => {
         activeDate = e.target.value || activeDate;
         renderAll();
       });
-
       for (const id of ['flt-search', 'flt-company', 'flt-scope', 'flt-status']) {
         document.getElementById(id).addEventListener('input', renderAttendance);
         document.getElementById(id).addEventListener('change', renderAttendance);
       }
       for (const id of ['roster-search', 'roster-company']) {
-        document.getElementById(id).addEventListener('input', renderRoster);
-        document.getElementById(id).addEventListener('change', renderRoster);
+        document.getElementById(id).addEventListener('input', renderForceManagement);
+        document.getElementById(id).addEventListener('change', renderForceManagement);
       }
 
+      document.getElementById('pm-company').addEventListener('change', (e) => syncPersonGroupSelect(e.target.value, null));
+
+      // Forms Submission
+      document.getElementById('battalion-form').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const id = document.getElementById('bm-id').value;
+        const name = document.getElementById('bm-name').value.trim();
+        const code = document.getElementById('bm-code').value.trim();
+        const commander = document.getElementById('bm-commander').value.trim();
+        const notes = document.getElementById('bm-notes').value.trim();
+
+        await persistState(id ? `تعديل الكتيبة ${name}` : `إدراج كتيبة جديدة: ${name}`);
+        if (id) {
+          state.battalions = state.battalions.map((b) => (b.id === id ? { ...b, name, code, commander, notes } : b));
+        } else {
+          const newBatId = uid('bat');
+          state.battalions.push({ id: newBatId, name, code, commander, notes });
+          const compLines = document.getElementById('bm-companies').value.split('\n').map((s) => s.trim()).filter(Boolean);
+          const autoGroups = document.getElementById('bm-auto-groups').checked;
+
+          compLines.forEach((cname, idx) => {
+            const isLeadership = cname.includes('قيادة');
+            const newCompId = uid('comp');
+            state.companies.push({
+              id: newCompId,
+              battalion_id: newBatId,
+              code: String(idx),
+              name: cname,
+              commander: isLeadership ? commander : '',
+              has_crews: !isLeadership
+            });
+            if (autoGroups) {
+              const gCount = isLeadership ? 1 : 2;
+              for (let gi = 0; gi < gCount; gi++) {
+                const gid = uid('grp');
+                const gName = isLeadership ? 'جماعة القيادة والأركان' : (gi === 0 ? 'الجماعة الأولى' : 'الجماعة الثانية');
+                state.groups.push({
+                  id: gid,
+                  battalion_id: newBatId,
+                  company_id: newCompId,
+                  name: gName,
+                  leader: '',
+                  shift_batch: isLeadership ? 'PERMANENT' : (gi === 0 ? 'A' : 'B'),
+                  capacity: 10
+                });
+                state.personnel.push(...createAutoMembersForGroup(newBatId, newCompId, gid, gName, 10, 1));
+              }
+            }
+          });
+          state.settings.active_battalion_id = newBatId;
+        }
+        await dbPut('app_state', state);
+        document.getElementById('battalion-modal').classList.add('hidden');
+        renderAll();
+        showToast('✓ تم حفظ الكتيبة وتشكيلها بنجاح');
+      });
+
+      document.getElementById('company-form').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const bat = getActiveBattalion();
+        const id = document.getElementById('cm-id').value;
+        const name = document.getElementById('cm-name').value.trim();
+        const commander = document.getElementById('cm-commander').value.trim();
+        const hasCrews = document.getElementById('cm-has-crews').value === 'true';
+
+        await persistState(id ? `تعديل السرية ${name}` : `إضافة سرية جديدة: ${name}`);
+        if (id) {
+          state.companies = state.companies.map((c) => (c.id === id ? { ...c, name, commander, has_crews: hasCrews } : c));
+        } else {
+          const newCompId = uid('comp');
+          state.companies.push({
+            id: newCompId,
+            battalion_id: bat.id,
+            code: String(getActiveCompanies().length),
+            name,
+            commander,
+            has_crews: hasCrews
+          });
+          const gCount = Math.max(0, Math.min(12, Number(document.getElementById('cm-groups-count').value) || 0));
+          const gSize = Math.max(0, Math.min(30, Number(document.getElementById('cm-group-size').value) || 0));
+          for (let gi = 0; gi < gCount; gi++) {
+            const gid = uid('grp');
+            const gName = `الجماعة ${gi + 1}`;
+            state.groups.push({
+              id: gid,
+              battalion_id: bat.id,
+              company_id: newCompId,
+              name: gName,
+              leader: '',
+              shift_batch: hasCrews ? (gi % 2 === 0 ? 'A' : 'B') : 'PERMANENT',
+              capacity: gSize || 10
+            });
+            if (gSize > 0) {
+              state.personnel.push(...createAutoMembersForGroup(bat.id, newCompId, gid, gName, gSize, 1));
+            }
+          }
+        }
+        await dbPut('app_state', state);
+        document.getElementById('company-modal').classList.add('hidden');
+        renderAll();
+        showToast('✓ تم حفظ السرية بنجاح');
+      });
+
+      document.getElementById('group-form').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const bat = getActiveBattalion();
+        const id = document.getElementById('gm-id').value;
+        const compId = document.getElementById('gm-company-id').value;
+        const name = document.getElementById('gm-name').value.trim();
+        const leader = document.getElementById('gm-leader').value.trim();
+        const shiftBatch = document.getElementById('gm-batch').value;
+        const capacity = Math.max(1, Number(document.getElementById('gm-capacity').value) || 10);
+
+        await persistState(id ? `تعديل الجماعة ${name}` : `إضافة جماعة: ${name}`);
+        if (id) {
+          state.groups = state.groups.map((g) => (g.id === id ? { ...g, name, leader, shift_batch: shiftBatch, capacity } : g));
+        } else {
+          const gid = uid('grp');
+          state.groups.push({ id: gid, battalion_id: bat.id, company_id: compId, name, leader, shift_batch: shiftBatch, capacity });
+          if (document.getElementById('gm-autofill').checked) {
+            state.personnel.push(...createAutoMembersForGroup(bat.id, compId, gid, name, capacity, 1));
+          }
+        }
+        await dbPut('app_state', state);
+        document.getElementById('group-modal').classList.add('hidden');
+        renderAll();
+        showToast('✓ تم حفظ الجماعة بنجاح');
+      });
+
+      document.getElementById('bulk-group-form').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        await persistState('تعديل جماعي لأفراد الجماعة');
+        const rows = document.querySelectorAll('#bulk-members-rows .bulk-row');
+        rows.forEach((row) => {
+          const pid = row.dataset.pid;
+          const p = state.personnel.find((x) => x.id === pid);
+          if (p) {
+            p.name = row.querySelector('.bg-name').value.trim() || p.name;
+            p.job = row.querySelector('.bg-job').value.trim();
+            p.serial = row.querySelector('.bg-serial').value.trim();
+            p.phone = row.querySelector('.bg-phone').value.trim();
+          }
+        });
+        await dbPut('app_state', state);
+        document.getElementById('bulk-group-modal').classList.add('hidden');
+        renderAll();
+        showToast('✓ تم حفظ تعديلات جميع أفراد الجماعة');
+      });
+
+      document.getElementById('person-form').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const bat = getActiveBattalion();
+        const id = document.getElementById('pm-id').value;
+        const obj = {
+          id: id || uid('p'),
+          battalion_id: bat.id,
+          company_id: document.getElementById('pm-company').value,
+          group_id: document.getElementById('pm-group').value || null,
+          name: document.getElementById('pm-name').value.trim(),
+          serial: document.getElementById('pm-serial').value.trim(),
+          rank: document.getElementById('pm-rank').value.trim(),
+          job: document.getElementById('pm-job').value.trim(),
+          phone: document.getElementById('pm-phone').value.trim(),
+          notes: document.getElementById('pm-notes').value.trim(),
+          shift_batch: document.getElementById('pm-batch').value,
+          is_leader: document.getElementById('pm-is-leader').checked
+        };
+        await persistState(id ? `تعديل بيانات ${obj.name}` : `إضافة فرد: ${obj.name}`);
+        if (id) {
+          state.personnel = state.personnel.map((x) => (x.id === id ? obj : x));
+        } else {
+          state.personnel.push(obj);
+        }
+        await dbPut('app_state', state);
+        document.getElementById('person-modal').classList.add('hidden');
+        renderAll();
+        showToast('✓ تم حفظ بيانات الفرد');
+      });
+
+      // Delegated Click Actions
       document.body.addEventListener('click', async (e) => {
         const btn = e.target.closest('[data-act]');
         if (!btn) return;
         const act = btn.dataset.act;
+
         if (act === 'set-st') {
           await setAttendanceStatus(btn.dataset.id, btn.dataset.st);
-        } else if (act === 'del-person') {
-          if (!confirm('حذف هذا العنصر نهائياً من القوة البشرية؟')) return;
-          const p = state.personnel.find((x) => x.id === btn.dataset.id);
-          await persistState(`حذف العنصر ${p ? p.name : ''}`);
-          state.personnel = state.personnel.filter((x) => x.id !== btn.dataset.id);
+        } else if (act === 'edit-bat') {
+          openBattalionModal(btn.dataset.id);
+        } else if (act === 'del-bat') {
+          if (state.battalions.length <= 1) { showToast('لا يمكن حذف الكتيبة الوحيدة'); return; }
+          if (!confirm('حذف هذه الكتيبة مع كامل سراياها وجماعاتها وأفرادها؟')) return;
+          const bid = btn.dataset.id;
+          await persistState('حذف كتيبة');
+          state.battalions = state.battalions.filter((b) => b.id !== bid);
+          state.companies = state.companies.filter((c) => c.battalion_id !== bid);
+          state.groups = state.groups.filter((g) => g.battalion_id !== bid);
+          state.personnel = state.personnel.filter((p) => p.battalion_id !== bid);
+          state.settings.active_battalion_id = state.battalions[0].id;
           await dbPut('app_state', state);
           renderAll();
-          showToast('تم حذف العنصر');
+          showToast('تم حذف الكتيبة');
+        } else if (act === 'add-comp-quick') {
+          openCompanyModal(null);
+        } else if (act === 'edit-comp') {
+          openCompanyModal(btn.dataset.id);
+        } else if (act === 'del-comp') {
+          if (!confirm('حذف هذه السرية مع جميع جماعاتها وأفرادها؟')) return;
+          const cid = btn.dataset.id;
+          await persistState('حذف سرية');
+          state.companies = state.companies.filter((c) => c.id !== cid);
+          state.groups = state.groups.filter((g) => g.company_id !== cid);
+          state.personnel = state.personnel.filter((p) => p.company_id !== cid);
+          await dbPut('app_state', state);
+          renderAll();
+          showToast('تم حذف السرية');
+        } else if (act === 'add-group') {
+          openGroupModal(btn.dataset.comp, null);
+        } else if (act === 'edit-group') {
+          openGroupModal(null, btn.dataset.id);
+        } else if (act === 'del-group') {
+          if (!confirm('حذف هذه الجماعة مع أفرادها؟')) return;
+          const gid = btn.dataset.id;
+          await persistState('حذف جماعة');
+          state.groups = state.groups.filter((g) => g.id !== gid);
+          state.personnel = state.personnel.filter((p) => p.group_id !== gid);
+          await dbPut('app_state', state);
+          renderAll();
+          showToast('تم حذف الجماعة');
+        } else if (act === 'bulk-group') {
+          openBulkGroupModal(btn.dataset.id);
+        } else if (act === 'fill-group-10') {
+          const g = state.groups.find((x) => x.id === btn.dataset.id);
+          if (!g) return;
+          const cur = state.personnel.filter((p) => p.group_id === g.id).length;
+          const cap = g.capacity || 10;
+          if (cur >= cap) return;
+          await persistState(`إكمال أفراد ${g.name} إلى ${cap}`);
+          state.personnel.push(...createAutoMembersForGroup(g.battalion_id, g.company_id, g.id, g.name, cap - cur, cur + 1));
+          await dbPut('app_state', state);
+          renderAll();
+          showToast(`✓ تم إكمال ${g.name} إلى ${cap} أفراد`);
+        } else if (act === 'add-person-grp') {
+          openPersonModal(null, btn.dataset.comp, btn.dataset.grp);
         } else if (act === 'edit-person') {
           openPersonModal(btn.dataset.id);
-        } else if (act === 'toggle-crews') {
-          await persistState('تعديل نظام الطواقم للسرية');
-          const c = state.companies.find((x) => x.code === btn.dataset.code);
-          if (c) {
-            c.has_crews = !c.has_crews;
-            c.batch_a_crews = c.has_crews ? ['الطاقم الأول', 'الطاقم الثاني'] : null;
-            c.batch_b_crews = c.has_crews ? ['الطاقم الثالث', 'الطاقم الرابع'] : null;
-            await dbPut('app_state', state);
-            renderAll();
-          }
+        } else if (act === 'del-person') {
+          if (!confirm('حذف هذا الفرد نهائياً؟')) return;
+          await persistState('حذف فرد');
+          state.personnel = state.personnel.filter((p) => p.id !== btn.dataset.id);
+          await dbPut('app_state', state);
+          renderAll();
+          showToast('تم حذف الفرد');
+        } else if (act === 'cycle-group-batch') {
+          const g = state.groups.find((x) => x.id === btn.dataset.id);
+          if (!g) return;
+          await persistState(`تبديل وجبة ${g.name}`);
+          const order = ['A', 'B', 'PERMANENT'];
+          g.shift_batch = order[(order.indexOf(g.shift_batch) + 1) % order.length];
+          await dbPut('app_state', state);
+          renderAll();
+          showToast(`${g.name} ← ${BATCH_LABELS[g.shift_batch]}`);
+        } else if (act === 'cycle-person-batch') {
+          const p = state.personnel.find((x) => x.id === btn.dataset.id);
+          if (!p) return;
+          await persistState(`تعديل مناوبة ${p.name}`);
+          const curEff = resolvePersonBatch(p);
+          const order = ['A', 'B', 'PERMANENT'];
+          p.shift_batch = order[(order.indexOf(curEff) + 1) % order.length];
+          await dbPut('app_state', state);
+          renderAll();
         } else if (act === 'do-undo') {
           await performUndo();
+        } else if (act === 'unban-target') {
+          state.accessControl.blockedDevices = (state.accessControl.blockedDevices || []).filter((b) => b.id !== btn.dataset.id);
+          await dbPut('app_state', state);
+          await pushAccessControlToCloud();
+          renderAccessControl();
+          showToast('✓ تم فك الحظر');
+        } else if (act === 'quick-ban-dev') {
+          const dev = btn.dataset.dev;
+          const nm = btn.dataset.name;
+          if (!confirm(`تأكيد حظر الجهاز ${dev} (${nm}) من استخدام التطبيق؟`)) return;
+          state.accessControl.blockedDevices = [
+            ...(state.accessControl.blockedDevices || []),
+            { id: uid('ban'), target: dev, reason: `حظر جهاز ${nm}`, blockedAt: new Date().toLocaleString('ar-SY') }
+          ];
+          await dbPut('app_state', state);
+          await pushAccessControlToCloud();
+          renderAccessControl();
         }
       });
 
+      // Hierarchy Auto-Shift Distribution & Commit
+      document.getElementById('btn-auto-shifts').addEventListener('click', async () => {
+        await persistState('فرز المناوبات تلقائياً من الهيكلية');
+        const comps = getActiveCompanies();
+        let toggle = 0;
+        for (const c of comps) {
+          const cGrps = state.groups.filter((g) => g.company_id === c.id);
+          for (const g of cGrps) {
+            if (!c.has_crews) {
+              g.shift_batch = 'PERMANENT';
+            } else {
+              g.shift_batch = toggle % 2 === 0 ? 'A' : 'B';
+              toggle++;
+            }
+          }
+          // Reset member overrides inside rotational companies to inherit group shift
+          state.personnel
+            .filter((p) => p.company_id === c.id)
+            .forEach((p) => { p.shift_batch = c.has_crews ? 'INHERIT' : 'PERMANENT'; });
+        }
+        await dbPut('app_state', state);
+        renderAll();
+        showToast('✓ تم فرز المناوبات تلقائياً بالتوازن بين الوجبة أ والوجبة ب');
+      });
+
+      document.getElementById('btn-commit-shifts').addEventListener('click', async () => {
+        await dbPut('app_state', state);
+        renderAll();
+        showToast('✓ تم اعتماد تشكيل الهيكلية وتحديث جدول التفقد وكشف الجاهزية');
+      });
+
+      // Mark All Present
       document.getElementById('btn-mark-all').addEventListener('click', async () => {
         await persistState('تحضير جميع المقررين لليوم');
         if (!state.attendance[activeDate]) state.attendance[activeDate] = {};
-        for (const p of state.personnel) {
+        for (const p of getActivePersonnel()) {
           if (isScheduledOnDuty(p, activeDate)) {
             state.attendance[activeDate][p.id] = { status: 'PRESENT', note: '', updatedAt: new Date().toISOString() };
           }
@@ -1324,107 +2969,86 @@
         showToast('✓ تم تسجيل جميع المقررين حاضرين');
       });
 
-      // Copy WhatsApp Summary
+      // Readiness Full-Page Share / Save / WhatsApp
+      document.getElementById('btn-share-readiness-img').addEventListener('click', async () => {
+        try {
+          assertExportRole();
+          const blob = await renderFullReadinessPng();
+          await shareOrDownloadPng(blob, `readiness-${activeDate}.png`, 'كشف الجاهزية الميدانية');
+        } catch (err) { showToast(err.message); }
+      });
+
+      document.getElementById('btn-dl-readiness-img').addEventListener('click', async () => {
+        try {
+          assertExportRole();
+          const blob = await renderFullReadinessPng();
+          downloadBlob(blob, `readiness-${activeDate}.png`);
+          showToast('✓ تم حفظ صورة كشف الجاهزية كاملة');
+        } catch (err) { showToast(err.message); }
+      });
+
+      document.getElementById('btn-share-hierarchy-img').addEventListener('click', async () => {
+        try {
+          assertExportRole();
+          const blob = await renderFullHierarchyPng();
+          await shareOrDownloadPng(blob, `hierarchy-${activeDate}.png`, 'الهيكلية التنظيمية والمناوبات');
+        } catch (err) { showToast(err.message); }
+      });
+
       document.getElementById('btn-copy-wa').addEventListener('click', async () => {
+        const bat = getActiveBattalion();
         const stats = computeStats();
         const shift = getShiftInfo(activeDate);
         const lines = [
-          `*${state.settings.unit_name}*`,
+          `*كشف الجاهزية — ${bat ? bat.name : state.settings.unit_name}*`,
           `📅 التاريخ: ${activeDate} (${shift.batchLabel} — اليوم ${shift.dayInBatch}/${shift.daysPerBatch})`,
           `━━━━━━━━━━━━━━`,
           `• إجمالي القوة: ${stats.total}`,
           `• المقرر بالدوام: ${stats.onDuty}`,
-          `• الحاضرون: ${stats.present}`,
-          `• المهام: ${stats.mission}`,
+          `• الحاضرون (فعّال): ${stats.present}`,
           `• الإجازات: ${stats.leave}`,
+          `• المرضية: ${stats.sick}`,
+          `• 🔴 غير فعال: ${stats.inactive}`,
           `• الغياب: ${stats.absent}`,
           `• نسبة الجاهزية: *${stats.readiness}%*`
         ];
         try {
           await navigator.clipboard.writeText(lines.join('\n'));
-          showToast('✓ تم نسخ ملخص واتساب الجاهز');
+          showToast('✓ تم نسخ ملخص كشف الجاهزية لواتساب');
         } catch {
           prompt('انسخ الملخص:', lines.join('\n'));
         }
       });
 
-      // Person Modal
-      document.getElementById('btn-add-person').addEventListener('click', () => openPersonModal(null));
-      document.getElementById('btn-close-person').addEventListener('click', () =>
-        document.getElementById('person-modal').classList.add('hidden')
-      );
-      document.getElementById('pm-company').addEventListener('change', syncCrewVisibility);
-      document.getElementById('person-form').addEventListener('submit', async (e) => {
-        e.preventDefault();
-        const id = document.getElementById('pm-id').value;
-        const compCode = document.getElementById('pm-company').value;
-        const comp = state.companies.find((c) => c.code === compCode);
-        const obj = {
-          id: id || ('p_' + Date.now()),
-          name: document.getElementById('pm-name').value.trim(),
-          serial: document.getElementById('pm-serial').value.trim(),
-          job: document.getElementById('pm-job').value.trim(),
-          company_code: compCode,
-          crew: comp && comp.has_crews ? document.getElementById('pm-crew').value : null,
-          squad: document.getElementById('pm-squad').value.trim(),
-          phone: document.getElementById('pm-phone').value.trim()
-        };
-        await persistState(id ? `تعديل بيانات ${obj.name}` : `إضافة عنصر ${obj.name}`);
-        if (id) {
-          state.personnel = state.personnel.map((x) => (x.id === id ? obj : x));
-        } else {
-          state.personnel.push(obj);
-        }
-        await dbPut('app_state', state);
-        document.getElementById('person-modal').classList.add('hidden');
-        renderAll();
-        showToast('✓ تم حفظ بيانات العنصر');
-      });
-
-      // Export Modal
+      // Attendance Export Modal
       document.getElementById('btn-open-export').addEventListener('click', () => {
         const allowed = state.settings.user_role === 'OWNER' || state.settings.user_role === 'ADMIN';
         document.getElementById('export-role-warn').classList.toggle('hidden', allowed);
         document.getElementById('export-buttons').classList.toggle('hidden', !allowed);
         document.getElementById('export-modal').classList.remove('hidden');
       });
-      document.getElementById('btn-close-export').addEventListener('click', () =>
-        document.getElementById('export-modal').classList.add('hidden')
-      );
-      document.getElementById('btn-exp-excel').addEventListener('click', () => {
-        try { exportExcel(); } catch (err) { showToast(err.message); }
-      });
-      document.getElementById('btn-exp-pdf').addEventListener('click', () => {
-        try { exportPdf(); } catch (err) { showToast(err.message); }
-      });
+      document.getElementById('btn-exp-excel').addEventListener('click', () => { try { exportExcel(); } catch (err) { showToast(err.message); } });
+      document.getElementById('btn-exp-pdf').addEventListener('click', () => { try { exportPdf(); } catch (err) { showToast(err.message); } });
       document.getElementById('btn-exp-png').addEventListener('click', async () => {
         try {
-          const blob = await renderPngBlob();
-          downloadBlob(blob, `tafaqqud-130mm-${activeDate}.png`);
-          showToast('✓ تم حفظ صورة التقرير');
+          const blob = await renderAttendancePng();
+          downloadBlob(blob, `tafaqqud-${activeDate}.png`);
+          showToast('✓ تم حفظ صورة التفقد');
         } catch (err) { showToast(err.message); }
       });
       document.getElementById('btn-exp-share').addEventListener('click', async () => {
         try {
-          const blob = await renderPngBlob();
-          const file = new File([blob], `tafaqqud-130mm-${activeDate}.png`, { type: 'image/png' });
-          if (navigator.canShare && navigator.canShare({ files: [file] })) {
-            await navigator.share({ title: state.settings.app_title, files: [file] });
-          } else {
-            downloadBlob(blob, `tafaqqud-130mm-${activeDate}.png`);
-            showToast('تم تحميل الصورة (المشاركة المباشرة غير مدعومة في هذا المتصفح)');
-          }
-        } catch (err) { showToast(err.message || 'تم إلغاء المشاركة'); }
+          const blob = await renderAttendancePng();
+          await shareOrDownloadPng(blob, `tafaqqud-${activeDate}.png`, state.settings.app_title);
+        } catch (err) { showToast(err.message); }
       });
 
-      // Chat Text & Voice
+      // Chat
       document.getElementById('btn-send-chat').addEventListener('click', sendTextChat);
-      document.getElementById('chat-input').addEventListener('keydown', (e) => {
-        if (e.key === 'Enter') sendTextChat();
-      });
+      document.getElementById('chat-input').addEventListener('keydown', (e) => { if (e.key === 'Enter') sendTextChat(); });
       document.getElementById('btn-rec-voice').addEventListener('click', toggleVoiceRecord);
 
-      // Settings save & PIN change
+      // Settings & Access Control Actions
       document.getElementById('btn-save-settings').addEventListener('click', async () => {
         await persistState('تعديل الإعدادات العامة');
         state.settings.app_title = document.getElementById('set-title').value.trim() || 'تفقد دوام الـ130مم';
@@ -1435,23 +3059,59 @@
         state.settings.user_role = document.getElementById('set-user-role').value;
         await dbPut('app_state', state);
         renderAll();
-        showToast('✓ تم حفظ الإعدادات وتثبيتها');
+        showToast('✓ تم حفظ الإعدادات');
+      });
+
+      document.getElementById('btn-toggle-global-block').addEventListener('click', async () => {
+        state.accessControl.globalBlock = !state.accessControl.globalBlock;
+        state.accessControl.blockMessage = document.getElementById('set-block-msg').value.trim() || state.accessControl.blockMessage;
+        await dbPut('app_state', state);
+        await pushAccessControlToCloud();
+        renderAccessControl();
+      });
+
+      document.getElementById('btn-add-ban').addEventListener('click', async () => {
+        const target = document.getElementById('ban-target-input').value.trim();
+        const reason = document.getElementById('ban-reason-input').value.trim();
+        if (!target) { showToast('أدخل اسم الشخص أو معرّف الجهاز أولاً'); return; }
+        state.accessControl.blockMessage = document.getElementById('set-block-msg').value.trim() || state.accessControl.blockMessage;
+        state.accessControl.blockedDevices = [
+          ...(state.accessControl.blockedDevices || []),
+          { id: uid('ban'), target, reason, blockedAt: new Date().toLocaleString('ar-SY') }
+        ];
+        document.getElementById('ban-target-input').value = '';
+        document.getElementById('ban-reason-input').value = '';
+        await dbPut('app_state', state);
+        await pushAccessControlToCloud();
+        renderAccessControl();
+        evaluateBlockStatus();
+      });
+
+      document.getElementById('btn-lock-this-device').addEventListener('click', () => {
+        if (!confirm('تأكيد حظر هذا الجهاز فوراً؟ (لن يفتح مجدداً إلا برمز المالك)')) return;
+        const msg = document.getElementById('set-block-msg').value.trim() || 'تم قفل وحظر هذا الجهاز بأمر القيادة.';
+        localStorage.setItem(LOCAL_BAN_KEY, msg);
+        evaluateBlockStatus();
+      });
+
+      document.getElementById('btn-refresh-access').addEventListener('click', async () => {
+        await syncAccessControlFromCloud(true);
+        showToast('✓ تم تحديث قائمة الأجهزة وقواعد الحظر');
       });
 
       document.getElementById('btn-change-pin').addEventListener('click', async () => {
         const np = document.getElementById('set-new-pin').value.trim();
         if (np.length < 4) { showToast('الرمز يجب أن يكون 4 أرقام على الأقل'); return; }
-        const hex = await sha256Hex(np);
-        localStorage.setItem(PIN_KEY, hex);
+        localStorage.setItem(PIN_KEY, await sha256Hex(np));
         document.getElementById('set-new-pin').value = '';
         showToast('✓ تم تحديث رمز القفل بنجاح');
       });
 
-      document.getElementById('btn-sync-cloud').addEventListener('click', syncWithSupabase);
+      document.getElementById('btn-sync-cloud').addEventListener('click', pushSnapshotCloud);
+      document.getElementById('btn-pull-cloud').addEventListener('click', pullSnapshotCloud);
 
       document.getElementById('btn-backup-json').addEventListener('click', () => {
-        const blob = new Blob([JSON.stringify(state, null, 2)], { type: 'application/json' });
-        downloadBlob(blob, `tafaqqud-backup-${activeDate}.json`);
+        downloadBlob(new Blob([JSON.stringify(state, null, 2)], { type: 'application/json' }), `tafaqqud-backup-${activeDate}.json`);
         showToast('✓ تم تصدير النسخة الاحتياطية');
       });
 
@@ -1460,40 +3120,17 @@
         if (!file) return;
         try {
           const parsed = JSON.parse(await file.text());
-          if (!parsed.personnel || !parsed.settings) throw new Error('ملف غير صالح');
           await persistState('استيراد نسخة احتياطية JSON');
-          state = { ...INITIAL_STATE, ...parsed, undoStack: state.undoStack };
+          state = migrateState({ ...parsed, undoStack: state.undoStack });
           await dbPut('app_state', state);
           renderAll();
           showToast('✓ تم استيراد البيانات بنجاح');
-        } catch { showToast('فشل استيراد الملف — تأكد أنه نسخة JSON صالحة'); }
+        } catch { showToast('ملف JSON غير صالح'); }
         e.target.value = '';
       });
 
-      window.addEventListener('online', renderHeader);
+      window.addEventListener('online', () => { renderHeader(); syncAccessControlFromCloud(true); });
       window.addEventListener('offline', renderHeader);
-    }
-
-    function syncCrewVisibility() {
-      const compCode = document.getElementById('pm-company').value;
-      const comp = state.companies.find((c) => c.code === compCode);
-      document.getElementById('pm-crew-wrap').classList.toggle('hidden', !comp || !comp.has_crews);
-    }
-
-    function openPersonModal(personId) {
-      populateCompanySelects();
-      const p = personId ? state.personnel.find((x) => x.id === personId) : null;
-      document.getElementById('person-modal-title').textContent = p ? 'تعديل بيانات العنصر' : 'إضافة عنصر جديد';
-      document.getElementById('pm-id').value = p ? p.id : '';
-      document.getElementById('pm-name').value = p ? p.name : '';
-      document.getElementById('pm-serial').value = p ? (p.serial || '') : '';
-      document.getElementById('pm-job').value = p ? (p.job || '') : '';
-      document.getElementById('pm-company').value = p ? p.company_code : '1';
-      document.getElementById('pm-crew').value = (p && p.crew) ? p.crew : 'الطاقم الأول';
-      document.getElementById('pm-squad').value = p ? (p.squad || '') : '';
-      document.getElementById('pm-phone').value = p ? (p.phone || '') : '';
-      syncCrewVisibility();
-      document.getElementById('person-modal').classList.remove('hidden');
     }
 
     async function sendTextChat() {
@@ -1544,22 +3181,19 @@
         };
         mediaRecorder.start();
         ind.classList.remove('hidden');
-      } catch {
-        showToast('تعذر الوصول للميكروفون — اسمح بالصلاحية من المتصفح');
-      }
+      } catch { showToast('تعذر الوصول للميكروفون'); }
     }
 
     // Boot
     async function init() {
       db = await openDB();
       const saved = await dbGet('app_state');
-      if (saved && saved.settings) {
-        state = { ...INITIAL_STATE, ...saved };
-      } else {
-        await dbPut('app_state', state);
-      }
+      state = migrateState(saved);
+      await dbPut('app_state', state);
       bindEvents();
       renderAll();
+      syncAccessControlFromCloud(true);
+      setInterval(() => syncAccessControlFromCloud(false), 30000);
       if ('serviceWorker' in navigator) {
         navigator.serviceWorker.register('/sw.js').catch(() => {});
       }
