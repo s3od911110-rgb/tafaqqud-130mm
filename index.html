@@ -310,6 +310,189 @@
       .bulk-row { grid-template-columns: 1fr 1fr; border: 1px solid var(--border); padding: 8px; border-radius: 10px; background: var(--bg-card); }
     }
 
+
+    /* Accordions for Hierarchy & Force */
+    .acc-card {
+      background: var(--bg-card); border: 1px solid var(--border-strong); border-radius: 13px;
+      margin-bottom: 10px; overflow: hidden;
+    }
+    .acc-header {
+      background: linear-gradient(135deg, rgba(205,186,161,.15), rgba(24,38,37,.96));
+      padding: 10px 12px; display: flex; justify-content: space-between; align-items: center; gap: 8px; flex-wrap: wrap;
+      cursor: pointer; user-select: none;
+    }
+    .acc-toggle-btn {
+      background: rgba(205,186,161,.14); border: 1px solid var(--border-strong); color: var(--gold-light);
+      width: 28px; height: 28px; border-radius: 8px; display: inline-flex; align-items: center; justify-content: center;
+      font-weight: 900; font-size: 13px; cursor: pointer; flex-shrink: 0; transition: transform .18s ease;
+    }
+    .acc-card.collapsed .acc-body { display: none; }
+    .acc-card.collapsed .acc-toggle-btn { transform: rotate(-90deg); }
+    .acc-body { padding: 10px; display: flex; flex-direction: column; gap: 8px; }
+
+    .sub-acc {
+      background: rgba(12, 20, 20, 0.75); border: 1px solid var(--border);
+      border-right: 3px solid var(--gold); border-radius: 11px; overflow: hidden;
+    }
+    .sub-acc-head {
+      background: rgba(35, 55, 53, 0.62); padding: 8px 10px;
+      display: flex; justify-content: space-between; align-items: center; gap: 6px; flex-wrap: wrap;
+      cursor: pointer;
+    }
+    .sub-acc.collapsed .sub-acc-body { display: none; }
+    .sub-acc-body { padding: 8px; display: flex; flex-direction: column; gap: 6px; }
+
+    .cmd-hq-box {
+      border: 2px solid var(--gold);
+      background: linear-gradient(145deg, rgba(205,186,161,.17), #13201e);
+      border-radius: 15px; padding: 12px; margin-bottom: 12px;
+    }
+    .cmd-two-cols { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 8px; margin-top: 10px; }
+    .cmd-slot {
+      background: rgba(12, 20, 20, 0.78); border: 1px solid var(--border-strong);
+      border-radius: 11px; padding: 9px 11px; display: flex; justify-content: space-between; align-items: center; gap: 8px;
+    }
+
+    /* WhatsApp-style Chat */
+    .wa-shell {
+      display: flex; flex-direction: column; min-height: 68vh;
+      background: #0b1413; border: 1px solid var(--border-strong); border-radius: 16px; overflow: hidden;
+    }
+    .wa-topbar {
+      background: #182725; border-bottom: 1px solid var(--border);
+      padding: 10px 14px; display: flex; justify-content: space-between; align-items: center; gap: 8px;
+    }
+    .wa-messages {
+      flex: 1; max-height: 60vh; overflow-y: auto; padding: 12px;
+      display: flex; flex-direction: column; gap: 8px;
+      background-image: radial-gradient(rgba(205,186,161,0.07) 1px, transparent 1px);
+      background-size: 18px 18px;
+    }
+    .wa-bubble {
+      max-width: 84%; padding: 8px 12px; border-radius: 13px;
+      position: relative; box-shadow: 0 2px 8px rgba(0,0,0,0.28);
+      border: 1px solid rgba(255,255,255,0.07);
+    }
+    .wa-bubble.me {
+      align-self: flex-start;
+      background: linear-gradient(135deg, #1d3b32, #152b25);
+      border-color: rgba(34,197,94,0.35);
+      border-top-right-radius: 4px;
+    }
+    .wa-bubble.other {
+      align-self: flex-end;
+      background: #1c2b2a;
+      border-color: var(--border);
+      border-top-left-radius: 4px;
+    }
+    .wa-sender { font-size: 11px; font-weight: 800; color: var(--gold-light); margin-bottom: 3px; }
+    .wa-text { font-size: 13.5px; line-height: 1.5; color: var(--text-main); word-break: break-word; }
+    .wa-meta { font-size: 10px; color: var(--text-muted); text-align: left; margin-top: 4px; }
+    .wa-composer {
+      background: #152220; border-top: 1px solid var(--border);
+      padding: 8px 10px; display: flex; align-items: center; gap: 6px;
+    }
+    .wa-input {
+      flex: 1; background: #0c1414; color: var(--text-main);
+      border: 1px solid var(--border); border-radius: 22px;
+      padding: 9px 14px; font-size: 13.5px; outline: none;
+    }
+    .wa-input:focus { border-color: var(--gold); }
+    .wa-circle-btn {
+      width: 40px; height: 40px; border-radius: 50%; border: none;
+      display: inline-flex; align-items: center; justify-content: center;
+      font-size: 16px; cursor: pointer; flex-shrink: 0;
+    }
+
+    /* Approval Waiting Overlay */
+    #approval-overlay {
+      position: fixed; inset: 0; z-index: 9500;
+      background: radial-gradient(circle at top, #1b2c29 0%, #0a1110 72%);
+      display: flex; align-items: center; justify-content: center; padding: 20px; text-align: center;
+    }
+    .approval-box {
+      max-width: 440px; width: 100%;
+      background: rgba(20, 32, 31, 0.96);
+      border: 2px solid var(--border-strong); border-radius: 20px; padding: 22px 18px;
+      box-shadow: 0 20px 60px rgba(0,0,0,.75);
+    }
+
+
+    /* Per-Page Width, Zoom, Font & Box/Rectangle Geometry Customization */
+    .container {
+      max-width: var(--active-page-maxw, 1060px);
+      transition: max-width .2s ease;
+    }
+    .tab-view {
+      zoom: var(--p-zoom, 1);
+      font-size: calc(14px * var(--p-font, 1));
+    }
+    .tab-view .card, .tab-view .cmd-hq-box {
+      border-radius: var(--p-rad, 14px);
+      padding: var(--p-pad, 13px);
+      margin-bottom: calc(var(--p-gap, 8px) + 4px);
+    }
+    .tab-view .acc-card, .tab-view .comp-block, .tab-view .wa-shell {
+      border-radius: var(--p-rad, 14px);
+      padding: 0;
+      margin-bottom: calc(var(--p-gap, 8px) + 4px);
+    }
+    .tab-view .person-card, .tab-view .member-row, .tab-view .org-member,
+    .tab-view .cmd-slot, .tab-view .sub-acc, .tab-view .group-block, .tab-view .comp-cmd-group {
+      border-radius: calc(var(--p-rad, 14px) * 0.78);
+      min-height: var(--p-row-h, 0px);
+    }
+    .tab-view .kpi-grid {
+      grid-template-columns: repeat(auto-fit, minmax(var(--p-kpi-w, 96px), 1fr));
+      gap: var(--p-gap, 8px);
+    }
+    .tab-view .kpi {
+      border-radius: calc(var(--p-rad, 14px) * 0.85);
+      min-height: var(--p-kpi-h, 0px);
+      display: flex; flex-direction: column; justify-content: center; align-items: center;
+      padding: calc(var(--p-pad, 13px) * 0.7) 6px;
+    }
+    .tab-view .list-stack, .tab-view .acc-body, .tab-view .sub-acc-body, .tab-view .group-members {
+      gap: var(--p-gap, 8px);
+    }
+    .share-top-btn {
+      width: 34px; height: 34px; border-radius: 10px;
+      background: linear-gradient(135deg, rgba(205,186,161,.22), rgba(27,42,41,.95));
+      border: 1px solid var(--border-strong);
+      color: var(--gold-light);
+      display: inline-flex; align-items: center; justify-content: center;
+      cursor: pointer; transition: transform .12s ease, filter .15s ease;
+    }
+    .share-top-btn:active { transform: scale(0.95); }
+    .comp-cmd-group {
+      background: linear-gradient(135deg, rgba(205,186,161,.13), rgba(14,23,23,.85));
+      border: 1px solid var(--border-strong);
+      border-right: 3px solid #eab308;
+      border-radius: 11px;
+      margin-bottom: 10px;
+      overflow: hidden;
+    }
+    .layout-preview-box {
+      background: rgba(10,17,16,.85);
+      border: 1px dashed var(--border-strong);
+      border-radius: 12px;
+      padding: 10px;
+      margin-top: 6px;
+    }
+    .rcfg-row {
+      display: grid;
+      grid-template-columns: auto 1fr 78px 42px auto;
+      gap: 6px;
+      align-items: center;
+      background: var(--bg-panel);
+      border: 1px solid var(--border);
+      border-radius: 9px;
+      padding: 7px 8px;
+    }
+    @media (max-width: 560px) {
+      .rcfg-row { grid-template-columns: auto 1fr 68px 36px auto; gap: 4px; }
+    }
+
     /* Print / Official PDF */
     #print-sheet { display: none; }
     @media print {
@@ -331,6 +514,34 @@
       VITE_OFFLINE_PIN_HASH: 'a037a7dfaf26abe1265bd5d51447be3bb1fdaef7c4c7a14bcf0d819818fb80b0'
     };
   </script>
+
+  <!-- OWNER APPROVAL GATE OVERLAY FOR NON-OWNER DEVICES -->
+  <div id="approval-overlay" class="hidden">
+    <div class="approval-box">
+      <div style="margin-bottom:10px">
+        <svg width="58" height="58" viewBox="0 0 256 256"><path d="M30,120L41,119L57,102L59,103L58,106L34,132L41,132L47,129L63,108L65,109L65,111L40,144L49,143L54,138L70,113L72,114L46,156L53,155L58,152L78,117L80,118L80,120L62,153L66,153L72,150L86,119L88,120L88,123L76,151L82,150L85,147L95,121L97,122L88,149L95,147L98,143L103,123L105,122L106,126L101,146L107,142L109,131L111,129L116,136L115,140L104,152L104,156L97,164L80,165L80,170L84,166L87,166L88,168L85,171L87,173L87,170L93,166L99,172L101,170L98,166L103,160L109,159L117,154L117,158L97,185L106,183L109,180L114,168L117,167L118,169L108,191L116,189L119,184L121,172L124,169L125,175L123,182L123,191L125,193L130,192L130,195L134,189L131,174L132,169L135,171L137,184L140,189L148,191L138,169L139,167L142,168L147,180L150,183L160,185L138,156L139,154L153,160L158,166L155,170L157,173L157,171L163,166L166,167L170,173L171,171L168,168L169,166L172,166L176,169L176,165L161,165L153,157L153,153L141,139L144,129L146,128L149,142L152,145L156,146L150,125L151,123L154,124L157,139L161,147L168,149L159,124L160,122L162,122L171,147L175,150L180,151L168,123L168,120L170,119L184,150L190,153L194,153L176,120L176,118L178,117L197,151L201,154L209,156L186,120L184,114L187,114L204,141L211,144L216,144L192,113L191,109L194,109L211,131L221,131L197,104L198,102L215,119L226,120L183,76L179,74L165,75L163,77L163,88L160,95L149,102L141,102L138,100L136,80L132,77L123,76L112,81L112,86L115,84L119,84L121,86L121,92L117,101L107,102L102,100L95,93L93,87L93,77L90,74L76,74L72,76Z M145,58L148,61L145,67L150,66L153,70L153,66L158,63L154,61L153,57L151,59Z M98,63L103,65L103,70L107,66L112,67L109,63L111,58L106,59L103,56L103,60Z M121,55L125,59L124,64L128,61L133,64L132,58L136,55L131,55L128,50L126,55Z" fill="#cdbaa1" /></svg>
+      </div>
+      <div style="font-size:19px;font-weight:900;color:var(--gold-light);margin-bottom:6px">بانتظار موافقة المالك</div>
+      <p style="font-size:13px;color:var(--text-muted);line-height:1.65;margin:0 0 12px">
+        هذا الجهاز غير معتمد بعد. لا يمكن فتح التطبيق دون موافقة المالك عبر السحابة أو إدخال رمز القيادة.
+      </p>
+      <div style="background:rgba(12,20,20,.8);border:1px solid var(--border);border-radius:10px;padding:8px;font-size:12px;color:var(--gold);margin-bottom:12px">
+        معرّف الجهاز: <strong id="approval-device-id" style="letter-spacing:1px"></strong>
+      </div>
+      <div class="form-grid" style="text-align:right;margin-bottom:10px">
+        <div>
+          <label class="label">الاسم الكامل / الصفة للتعريف عند المالك</label>
+          <input id="req-user-name" class="input-field" placeholder="اكتب اسمك الثلاثي أو صفتك" />
+        </div>
+        <button class="btn btn-primary" id="btn-send-approval-req">📩 إرسال طلب موافقة للمالك</button>
+        <div id="approval-status-msg" style="font-size:12px;color:#fde68a;text-align:center"></div>
+      </div>
+      <div style="display:flex;gap:6px;justify-content:center;flex-wrap:wrap">
+        <button class="btn btn-sm" id="btn-check-approval-now">🔄 فحص الموافقة الآن</button>
+        <button class="btn btn-sm" id="btn-approval-owner-pin" style="border-color:var(--border-strong);color:var(--gold)">🔑 دخول بصلاحية المالك</button>
+      </div>
+    </div>
+  </div>
 
   <!-- FULL-SCREEN BLOCK OVERLAY -->
   <div id="block-overlay" class="hidden">
@@ -364,7 +575,13 @@
       </div>
       <div class="top-actions">
         <span id="net-pill" class="pill online">● متصل</span>
-        <span id="role-pill" class="pill gold">مالك</span>
+        <button class="share-top-btn" id="btn-share-app-top" title="مشاركة رابط تنزيل التطبيق">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/>
+            <polyline points="16 6 12 2 8 6"/>
+            <line x1="12" y1="2" x2="12" y2="15"/>
+          </svg>
+        </button>
         <button class="btn btn-icon" id="btn-undo-top" title="تراجع عن آخر عملية">↶</button>
       </div>
     </header>
@@ -494,21 +711,32 @@
         <div id="hierarchy-canvas"></div>
       </section>
 
-      <!-- TAB 5: CHAT -->
+      <!-- TAB 5: CHAT (WHATSAPP STYLE) -->
       <section id="tab-chat" class="tab-view hidden">
-        <div class="card">
-          <div class="card-title">
-            <span>🎙️ غرفة التواصل الميداني (نصي وصوتي)</span>
-            <span class="pill" id="chat-count">0 رسالة</span>
+        <div class="wa-shell">
+          <div class="wa-topbar">
+            <div style="display:flex;align-items:center;gap:9px">
+              <div class="brand-logo" style="width:36px;height:36px">
+                <svg width="24" height="24" viewBox="0 0 256 256"><path d="M30,120L41,119L57,102L59,103L58,106L34,132L41,132L47,129L63,108L65,109L65,111L40,144L49,143L54,138L70,113L72,114L46,156L53,155L58,152L78,117L80,118L80,120L62,153L66,153L72,150L86,119L88,120L88,123L76,151L82,150L85,147L95,121L97,122L88,149L95,147L98,143L103,123L105,122L106,126L101,146L107,142L109,131L111,129L116,136L115,140L104,152L104,156L97,164L80,165L80,170L84,166L87,166L88,168L85,171L87,173L87,170L93,166L99,172L101,170L98,166L103,160L109,159L117,154L117,158L97,185L106,183L109,180L114,168L117,167L118,169L108,191L116,189L119,184L121,172L124,169L125,175L123,182L123,191L125,193L130,192L130,195L134,189L131,174L132,169L135,171L137,184L140,189L148,191L138,169L139,167L142,168L147,180L150,183L160,185L138,156L139,154L153,160L158,166L155,170L157,173L157,171L163,166L166,167L170,173L171,171L168,168L169,166L172,166L176,169L176,165L161,165L153,157L153,153L141,139L144,129L146,128L149,142L152,145L156,146L150,125L151,123L154,124L157,139L161,147L168,149L159,124L160,122L162,122L171,147L175,150L180,151L168,123L168,120L170,119L184,150L190,153L194,153L176,120L176,118L178,117L197,151L201,154L209,156L186,120L184,114L187,114L204,141L211,144L216,144L192,113L191,109L194,109L211,131L221,131L197,104L198,102L215,119L226,120L183,76L179,74L165,75L163,77L163,88L160,95L149,102L141,102L138,100L136,80L132,77L123,76L112,81L112,86L115,84L119,84L121,86L121,92L117,101L107,102L102,100L95,93L93,87L93,77L90,74L76,74L72,76Z M145,58L148,61L145,67L150,66L153,70L153,66L158,63L154,61L153,57L151,59Z M98,63L103,65L103,70L107,66L112,67L109,63L111,58L106,59L103,56L103,60Z M121,55L125,59L124,64L128,61L133,64L132,58L136,55L131,55L128,50L126,55Z" fill="#cdbaa1" /></svg>
+              </div>
+              <div>
+                <div style="font-size:14px;font-weight:900;color:var(--gold-light)">غرفة التواصل الفوري</div>
+                <div style="font-size:11px;color:#86efac" id="wa-sub-status">الكتيبة الأولى مدفعية 130مم • مشفّر ومزامن</div>
+              </div>
+            </div>
+            <div style="display:flex;gap:5px;align-items:center">
+              <span class="pill gold" id="chat-count">0 رسالة</span>
+              <button class="btn btn-danger btn-xs hidden" id="btn-clear-chat" title="مسح الشات لدى الجميع (للمالك فقط)">🗑 مسح للجميع</button>
+            </div>
           </div>
-          <div class="chat-list" id="chat-list"></div>
-          <div class="chat-bar">
-            <input id="chat-input" class="input-field" placeholder="اكتب رسالة إدارية أو ميدانية..." />
-            <button class="btn" id="btn-rec-voice" title="تسجيل رسالة صوتية">🎙️</button>
-            <button class="btn btn-primary" id="btn-send-chat">إرسال</button>
+          <div class="wa-messages" id="chat-list"></div>
+          <div id="rec-indicator" class="hidden" style="padding:6px 12px;background:rgba(239,68,68,.18);color:#fca5a5;font-size:12px;font-weight:700;text-align:center">
+            ● جارٍ تسجيل رسالة صوتية... اضغط الميكروفون مرة أخرى للإرسال
           </div>
-          <div id="rec-indicator" class="hidden" style="margin-top:8px;color:#fca5a5;font-size:12px;font-weight:700">
-            ● جارٍ التسجيل الصوتي... اضغط زر الميكروفون مرة أخرى للإرسال
+          <div class="wa-composer">
+            <button class="wa-circle-btn" id="btn-rec-voice" style="background:var(--bg-elevated);color:var(--gold-light);border:1px solid var(--border)" title="تسجيل رسالة صوتية">🎙️</button>
+            <input id="chat-input" class="wa-input" placeholder="اكتب رسالة..." />
+            <button class="wa-circle-btn" id="btn-send-chat" style="background:linear-gradient(135deg,#22c55e,#15803d);color:#fff" title="إرسال">➤</button>
           </div>
         </div>
       </section>
@@ -555,6 +783,10 @@
                 </select>
               </div>
             </div>
+            <div>
+              <label class="label">رابط تنزيل التطبيق (لزر المشاركة السهمي بالأعلى)</label>
+              <input id="set-download-url" class="input-field" style="direction:ltr;text-align:left" placeholder="https://tafaqqud-130mm.vercel.app" />
+            </div>
             <button class="btn btn-primary" id="btn-save-settings">حفظ الإعدادات</button>
           </div>
         </div>
@@ -596,13 +828,151 @@
             </div>
 
             <div>
-              <div style="font-size:12px;font-weight:800;color:var(--gold);margin-bottom:5px">قائمة المحظورين حالياً:</div>
+              <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:5px">
+                <span style="font-size:12px;font-weight:800;color:#fde68a">⏳ طلبات الموافقة على الأجهزة الجديدة:</span>
+                <label style="font-size:11px;display:flex;align-items:center;gap:4px;cursor:pointer">
+                  <input type="checkbox" id="set-require-approval" />
+                  <span>اشتراط موافقة المالك لأي جهاز جديد</span>
+                </label>
+              </div>
+              <div id="pending-approvals-wrap"></div>
+            </div>
+
+            <div>
+              <div style="font-size:12px;font-weight:800;color:#86efac;margin-bottom:5px">✅ الأجهزة المعتمدة:</div>
+              <div id="approved-devices-wrap"></div>
+            </div>
+
+            <div>
+              <div style="font-size:12px;font-weight:800;color:var(--gold);margin-bottom:5px">🚫 قائمة المحظورين حالياً:</div>
               <div id="blocked-list-wrap"></div>
             </div>
 
             <div>
               <div style="font-size:12px;font-weight:800;color:var(--gold);margin-bottom:5px">الأجهزة المتصلة بالتطبيق (اضغط حظر لأي جهاز):</div>
               <div id="registered-devices-wrap"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- READINESS METRICS CUSTOMIZER (كشف الجاهزية) -->
+        <div class="card">
+          <div class="card-title">
+            <span>⚡ تعديل حالات ومؤشرات صفحة كشف الجاهزية</span>
+            <button class="btn btn-xs" id="btn-reset-readiness-cfg">إعادة الافتراضي</button>
+          </div>
+          <div style="font-size:11.5px;color:var(--text-muted);margin-bottom:8px;line-height:1.5">
+            تحكّم بكل حالة في كشف الجاهزية (إظهار/إخفاء، تعديل المسمى، اختيار اللون، الترتيب، أو إدخال قيمة يدوية مؤقتة — اترك خانة القيمة فارغة للحساب التلقائي):
+          </div>
+          <div id="readiness-cfg-list" class="form-grid"></div>
+          <button class="btn btn-primary btn-sm" id="btn-save-readiness-cfg" style="margin-top:10px">✓ حفظ وتطبيق تعديلات الجاهزية</button>
+        </div>
+
+        <!-- PER-PAGE EXPANSION, ZOOM & BOX/RECTANGLE GEOMETRY CONTROLS -->
+        <div class="card">
+          <div class="card-title">
+            <span>📐 توسيع وتكبير وتصغير الصفحات وقياسات المستطيلات والمربعات</span>
+            <button class="btn btn-xs" id="btn-reset-layout-cfg">ضبط هذه الصفحة</button>
+          </div>
+          <div class="form-grid">
+            <div>
+              <label class="label">اختر الصفحة (لكل صفحة إعداداتها المستقلة):</label>
+              <select id="layout-target-page" class="input-field">
+                <option value="attendance">التفقد</option>
+                <option value="readiness">الجاهزية</option>
+                <option value="personnel">القوة</option>
+                <option value="hierarchy">الهيكلية</option>
+                <option value="chat">التواصل</option>
+              </select>
+            </div>
+
+            <div class="row-2">
+              <div>
+                <div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:3px">
+                  <span style="color:var(--gold);font-weight:700">توسيع عرض الصفحة:</span>
+                  <strong id="lbl-page-maxw" style="color:var(--gold-light)">1060px</strong>
+                </div>
+                <input id="rng-page-maxw" type="range" min="640" max="1600" step="40" value="1060" style="width:100%" />
+              </div>
+              <div>
+                <div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:3px">
+                  <span style="color:var(--gold);font-weight:700">تكبير / تصغير الصفحة:</span>
+                  <strong id="lbl-page-zoom" style="color:var(--gold-light)">100%</strong>
+                </div>
+                <input id="rng-page-zoom" type="range" min="70" max="140" step="5" value="100" style="width:100%" />
+              </div>
+            </div>
+
+            <div style="display:flex;gap:6px;flex-wrap:wrap;align-items:center">
+              <button type="button" class="btn btn-xs" id="btn-zoom-minus">➖ تصغير</button>
+              <button type="button" class="btn btn-xs" id="btn-zoom-100">100% طبيعي</button>
+              <button type="button" class="btn btn-xs" id="btn-zoom-plus">➕ تكبير</button>
+              <button type="button" class="btn btn-xs" id="btn-widen-full">↔ توسيع كامل</button>
+            </div>
+
+            <div>
+              <div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:3px">
+                <span style="color:var(--gold);font-weight:700">حجم الخط داخل الصفحة:</span>
+                <strong id="lbl-page-font" style="color:var(--gold-light)">100%</strong>
+              </div>
+              <input id="rng-page-font" type="range" min="80" max="135" step="5" value="100" style="width:100%" />
+            </div>
+
+            <div style="border-top:1px solid var(--border);padding-top:10px">
+              <div style="font-size:12.5px;font-weight:800;color:var(--gold-light);margin-bottom:8px">قياسات المربعات والمستطيلات داخل هذه الصفحة:</div>
+              <div class="row-2">
+                <div>
+                  <label class="label">عرض المربعات (KPI): <span id="lbl-kpi-w">96</span>px</label>
+                  <input id="rng-kpi-w" type="range" min="70" max="200" step="4" value="96" style="width:100%" />
+                </div>
+                <div>
+                  <label class="label">ارتفاع المربعات (KPI): <span id="lbl-kpi-h">64</span>px</label>
+                  <input id="rng-kpi-h" type="range" min="50" max="150" step="4" value="64" style="width:100%" />
+                </div>
+              </div>
+              <div class="row-2" style="margin-top:8px">
+                <div>
+                  <label class="label">ارتفاع المستطيلات (البطاقات/الصفوف): <span id="lbl-row-h">52</span>px</label>
+                  <input id="rng-row-h" type="range" min="40" max="140" step="4" value="52" style="width:100%" />
+                </div>
+                <div>
+                  <label class="label">تدوير زوايا المستطيلات: <span id="lbl-box-rad">14</span>px</label>
+                  <input id="rng-box-rad" type="range" min="2" max="28" step="2" value="14" style="width:100%" />
+                </div>
+              </div>
+              <div class="row-2" style="margin-top:8px">
+                <div>
+                  <label class="label">المسافة بين المربعات والمستطيلات: <span id="lbl-box-gap">8</span>px</label>
+                  <input id="rng-box-gap" type="range" min="4" max="22" step="2" value="8" style="width:100%" />
+                </div>
+                <div>
+                  <label class="label">الحشو الداخلي للبطاقات: <span id="lbl-card-pad">13</span>px</label>
+                  <input id="rng-card-pad" type="range" min="6" max="26" step="1" value="13" style="width:100%" />
+                </div>
+              </div>
+
+              <div class="layout-preview-box">
+                <div style="font-size:11px;color:var(--text-muted);margin-bottom:6px">معاينة فورية لقياسات المربعات والمستطيلات:</div>
+                <div id="layout-live-preview" style="display:flex;flex-direction:column;gap:8px">
+                  <div id="preview-kpi-row" style="display:grid;grid-template-columns:repeat(2,minmax(70px,1fr));gap:8px">
+                    <div class="preview-sq" style="background:var(--bg-card);border:1px solid var(--border-strong);text-align:center;display:flex;flex-direction:column;justify-content:center">
+                      <strong style="color:var(--gold-light)">24</strong><span style="font-size:11px;color:var(--text-muted)">مربع مؤشر</span>
+                    </div>
+                    <div class="preview-sq" style="background:var(--bg-card);border:1px solid var(--border-strong);text-align:center;display:flex;flex-direction:column;justify-content:center">
+                      <strong style="color:var(--ok)">95%</strong><span style="font-size:11px;color:var(--text-muted)">مربع مؤشر</span>
+                    </div>
+                  </div>
+                  <div id="preview-rect" style="background:var(--bg-panel);border:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:8px 12px">
+                    <strong style="font-size:12.5px">مستطيل فرد / سرية</strong>
+                    <span class="pill gold">معاينة</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div style="display:flex;gap:6px;flex-wrap:wrap">
+              <button type="button" class="btn btn-primary btn-sm" id="btn-save-layout-cfg">✓ حفظ قياسات هذه الصفحة</button>
+              <button type="button" class="btn btn-ok btn-sm" id="btn-apply-layout-all">📋 تطبيق على كل الصفحات</button>
             </div>
           </div>
         </div>
@@ -667,6 +1037,57 @@
     </div>
   </div>
 
+  <!-- COMMAND HQ MODAL (قائد الكتيبة ورئيس الأركان) -->
+  <div id="cmd-hq-modal" class="modal-backdrop hidden">
+    <div class="modal">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px">
+        <strong style="color:var(--gold-light)">تعديل قيادة الكتيبة (خارج السرايا والجماعات)</strong>
+        <button class="btn btn-sm" data-close="cmd-hq-modal">✕</button>
+      </div>
+      <form id="cmd-hq-form" class="form-grid">
+        <div>
+          <label class="label">قائد الكتيبة</label>
+          <input id="hq-commander" class="input-field" placeholder="اسم قائد الكتيبة" />
+        </div>
+        <div class="row-2">
+          <div>
+            <label class="label">مناوبة قائد الكتيبة</label>
+            <select id="hq-commander-batch" class="input-field">
+              <option value="NO_SHIFT">دون دوام</option>
+              <option value="PERMANENT">دوام دائم</option>
+              <option value="A">المناوبة أ</option>
+              <option value="B">المناوبة ب</option>
+            </select>
+          </div>
+          <div>
+            <label class="label">ملاحظة / صفة</label>
+            <input id="hq-commander-note" class="input-field" placeholder="مثال: قيادة الكتيبة" />
+          </div>
+        </div>
+        <div style="border-top:1px solid var(--border);padding-top:8px">
+          <label class="label">رئيس أركان الكتيبة</label>
+          <input id="hq-chief" class="input-field" placeholder="اسم رئيس أركان الكتيبة" />
+        </div>
+        <div class="row-2">
+          <div>
+            <label class="label">مناوبة رئيس الأركان</label>
+            <select id="hq-chief-batch" class="input-field">
+              <option value="NO_SHIFT">دون دوام</option>
+              <option value="PERMANENT">دوام دائم</option>
+              <option value="A">المناوبة أ</option>
+              <option value="B">المناوبة ب</option>
+            </select>
+          </div>
+          <div>
+            <label class="label">ملاحظة / صفة</label>
+            <input id="hq-chief-note" class="input-field" placeholder="مثال: رئاسة الأركان" />
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary">✓ حفظ قيادة الكتيبة</button>
+      </form>
+    </div>
+  </div>
+
   <!-- BATTALION MODAL -->
   <div id="battalion-modal" class="modal-backdrop hidden">
     <div class="modal">
@@ -688,6 +1109,12 @@
           <div>
             <label class="label">قائد الكتيبة</label>
             <input id="bm-commander" class="input-field" placeholder="الاسم أو الصفة" />
+          </div>
+        </div>
+        <div class="row-2">
+          <div>
+            <label class="label">رئيس أركان الكتيبة</label>
+            <input id="bm-chief-of-staff" class="input-field" placeholder="اسم رئيس الأركان" />
           </div>
         </div>
         <div>
@@ -737,14 +1164,21 @@
             </select>
           </div>
         </div>
-        <div id="cm-init-groups-wrap" class="row-2">
-          <div>
-            <label class="label">عدد الجماعات المبدئي</label>
-            <input id="cm-groups-count" type="number" min="0" max="12" value="2" class="input-field" />
+        <div id="cm-init-groups-wrap" class="form-grid">
+          <div style="background:rgba(205,186,161,.1);border:1px solid var(--border-strong);border-radius:10px;padding:9px 11px;font-size:12px;color:var(--gold-light);line-height:1.6">
+            ✓ سيتم فرز تشكيل السرية تلقائياً عند الإنشاء:<br/>
+            • <strong>قيادة السرية (4):</strong> قائد السرية / معاون قائد السرية / معاون ضابط رمي / ضابط.<br/>
+            • <strong>4 جماعات قتالية:</strong> كل جماعة 10 أفراد (قائد جماعة / مسدد / 7 سادن / سائق).
           </div>
-          <div>
-            <label class="label">أفراد كل جماعة</label>
-            <input id="cm-group-size" type="number" min="0" max="30" value="10" class="input-field" />
+          <div class="row-2">
+            <div>
+              <label class="label">عدد الجماعات المفرزة</label>
+              <input id="cm-groups-count" type="number" min="0" max="12" value="4" class="input-field" />
+            </div>
+            <div>
+              <label class="label">أفراد كل جماعة</label>
+              <input id="cm-group-size" type="number" min="0" max="30" value="10" class="input-field" />
+            </div>
           </div>
         </div>
         <button type="submit" class="btn btn-primary">حفظ السرية</button>
@@ -774,9 +1208,10 @@
           <div>
             <label class="label">الوجبة / المناوبة</label>
             <select id="gm-batch" class="input-field">
-              <option value="A">الوجبة أ (المناوبة الأولى)</option>
-              <option value="B">الوجبة ب (المناوبة الثانية)</option>
+              <option value="A">المناوبة أ</option>
+              <option value="B">المناوبة ب</option>
               <option value="PERMANENT">دوام دائم</option>
+              <option value="NO_SHIFT">دون دوام</option>
             </select>
           </div>
         </div>
@@ -866,9 +1301,10 @@
             <label class="label">تخصيص المناوبة</label>
             <select id="pm-batch" class="input-field">
               <option value="INHERIT">تلقائي (يتبع الجماعة)</option>
-              <option value="A">الوجبة أ</option>
-              <option value="B">الوجبة ب</option>
+              <option value="A">المناوبة أ</option>
+              <option value="B">المناوبة ب</option>
               <option value="PERMANENT">دوام دائم</option>
+              <option value="NO_SHIFT">دون دوام</option>
             </select>
           </div>
           <div style="display:flex;align-items:flex-end;padding-bottom:6px">
@@ -884,6 +1320,26 @@
         </div>
         <button type="submit" class="btn btn-primary">حفظ بيانات الفرد</button>
       </form>
+    </div>
+  </div>
+
+  <!-- SHARE APP DOWNLOAD LINK MODAL -->
+  <div id="share-app-modal" class="modal-backdrop hidden">
+    <div class="modal">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px">
+        <strong style="color:var(--gold-light)">📤 مشاركة رابط تنزيل التطبيق</strong>
+        <button class="btn btn-sm" data-close="share-app-modal">✕</button>
+      </div>
+      <div style="text-align:center;margin-bottom:10px">
+        <svg width="46" height="46" viewBox="0 0 256 256"><path d="M30,120L41,119L57,102L59,103L58,106L34,132L41,132L47,129L63,108L65,109L65,111L40,144L49,143L54,138L70,113L72,114L46,156L53,155L58,152L78,117L80,118L80,120L62,153L66,153L72,150L86,119L88,120L88,123L76,151L82,150L85,147L95,121L97,122L88,149L95,147L98,143L103,123L105,122L106,126L101,146L107,142L109,131L111,129L116,136L115,140L104,152L104,156L97,164L80,165L80,170L84,166L87,166L88,168L85,171L87,173L87,170L93,166L99,172L101,170L98,166L103,160L109,159L117,154L117,158L97,185L106,183L109,180L114,168L117,167L118,169L108,191L116,189L119,184L121,172L124,169L125,175L123,182L123,191L125,193L130,192L130,195L134,189L131,174L132,169L135,171L137,184L140,189L148,191L138,169L139,167L142,168L147,180L150,183L160,185L138,156L139,154L153,160L158,166L155,170L157,173L157,171L163,166L166,167L170,173L171,171L168,168L169,166L172,166L176,169L176,165L161,165L153,157L153,153L141,139L144,129L146,128L149,142L152,145L156,146L150,125L151,123L154,124L157,139L161,147L168,149L159,124L160,122L162,122L171,147L175,150L180,151L168,123L168,120L170,119L184,150L190,153L194,153L176,120L176,118L178,117L197,151L201,154L209,156L186,120L184,114L187,114L204,141L211,144L216,144L192,113L191,109L194,109L211,131L221,131L197,104L198,102L215,119L226,120L183,76L179,74L165,75L163,77L163,88L160,95L149,102L141,102L138,100L136,80L132,77L123,76L112,81L112,86L115,84L119,84L121,86L121,92L117,101L107,102L102,100L95,93L93,87L93,77L90,74L76,74L72,76Z M145,58L148,61L145,67L150,66L153,70L153,66L158,63L154,61L153,57L151,59Z M98,63L103,65L103,70L107,66L112,67L109,63L111,58L106,59L103,56L103,60Z M121,55L125,59L124,64L128,61L133,64L132,58L136,55L131,55L128,50L126,55Z" fill="#cdbaa1" /></svg>
+        <div style="font-size:14px;font-weight:800;color:var(--gold-light);margin-top:4px" id="share-app-name">تفقد دوام الـ130مم</div>
+      </div>
+      <label class="label">رابط التنزيل والتثبيت المباشر:</label>
+      <input id="share-app-url-input" class="input-field" readonly style="direction:ltr;text-align:left;font-size:12.5px;margin-bottom:10px" />
+      <div class="form-grid">
+        <button class="btn btn-primary" id="btn-share-app-native">📤 مشاركة الرابط مباشرة (واتساب / تيليغرام)</button>
+        <button class="btn btn-ok" id="btn-copy-app-link">📋 نسخ رابط التنزيل</button>
+      </div>
     </div>
   </div>
 
@@ -929,11 +1385,15 @@
       ABSENT: 'غياب'
     };
     const BATCH_LABELS = {
-      A: 'الوجبة أ',
-      B: 'الوجبة ب',
+      A: 'المناوبة أ',
+      B: 'المناوبة ب',
       PERMANENT: 'دوام دائم',
+      NO_SHIFT: 'دون دوام',
       INHERIT: 'يتبع الجماعة'
     };
+    const SESSION_TOKEN_KEY = 'tafaqqud_session_token_v1';
+    const collapsedComps = new Set();
+    const collapsedGroups = new Set();
     const ROLE_LABELS = { OWNER: 'مالك', ADMIN: 'مشرف', VIEWER: 'مشاهد' };
 
     function getOrCreateDeviceId() {
@@ -961,13 +1421,34 @@
           shift_start: '2026-11-24',
           shift_days: 10,
           user_name: 'شيخ أبو سعيد',
-          user_role: 'OWNER'
+          user_role: 'OWNER',
+          app_download_url: 'https://tafaqqud-130mm.vercel.app',
+          readinessMetrics: [
+            { key: 'total', label: 'إجمالي القوة', enabled: true, color: '#e7d8c2', manualValue: '' },
+            { key: 'onDuty', label: 'مقرر اليوم', enabled: true, color: '#cdbaa1', manualValue: '' },
+            { key: 'present', label: 'حاضر فعال', enabled: true, color: '#22c55e', manualValue: '' },
+            { key: 'inactive', label: 'غير فعال', enabled: true, color: '#ef4444', manualValue: '' },
+            { key: 'absent', label: 'غياب', enabled: true, color: '#dc2626', manualValue: '' },
+            { key: 'leave', label: 'إجازة', enabled: true, color: '#38bdf8', manualValue: '' },
+            { key: 'sick', label: 'مرضية', enabled: true, color: '#f59e0b', manualValue: '' },
+            { key: 'readiness', label: 'الجاهزية', enabled: true, color: '#22c55e', manualValue: '' }
+          ],
+          pageLayouts: {
+            attendance: { maxW: 1060, zoom: 100, font: 100, kpiMinW: 96, kpiMinH: 64, rowMinH: 52, boxRadius: 14, boxGap: 8, cardPad: 13 },
+            readiness:  { maxW: 1060, zoom: 100, font: 100, kpiMinW: 96, kpiMinH: 64, rowMinH: 52, boxRadius: 14, boxGap: 8, cardPad: 13 },
+            personnel:  { maxW: 1060, zoom: 100, font: 100, kpiMinW: 96, kpiMinH: 64, rowMinH: 52, boxRadius: 14, boxGap: 8, cardPad: 13 },
+            hierarchy:  { maxW: 1060, zoom: 100, font: 100, kpiMinW: 96, kpiMinH: 64, rowMinH: 52, boxRadius: 14, boxGap: 8, cardPad: 13 },
+            chat:       { maxW: 1060, zoom: 100, font: 100, kpiMinW: 96, kpiMinH: 64, rowMinH: 52, boxRadius: 14, boxGap: 8, cardPad: 13 }
+          }
         },
         accessControl: {
           globalBlock: false,
-          blockMessage: 'تم حظر الوصول إلى هذا التطبيق من قبل قيادة الكتيبة.',
+          requireApproval: true,
+          blockMessage: 'تم حظرك من الوصول للتطبيق بأمر من المالك',
           blockedDevices: [],
-          registeredDevices: []
+          registeredDevices: [],
+          pendingApprovals: [],
+          approvedDevices: []
         },
         battalions: [
           {
@@ -975,6 +1456,9 @@
             name: 'الكتيبة الأولى مدفعية 130مم',
             code: '130-1',
             commander: 'قائد الكتيبة الأولى مدفعية 130',
+            chief_of_staff: 'رئيس أركان الكتيبة الأولى مدفعية 130',
+            commander_batch: 'PERMANENT',
+            chief_batch: 'PERMANENT',
             notes: 'ثكنة اللواء 137'
           }
         ],
@@ -1023,10 +1507,22 @@
             };
           }
         }
+        const mergedSettings = { ...def.settings, ...(raw.settings || {}) };
+        if (!Array.isArray(mergedSettings.readinessMetrics) || !mergedSettings.readinessMetrics.length) {
+          mergedSettings.readinessMetrics = def.settings.readinessMetrics;
+        }
+        const mergedLayouts = { ...def.settings.pageLayouts };
+        for (const pKey of ['attendance', 'readiness', 'personnel', 'hierarchy', 'chat']) {
+          mergedLayouts[pKey] = {
+            ...def.settings.pageLayouts[pKey],
+            ...((raw.settings && raw.settings.pageLayouts && raw.settings.pageLayouts[pKey]) || {})
+          };
+        }
+        mergedSettings.pageLayouts = mergedLayouts;
         return {
           ...def,
           ...raw,
-          settings: { ...def.settings, ...(raw.settings || {}) },
+          settings: mergedSettings,
           accessControl: { ...def.accessControl, ...(raw.accessControl || {}) },
           attendance: migratedAtt
         };
@@ -1224,7 +1720,7 @@
       const remaining = daysPerBatch - dayInBatch + 1;
       return {
         activeBatch: isA ? 'A' : 'B',
-        batchLabel: isA ? 'الوجبة أ' : 'الوجبة ب',
+        batchLabel: isA ? 'المناوبة أ' : 'المناوبة ب',
         dayInBatch,
         daysPerBatch,
         remaining
@@ -1232,16 +1728,17 @@
     }
 
     function resolvePersonBatch(person) {
-      const comp = state.companies.find((c) => c.id === person.company_id);
-      if (comp && !comp.has_crews) return 'PERMANENT';
       if (person.shift_batch && person.shift_batch !== 'INHERIT') return person.shift_batch;
       const grp = state.groups.find((g) => g.id === person.group_id);
       if (grp && grp.shift_batch) return grp.shift_batch;
+      const comp = state.companies.find((c) => c.id === person.company_id);
+      if (comp && comp.has_crews === false) return 'PERMANENT';
       return 'A';
     }
 
     function isScheduledOnDuty(person, dateIso) {
       const eff = resolvePersonBatch(person);
+      if (eff === 'NO_SHIFT') return false;
       if (eff === 'PERMANENT') return true;
       const shift = getShiftInfo(dateIso);
       return eff === shift.activeBatch;
@@ -1264,21 +1761,52 @@
       renderAll();
     }
 
-    // ACCESS CONTROL & REMOTE BLOCK ENGINE
+    // SECURITY & SESSION HARDENING + ACCESS CONTROL + OWNER APPROVAL GATE
+    function hasValidOwnerSession() {
+      const tok = sessionStorage.getItem(SESSION_TOKEN_KEY);
+      return Boolean(tok && tok.startsWith('OWN_') && state.settings.user_role === 'OWNER');
+    }
+
+    function issueOwnerSession() {
+      const rand = Math.random().toString(36).slice(2, 10) + Date.now().toString(36);
+      sessionStorage.setItem(SESSION_TOKEN_KEY, `OWN_${rand}`);
+      state.settings.user_role = 'OWNER';
+      const approved = state.accessControl.approvedDevices || [];
+      if (!approved.some((d) => d.deviceId === MY_DEVICE_ID)) {
+        approved.unshift({
+          deviceId: MY_DEVICE_ID,
+          userName: state.settings.user_name || 'المالك',
+          role: 'OWNER',
+          approvedAt: new Date().toLocaleString('ar-SY')
+        });
+        state.accessControl.approvedDevices = approved.slice(0, 80);
+      }
+    }
+
+    function isDeviceApproved() {
+      if (hasValidOwnerSession()) return true;
+      const ac = state.accessControl || {};
+      if (ac.requireApproval === false) return true;
+      const approvedList = ac.approvedDevices || [];
+      if (!approvedList.length && state.settings.user_role === 'OWNER') return true;
+      return approvedList.some((d) => (d.deviceId || '').toLowerCase() === MY_DEVICE_ID.toLowerCase());
+    }
+
     function evaluateBlockStatus() {
-      const overlay = document.getElementById('block-overlay');
+      const blockOverlay = document.getElementById('block-overlay');
+      const approvalOverlay = document.getElementById('approval-overlay');
       const localBan = localStorage.getItem(LOCAL_BAN_KEY);
       const ac = state.accessControl || {};
       const myName = (state.settings.user_name || '').trim().toLowerCase();
-      const isOwner = state.settings.user_role === 'OWNER';
+      const ownerAuth = hasValidOwnerSession();
 
       let blocked = false;
-      let reason = ac.blockMessage || 'تم حظر الوصول إلى التطبيق من قبل قيادة الكتيبة.';
+      let reason = ac.blockMessage || 'تم حظرك من الوصول للتطبيق بأمر من المالك';
 
-      if (localBan) {
+      if (localBan && !ownerAuth) {
         blocked = true;
         reason = localBan;
-      } else {
+      } else if (!ownerAuth) {
         const matched = (ac.blockedDevices || []).find((b) => {
           const target = (b.target || '').trim().toLowerCase();
           return target && (target === MY_DEVICE_ID.toLowerCase() || (myName && target === myName));
@@ -1286,14 +1814,25 @@
         if (matched) {
           blocked = true;
           reason = matched.reason || reason;
-        } else if (ac.globalBlock && !isOwner) {
+        } else if (ac.globalBlock) {
           blocked = true;
         }
       }
 
       document.getElementById('block-reason-text').textContent = reason;
       document.getElementById('block-device-id').textContent = MY_DEVICE_ID;
-      overlay.classList.toggle('hidden', !blocked);
+      blockOverlay.classList.toggle('hidden', !blocked);
+
+      const needsApproval = !blocked && !isDeviceApproved();
+      document.getElementById('approval-device-id').textContent = MY_DEVICE_ID;
+      const pending = (ac.pendingApprovals || []).find((p) => p.deviceId === MY_DEVICE_ID);
+      const statusEl = document.getElementById('approval-status-msg');
+      if (needsApproval) {
+        statusEl.textContent = pending
+          ? `تم إرسال الطلب (${pending.requestedAt}) — بانتظار موافقة المالك عبر السحابة.`
+          : 'لم يتم اعتماد هذا الجهاز بعد من قبل المالك.';
+      }
+      approvalOverlay.classList.toggle('hidden', !needsApproval);
     }
 
     async function syncAccessControlFromCloud(registerSelf = true) {
@@ -1313,14 +1852,51 @@
           state.accessControl.globalBlock = Boolean(remote.global_block);
           state.accessControl.blockMessage = remote.block_message || state.accessControl.blockMessage;
           state.accessControl.blockedDevices = Array.isArray(remote.blocked_devices) ? remote.blocked_devices : [];
-          state.accessControl.registeredDevices = Array.isArray(remote.registered_devices) ? remote.registered_devices : [];
+
+          const rawReg = Array.isArray(remote.registered_devices) ? remote.registered_devices : [];
+          const metaObj = rawReg.find((item) => item && item.__meta === true);
+          const pureDevs = rawReg.filter((item) => item && item.deviceId && !item.__meta);
+          state.accessControl.registeredDevices = pureDevs;
+
+          if (metaObj) {
+            state.accessControl.requireApproval = metaObj.requireApproval !== false;
+            state.accessControl.pendingApprovals = Array.isArray(metaObj.pendingApprovals) ? metaObj.pendingApprovals : [];
+            state.accessControl.approvedDevices = Array.isArray(metaObj.approvedDevices) ? metaObj.approvedDevices : [];
+
+            const remoteReset = metaObj.chatResetAt || '';
+            const localReset = state.accessControl.chatResetAt || '';
+            if (remoteReset && (!localReset || remoteReset > localReset)) {
+              state.accessControl.chatResetAt = remoteReset;
+              state.chat = [];
+              renderChat();
+            }
+            if (Array.isArray(metaObj.cloudChat)) {
+              const resetTs = state.accessControl.chatResetAt ? Date.parse(state.accessControl.chatResetAt) : 0;
+              const localIds = new Set((state.chat || []).map((m) => String(m.id)));
+              let added = false;
+              for (const cm of metaObj.cloudChat) {
+                if (!cm || !cm.id) continue;
+                if (resetTs && Number(cm.id) <= resetTs) continue;
+                if (!localIds.has(String(cm.id))) {
+                  state.chat.push(cm);
+                  localIds.add(String(cm.id));
+                  added = true;
+                }
+              }
+              if (added) {
+                state.chat.sort((a, b) => Number(a.id) - Number(b.id));
+                state.chat = state.chat.slice(-120);
+                renderChat();
+              }
+            }
+          }
 
           if (registerSelf) {
-            const others = state.accessControl.registeredDevices.filter((d) => d.deviceId !== MY_DEVICE_ID);
+            const others = pureDevs.filter((d) => d.deviceId !== MY_DEVICE_ID);
             others.unshift({
               deviceId: MY_DEVICE_ID,
               userName: state.settings.user_name || 'مستخدم',
-              role: state.settings.user_role || 'VIEWER',
+              role: hasValidOwnerSession() ? 'OWNER' : 'VIEWER',
               lastSeen: new Date().toLocaleString('ar-SY')
             });
             state.accessControl.registeredDevices = others.slice(0, 60);
@@ -1336,10 +1912,25 @@
     async function pushAccessControlToCloud(silent = false) {
       const env = window.__TAFAQ_ENV__ || {};
       if (!env.VITE_SUPABASE_URL || !env.VITE_SUPABASE_ANON_KEY || !navigator.onLine) {
-        if (!silent) showToast('تم الحفظ محلياً — سيتم تطبيق الحظر سحابياً عند توفر الإنترنت');
+        if (!silent) showToast('تم الحفظ محلياً — سيتم تطبيق التغييرات سحابياً عند توفر الإنترنت');
         return;
       }
       try {
+        const pureList = (state.accessControl.registeredDevices || []).filter((d) => d && d.deviceId && !d.__meta);
+        const cloudChat = (state.chat || [])
+          .filter((m) => m && !m.audio && m.text)
+          .slice(-60);
+        const payloadDevices = [
+          {
+            __meta: true,
+            requireApproval: state.accessControl.requireApproval !== false,
+            pendingApprovals: state.accessControl.pendingApprovals || [],
+            approvedDevices: state.accessControl.approvedDevices || [],
+            chatResetAt: state.accessControl.chatResetAt || '',
+            cloudChat
+          },
+          ...pureList
+        ];
         const res = await fetch(`${env.VITE_SUPABASE_URL}/rest/v1/app_access_control`, {
           method: 'POST',
           headers: {
@@ -1353,23 +1944,130 @@
             global_block: Boolean(state.accessControl.globalBlock),
             block_message: state.accessControl.blockMessage,
             blocked_devices: state.accessControl.blockedDevices || [],
-            registered_devices: state.accessControl.registeredDevices || [],
+            registered_devices: payloadDevices,
             updated_at: new Date().toISOString()
           })
         });
-        if (!res.ok) throw new Error('تأكد من تنفيذ ملف supabase-setup.sql المحدّث في Supabase');
-        if (!silent) showToast('✓ تم تحديث قواعد الحظر سحابياً بنجاح');
+        if (!res.ok) throw new Error('تأكد من تنفيذ ملف supabase-setup.sql في Supabase');
+        if (!silent) showToast('✓ تم تحديث القواعد والمزامنة السحابية بنجاح');
       } catch (err) {
-        if (!silent) showToast(err.message || 'تعذر رفع قواعد الحظر للسحابة');
+        if (!silent) showToast(err.message || 'تعذر الاتصال بـ Supabase');
       }
+    }
+
+    let currentActiveTab = 'attendance';
+
+    function getReadinessMetricsList() {
+      if (state && state.settings && Array.isArray(state.settings.readinessMetrics) && state.settings.readinessMetrics.length) {
+        return state.settings.readinessMetrics;
+      }
+      return buildDefaultState().settings.readinessMetrics;
+    }
+
+    function getMetricDisplayVal(metric, stats) {
+      const manual = (metric.manualValue !== undefined && metric.manualValue !== null) ? String(metric.manualValue).trim() : '';
+      if (manual !== '') {
+        return metric.key === 'readiness' && !manual.endsWith('%') ? `${manual}%` : manual;
+      }
+      const rawVal = stats[metric.key] !== undefined ? stats[metric.key] : 0;
+      return metric.key === 'readiness' ? `${rawVal}%` : String(rawVal);
+    }
+
+    function renderReadinessCustomizer() {
+      const wrap = document.getElementById('readiness-cfg-list');
+      if (!wrap) return;
+      const metrics = getReadinessMetricsList();
+      wrap.innerHTML = metrics.map((m, idx) => `
+        <div class="rcfg-row" data-ridx="${idx}">
+          <input type="checkbox" class="rcfg-en" ${m.enabled !== false ? 'checked' : ''} title="إظهار / إخفاء" />
+          <input class="input-field rcfg-lbl" value="${escapeHtml(m.label)}" placeholder="اسم الحالة" style="padding:5px 8px;font-size:12.5px" />
+          <input class="input-field rcfg-manual" value="${escapeHtml(m.manualValue || '')}" placeholder="تلقائي" title="قيمة يدوية اختيارية" style="padding:5px 6px;font-size:12px;text-align:center" />
+          <input type="color" class="rcfg-col" value="${(m.color && m.color.startsWith('#')) ? m.color : '#cdbaa1'}" style="width:34px;height:30px;padding:1px;border:1px solid var(--border);border-radius:6px;background:transparent;cursor:pointer" />
+          <div style="display:flex;gap:2px">
+            <button type="button" class="btn btn-xs" data-act="move-rm-up" data-idx="${idx}" title="أعلى">▲</button>
+            <button type="button" class="btn btn-xs" data-act="move-rm-down" data-idx="${idx}" title="أسفل">▼</button>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function ensurePageLayout(pageKey) {
+      const def = buildDefaultState().settings.pageLayouts;
+      if (!state.settings.pageLayouts) state.settings.pageLayouts = JSON.parse(JSON.stringify(def));
+      if (!state.settings.pageLayouts[pageKey]) {
+        state.settings.pageLayouts[pageKey] = { ...(def[pageKey] || def.attendance) };
+      }
+      return state.settings.pageLayouts[pageKey];
+    }
+
+    function updateLayoutPreview(cfg) {
+      const sqs = document.querySelectorAll('#layout-live-preview .preview-sq');
+      const row = document.getElementById('preview-kpi-row');
+      const rect = document.getElementById('preview-rect');
+      if (!row || !rect) return;
+      row.style.gap = (cfg.boxGap ?? 8) + 'px';
+      row.style.gridTemplateColumns = `repeat(auto-fit, minmax(${Math.min(130, cfg.kpiMinW || 96)}px, 1fr))`;
+      sqs.forEach((sq) => {
+        sq.style.minHeight = (cfg.kpiMinH || 64) + 'px';
+        sq.style.borderRadius = Math.round((cfg.boxRadius ?? 14) * 0.85) + 'px';
+        sq.style.padding = Math.round((cfg.cardPad ?? 13) * 0.6) + 'px 6px';
+      });
+      rect.style.minHeight = (cfg.rowMinH || 52) + 'px';
+      rect.style.borderRadius = Math.round((cfg.boxRadius ?? 14) * 0.78) + 'px';
+      rect.style.padding = `${Math.round((cfg.cardPad ?? 13) * 0.65)}px ${cfg.cardPad ?? 13}px`;
+    }
+
+    function syncLayoutControlsUI() {
+      const page = document.getElementById('layout-target-page').value || 'attendance';
+      const cfg = ensurePageLayout(page);
+      document.getElementById('rng-page-maxw').value = cfg.maxW || 1060;
+      document.getElementById('lbl-page-maxw').textContent = (cfg.maxW || 1060) + 'px';
+      document.getElementById('rng-page-zoom').value = cfg.zoom || 100;
+      document.getElementById('lbl-page-zoom').textContent = (cfg.zoom || 100) + '%';
+      document.getElementById('rng-page-font').value = cfg.font || 100;
+      document.getElementById('lbl-page-font').textContent = (cfg.font || 100) + '%';
+      document.getElementById('rng-kpi-w').value = cfg.kpiMinW || 96;
+      document.getElementById('lbl-kpi-w').textContent = cfg.kpiMinW || 96;
+      document.getElementById('rng-kpi-h').value = cfg.kpiMinH || 64;
+      document.getElementById('lbl-kpi-h').textContent = cfg.kpiMinH || 64;
+      document.getElementById('rng-row-h').value = cfg.rowMinH || 52;
+      document.getElementById('lbl-row-h').textContent = cfg.rowMinH || 52;
+      document.getElementById('rng-box-rad').value = cfg.boxRadius ?? 14;
+      document.getElementById('lbl-box-rad').textContent = cfg.boxRadius ?? 14;
+      document.getElementById('rng-box-gap').value = cfg.boxGap ?? 8;
+      document.getElementById('lbl-box-gap').textContent = cfg.boxGap ?? 8;
+      document.getElementById('rng-card-pad').value = cfg.cardPad ?? 13;
+      document.getElementById('lbl-card-pad').textContent = cfg.cardPad ?? 13;
+      updateLayoutPreview(cfg);
+    }
+
+    function applyLayoutStyles() {
+      const pages = ['attendance', 'readiness', 'personnel', 'hierarchy', 'chat'];
+      for (const p of pages) {
+        const el = document.getElementById('tab-' + p);
+        if (!el) continue;
+        const cfg = ensurePageLayout(p);
+        el.style.setProperty('--p-zoom', ((cfg.zoom || 100) / 100).toFixed(2));
+        el.style.setProperty('--p-font', ((cfg.font || 100) / 100).toFixed(2));
+        el.style.setProperty('--p-kpi-w', (cfg.kpiMinW || 96) + 'px');
+        el.style.setProperty('--p-kpi-h', (cfg.kpiMinH || 64) + 'px');
+        el.style.setProperty('--p-row-h', (cfg.rowMinH || 52) + 'px');
+        el.style.setProperty('--p-rad', (cfg.boxRadius ?? 14) + 'px');
+        el.style.setProperty('--p-gap', (cfg.boxGap ?? 8) + 'px');
+        el.style.setProperty('--p-pad', (cfg.cardPad ?? 13) + 'px');
+      }
+      const activeCfg = pages.includes(currentActiveTab) ? ensurePageLayout(currentActiveTab) : { maxW: 1060 };
+      document.documentElement.style.setProperty('--active-page-maxw', (activeCfg.maxW || 1060) + 'px');
     }
 
     // RENDERING
     function renderHeader() {
+      applyLayoutStyles();
       const bat = getActiveBattalion();
       document.getElementById('hdr-title').textContent = state.settings.app_title;
       document.getElementById('hdr-unit').textContent = bat ? bat.name : state.settings.unit_name;
-      document.getElementById('role-pill').textContent = ROLE_LABELS[state.settings.user_role] || 'مالك';
+      const clearBtn = document.getElementById('btn-clear-chat');
+      if (clearBtn) clearBtn.classList.toggle('hidden', !hasValidOwnerSession());
 
       const net = document.getElementById('net-pill');
       if (navigator.onLine) {
@@ -1529,20 +2227,35 @@
 
     function renderReadiness() {
       const stats = computeStats();
-      document.getElementById('readiness-kpi-bar').innerHTML = `
-        <div class="kpi"><div class="kpi-val" style="color:var(--gold-light)">${stats.total}</div><div class="kpi-lbl">إجمالي القوة</div></div>
-        <div class="kpi"><div class="kpi-val" style="color:var(--gold)">${stats.onDuty}</div><div class="kpi-lbl">مقرر اليوم</div></div>
-        <div class="kpi"><div class="kpi-val" style="color:var(--ok)">${stats.present}</div><div class="kpi-lbl">حاضر فعّال</div></div>
-        <div class="kpi" style="border-color:rgba(239,68,68,.5)"><div class="kpi-val" style="color:#ef4444">${stats.inactive}</div><div class="kpi-lbl" style="color:#fca5a5">غير فعال</div></div>
-        <div class="kpi"><div class="kpi-val" style="color:#dc2626">${stats.absent}</div><div class="kpi-lbl">غياب</div></div>
-        <div class="kpi"><div class="kpi-val" style="color:var(--ok)">${stats.readiness}%</div><div class="kpi-lbl">الجاهزية</div></div>
-      `;
+      const metrics = getReadinessMetricsList();
+      const lblByKey = Object.fromEntries(metrics.map((m) => [m.key, m.label]));
+
+      document.getElementById('readiness-kpi-bar').innerHTML = metrics
+        .filter((m) => m.enabled !== false)
+        .map((m) => {
+          const displayVal = getMetricDisplayVal(m, stats);
+          const isDanger = m.key === 'inactive' || m.key === 'absent';
+          return `<div class="kpi" style="${isDanger ? 'border-color:rgba(239,68,68,.5)' : ''}">
+            <div class="kpi-val" style="color:${escapeHtml(m.color || '#e7d8c2')}">${escapeHtml(displayVal)}</div>
+            <div class="kpi-lbl" style="${isDanger ? 'color:#fca5a5' : ''}">${escapeHtml(m.label)}</div>
+          </div>`;
+        }).join('');
 
       const rows = getReadinessCompanyRows();
       document.getElementById('readiness-table-wrap').innerHTML = `
         <table>
           <thead>
-            <tr><th>السرية</th><th>القوة</th><th>مقرر</th><th>حاضر</th><th>إجازة</th><th>مرضية</th><th style="color:#fca5a5">غير فعال</th><th>غياب</th><th>الجاهزية</th></tr>
+            <tr>
+              <th>السرية</th>
+              <th>${escapeHtml(lblByKey.total || 'إجمالي القوة')}</th>
+              <th>${escapeHtml(lblByKey.onDuty || 'مقرر اليوم')}</th>
+              <th>${escapeHtml(lblByKey.present || 'حاضر فعال')}</th>
+              <th>${escapeHtml(lblByKey.leave || 'إجازة')}</th>
+              <th>${escapeHtml(lblByKey.sick || 'مرضية')}</th>
+              <th style="color:#fca5a5">${escapeHtml(lblByKey.inactive || 'غير فعال')}</th>
+              <th>${escapeHtml(lblByKey.absent || 'غياب')}</th>
+              <th>${escapeHtml(lblByKey.readiness || 'الجاهزية')}</th>
+            </tr>
           </thead>
           <tbody>
             ${rows.map((r) => `
@@ -1671,28 +2384,36 @@
         }).join('');
 
         const ungroupedFiltered = q
-          ? ungrouped.filter((p) => `${p.name} ${p.serial || ''} ${p.job || ''}`.toLowerCase().includes(q))
+          ? ungrouped.filter((p) => `${p.name} ${p.serial || ''} ${p.job || ''} ${p.rank || ''}`.toLowerCase().includes(q))
           : ungrouped;
 
-        const ungroupedHtml = ungroupedFiltered.length ? `
-          <div class="group-block">
-            <div class="group-head"><strong style="font-size:12.5px;color:var(--text-muted)">أفراد بدون جماعة (${ungroupedFiltered.length})</strong></div>
+        const ungroupedHtml = `
+          <div class="comp-cmd-group">
+            <div class="group-head" style="background:rgba(205,186,161,.14)">
+              <div>
+                <strong style="font-size:12.5px;color:var(--gold-light)">⭐ قيادة السرية والضباط (خارج الجماعات: ${ungroupedFiltered.length})</strong>
+              </div>
+              <div style="display:flex;gap:4px;flex-wrap:wrap">
+                <button class="btn btn-xs" data-act="bulk-comp-officers" data-comp="${c.id}">✎ تعديل الكل</button>
+                <button class="btn btn-primary btn-xs" data-act="add-comp-officer" data-comp="${c.id}">+ إضافة ضابط للسرية</button>
+              </div>
+            </div>
             <div class="group-members">
-              ${ungroupedFiltered.map((p) => `
+              ${ungroupedFiltered.length ? ungroupedFiltered.map((p, idx) => `
                 <div class="member-row">
                   <div>
-                    <div style="font-size:13px;font-weight:800">${escapeHtml(p.name)}</div>
-                    <div class="person-meta">${escapeHtml(p.job || '-')} ${p.serial ? '• ' + escapeHtml(p.serial) : ''}</div>
+                    <div style="font-size:13px;font-weight:800">${idx + 1}. ★ ${escapeHtml(p.name)}</div>
+                    <div class="person-meta">${p.rank ? escapeHtml(p.rank) + ' • ' : ''}${escapeHtml(p.job || 'ضابط قيادة سرية')} ${p.serial ? '• ' + escapeHtml(p.serial) : ''}</div>
                   </div>
                   <div style="display:flex;gap:4px">
                     <button class="btn btn-xs" data-act="edit-person" data-id="${p.id}">تعديل</button>
                     <button class="btn btn-danger btn-xs" data-act="del-person" data-id="${p.id}">حذف</button>
                   </div>
                 </div>
-              `).join('')}
+              `).join('') : '<div style="font-size:11.5px;color:var(--text-muted);text-align:center;padding:6px">لا يوجد ضباط مسجلون في قيادة السرية — اضغط «+ إضافة ضابط للسرية».</div>'}
             </div>
           </div>
-        ` : '';
+        `;
 
         return `
           <div class="comp-block">
@@ -1718,105 +2439,185 @@
       }).join('');
     }
 
-    // TAB 4: HIERARCHY & AUTO-SHIFT ROSTER (الهيكلية)
+    function batchBadgeClass(b) {
+      if (b === 'A') return 'green';
+      if (b === 'B') return 'blue';
+      if (b === 'NO_SHIFT') return 'red';
+      return 'gold';
+    }
+
+    // TAB 4: HIERARCHY & AUTO-SHIFT ROSTER (الهيكلية — سدائل قابلة للطي + قيادة الكتيبة مستقلة)
     function renderHierarchy() {
       const bat = getActiveBattalion();
-      const comps = getActiveCompanies();
-      const grps = getActiveGroups();
+      const comps = getActiveCompanies().filter((c) => c.code !== '0' && !c.name.includes('قيادة الكتيبة'));
+      const validCompIds = new Set(comps.map((c) => c.id));
+      const grps = getActiveGroups().filter((g) => validCompIds.has(g.company_id));
       const people = getActivePersonnel();
       const shift = getShiftInfo(activeDate);
 
-      let cntA = 0, cntB = 0, cntP = 0;
+      let cntA = 0, cntB = 0, cntP = 0, cntNo = 0;
       for (const p of people) {
         const b = resolvePersonBatch(p);
         if (b === 'A') cntA++;
         else if (b === 'B') cntB++;
+        else if (b === 'NO_SHIFT') cntNo++;
         else cntP++;
       }
       const todayDuty = people.filter((p) => isScheduledOnDuty(p, activeDate)).length;
 
       document.getElementById('hierarchy-shift-summary').innerHTML = `
-        <div class="kpi"><div class="kpi-val" style="color:var(--ok)">${cntA}</div><div class="kpi-lbl">الوجبة أ</div></div>
-        <div class="kpi"><div class="kpi-val" style="color:var(--info)">${cntB}</div><div class="kpi-lbl">الوجبة ب</div></div>
+        <div class="kpi"><div class="kpi-val" style="color:var(--ok)">${cntA}</div><div class="kpi-lbl">المناوبة أ</div></div>
+        <div class="kpi"><div class="kpi-val" style="color:var(--info)">${cntB}</div><div class="kpi-lbl">المناوبة ب</div></div>
         <div class="kpi"><div class="kpi-val" style="color:var(--gold)">${cntP}</div><div class="kpi-lbl">دوام دائم</div></div>
+        <div class="kpi"><div class="kpi-val" style="color:#fca5a5">${cntNo}</div><div class="kpi-lbl">دون دوام</div></div>
         <div class="kpi"><div class="kpi-val" style="color:var(--gold-light)">${todayDuty}</div><div class="kpi-lbl">مناوبو اليوم (${shift.batchLabel})</div></div>
       `;
 
       const canvasEl = document.getElementById('hierarchy-canvas');
       if (!bat) { canvasEl.innerHTML = ''; return; }
 
+      const cmdBatch = bat.commander_batch || 'PERMANENT';
+      const chiefBatch = bat.chief_batch || 'PERMANENT';
+
       const branchesHtml = comps.map((c) => {
         const cGroups = grps.filter((g) => g.company_id === c.id);
         const cPeople = people.filter((p) => p.company_id === c.id);
+        const isCompCollapsed = collapsedComps.has(c.id);
 
-        return `
-          <div class="org-dept">
-            <div class="org-dept-head">
-              <div>
-                <div style="font-size:14px;font-weight:900;color:var(--gold-light)">${escapeHtml(c.name)}</div>
-                <div class="person-meta">القائد: ${escapeHtml(c.commander || 'غير محدد')} • القوة: ${cPeople.length}</div>
+        const groupsHtml = cGroups.map((g) => {
+          const gPeople = cPeople.filter((p) => p.group_id === g.id);
+          const isGrpCollapsed = collapsedGroups.has(g.id);
+          const bCls = batchBadgeClass(g.shift_batch);
+
+          return `
+            <div class="sub-acc ${isGrpCollapsed ? 'collapsed' : ''}">
+              <div class="sub-acc-head" data-act="toggle-grp" data-id="${g.id}">
+                <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap">
+                  <span class="acc-toggle-btn" style="width:24px;height:24px;font-size:11px">▾</span>
+                  <strong style="font-size:13px;color:var(--gold-light)">${escapeHtml(g.name)}</strong>
+                  <span style="font-size:11px;color:var(--text-muted)">(${gPeople.length}/${g.capacity || 10})</span>
+                  <button class="pill clickable ${bCls}" data-act="cycle-group-batch" data-id="${g.id}" title="تبديل المناوبة">${BATCH_LABELS[g.shift_batch] || 'المناوبة أ'} ↻</button>
+                </div>
+                <div style="display:flex;gap:4px;align-items:center">
+                  <button class="btn btn-ok btn-xs" data-act="add-person-grp" data-comp="${c.id}" data-grp="${g.id}">+ فرد</button>
+                  <button class="btn btn-xs" data-act="edit-group" data-id="${g.id}">✎</button>
+                  <button class="btn btn-danger btn-xs" data-act="del-group" data-id="${g.id}">🗑</button>
+                </div>
               </div>
-              <div style="display:flex;gap:4px">
-                <button class="btn btn-xs" data-act="add-group" data-comp="${c.id}">+ جماعة</button>
-                <button class="btn btn-xs" data-act="edit-comp" data-id="${c.id}">✎</button>
-              </div>
-            </div>
-            <div class="org-dept-body">
-              ${cGroups.map((g) => {
-                const gPeople = cPeople.filter((p) => p.group_id === g.id);
-                const bCls = g.shift_batch === 'A' ? 'green' : g.shift_batch === 'B' ? 'blue' : 'gold';
-                return `
-                  <div class="org-group">
-                    <div style="display:flex;justify-content:space-between;align-items:center;gap:6px;flex-wrap:wrap">
+              <div class="sub-acc-body">
+                ${g.leader ? `<div style="font-size:11.5px;color:var(--gold);padding:0 4px">★ قائد الجماعة: ${escapeHtml(g.leader)}</div>` : ''}
+                ${gPeople.map((p) => {
+                  const eff = resolvePersonBatch(p);
+                  const pCls = batchBadgeClass(eff);
+                  return `
+                    <div class="org-member ${p.is_leader ? 'is-leader' : ''}">
                       <div>
-                        <strong style="font-size:13px;color:var(--gold-light)">${escapeHtml(g.name)}</strong>
-                        <span style="font-size:11px;color:var(--text-muted)">(${gPeople.length}/${g.capacity || 10})</span>
-                        ${g.leader ? `<div style="font-size:11px;color:var(--gold)">★ قائد الجماعة: ${escapeHtml(g.leader)}</div>` : ''}
+                        <strong>${p.is_leader ? '★ ' : ''}${escapeHtml(p.name)}</strong>
+                        <span style="color:var(--text-muted)">${p.job ? ' — ' + escapeHtml(p.job) : ''}</span>
                       </div>
                       <div style="display:flex;gap:4px;align-items:center">
-                        <button class="pill clickable ${bCls}" data-act="cycle-group-batch" data-id="${g.id}" title="اضغط لتبديل الوجبة">${BATCH_LABELS[g.shift_batch] || 'الوجبة أ'} ↻</button>
-                        <button class="btn btn-xs" data-act="edit-group" data-id="${g.id}">✎</button>
+                        <button class="pill clickable ${pCls}" style="font-size:10px;padding:2px 6px" data-act="cycle-person-batch" data-id="${p.id}" title="تبديل مناوبة الفرد">${BATCH_LABELS[eff]}</button>
+                        <button class="btn btn-xs" data-act="edit-person" data-id="${p.id}">✎</button>
+                        <button class="btn btn-danger btn-xs" data-act="del-person" data-id="${p.id}">✕</button>
                       </div>
                     </div>
-                    <div>
-                      ${gPeople.map((p) => {
+                  `;
+                }).join('') || '<div style="font-size:11.5px;color:var(--text-muted);text-align:center;padding:4px">لا يوجد أفراد في الجماعة — اضغط «+ فرد».</div>'}
+              </div>
+            </div>
+          `;
+        }).join('');
+
+        return `
+          <div class="acc-card ${isCompCollapsed ? 'collapsed' : ''}">
+            <div class="acc-header" data-act="toggle-comp" data-id="${c.id}">
+              <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
+                <span class="acc-toggle-btn">▾</span>
+                <div>
+                  <div style="font-size:14px;font-weight:900;color:var(--gold-light)">🛡️ ${escapeHtml(c.name)}</div>
+                  <div class="person-meta">القائد: ${escapeHtml(c.commander || 'غير محدد')} • ${cGroups.length} جماعات • ${cPeople.length} فرد</div>
+                </div>
+              </div>
+              <div style="display:flex;gap:4px;flex-wrap:wrap">
+                <button class="btn btn-primary btn-xs" data-act="add-group" data-comp="${c.id}">+ جماعة</button>
+                <button class="btn btn-xs" data-act="edit-comp" data-id="${c.id}">✎</button>
+                <button class="btn btn-danger btn-xs" data-act="del-comp" data-id="${c.id}">🗑</button>
+              </div>
+            </div>
+            <div class="acc-body">
+              ${(() => {
+                const cmdOfficers = cPeople.filter((p) => !cGroups.some((g) => g.id === p.group_id));
+                return `
+                  <div class="comp-cmd-group" style="margin-bottom:4px">
+                    <div class="sub-acc-head" style="background:rgba(205,186,161,.14)">
+                      <strong style="font-size:12.5px;color:var(--gold-light)">⭐ قيادة السرية والضباط (${cmdOfficers.length})</strong>
+                      <button class="btn btn-primary btn-xs" data-act="add-comp-officer" data-comp="${c.id}">+ ضابط</button>
+                    </div>
+                    <div class="sub-acc-body">
+                      ${cmdOfficers.map((p) => {
                         const eff = resolvePersonBatch(p);
-                        const pCls = eff === 'A' ? 'green' : eff === 'B' ? 'blue' : 'gold';
                         return `
-                          <div class="org-member ${p.is_leader ? 'is-leader' : ''}">
+                          <div class="org-member is-leader">
                             <div>
-                              <strong>${p.is_leader ? '★ ' : ''}${escapeHtml(p.name)}</strong>
+                              <strong>★ ${escapeHtml(p.name)}</strong>
                               <span style="color:var(--text-muted)">${p.job ? ' — ' + escapeHtml(p.job) : ''}</span>
                             </div>
                             <div style="display:flex;gap:4px;align-items:center">
-                              <button class="pill clickable ${pCls}" style="font-size:10px;padding:2px 6px" data-act="cycle-person-batch" data-id="${p.id}" title="تخصيص وجبة الفرد">${BATCH_LABELS[eff]}</button>
+                              <button class="pill clickable ${batchBadgeClass(eff)}" style="font-size:10px;padding:2px 6px" data-act="cycle-person-batch" data-id="${p.id}">${BATCH_LABELS[eff]}</button>
                               <button class="btn btn-xs" data-act="edit-person" data-id="${p.id}">✎</button>
+                              <button class="btn btn-danger btn-xs" data-act="del-person" data-id="${p.id}">✕</button>
                             </div>
                           </div>
                         `;
-                      }).join('') || '<div style="font-size:11.5px;color:var(--text-muted);margin-top:5px">لا يوجد أفراد في الجماعة</div>'}
+                      }).join('') || '<div style="font-size:11px;color:var(--text-muted);text-align:center;padding:4px">لا يوجد ضباط قيادة سرية بعد</div>'}
                     </div>
                   </div>
                 `;
-              }).join('') || '<div style="font-size:12px;color:var(--text-muted);text-align:center">لا توجد جماعات</div>'}
+              })()}
+              ${groupsHtml || '<div style="font-size:12px;color:var(--text-muted);text-align:center;padding:8px">لا توجد جماعات في هذه السرية — اضغط «+ جماعة».</div>'}
             </div>
           </div>
         `;
       }).join('');
 
       canvasEl.innerHTML = `
-        <div class="org-root">
-          <div style="display:flex;justify-content:center;align-items:center;gap:10px;margin-bottom:4px">
-            <svg width="34" height="34" viewBox="0 0 256 256"><path d="${EAGLE_PATH}" fill="#cdbaa1" /></svg>
-            <div style="font-size:18px;font-weight:900;color:var(--gold-light)">${escapeHtml(bat.name)}</div>
+        <div class="cmd-hq-box">
+          <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap">
+            <div style="display:flex;align-items:center;gap:8px">
+              <svg width="32" height="32" viewBox="0 0 256 256"><path d="${EAGLE_PATH}" fill="#cdbaa1" /></svg>
+              <div>
+                <div style="font-size:16px;font-weight:900;color:var(--gold-light)">${escapeHtml(bat.name)}</div>
+                <div style="font-size:11px;color:var(--text-muted)">قيادة الكتيبة (مستقلة — لا تُحتسب سرية أو جماعة)</div>
+              </div>
+            </div>
+            <div style="display:flex;gap:5px;flex-wrap:wrap">
+              <button class="btn btn-xs" data-act="open-cmd-hq">✎ تعديل القيادة</button>
+              <button class="btn btn-xs" data-act="edit-bat" data-id="${bat.id}">✎ الكتيبة</button>
+              <button class="btn btn-primary btn-xs" data-act="add-comp-quick">+ سرية</button>
+            </div>
           </div>
-          <div style="font-size:13px;color:var(--gold)">★ قائد الكتيبة: ${escapeHtml(bat.commander || 'غير محدد')}</div>
-          <div style="margin-top:8px;display:flex;justify-content:center;gap:6px;flex-wrap:wrap">
+          <div class="cmd-two-cols">
+            <div class="cmd-slot">
+              <div>
+                <div style="font-size:11px;color:var(--gold);font-weight:700">★ قائد الكتيبة</div>
+                <div style="font-size:13.5px;font-weight:900;color:var(--text-main)">${escapeHtml(bat.commander || 'غير محدد')}</div>
+              </div>
+              <button class="pill clickable ${batchBadgeClass(cmdBatch)}" data-act="cycle-hq-cmd">${BATCH_LABELS[cmdBatch]}</button>
+            </div>
+            <div class="cmd-slot">
+              <div>
+                <div style="font-size:11px;color:var(--gold);font-weight:700">★ رئيس أركان الكتيبة</div>
+                <div style="font-size:13.5px;font-weight:900;color:var(--text-main)">${escapeHtml(bat.chief_of_staff || 'غير محدد')}</div>
+              </div>
+              <button class="pill clickable ${batchBadgeClass(chiefBatch)}" data-act="cycle-hq-chief">${BATCH_LABELS[chiefBatch]}</button>
+            </div>
+          </div>
+          <div style="margin-top:9px;display:flex;gap:6px;flex-wrap:wrap;align-items:center">
             <span class="pill gold">${comps.length} سرايا</span>
             <span class="pill">${grps.length} جماعات</span>
             <span class="pill">${people.length} فرد</span>
-            <button class="btn btn-xs" data-act="edit-bat" data-id="${bat.id}">✎ تعديل الكتيبة</button>
-            <button class="btn btn-primary btn-xs" data-act="add-comp-quick">+ إضافة سرية</button>
+            <button class="btn btn-xs" data-act="expand-all-acc">▼ فتح كل السدائل</button>
+            <button class="btn btn-xs" data-act="collapse-all-acc">▲ طي كل السدائل</button>
           </div>
         </div>
         <div class="org-branches">${branchesHtml}</div>
@@ -1826,16 +2627,18 @@
     function renderChat() {
       document.getElementById('chat-count').textContent = `${state.chat.length} رسالة`;
       const el = document.getElementById('chat-list');
-      el.innerHTML = state.chat.map((m) => `
-        <div class="chat-msg">
-          <div class="chat-head">
-            <strong>${escapeHtml(m.sender)} (${ROLE_LABELS[m.role] || m.role})</strong>
-            <span>${escapeHtml(m.time)}</span>
+      const me = (state.settings.user_name || '').trim();
+      el.innerHTML = state.chat.map((m) => {
+        const isMe = m.sender === me;
+        return `
+          <div class="wa-bubble ${isMe ? 'me' : 'other'}">
+            ${!isMe ? `<div class="wa-sender">${escapeHtml(m.sender)} • ${ROLE_LABELS[m.role] || m.role}</div>` : ''}
+            ${m.text ? `<div class="wa-text">${escapeHtml(m.text)}</div>` : ''}
+            ${m.audio ? `<audio controls src="${m.audio}" style="width:100%;height:34px;margin-top:6px"></audio>` : ''}
+            <div class="wa-meta">${escapeHtml(m.time)} ${isMe ? '✓✓' : ''}</div>
           </div>
-          ${m.text ? `<div style="font-size:13.5px">${escapeHtml(m.text)}</div>` : ''}
-          ${m.audio ? `<audio controls src="${m.audio}" style="width:100%;height:34px;margin-top:6px"></audio>` : ''}
-        </div>
-      `).join('') || '<div style="text-align:center;color:var(--text-muted);padding:20px">لا توجد رسائل بعد. يمكنك إرسال نص أو تسجيل صوتي.</div>';
+        `;
+      }).join('') || '<div style="text-align:center;color:var(--text-muted);padding:28px;font-size:13px">لا توجد رسائل بعد. ابدأ المراسلة النصية أو الصوتية الآن.</div>';
       el.scrollTop = el.scrollHeight;
     }
 
@@ -1850,6 +2653,39 @@
       const gBtn = document.getElementById('btn-toggle-global-block');
       gBtn.textContent = ac.globalBlock ? '✅ فك الحظر الشامل (التطبيق محظور الآن)' : '⛔ تفعيل الحظر الشامل';
       gBtn.className = ac.globalBlock ? 'btn btn-ok btn-sm' : 'btn btn-danger-solid btn-sm';
+
+      document.getElementById('set-require-approval').checked = ac.requireApproval !== false;
+
+      const pending = ac.pendingApprovals || [];
+      document.getElementById('pending-approvals-wrap').innerHTML = pending.length
+        ? pending.map((p) => `
+            <div class="member-row" style="margin-bottom:5px;border-color:rgba(245,158,11,.5)">
+              <div>
+                <strong style="color:#fde68a">⏳ ${escapeHtml(p.userName || 'مستخدم جديد')}</strong>
+                <div class="person-meta">${escapeHtml(p.deviceId)} • ${escapeHtml(p.requestedAt || '')}</div>
+              </div>
+              <div style="display:flex;gap:4px">
+                <button class="btn btn-ok btn-xs" data-act="approve-dev" data-dev="${escapeHtml(p.deviceId)}" data-name="${escapeHtml(p.userName || '')}">✓ موافقة</button>
+                <button class="btn btn-danger btn-xs" data-act="reject-dev" data-dev="${escapeHtml(p.deviceId)}" data-name="${escapeHtml(p.userName || '')}">✕ رفض وحظر</button>
+              </div>
+            </div>
+          `).join('')
+        : '<div style="font-size:12px;color:var(--text-muted)">لا توجد طلبات موافقة معلقة حالياً.</div>';
+
+      const approved = ac.approvedDevices || [];
+      document.getElementById('approved-devices-wrap').innerHTML = approved.length
+        ? approved.map((d) => `
+            <div class="member-row" style="margin-bottom:5px;border-color:rgba(34,197,94,.35)">
+              <div>
+                <strong style="color:#86efac">✓ ${escapeHtml(d.userName || 'معتمد')}</strong>
+                <div class="person-meta">${escapeHtml(d.deviceId)} • ${escapeHtml(d.approvedAt || '')}</div>
+              </div>
+              ${d.deviceId !== MY_DEVICE_ID
+                ? `<button class="btn btn-danger btn-xs" data-act="revoke-approve" data-dev="${escapeHtml(d.deviceId)}">سحب الاعتماد</button>`
+                : '<span class="pill gold">المالك</span>'}
+            </div>
+          `).join('')
+        : '<div style="font-size:12px;color:var(--text-muted)">لم تُسجّل أجهزة معتمدة إضافية بعد.</div>';
 
       const blocked = ac.blockedDevices || [];
       document.getElementById('blocked-list-wrap').innerHTML = blocked.length
@@ -1892,8 +2728,11 @@
       document.getElementById('set-shift-days').value = state.settings.shift_days;
       document.getElementById('set-user-name').value = state.settings.user_name;
       document.getElementById('set-user-role').value = state.settings.user_role;
+      document.getElementById('set-download-url').value = state.settings.app_download_url || 'https://tafaqqud-130mm.vercel.app';
 
       renderAccessControl();
+      renderReadinessCustomizer();
+      syncLayoutControlsUI();
 
       const env = window.__TAFAQ_ENV__ || {};
       document.getElementById('supa-status').textContent = env.VITE_SUPABASE_URL
@@ -2000,16 +2839,15 @@
         `التاريخ: ${activeDate}  •  ${shift.batchLabel} (اليوم ${shift.dayInBatch} من ${shift.daysPerBatch})  •  القائد: ${bat && bat.commander ? bat.commander : '-'}`
       );
 
-      // KPI Boxes
-      const kpis = [
-        { lbl: 'إجمالي القوة', val: stats.total, col: '#e7d8c2' },
-        { lbl: 'مقرر اليوم', val: stats.onDuty, col: '#cdbaa1' },
-        { lbl: 'حاضر فعّال', val: stats.present, col: '#22c55e' },
-        { lbl: 'إجازة', val: stats.leave, col: '#38bdf8' },
-        { lbl: 'غير فعال', val: stats.inactive, col: '#ef4444' },
-        { lbl: 'غياب', val: stats.absent, col: '#dc2626' },
-        { lbl: 'الجاهزية', val: stats.readiness + '%', col: '#22c55e' }
-      ];
+      // KPI Boxes (honoring customized readiness metrics)
+      const kpis = getReadinessMetricsList()
+        .filter((m) => m.enabled !== false)
+        .map((m) => ({
+          lbl: m.label,
+          val: getMetricDisplayVal(m, stats),
+          col: (m.color && m.color.startsWith('#')) ? m.color : '#cdbaa1',
+          isDanger: m.key === 'inactive' || m.key === 'absent'
+        }));
       const boxW = (w - 48 - (kpis.length - 1) * 10) / kpis.length;
       kpis.forEach((k, idx) => {
         const x = w - 24 - (idx + 1) * boxW - idx * 10;
@@ -2337,6 +3175,7 @@
       document.getElementById('bm-name').value = bat ? bat.name : '';
       document.getElementById('bm-code').value = bat ? (bat.code || '') : '';
       document.getElementById('bm-commander').value = bat ? (bat.commander || '') : '';
+      document.getElementById('bm-chief-of-staff').value = bat ? (bat.chief_of_staff || '') : '';
       document.getElementById('bm-notes').value = bat ? (bat.notes || '') : '';
       document.getElementById('bm-companies-wrap').classList.toggle('hidden', Boolean(bat));
       document.getElementById('battalion-modal').classList.remove('hidden');
@@ -2386,13 +3225,36 @@
       document.getElementById('bulk-group-modal').classList.remove('hidden');
     }
 
+    function openBulkCompanyOfficersModal(compId) {
+      const comp = state.companies.find((c) => c.id === compId);
+      if (!comp) return;
+      const compGrps = state.groups.filter((g) => g.company_id === compId);
+      const members = state.personnel.filter((p) => p.company_id === compId && !compGrps.some((g) => g.id === p.group_id));
+      document.getElementById('bulk-modal-title').textContent = `تعديل ضباط قيادة ${comp.name} (${members.length})`;
+      document.getElementById('bg-group-id').value = 'COMP_HQ:' + compId;
+      document.getElementById('bulk-members-rows').innerHTML = members.map((p, idx) => `
+        <div class="bulk-row" data-pid="${p.id}">
+          <strong style="color:var(--gold)">${idx + 1}</strong>
+          <input class="input-field bg-name" value="${escapeHtml(p.name)}" placeholder="الاسم الكامل" />
+          <input class="input-field bg-job" value="${escapeHtml(p.job || '')}" placeholder="المسمى / الصفة" />
+          <input class="input-field bg-serial" value="${escapeHtml(p.serial || '')}" placeholder="الرقم الذاتي" />
+          <input class="input-field bg-phone" value="${escapeHtml(p.phone || '')}" placeholder="الهاتف" />
+        </div>
+      `).join('') || '<div style="text-align:center;color:var(--text-muted);padding:14px">لا يوجد ضباط في قيادة السرية بعد.</div>';
+      document.getElementById('bulk-group-modal').classList.remove('hidden');
+    }
+
     function syncPersonGroupSelect(compId, selectedGroupId) {
       const grps = state.groups.filter((g) => g.company_id === compId);
       const sel = document.getElementById('pm-group');
-      sel.innerHTML = ['<option value="">بدون جماعة</option>']
+      sel.innerHTML = ['<option value="">قيادة السرية (خارج الجماعات)</option>']
         .concat(grps.map((g) => `<option value="${g.id}">${escapeHtml(g.name)} (${BATCH_LABELS[g.shift_batch]})</option>`))
         .join('');
-      sel.value = selectedGroupId && grps.some((g) => g.id === selectedGroupId) ? selectedGroupId : (grps[0] ? grps[0].id : '');
+      if (selectedGroupId === 'NONE' || selectedGroupId === '' || selectedGroupId === null) {
+        sel.value = '';
+      } else {
+        sel.value = selectedGroupId && grps.some((g) => g.id === selectedGroupId) ? selectedGroupId : (grps[0] ? grps[0].id : '');
+      }
     }
 
     function openPersonModal(personId, presetCompId, presetGroupId) {
@@ -2417,23 +3279,61 @@
       compSel.innerHTML = comps.map((c) => `<option value="${c.id}">${escapeHtml(c.name)}</option>`).join('');
       const targetComp = p ? p.company_id : (presetCompId || comps[0].id);
       compSel.value = targetComp;
-      syncPersonGroupSelect(targetComp, p ? p.group_id : presetGroupId);
+      syncPersonGroupSelect(targetComp, p ? (p.group_id || 'NONE') : (presetGroupId !== undefined ? presetGroupId : ''));
       document.getElementById('person-modal').classList.remove('hidden');
+    }
+
+    const SQUAD_ROLES_10 = [
+      { role: 'قائد جماعة', rank: 'قائد جماعة', leader: true },
+      { role: 'مسدد', rank: 'رامي / مسدد', leader: false },
+      { role: 'سادن', rank: 'سادن مدفع', leader: false },
+      { role: 'سادن', rank: 'سادن مدفع', leader: false },
+      { role: 'سادن', rank: 'سادن مدفع', leader: false },
+      { role: 'سادن', rank: 'سادن مدفع', leader: false },
+      { role: 'سادن', rank: 'سادن مدفع', leader: false },
+      { role: 'سادن', rank: 'سادن مدفع', leader: false },
+      { role: 'سادن', rank: 'سادن مدفع', leader: false },
+      { role: 'سائق', rank: 'سائق', leader: false }
+    ];
+
+    const COMPANY_COMMAND_ROLES = [
+      { role: 'قائد السرية', rank: 'قائد سرية' },
+      { role: 'معاون قائد السرية', rank: 'معاون قائد سرية' },
+      { role: 'معاون ضابط رمي', rank: 'ضابط رمي' },
+      { role: 'ضابط', rank: 'ضابط' }
+    ];
+
+    function createCompanyCommandOfficers(batId, compId, compName, commanderName) {
+      return COMPANY_COMMAND_ROLES.map((item, idx) => ({
+        id: uid('p'),
+        battalion_id: batId,
+        company_id: compId,
+        group_id: null,
+        serial: '',
+        name: (idx === 0 && commanderName) ? commanderName : `${item.role} — ${compName}`,
+        rank: item.rank,
+        job: item.role,
+        is_leader: true,
+        shift_batch: 'PERMANENT',
+        phone: '',
+        notes: 'قيادة السرية'
+      }));
     }
 
     function createAutoMembersForGroup(batId, compId, groupId, groupName, count, startIndex) {
       const created = [];
       for (let i = startIndex; i < startIndex + count; i++) {
+        const spec = SQUAD_ROLES_10[(i - 1) % SQUAD_ROLES_10.length];
         created.push({
           id: uid('p'),
           battalion_id: batId,
           company_id: compId,
           group_id: groupId,
           serial: '',
-          name: i === 1 ? `قائد ${groupName}` : `فرد ${i} — ${groupName}`,
-          rank: i === 1 ? 'قائد جماعة' : 'فرد',
-          job: i === 1 ? 'قائد جماعة' : 'مقاتل / رامي',
-          is_leader: i === 1,
+          name: `${spec.role} (${i}) — ${groupName}`,
+          rank: spec.rank,
+          job: spec.role,
+          is_leader: spec.leader,
           shift_batch: 'INHERIT',
           phone: '',
           notes: ''
@@ -2465,8 +3365,10 @@
         openPinModal('SETTINGS');
         return;
       }
+      currentActiveTab = tabId;
       document.querySelectorAll('.tab-view').forEach((el) => el.classList.add('hidden'));
       document.getElementById('tab-' + tabId).classList.remove('hidden');
+      applyLayoutStyles();
       document.querySelectorAll('.nav-btn').forEach((b) => b.classList.toggle('active', b.dataset.tab === tabId));
       if (tabId === 'settings') renderSettings();
       if (tabId === 'hierarchy') renderHierarchy();
@@ -2576,15 +3478,17 @@
           document.getElementById('pin-modal').classList.add('hidden');
           if (pinModalMode === 'UNLOCK_BLOCK') {
             localStorage.removeItem(LOCAL_BAN_KEY);
-            state.settings.user_role = 'OWNER';
+            issueOwnerSession();
             state.accessControl.blockedDevices = (state.accessControl.blockedDevices || []).filter(
               (b) => (b.target || '').toLowerCase() !== MY_DEVICE_ID.toLowerCase()
             );
             await dbPut('app_state', state);
+            await pushAccessControlToCloud(true);
             evaluateBlockStatus();
             renderAll();
-            showToast('✓ تم فك الحظر بصلاحية المالك');
+            showToast('✓ تم التحقق ومنح جلسة المالك بنجاح');
           } else {
+            if (state.settings.user_role === 'OWNER') issueOwnerSession();
             settingsUnlocked = true;
             switchTab('settings', true);
             renderSettings();
@@ -2640,14 +3544,15 @@
         const name = document.getElementById('bm-name').value.trim();
         const code = document.getElementById('bm-code').value.trim();
         const commander = document.getElementById('bm-commander').value.trim();
+        const chiefOfStaff = document.getElementById('bm-chief-of-staff').value.trim();
         const notes = document.getElementById('bm-notes').value.trim();
 
         await persistState(id ? `تعديل الكتيبة ${name}` : `إدراج كتيبة جديدة: ${name}`);
         if (id) {
-          state.battalions = state.battalions.map((b) => (b.id === id ? { ...b, name, code, commander, notes } : b));
+          state.battalions = state.battalions.map((b) => (b.id === id ? { ...b, name, code, commander, chief_of_staff: chiefOfStaff, notes } : b));
         } else {
           const newBatId = uid('bat');
-          state.battalions.push({ id: newBatId, name, code, commander, notes });
+          state.battalions.push({ id: newBatId, name, code, commander, chief_of_staff: chiefOfStaff, commander_batch: 'PERMANENT', chief_batch: 'PERMANENT', notes });
           const compLines = document.getElementById('bm-companies').value.split('\n').map((s) => s.trim()).filter(Boolean);
           const autoGroups = document.getElementById('bm-auto-groups').checked;
 
@@ -2662,18 +3567,19 @@
               commander: isLeadership ? commander : '',
               has_crews: !isLeadership
             });
-            if (autoGroups) {
-              const gCount = isLeadership ? 1 : 2;
-              for (let gi = 0; gi < gCount; gi++) {
+            if (autoGroups && !isLeadership) {
+              state.personnel.push(...createCompanyCommandOfficers(newBatId, newCompId, cname, ''));
+              const ordNames = ['الجماعة الأولى', 'الجماعة الثانية', 'الجماعة الثالثة', 'الجماعة الرابعة'];
+              for (let gi = 0; gi < 4; gi++) {
                 const gid = uid('grp');
-                const gName = isLeadership ? 'جماعة القيادة والأركان' : (gi === 0 ? 'الجماعة الأولى' : 'الجماعة الثانية');
+                const gName = ordNames[gi];
                 state.groups.push({
                   id: gid,
                   battalion_id: newBatId,
                   company_id: newCompId,
                   name: gName,
                   leader: '',
-                  shift_batch: isLeadership ? 'PERMANENT' : (gi === 0 ? 'A' : 'B'),
+                  shift_batch: gi % 2 === 0 ? 'A' : 'B',
                   capacity: 10
                 });
                 state.personnel.push(...createAutoMembersForGroup(newBatId, newCompId, gid, gName, 10, 1));
@@ -2704,16 +3610,18 @@
           state.companies.push({
             id: newCompId,
             battalion_id: bat.id,
-            code: String(getActiveCompanies().length),
+            code: String(getActiveCompanies().length + 1),
             name,
             commander,
             has_crews: hasCrews
           });
+          state.personnel.push(...createCompanyCommandOfficers(bat.id, newCompId, name, commander));
           const gCount = Math.max(0, Math.min(12, Number(document.getElementById('cm-groups-count').value) || 0));
           const gSize = Math.max(0, Math.min(30, Number(document.getElementById('cm-group-size').value) || 0));
+          const ordNames = ['الجماعة الأولى', 'الجماعة الثانية', 'الجماعة الثالثة', 'الجماعة الرابعة'];
           for (let gi = 0; gi < gCount; gi++) {
             const gid = uid('grp');
-            const gName = `الجماعة ${gi + 1}`;
+            const gName = ordNames[gi] || `الجماعة ${gi + 1}`;
             state.groups.push({
               id: gid,
               battalion_id: bat.id,
@@ -2888,7 +3796,7 @@
           const g = state.groups.find((x) => x.id === btn.dataset.id);
           if (!g) return;
           await persistState(`تبديل وجبة ${g.name}`);
-          const order = ['A', 'B', 'PERMANENT'];
+          const order = ['A', 'B', 'PERMANENT', 'NO_SHIFT'];
           g.shift_batch = order[(order.indexOf(g.shift_batch) + 1) % order.length];
           await dbPut('app_state', state);
           renderAll();
@@ -2898,7 +3806,7 @@
           if (!p) return;
           await persistState(`تعديل مناوبة ${p.name}`);
           const curEff = resolvePersonBatch(p);
-          const order = ['A', 'B', 'PERMANENT'];
+          const order = ['A', 'B', 'PERMANENT', 'NO_SHIFT'];
           p.shift_batch = order[(order.indexOf(curEff) + 1) % order.length];
           await dbPut('app_state', state);
           renderAll();
@@ -3057,6 +3965,7 @@
         state.settings.shift_days = Math.max(1, Number(document.getElementById('set-shift-days').value) || 10);
         state.settings.user_name = document.getElementById('set-user-name').value.trim() || 'شيخ أبو سعيد';
         state.settings.user_role = document.getElementById('set-user-role').value;
+        state.settings.app_download_url = document.getElementById('set-download-url').value.trim() || 'https://tafaqqud-130mm.vercel.app';
         await dbPut('app_state', state);
         renderAll();
         showToast('✓ تم حفظ الإعدادات');
@@ -3129,6 +4038,329 @@
         e.target.value = '';
       });
 
+      // Command HQ Modal
+      document.getElementById('cmd-hq-form').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const bat = getActiveBattalion();
+        if (!bat) return;
+        await persistState('تعديل قيادة الكتيبة (القائد ورئيس الأركان)');
+        bat.commander = document.getElementById('hq-commander').value.trim();
+        bat.commander_batch = document.getElementById('hq-commander-batch').value;
+        bat.chief_of_staff = document.getElementById('hq-chief').value.trim();
+        bat.chief_batch = document.getElementById('hq-chief-batch').value;
+        await dbPut('app_state', state);
+        document.getElementById('cmd-hq-modal').classList.add('hidden');
+        renderAll();
+        showToast('✓ تم حفظ بيانات قيادة الكتيبة');
+      });
+
+      // Approval Gate Buttons
+      document.getElementById('btn-send-approval-req').addEventListener('click', async () => {
+        const nm = document.getElementById('req-user-name').value.trim() || state.settings.user_name || 'مستخدم جديد';
+        state.settings.user_name = nm;
+        await syncAccessControlFromCloud(false);
+        const pending = (state.accessControl.pendingApprovals || []).filter((p) => p.deviceId !== MY_DEVICE_ID);
+        pending.unshift({
+          deviceId: MY_DEVICE_ID,
+          userName: nm,
+          requestedAt: new Date().toLocaleString('ar-SY')
+        });
+        state.accessControl.pendingApprovals = pending.slice(0, 50);
+        await dbPut('app_state', state);
+        await pushAccessControlToCloud(true);
+        evaluateBlockStatus();
+        showToast('✓ تم إرسال طلب الموافقة للمالك عبر السحابة');
+      });
+
+      document.getElementById('btn-check-approval-now').addEventListener('click', async () => {
+        await syncAccessControlFromCloud(false);
+        evaluateBlockStatus();
+        if (isDeviceApproved()) showToast('✓ تمت الموافقة على جهازك، مرحباً بك');
+        else showToast('الطلب لا يزال بانتظار موافقة المالك');
+      });
+
+      document.getElementById('btn-approval-owner-pin').addEventListener('click', () => openPinModal('UNLOCK_BLOCK'));
+
+      document.getElementById('set-require-approval').addEventListener('change', async (e) => {
+        state.accessControl.requireApproval = e.target.checked;
+        await dbPut('app_state', state);
+        await pushAccessControlToCloud();
+      });
+
+      document.getElementById('btn-clear-chat').addEventListener('click', async () => {
+        if (!hasValidOwnerSession()) {
+          showToast('مسح الشات لدى الجميع حصري للمالك فقط');
+          return;
+        }
+        if (!confirm('تأكيد مسح الشات لدى الجميع نهائياً؟')) return;
+        state.chat = [];
+        state.accessControl.chatResetAt = new Date().toISOString();
+        await dbPut('app_state', state);
+        await pushAccessControlToCloud(true);
+        renderChat();
+        showToast('✓ تم مسح الشات لدى الجميع بأمر المالك');
+      });
+
+      // Extra Delegated Actions for Accordions, Command HQ & Approvals
+      document.body.addEventListener('click', async (e) => {
+        if (e.target.closest('button[data-act]') && e.target.closest('[data-act="toggle-comp"],[data-act="toggle-grp"]')) {
+          return;
+        }
+        const el = e.target.closest('[data-act]');
+        if (!el) return;
+        const act = el.dataset.act;
+
+        if (act === 'toggle-comp') {
+          const cid = el.dataset.id;
+          if (collapsedComps.has(cid)) collapsedComps.delete(cid);
+          else collapsedComps.add(cid);
+          renderHierarchy();
+        } else if (act === 'toggle-grp') {
+          const gid = el.dataset.id;
+          if (collapsedGroups.has(gid)) collapsedGroups.delete(gid);
+          else collapsedGroups.add(gid);
+          renderHierarchy();
+        } else if (act === 'expand-all-acc') {
+          collapsedComps.clear();
+          collapsedGroups.clear();
+          renderHierarchy();
+        } else if (act === 'collapse-all-acc') {
+          getActiveCompanies().forEach((c) => collapsedComps.add(c.id));
+          getActiveGroups().forEach((g) => collapsedGroups.add(g.id));
+          renderHierarchy();
+        } else if (act === 'open-cmd-hq') {
+          const bat = getActiveBattalion();
+          if (!bat) return;
+          document.getElementById('hq-commander').value = bat.commander || '';
+          document.getElementById('hq-commander-batch').value = bat.commander_batch || 'PERMANENT';
+          document.getElementById('hq-chief').value = bat.chief_of_staff || '';
+          document.getElementById('hq-chief-batch').value = bat.chief_batch || 'PERMANENT';
+          document.getElementById('cmd-hq-modal').classList.remove('hidden');
+        } else if (act === 'cycle-hq-cmd') {
+          const bat = getActiveBattalion();
+          if (!bat) return;
+          await persistState('تغيير مناوبة قائد الكتيبة');
+          const ord = ['PERMANENT', 'A', 'B', 'NO_SHIFT'];
+          bat.commander_batch = ord[(ord.indexOf(bat.commander_batch || 'PERMANENT') + 1) % ord.length];
+          await dbPut('app_state', state);
+          renderHierarchy();
+        } else if (act === 'cycle-hq-chief') {
+          const bat = getActiveBattalion();
+          if (!bat) return;
+          await persistState('تغيير مناوبة رئيس أركان الكتيبة');
+          const ord = ['PERMANENT', 'A', 'B', 'NO_SHIFT'];
+          bat.chief_batch = ord[(ord.indexOf(bat.chief_batch || 'PERMANENT') + 1) % ord.length];
+          await dbPut('app_state', state);
+          renderHierarchy();
+        } else if (act === 'approve-dev') {
+          const dev = el.dataset.dev;
+          const nm = el.dataset.name || 'مستخدم معتمد';
+          state.accessControl.pendingApprovals = (state.accessControl.pendingApprovals || []).filter((p) => p.deviceId !== dev);
+          state.accessControl.blockedDevices = (state.accessControl.blockedDevices || []).filter((b) => (b.target || '').toLowerCase() !== dev.toLowerCase());
+          const appList = (state.accessControl.approvedDevices || []).filter((d) => d.deviceId !== dev);
+          appList.unshift({ deviceId: dev, userName: nm, role: 'VIEWER', approvedAt: new Date().toLocaleString('ar-SY') });
+          state.accessControl.approvedDevices = appList.slice(0, 80);
+          await dbPut('app_state', state);
+          await pushAccessControlToCloud();
+          renderAccessControl();
+          showToast(`✓ تمت الموافقة على الجهاز ${dev}`);
+        } else if (act === 'reject-dev') {
+          const dev = el.dataset.dev;
+          const nm = el.dataset.name || dev;
+          state.accessControl.pendingApprovals = (state.accessControl.pendingApprovals || []).filter((p) => p.deviceId !== dev);
+          state.accessControl.blockedDevices = [
+            ...(state.accessControl.blockedDevices || []),
+            { id: uid('ban'), target: dev, reason: `رفض طلب دخول ${nm}`, blockedAt: new Date().toLocaleString('ar-SY') }
+          ];
+          await dbPut('app_state', state);
+          await pushAccessControlToCloud();
+          renderAccessControl();
+          showToast('تم رفض الجهاز وإضافته لقائمة الحظر');
+        } else if (act === 'revoke-approve') {
+          const dev = el.dataset.dev;
+          state.accessControl.approvedDevices = (state.accessControl.approvedDevices || []).filter((d) => d.deviceId !== dev);
+          await dbPut('app_state', state);
+          await pushAccessControlToCloud();
+          renderAccessControl();
+          showToast('تم سحب اعتماد الجهاز');
+        }
+      });
+
+      // Top Share App Arrow Button (immediate share with modal fallback)
+      document.getElementById('btn-share-app-top').addEventListener('click', async () => {
+        const shareUrl = (state.settings && state.settings.app_download_url) || window.location.origin || 'https://tafaqqud-130mm.vercel.app';
+        const title = state.settings.app_title || 'تفقد دوام الـ130مم';
+        if (navigator.share) {
+          try {
+            await navigator.share({ title, text: `رابط تنزيل وتثبيت تطبيق ${title}:`, url: shareUrl });
+            return;
+          } catch (err) {
+            if (err && err.name === 'AbortError') return;
+          }
+        }
+        document.getElementById('share-app-name').textContent = title;
+        document.getElementById('share-app-url-input').value = shareUrl;
+        document.getElementById('share-app-modal').classList.remove('hidden');
+      });
+
+      document.getElementById('btn-share-app-native').addEventListener('click', async () => {
+        const shareUrl = document.getElementById('share-app-url-input').value;
+        const title = state.settings.app_title || 'تفقد دوام الـ130مم';
+        if (navigator.share) {
+          try {
+            await navigator.share({ title, text: `رابط تنزيل وتثبيت تطبيق ${title}:`, url: shareUrl });
+            return;
+          } catch (err) {
+            if (err && err.name === 'AbortError') return;
+          }
+        }
+        try {
+          await navigator.clipboard.writeText(shareUrl);
+          showToast('✓ تم نسخ رابط تنزيل التطبيق لمشاركته');
+        } catch {
+          prompt('انسخ رابط تنزيل التطبيق:', shareUrl);
+        }
+      });
+
+      document.getElementById('btn-copy-app-link').addEventListener('click', async () => {
+        const shareUrl = document.getElementById('share-app-url-input').value;
+        try {
+          await navigator.clipboard.writeText(shareUrl);
+          showToast('✓ تم نسخ رابط التنزيل');
+        } catch {
+          prompt('انسخ الرابط:', shareUrl);
+        }
+      });
+
+      // Add / Bulk Edit Company Command Officers + Reorder Readiness Metrics
+      document.body.addEventListener('click', async (e) => {
+        const btn = e.target.closest('[data-act]');
+        if (!btn) return;
+        const act = btn.dataset.act;
+        if (act === 'add-comp-officer') {
+          openPersonModal(null, btn.dataset.comp, 'NONE');
+          document.getElementById('person-modal-title').textContent = 'إضافة ضابط ضمن قيادة السرية';
+          document.getElementById('pm-rank').value = 'ضابط';
+          document.getElementById('pm-job').value = 'ضابط';
+          document.getElementById('pm-is-leader').checked = true;
+          document.getElementById('pm-batch').value = 'PERMANENT';
+        } else if (act === 'bulk-comp-officers') {
+          openBulkCompanyOfficersModal(btn.dataset.comp);
+        } else if (act === 'move-rm-up' || act === 'move-rm-down') {
+          const idx = Number(btn.dataset.idx);
+          const list = getReadinessMetricsList();
+          const target = act === 'move-rm-up' ? idx - 1 : idx + 1;
+          if (target < 0 || target >= list.length) return;
+          const tmp = list[idx];
+          list[idx] = list[target];
+          list[target] = tmp;
+          state.settings.readinessMetrics = list;
+          await dbPut('app_state', state);
+          renderReadinessCustomizer();
+          renderReadiness();
+        }
+      });
+
+      // Readiness Metrics Customizer Save/Reset
+      document.getElementById('btn-save-readiness-cfg').addEventListener('click', async () => {
+        const base = getReadinessMetricsList().map((x) => ({ ...x }));
+        document.querySelectorAll('#readiness-cfg-list [data-ridx]').forEach((row) => {
+          const i = Number(row.dataset.ridx);
+          if (base[i]) {
+            base[i].enabled = row.querySelector('.rcfg-en').checked;
+            base[i].label = row.querySelector('.rcfg-lbl').value.trim() || base[i].label;
+            base[i].manualValue = row.querySelector('.rcfg-manual').value.trim();
+            base[i].color = row.querySelector('.rcfg-col').value || base[i].color;
+          }
+        });
+        state.settings.readinessMetrics = base;
+        await dbPut('app_state', state);
+        renderReadiness();
+        showToast('✓ تم حفظ وتطبيق تعديلات حالات كشف الجاهزية');
+      });
+
+      document.getElementById('btn-reset-readiness-cfg').addEventListener('click', async () => {
+        state.settings.readinessMetrics = buildDefaultState().settings.readinessMetrics;
+        await dbPut('app_state', state);
+        renderReadinessCustomizer();
+        renderReadiness();
+        showToast('تمت إعادة حالات كشف الجاهزية للوضع الافتراضي');
+      });
+
+      // Live Per-Page Expansion, Zoom, Font & Rectangle/Square Geometry Sliders
+      document.getElementById('layout-target-page').addEventListener('change', syncLayoutControlsUI);
+
+      const pageSliderBindings = [
+        ['rng-page-maxw', 'lbl-page-maxw', 'maxW', 'px'],
+        ['rng-page-zoom', 'lbl-page-zoom', 'zoom', '%'],
+        ['rng-page-font', 'lbl-page-font', 'font', '%'],
+        ['rng-kpi-w', 'lbl-kpi-w', 'kpiMinW', ''],
+        ['rng-kpi-h', 'lbl-kpi-h', 'kpiMinH', ''],
+        ['rng-row-h', 'lbl-row-h', 'rowMinH', ''],
+        ['rng-box-rad', 'lbl-box-rad', 'boxRadius', ''],
+        ['rng-box-gap', 'lbl-box-gap', 'boxGap', ''],
+        ['rng-card-pad', 'lbl-card-pad', 'cardPad', '']
+      ];
+
+      pageSliderBindings.forEach(([rngId, lblId, prop, suffix]) => {
+        document.getElementById(rngId).addEventListener('input', (e) => {
+          const page = document.getElementById('layout-target-page').value || 'attendance';
+          const cfg = ensurePageLayout(page);
+          const val = Number(e.target.value);
+          cfg[prop] = val;
+          document.getElementById(lblId).textContent = val + suffix;
+          updateLayoutPreview(cfg);
+          applyLayoutStyles();
+        });
+      });
+
+      document.getElementById('btn-zoom-minus').addEventListener('click', () => {
+        const rng = document.getElementById('rng-page-zoom');
+        rng.value = Math.max(70, Number(rng.value) - 5);
+        rng.dispatchEvent(new Event('input'));
+      });
+      document.getElementById('btn-zoom-100').addEventListener('click', () => {
+        const rng = document.getElementById('rng-page-zoom');
+        rng.value = 100;
+        rng.dispatchEvent(new Event('input'));
+      });
+      document.getElementById('btn-zoom-plus').addEventListener('click', () => {
+        const rng = document.getElementById('rng-page-zoom');
+        rng.value = Math.min(140, Number(rng.value) + 5);
+        rng.dispatchEvent(new Event('input'));
+      });
+      document.getElementById('btn-widen-full').addEventListener('click', () => {
+        const rng = document.getElementById('rng-page-maxw');
+        rng.value = 1600;
+        rng.dispatchEvent(new Event('input'));
+      });
+
+      document.getElementById('btn-save-layout-cfg').addEventListener('click', async () => {
+        await dbPut('app_state', state);
+        applyLayoutStyles();
+        showToast('✓ تم حفظ قياسات الصفحة المختارة بنجاح');
+      });
+
+      document.getElementById('btn-apply-layout-all').addEventListener('click', async () => {
+        const page = document.getElementById('layout-target-page').value || 'attendance';
+        const src = { ...ensurePageLayout(page) };
+        for (const p of ['attendance', 'readiness', 'personnel', 'hierarchy', 'chat']) {
+          state.settings.pageLayouts[p] = { ...src };
+        }
+        await dbPut('app_state', state);
+        applyLayoutStyles();
+        showToast('✓ تم تطبيق نفس القياسات على جميع الصفحات الخمس');
+      });
+
+      document.getElementById('btn-reset-layout-cfg').addEventListener('click', async () => {
+        const page = document.getElementById('layout-target-page').value || 'attendance';
+        state.settings.pageLayouts[page] = { ...buildDefaultState().settings.pageLayouts[page] };
+        await dbPut('app_state', state);
+        syncLayoutControlsUI();
+        applyLayoutStyles();
+        showToast('تمت إعادة الصفحة المختارة للقياس الافتراضي');
+      });
+
       window.addEventListener('online', () => { renderHeader(); syncAccessControlFromCloud(true); });
       window.addEventListener('offline', renderHeader);
     }
@@ -3147,6 +4379,7 @@
       inp.value = '';
       await dbPut('app_state', state);
       renderChat();
+      pushAccessControlToCloud(true);
     }
 
     async function toggleVoiceRecord() {
@@ -3189,6 +4422,9 @@
       db = await openDB();
       const saved = await dbGet('app_state');
       state = migrateState(saved);
+      if (state.settings.user_role === 'OWNER' && !localStorage.getItem(LOCAL_BAN_KEY) && !sessionStorage.getItem(SESSION_TOKEN_KEY)) {
+        issueOwnerSession();
+      }
       await dbPut('app_state', state);
       bindEvents();
       renderAll();
