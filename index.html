@@ -176,11 +176,10 @@
       border: 1px solid var(--border); background: var(--bg-deep); color: var(--text-muted);
       font-size: 11.5px; font-weight: 700; cursor: pointer;
     }
-    .st-btn.active-PRESENT { background: rgba(34,197,94,.22); border-color: #22c55e; color: #bbf7d0; }
-    .st-btn.active-LEAVE { background: rgba(56,189,248,.22); border-color: #38bdf8; color: #bae6fd; }
-    .st-btn.active-SICK { background: rgba(245,158,11,.22); border-color: #f59e0b; color: #fde68a; }
-    .st-btn.active-INACTIVE { background: rgba(239,68,68,.30); border-color: #ef4444; color: #ffffff; box-shadow: 0 0 0 1px rgba(239,68,68,.45); }
-    .st-btn.active-ABSENT { background: rgba(185,28,28,.34); border-color: #dc2626; color: #fecaca; }
+    .st-btn.active-PRESENT { background: rgba(34,197,94,.24); border-color: #22c55e; color: #bbf7d0; }
+    .st-btn.active-ABSENT  { background: rgba(220,38,38,.32); border-color: #ef4444; color: #fecaca; }
+    .st-btn.active-EXCUSED { background: rgba(56,189,248,.22); border-color: #38bdf8; color: #bae6fd; }
+    .st-btn.active-OTHER   { background: rgba(245,158,11,.24); border-color: #f59e0b; color: #fde68a; }
 
     /* Force / Structure Accordion Cards */
     .comp-block {
@@ -551,9 +550,187 @@
       border: 1px solid var(--border); font-size: 12.5px; cursor: pointer;
     }
     .undo-acc-list {
-      max-height: 270px; overflow-y: auto; display: flex; flex-direction: column; gap: 5px;
+      max-height: 320px; overflow-y: auto; -webkit-overflow-scrolling: touch;
+      display: flex; flex-direction: column; gap: 6px; padding: 2px;
     }
+    .undo-acc-list > .member-row {
+      flex-shrink: 0; min-height: auto; align-items: center;
+      padding: 9px 10px; flex-wrap: nowrap; gap: 8px;
+    }
+    .undo-acc-list > .member-row > div:first-child {
+      flex: 1; min-width: 0; line-height: 1.45;
+    }
+    .undo-acc-list > .member-row button {
+      flex-shrink: 0; white-space: nowrap;
+    }
+    .wa-messages > .wa-bubble, .chat-list > .chat-msg { flex-shrink: 0; }
+    .recipient-pick-list { align-content: start; }
+    .recipient-pick-item { flex-shrink: 0; }
     .btn-icon:disabled { opacity: 0.35; cursor: not-allowed; }
+
+
+    /* v8: Sleek Compact Unified Layout Across All Pages (Matching Reference Proportions) */
+    .app-shell { max-width: 1160px; margin: 0 auto; padding-bottom: 68px; }
+    .topbar { padding: 6px 10px; gap: 6px; flex-wrap: nowrap; }
+    .brand { gap: 7px; min-width: 0; }
+    .brand-logo { width: 32px; height: 32px; border-radius: 9px; }
+    .brand-logo svg { width: 22px; height: 22px; }
+    .brand-title { font-size: 13px; }
+    .brand-sub { font-size: 9.5px; }
+    .top-actions { gap: 4px; flex-wrap: nowrap; flex-shrink: 0; }
+    .btn-icon, .share-top-btn { width: 29px; height: 29px; border-radius: 8px; font-size: 13px; }
+    .bat-bar { padding: 5px 10px; gap: 6px; flex-wrap: nowrap; }
+    .bat-select-wrap { gap: 6px; min-width: 0; flex: 1; }
+    .bat-select { padding: 4px 8px; font-size: 11.5px; border-radius: 8px; }
+    .container { padding: 8px 10px; }
+    .card { padding: 9px 10px; margin-bottom: 8px; border-radius: 11px; }
+    .card-title { font-size: 12.5px; margin-bottom: 7px; gap: 6px; }
+    .shift-banner { padding: 8px 10px; gap: 8px; }
+    .shift-meta { gap: 4px; margin-top: 4px; }
+    .date-input { padding: 5px 8px; font-size: 11.5px; border-radius: 8px; }
+    .pill { padding: 2px 7px; font-size: 10px; }
+    .btn { padding: 5px 9px; font-size: 11px; border-radius: 8px; }
+    .btn-sm { padding: 4px 8px; font-size: 10.5px; border-radius: 7px; }
+    .btn-xs { padding: 2.5px 6px; font-size: 10px; border-radius: 6px; }
+    .input-field, select.input-field, textarea.input-field { padding: 6px 8px; font-size: 11.5px; border-radius: 8px; }
+    .label { font-size: 11px; margin-bottom: 3px; }
+
+    /* Single-Row Compact KPIs matching reference image */
+    .tab-view .kpi-grid, .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(var(--p-kpi-w, 60px), 1fr));
+      gap: var(--p-gap, 6px);
+      margin-bottom: 8px;
+    }
+    #kpi-bar, #readiness-kpi-bar {
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+    }
+    .tab-view .kpi, .kpi {
+      padding: 7px 4px;
+      min-height: var(--p-kpi-h, 52px);
+      border-radius: calc(var(--p-rad, 11px) * 0.85);
+    }
+    .kpi-val { font-size: 16px; line-height: 1.15; }
+    .kpi-lbl { font-size: 9.5px; margin-top: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 100%; }
+
+    /* Single-Row Compact Filters */
+    #tab-attendance .filters {
+      display: grid;
+      grid-template-columns: 1.45fr 1fr 1.1fr 0.85fr;
+      gap: 5px;
+      margin-bottom: 8px;
+    }
+    #tab-hierarchy .filters {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr;
+      gap: 6px;
+      margin-bottom: 8px;
+    }
+    @media (max-width: 520px) {
+      #tab-attendance .filters {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    /* Compact Person Cards with Equal Single-Row 4 Status Buttons */
+    .person-card {
+      padding: 7px 9px; margin-bottom: 6px; gap: 6px; border-radius: 10px;
+    }
+    .person-name { font-size: 12px; }
+    .person-meta { font-size: 10px; margin-top: 1px; }
+    .status-row {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 5px;
+    }
+    .st-btn {
+      min-width: 0; padding: 5px 4px; border-radius: 7px;
+      font-size: 10.5px; white-space: nowrap; text-align: center;
+    }
+
+    /* Compact Tables, Hierarchy, Chat & Bottom Nav */
+    table { font-size: 11px; }
+    th, td { padding: 6px 5px; }
+    .acc-header { padding: 8px 10px; }
+    .acc-body { padding: 7px; gap: 6px; }
+    .sub-acc-head { padding: 6px 8px; }
+    .sub-acc-body { padding: 6px; gap: 5px; }
+    .org-member { padding: 5px 8px; font-size: 11.5px; }
+    .cmd-hq-box { padding: 9px 10px; margin-bottom: 8px; }
+    .cmd-slot { padding: 7px 9px; }
+    .wa-shell { min-height: 74vh; }
+    .wa-messages { max-height: 62vh; padding: 9px; gap: 6px; }
+    .wa-bubble { padding: 7px 10px; }
+    .wa-text { font-size: 12.5px; }
+    .bottom-nav { padding: 4px 2px calc(4px + env(safe-area-inset-bottom)); }
+    .nav-btn { padding: 3px 1px; font-size: 9.5px; }
+    .nav-btn .ico { font-size: 15px; }
+
+    /* =========================================================================
+       STRICT VIEWER MODE (READ-ONLY ATTENDANCE + ANTI-SCREENSHOT / ANTI-COPY)
+       ========================================================================= */
+    body.viewer-locked {
+      user-select: none !important;
+      -webkit-user-select: none !important;
+      -webkit-touch-callout: none !important;
+      -webkit-user-drag: none !important;
+    }
+    body.viewer-locked .bottom-nav,
+    body.viewer-locked #btn-share-app-top,
+    body.viewer-locked #btn-undo-top,
+    body.viewer-locked #btn-redo-top,
+    body.viewer-locked #btn-quick-add-bat,
+    body.viewer-locked #btn-mark-all,
+    body.viewer-locked #btn-open-export {
+      display: none !important;
+    }
+    body.viewer-locked .app-shell { padding-bottom: 24px; }
+    body.viewer-locked #global-battalion-select {
+      pointer-events: none; opacity: 0.85;
+    }
+    body.viewer-locked .st-btn {
+      pointer-events: none !important;
+      cursor: default !important;
+      opacity: 0.35;
+    }
+    body.viewer-locked .st-btn.active-PRESENT,
+    body.viewer-locked .st-btn.active-ABSENT,
+    body.viewer-locked .st-btn.active-EXCUSED,
+    body.viewer-locked .st-btn.active-OTHER {
+      opacity: 1 !important;
+      font-weight: 900;
+    }
+    #viewer-watermark-layer {
+      position: fixed; inset: 0; z-index: 8000;
+      pointer-events: none; overflow: hidden;
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 44px 16px; padding: 28px 10px;
+      opacity: 0.085;
+    }
+    .wm-tile {
+      transform: rotate(-28deg);
+      font-size: 11px; font-weight: 900; color: #e7d8c2;
+      text-align: center; white-space: nowrap;
+      letter-spacing: 0.5px;
+    }
+    #viewer-privacy-shield {
+      position: fixed; inset: 0; z-index: 9950;
+      background: #060b0b;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      padding: 24px; text-align: center; gap: 10px;
+    }
+    @media print {
+      body.viewer-locked * { display: none !important; }
+      body.viewer-locked::after {
+        content: "⛔ محتوى محمي — الطباعة والتصدير والتقاط الشاشة محظورة لصلاحية المشاهد";
+        display: block !important;
+        padding: 48px 20px;
+        text-align: center;
+        font-size: 20px;
+        font-weight: 900;
+        color: #b91c1c;
+      }
+    }
 
     /* Print / Official PDF */
     #print-sheet { display: none; }
@@ -636,6 +813,8 @@
         </div>
       </div>
       <div class="top-actions">
+        <span id="viewer-mode-pill" class="pill red hidden">👁️ مشاهدة فقط</span>
+        <button class="btn btn-icon hidden" id="btn-viewer-owner-unlock" title="دخول المالك بالرمز">🔑</button>
         <span id="net-pill" class="pill online">● متصل</span>
         <button class="share-top-btn" id="btn-share-app-top" title="مشاركة رابط تنزيل التطبيق">
           <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
@@ -696,10 +875,9 @@
             <select id="flt-status" class="input-field">
               <option value="ALL">كل الحالات</option>
               <option value="PRESENT">حاضر</option>
-              <option value="LEAVE">إجازة</option>
-              <option value="SICK">مرضية</option>
-              <option value="INACTIVE">غير فعال</option>
               <option value="ABSENT">غياب</option>
+              <option value="EXCUSED">غياب مشروع</option>
+              <option value="OTHER">حالة أخرى</option>
             </select>
           </div>
           <div id="attendance-list"></div>
@@ -722,7 +900,7 @@
         </div>
         <div class="card">
           <div class="card-title">
-            <span>حالات «غير فعال» والغياب والإجازات لليوم</span>
+            <span>حالات الغياب والغياب المشروع والحالات الأخرى لليوم</span>
             <span class="pill red" id="readiness-exc-count">0 حالة</span>
           </div>
           <div id="readiness-exceptions"></div>
@@ -827,7 +1005,7 @@
                 <input id="set-shift-start" type="date" class="input-field" />
               </div>
               <div>
-                <label class="label">أيام الدوام / الإجازة لكل مناوبة</label>
+                <label class="label">عدد أيام كل مناوبة (10/10)</label>
                 <input id="set-shift-days" type="number" min="1" max="30" class="input-field" />
               </div>
             </div>
@@ -1518,6 +1696,17 @@
   </div>
 
   <div id="print-sheet"></div>
+  <!-- VIEWER WATERMARK & PRIVACY ANTI-CAPTURE SHIELD -->
+  <div id="viewer-watermark-layer" class="hidden" aria-hidden="true"></div>
+  <div id="viewer-privacy-shield" class="hidden">
+    <div style="font-size:38px">🛡️</div>
+    <div style="font-size:17px;font-weight:900;color:#fecaca">المحتوى محمي — للعرض فقط</div>
+    <div id="viewer-shield-msg" style="font-size:12.5px;color:var(--text-muted);max-width:340px;line-height:1.6">
+      يُمنع التقاط لقطة شاشة أو النسخ أو التبديل لالتقاط البيانات بصلاحية المشاهد.
+    </div>
+    <button class="btn btn-primary btn-sm" id="btn-resume-viewer">العودة للعرض</button>
+  </div>
+
   <!-- IN-APP REAL-TIME NOTIFICATION BANNER -->
   <div id="inapp-notif-banner" class="hidden">
     <div style="flex:1;min-width:0">
@@ -1549,11 +1738,16 @@
 
     const STATUS_LABELS = {
       PRESENT: 'حاضر',
-      LEAVE: 'إجازة',
-      SICK: 'مرضية',
-      INACTIVE: 'غير فعال',
-      ABSENT: 'غياب'
+      ABSENT: 'غياب',
+      EXCUSED: 'غياب مشروع',
+      OTHER: 'حالة أخرى'
     };
+    function normalizeStatus(st) {
+      if (st === 'PRESENT' || st === 'ABSENT' || st === 'EXCUSED' || st === 'OTHER') return st;
+      if (st === 'LEAVE' || st === 'SICK') return 'EXCUSED';
+      if (st === 'INACTIVE' || st === 'MISSION') return 'OTHER';
+      return 'PRESENT';
+    }
     const MAX_UNDO_STEPS = 200;
     const LAST_NOTIF_KEY = 'rased_last_notif_id_v1';
     const BATCH_LABELS = {
@@ -1600,22 +1794,19 @@
           user_name: 'شيخ أبو سعيد',
           user_role: 'OWNER',
           app_download_url: 'https://tafaqqud-130mm.vercel.app',
+          layoutPresetVersion: 3,
           readinessMetrics: [
-            { key: 'total', label: 'إجمالي القوة', enabled: true, color: '#e7d8c2', manualValue: '' },
-            { key: 'onDuty', label: 'مقرر اليوم', enabled: true, color: '#cdbaa1', manualValue: '' },
-            { key: 'present', label: 'حاضر فعال', enabled: true, color: '#22c55e', manualValue: '' },
-            { key: 'inactive', label: 'غير فعال', enabled: true, color: '#ef4444', manualValue: '' },
-            { key: 'absent', label: 'غياب', enabled: true, color: '#dc2626', manualValue: '' },
-            { key: 'leave', label: 'إجازة', enabled: true, color: '#38bdf8', manualValue: '' },
-            { key: 'sick', label: 'مرضية', enabled: true, color: '#f59e0b', manualValue: '' },
-            { key: 'readiness', label: 'الجاهزية', enabled: true, color: '#22c55e', manualValue: '' }
+            { key: 'total',   label: 'القوة',        enabled: true, color: '#e7d8c2', manualValue: '' },
+            { key: 'present', label: 'حاضر',         enabled: true, color: '#22c55e', manualValue: '' },
+            { key: 'absent',  label: 'غياب',         enabled: true, color: '#ef4444', manualValue: '' },
+            { key: 'excused', label: 'غياب مشروع',   enabled: true, color: '#38bdf8', manualValue: '' },
+            { key: 'other',   label: 'حالة أخرى',    enabled: true, color: '#f59e0b', manualValue: '' }
           ],
           pageLayouts: {
-            attendance: { maxW: 1060, zoom: 100, font: 100, kpiMinW: 96, kpiMinH: 64, rowMinH: 52, boxRadius: 14, boxGap: 8, cardPad: 13 },
-            readiness:  { maxW: 1060, zoom: 100, font: 100, kpiMinW: 96, kpiMinH: 64, rowMinH: 52, boxRadius: 14, boxGap: 8, cardPad: 13 },
-            personnel:  { maxW: 1060, zoom: 100, font: 100, kpiMinW: 96, kpiMinH: 64, rowMinH: 52, boxRadius: 14, boxGap: 8, cardPad: 13 },
-            hierarchy:  { maxW: 1060, zoom: 100, font: 100, kpiMinW: 96, kpiMinH: 64, rowMinH: 52, boxRadius: 14, boxGap: 8, cardPad: 13 },
-            chat:       { maxW: 1060, zoom: 100, font: 100, kpiMinW: 96, kpiMinH: 64, rowMinH: 52, boxRadius: 14, boxGap: 8, cardPad: 13 }
+            attendance: { maxW: 1160, zoom: 95, font: 95, kpiMinW: 60, kpiMinH: 52, rowMinH: 46, boxRadius: 11, boxGap: 6, cardPad: 9 },
+            readiness:  { maxW: 1160, zoom: 95, font: 95, kpiMinW: 60, kpiMinH: 52, rowMinH: 46, boxRadius: 11, boxGap: 6, cardPad: 9 },
+            hierarchy:  { maxW: 1160, zoom: 95, font: 95, kpiMinW: 60, kpiMinH: 52, rowMinH: 46, boxRadius: 11, boxGap: 6, cardPad: 9 },
+            chat:       { maxW: 1160, zoom: 95, font: 95, kpiMinW: 60, kpiMinH: 52, rowMinH: 46, boxRadius: 11, boxGap: 6, cardPad: 9 }
           }
         },
         accessControl: {
@@ -1674,14 +1865,13 @@
       if (!raw || typeof raw !== 'object') return buildDefaultState();
       const def = buildDefaultState();
       if (raw.schemaVersion === 2 && Array.isArray(raw.battalions) && raw.battalions.length) {
-        // Ensure MISSION -> INACTIVE conversion & accessControl presence
         const migratedAtt = {};
         for (const [dt, map] of Object.entries(raw.attendance || {})) {
           migratedAtt[dt] = {};
           for (const [pid, entry] of Object.entries(map || {})) {
             migratedAtt[dt][pid] = {
               ...entry,
-              status: entry.status === 'MISSION' ? 'INACTIVE' : (entry.status || 'PRESENT')
+              status: normalizeStatus(entry.status)
             };
           }
         }
@@ -1689,17 +1879,19 @@
         if (!mergedSettings.app_title || mergedSettings.app_title === 'تفقد دوام الـ130مم') {
           mergedSettings.app_title = 'راصد | 130مم';
         }
+        const allowedMetricKeys = new Set(['total', 'present', 'absent', 'excused', 'other']);
         if (Array.isArray(raw.settings && raw.settings.readinessMetrics) && raw.settings.readinessMetrics.length) {
           const defByKey = Object.fromEntries(def.settings.readinessMetrics.map((m) => [m.key, m]));
           const seenKeys = new Set();
           const normalizedMetrics = [];
           for (const m of raw.settings.readinessMetrics) {
-            if (!m || !m.key || seenKeys.has(m.key)) continue;
+            if (!m || !allowedMetricKeys.has(m.key) || seenKeys.has(m.key)) continue;
             seenKeys.add(m.key);
-            const fallback = defByKey[m.key] || { label: m.label || m.key, color: '#cdbaa1' };
+            const fallback = defByKey[m.key];
+            const cleanLbl = (m.label === 'إجمالي القوة' ? 'القوة' : (m.label === 'حاضر فعال' ? 'حاضر' : m.label)) || fallback.label;
             normalizedMetrics.push({
               key: m.key,
-              label: m.label || fallback.label,
+              label: cleanLbl,
               enabled: m.enabled === false ? false : true,
               color: (m.color && m.color.startsWith('#')) ? m.color : fallback.color,
               manualValue: m.manualValue !== undefined ? String(m.manualValue) : ''
@@ -1712,13 +1904,14 @@
         } else {
           mergedSettings.readinessMetrics = def.settings.readinessMetrics.map((m) => ({ ...m }));
         }
-        const mergedLayouts = { ...def.settings.pageLayouts };
+        const mergedLayouts = {};
+        const useSavedLayout = raw.settings && Number(raw.settings.layoutPresetVersion) >= 3;
         for (const pKey of ['attendance', 'readiness', 'hierarchy', 'chat']) {
-          mergedLayouts[pKey] = {
-            ...def.settings.pageLayouts[pKey],
-            ...((raw.settings && raw.settings.pageLayouts && raw.settings.pageLayouts[pKey]) || {})
-          };
+          mergedLayouts[pKey] = useSavedLayout
+            ? { ...def.settings.pageLayouts[pKey], ...((raw.settings.pageLayouts && raw.settings.pageLayouts[pKey]) || {}) }
+            : { ...def.settings.pageLayouts[pKey] };
         }
+        mergedSettings.layoutPresetVersion = 3;
         mergedSettings.pageLayouts = mergedLayouts;
 
         const normBattalions = (raw.battalions || []).map((b) => ({
@@ -1815,7 +2008,7 @@
         for (const [pid, entry] of Object.entries(map || {})) {
           attendance[dt][pid] = {
             ...entry,
-            status: entry.status === 'MISSION' ? 'INACTIVE' : (entry.status || 'PRESENT')
+            status: normalizeStatus(entry.status)
           };
         }
       }
@@ -1972,16 +2165,68 @@
     function getAttendanceEntry(dateIso, personId) {
       const dayMap = state.attendance[dateIso] || {};
       const entry = dayMap[personId] || { status: 'PRESENT', note: '' };
-      if (entry.status === 'MISSION') entry.status = 'INACTIVE';
-      return entry;
+      return { ...entry, status: normalizeStatus(entry.status) };
+    }
+
+    function isViewerMode() {
+      return state && state.settings && state.settings.user_role === 'VIEWER' && !hasValidOwnerSession();
+    }
+
+    function renderViewerWatermark() {
+      const wm = document.getElementById('viewer-watermark-layer');
+      if (!wm) return;
+      if (!isViewerMode()) {
+        wm.classList.add('hidden');
+        wm.innerHTML = '';
+        return;
+      }
+      const stamp = `${state.settings.user_name || 'مشاهد'} • ${MY_DEVICE_ID} • ${new Date().toLocaleTimeString('ar-SY', { hour: '2-digit', minute: '2-digit' })}`;
+      wm.innerHTML = Array.from({ length: 18 }).map(() => `<div class="wm-tile">${escapeHtml(stamp)}</div>`).join('');
+      wm.classList.remove('hidden');
+    }
+
+    function triggerViewerPrivacyShield(msg) {
+      if (!isViewerMode()) return;
+      const sh = document.getElementById('viewer-privacy-shield');
+      const txt = document.getElementById('viewer-shield-msg');
+      if (txt && msg) txt.textContent = msg;
+      if (sh) sh.classList.remove('hidden');
+    }
+
+    function applyViewerLockdown() {
+      const viewer = isViewerMode();
+      document.body.classList.toggle('viewer-locked', viewer);
+      const pill = document.getElementById('viewer-mode-pill');
+      const unlockBtn = document.getElementById('btn-viewer-owner-unlock');
+      if (pill) pill.classList.toggle('hidden', !viewer);
+      if (unlockBtn) unlockBtn.classList.toggle('hidden', !viewer);
+
+      if (viewer) {
+        settingsUnlocked = false;
+        if (currentActiveTab !== 'attendance') {
+          currentActiveTab = 'attendance';
+          document.querySelectorAll('.tab-view').forEach((el) => el.classList.add('hidden'));
+          document.getElementById('tab-attendance').classList.remove('hidden');
+        }
+        renderViewerWatermark();
+      } else {
+        const sh = document.getElementById('viewer-privacy-shield');
+        if (sh) sh.classList.add('hidden');
+        renderViewerWatermark();
+      }
     }
 
     async function setAttendanceStatus(personId, status) {
+      if (isViewerMode()) {
+        showToast('وضع المشاهدة فقط — التعديل غير مسموح');
+        return;
+      }
+      const cleanSt = normalizeStatus(status);
       const p = state.personnel.find((x) => x.id === personId);
-      await persistState(`تحديث حالة ${p ? p.name : personId} إلى ${STATUS_LABELS[status]}`);
+      await persistState(`تحديث حالة ${p ? p.name : personId} إلى ${STATUS_LABELS[cleanSt]}`);
       if (!state.attendance[activeDate]) state.attendance[activeDate] = {};
       const prev = state.attendance[activeDate][personId] || { status: 'PRESENT', note: '' };
-      state.attendance[activeDate][personId] = { status, note: prev.note || '', updatedAt: new Date().toISOString() };
+      state.attendance[activeDate][personId] = { status: cleanSt, note: prev.note || '', updatedAt: new Date().toISOString() };
       await dbPut('app_state', state);
       renderAll();
     }
@@ -2087,6 +2332,12 @@
             state.accessControl.requireApproval = metaObj.requireApproval !== false;
             state.accessControl.pendingApprovals = Array.isArray(metaObj.pendingApprovals) ? metaObj.pendingApprovals : [];
             state.accessControl.approvedDevices = Array.isArray(metaObj.approvedDevices) ? metaObj.approvedDevices : [];
+            if (!hasValidOwnerSession()) {
+              const myApp = state.accessControl.approvedDevices.find((d) => (d.deviceId || '').toLowerCase() === MY_DEVICE_ID.toLowerCase());
+              if (myApp && myApp.role === 'VIEWER') {
+                state.settings.user_role = 'VIEWER';
+              }
+            }
 
             const remoteReset = metaObj.chatResetAt || '';
             const localReset = state.accessControl.chatResetAt || '';
@@ -2219,22 +2470,18 @@
 
     function getMetricDisplayVal(metric, stats) {
       const manual = (metric.manualValue !== undefined && metric.manualValue !== null) ? String(metric.manualValue).trim() : '';
-      if (manual !== '') {
-        return metric.key === 'readiness' && !manual.endsWith('%') ? `${manual}%` : manual;
-      }
+      if (manual !== '') return manual;
+      if (metric.key === 'total') return `${stats.onDuty} / ${stats.total}`;
       const rawVal = stats[metric.key] !== undefined ? stats[metric.key] : 0;
-      return metric.key === 'readiness' ? `${rawVal}%` : String(rawVal);
+      return String(rawVal);
     }
 
     function getCompanyMetricCell(metricKey, r) {
-      if (metricKey === 'total') return { val: String(r.total), style: '' };
-      if (metricKey === 'onDuty') return { val: String(r.duty), style: '' };
+      if (metricKey === 'total') return { val: `${r.duty} / ${r.total}`, style: 'color:var(--gold-light);font-weight:800' };
       if (metricKey === 'present') return { val: String(r.present), style: 'color:var(--ok);font-weight:800' };
-      if (metricKey === 'leave') return { val: String(r.leave), style: 'color:var(--info)' };
-      if (metricKey === 'sick') return { val: String(r.sick), style: 'color:var(--warn)' };
-      if (metricKey === 'inactive') return { val: String(r.inactive), style: `color:${r.inactive ? '#ef4444' : 'var(--text-muted)'};font-weight:900` };
-      if (metricKey === 'absent') return { val: String(r.absent), style: `color:${r.absent ? '#dc2626' : 'var(--text-muted)'};font-weight:800` };
-      if (metricKey === 'readiness') return { val: `${r.pct}%`, pill: true, style: '' };
+      if (metricKey === 'absent') return { val: String(r.absent), style: `color:${r.absent ? '#ef4444' : 'var(--text-muted)'};font-weight:900` };
+      if (metricKey === 'excused') return { val: String(r.excused), style: 'color:var(--info);font-weight:800' };
+      if (metricKey === 'other') return { val: String(r.other), style: 'color:var(--warn);font-weight:800' };
       return { val: '-', style: '' };
     }
 
@@ -2367,18 +2614,16 @@
     function computeStats() {
       const people = getActivePersonnel();
       const dutyPeople = people.filter((p) => isScheduledOnDuty(p, activeDate));
-      let present = 0, leave = 0, sick = 0, inactive = 0, absent = 0;
+      let present = 0, absent = 0, excused = 0, other = 0;
       for (const p of dutyPeople) {
         const st = getAttendanceEntry(activeDate, p.id).status;
         if (st === 'PRESENT') present++;
-        else if (st === 'LEAVE') leave++;
-        else if (st === 'SICK') sick++;
-        else if (st === 'INACTIVE') inactive++;
         else if (st === 'ABSENT') absent++;
+        else if (st === 'EXCUSED') excused++;
+        else if (st === 'OTHER') other++;
       }
       const onDuty = dutyPeople.length;
-      const readiness = onDuty ? Math.round((present / onDuty) * 100) : 0;
-      return { total: people.length, onDuty, present, leave, sick, inactive, absent, readiness };
+      return { total: people.length, onDuty, present, absent, excused, other };
     }
 
     function getFilteredRows() {
@@ -2425,12 +2670,11 @@
 
       const stats = computeStats();
       document.getElementById('kpi-bar').innerHTML = `
-        <div class="kpi"><div class="kpi-val" style="color:var(--gold-light)">${stats.onDuty}</div><div class="kpi-lbl">مقرر اليوم / ${stats.total}</div></div>
+        <div class="kpi"><div class="kpi-val" style="color:var(--gold-light)">${stats.onDuty}</div><div class="kpi-lbl">القوة / ${stats.total}</div></div>
         <div class="kpi"><div class="kpi-val" style="color:var(--ok)">${stats.present}</div><div class="kpi-lbl">حاضر</div></div>
-        <div class="kpi"><div class="kpi-val" style="color:var(--info)">${stats.leave}</div><div class="kpi-lbl">إجازة</div></div>
-        <div class="kpi"><div class="kpi-val" style="color:#ef4444">${stats.inactive}</div><div class="kpi-lbl" style="color:#fca5a5">غير فعال</div></div>
-        <div class="kpi"><div class="kpi-val" style="color:#dc2626">${stats.absent}</div><div class="kpi-lbl">غياب</div></div>
-        <div class="kpi"><div class="kpi-val" style="color:var(--gold)">${stats.readiness}%</div><div class="kpi-lbl">الجاهزية</div></div>
+        <div class="kpi"><div class="kpi-val" style="color:#ef4444">${stats.absent}</div><div class="kpi-lbl" style="color:#fca5a5">غياب</div></div>
+        <div class="kpi"><div class="kpi-val" style="color:var(--info)">${stats.excused}</div><div class="kpi-lbl">غياب مشروع</div></div>
+        <div class="kpi"><div class="kpi-val" style="color:var(--warn)">${stats.other}</div><div class="kpi-lbl">حالة أخرى</div></div>
       `;
 
       const rows = getFilteredRows();
@@ -2439,6 +2683,7 @@
         wrap.innerHTML = '<div style="text-align:center;color:var(--text-muted);padding:20px">لا توجد عناصر مطابقة للفلتر الحالي.</div>';
         return;
       }
+      const readOnly = isViewerMode();
 
       wrap.innerHTML = rows.map((r, i) => `
         <div class="person-card">
@@ -2455,7 +2700,7 @@
           </div>
           <div class="status-row">
             ${Object.entries(STATUS_LABELS).map(([k, lbl]) => `
-              <button class="st-btn ${r.status === k ? 'active-' + k : ''}" data-act="set-st" data-id="${r.id}" data-st="${k}">${lbl}</button>
+              <button class="st-btn ${r.status === k ? 'active-' + k : ''}" ${readOnly ? 'disabled tabindex="-1"' : `data-act="set-st" data-id="${r.id}" data-st="${k}"`}>${lbl}</button>
             `).join('')}
           </div>
         </div>
@@ -2466,17 +2711,15 @@
       return getActiveCompanies().map((c) => {
         const members = getActivePersonnel().filter((p) => p.company_id === c.id);
         const duty = members.filter((p) => isScheduledOnDuty(p, activeDate));
-        let present = 0, leave = 0, sick = 0, inactive = 0, absent = 0;
+        let present = 0, absent = 0, excused = 0, other = 0;
         for (const p of duty) {
           const st = getAttendanceEntry(activeDate, p.id).status;
           if (st === 'PRESENT') present++;
-          else if (st === 'LEAVE') leave++;
-          else if (st === 'SICK') sick++;
-          else if (st === 'INACTIVE') inactive++;
           else if (st === 'ABSENT') absent++;
+          else if (st === 'EXCUSED') excused++;
+          else if (st === 'OTHER') other++;
         }
-        const pct = duty.length ? Math.round((present / duty.length) * 100) : 0;
-        return { name: c.name, commander: c.commander || '-', total: members.length, duty: duty.length, present, leave, sick, inactive, absent, pct };
+        return { name: c.name, commander: c.commander || '-', total: members.length, duty: duty.length, present, absent, excused, other };
       });
     }
 
@@ -2498,7 +2741,7 @@
       document.getElementById('readiness-kpi-bar').innerHTML = visibleMetrics.length
         ? visibleMetrics.map((m) => {
             const displayVal = getMetricDisplayVal(m, stats);
-            const isDanger = m.key === 'inactive' || m.key === 'absent';
+            const isDanger = m.key === 'absent';
             return `<div class="kpi" style="${isDanger ? 'border-color:rgba(239,68,68,.5)' : ''}">
               <div class="kpi-val" style="color:${escapeHtml(m.color || '#e7d8c2')}">${escapeHtml(displayVal)}</div>
               <div class="kpi-lbl" style="${isDanger ? 'color:#fca5a5' : ''}">${escapeHtml(m.label)}</div>
@@ -2512,7 +2755,7 @@
           <thead>
             <tr>
               <th>السرية</th>
-              ${visibleMetrics.map((m) => `<th style="${m.key === 'inactive' || m.key === 'absent' ? 'color:#fca5a5' : ''}">${escapeHtml(m.label)}</th>`).join('')}
+              ${visibleMetrics.map((m) => `<th style="${m.key === 'absent' ? 'color:#fca5a5' : ''}">${escapeHtml(m.label)}</th>`).join('')}
             </tr>
           </thead>
           <tbody>
@@ -2534,17 +2777,17 @@
       document.getElementById('readiness-exc-count').textContent = `${exceptions.length} حالة`;
       document.getElementById('readiness-exceptions').innerHTML = exceptions.length
         ? exceptions.map(({ p, compName, groupName, e }) => {
-            const isRed = e.status === 'INACTIVE' || e.status === 'ABSENT';
-            const cls = isRed ? 'red' : (e.status === 'LEAVE' ? 'blue' : 'gold');
+            const isRed = e.status === 'ABSENT';
+            const cls = isRed ? 'red' : (e.status === 'EXCUSED' ? 'blue' : 'gold');
             return `<div class="person-card" style="flex-direction:row;justify-content:space-between;align-items:center;${isRed ? 'border-color:rgba(239,68,68,.5)' : ''}">
               <div>
                 <div class="person-name">${escapeHtml(p.name)}</div>
                 <div class="person-meta">${escapeHtml(compName)} • ${escapeHtml(groupName)} ${p.job ? '• ' + escapeHtml(p.job) : ''}</div>
               </div>
-              <span class="pill ${cls}">${STATUS_LABELS[e.status]}</span>
+              <span class="pill ${cls}">${STATUS_LABELS[e.status] || 'حالة أخرى'}</span>
             </div>`;
           }).join('')
-        : '<div style="color:var(--ok);font-weight:700;padding:8px">✓ كامل القوة المقررة حاضرة وجاهزة 100% دون غياب أو حالات غير فعالة.</div>';
+        : '<div style="color:var(--ok);font-weight:700;padding:8px">✓ كامل القوة المقررة حاضرة بالكامل دون غياب أو حالات أخرى.</div>';
     }
 
     let chatFilterMode = 'ALL';
@@ -3097,6 +3340,7 @@
       renderChat();
       if (settingsUnlocked) renderSettings();
       evaluateBlockStatus();
+      applyViewerLockdown();
     }
 
     // HIGH-RES FULL-PAGE PNG GENERATORS (100% OFFLINE & CRISP RTL ARABIC)
@@ -3181,21 +3425,21 @@
           lbl: m.label,
           val: getMetricDisplayVal(m, stats),
           col: (m.color && m.color.startsWith('#')) ? m.color : '#cdbaa1',
-          isDanger: m.key === 'inactive' || m.key === 'absent'
+          isDanger: m.key === 'absent'
         }));
       const boxW = kpis.length ? ((w - 48 - (kpis.length - 1) * 10) / kpis.length) : (w - 48);
       kpis.forEach((k, idx) => {
         const x = w - 24 - (idx + 1) * boxW - idx * 10;
         ctx.fillStyle = '#182625';
         ctx.fillRect(x, 174, boxW, 82);
-        ctx.strokeStyle = k.lbl === 'غير فعال' ? '#ef4444' : 'rgba(205,186,161,0.35)';
+        ctx.strokeStyle = k.isDanger ? '#ef4444' : 'rgba(205,186,161,0.35)';
         ctx.lineWidth = 1.5;
         ctx.strokeRect(x, 174, boxW, 82);
         ctx.textAlign = 'center';
         ctx.fillStyle = k.col;
         ctx.font = 'bold 30px Cairo, Tahoma, sans-serif';
         ctx.fillText(String(k.val), x + boxW / 2, 214);
-        ctx.fillStyle = k.lbl === 'غير فعال' ? '#fca5a5' : '#9eb0ab';
+        ctx.fillStyle = k.isDanger ? '#fca5a5' : '#9eb0ab';
         ctx.font = 'bold 15px Cairo, Tahoma, sans-serif';
         ctx.fillText(k.lbl, x + boxW / 2, 242);
       });
@@ -3221,7 +3465,7 @@
         x: Math.round(dynStart - idx * colStep)
       }));
       dynCols.forEach((c) => {
-        ctx.fillStyle = (c.key === 'inactive' || c.key === 'absent') ? '#fca5a5' : '#e7d8c2';
+        ctx.fillStyle = (c.key === 'absent') ? '#fca5a5' : '#e7d8c2';
         ctx.fillText(c.lbl.slice(0, 12), c.x, y + 29);
       });
 
@@ -3248,13 +3492,13 @@
       ctx.strokeRect(24, y, w - 48, 42);
       ctx.fillStyle = '#fecaca';
       ctx.font = 'bold 19px Cairo, Tahoma, sans-serif';
-      ctx.fillText(`تفصيل الحالات غير الحاضرة (غير فعال / غياب / إجازات): ${exceptions.length} حالة`, w - 42, y + 28);
+      ctx.fillText(`تفصيل حالات الغياب والغياب المشروع والحالات الأخرى: ${exceptions.length} حالة`, w - 42, y + 28);
       y += 48;
 
       if (!exceptions.length) {
         ctx.fillStyle = '#86efac';
         ctx.font = 'bold 18px Cairo, Tahoma, sans-serif';
-        ctx.fillText('✓ لا يوجد غياب أو حالات غير فعالة بين المقررين اليوم — الجاهزية مكتملة.', w - 42, y + 24);
+        ctx.fillText('✓ لا يوجد غياب أو حالات أخرى بين المقررين اليوم.', w - 42, y + 24);
         y += excH;
       } else {
         exceptions.forEach((ex, idx) => {
@@ -3263,9 +3507,9 @@
           ctx.fillStyle = '#f4efe8';
           ctx.font = 'bold 16px Cairo, Tahoma, sans-serif';
           ctx.fillText(`${idx + 1}. ${ex.p.name}  (${ex.compName} • ${ex.groupName})`, w - 42, y + 23);
-          const isRed = ex.e.status === 'INACTIVE' || ex.e.status === 'ABSENT';
-          ctx.fillStyle = isRed ? '#ef4444' : (ex.e.status === 'LEAVE' ? '#38bdf8' : '#f59e0b');
-          ctx.fillText(STATUS_LABELS[ex.e.status], 180, y + 23);
+          const isRed = ex.e.status === 'ABSENT';
+          ctx.fillStyle = isRed ? '#ef4444' : (ex.e.status === 'EXCUSED' ? '#38bdf8' : '#f59e0b');
+          ctx.fillText(STATUS_LABELS[ex.e.status] || 'حالة أخرى', 180, y + 23);
           y += excH;
         });
       }
@@ -3413,7 +3657,7 @@
         <Worksheet ss:Name="تفقد ${activeDate}" ss:RightToLeft="1">
           <Table>
             <Row><Cell ss:StyleID="title"><Data ss:Type="String">${escapeXml(bat ? bat.name : state.settings.unit_name)} — ${escapeXml(state.settings.app_title)} (${activeDate} | ${shift.batchLabel})</Data></Cell></Row>
-            <Row><Cell><Data ss:Type="String">مقرر: ${stats.onDuty} | حاضر: ${stats.present} | إجازة: ${stats.leave} | غير فعال: ${stats.inactive} | غياب: ${stats.absent} | الجاهزية: ${stats.readiness}%</Data></Cell></Row>
+            <Row><Cell><Data ss:Type="String">القوة: ${stats.onDuty}/${stats.total} | حاضر: ${stats.present} | غياب: ${stats.absent} | غياب مشروع: ${stats.excused} | حالة أخرى: ${stats.other}</Data></Cell></Row>
             <Row></Row>
             <Row>
               <Cell ss:StyleID="hdr"><Data ss:Type="String">#</Data></Cell>
@@ -3448,12 +3692,12 @@
           <svg width="56" height="56" viewBox="0 0 256 256"><path d="${EAGLE_PATH}" fill="#152121"/></svg>
         </div>
         <div style="margin:10px 0;font-weight:700">
-          القوة: ${stats.total} | مقرر: ${stats.onDuty} | حاضر: ${stats.present} | إجازة: ${stats.leave} | <span style="color:#b91c1c">غير فعال: ${stats.inactive}</span> | غياب: ${stats.absent} | الجاهزية: ${stats.readiness}%
+          القوة: ${stats.onDuty}/${stats.total} | حاضر: ${stats.present} | <span style="color:#b91c1c">غياب: ${stats.absent}</span> | غياب مشروع: ${stats.excused} | حالة أخرى: ${stats.other}
         </div>
         <table>
           <thead><tr><th>#</th><th>الرقم الذاتي</th><th>الاسم</th><th>السرية</th><th>الجماعة</th><th>المناوبة</th><th>الحالة</th></tr></thead>
           <tbody>
-            ${rows.map((r, i) => `<tr><td>${i + 1}</td><td>${escapeHtml(r.serial || '-')}</td><td>${escapeHtml(r.name)}</td><td>${escapeHtml(r.companyName)}</td><td>${escapeHtml(r.groupName)}</td><td>${BATCH_LABELS[r.effectiveBatch]}</td><td style="${r.status === 'INACTIVE' || r.status === 'ABSENT' ? 'color:#b91c1c;font-weight:900' : ''}"><strong>${STATUS_LABELS[r.status]}</strong></td></tr>`).join('')}
+            ${rows.map((r, i) => `<tr><td>${i + 1}</td><td>${escapeHtml(r.serial || '-')}</td><td>${escapeHtml(r.name)}</td><td>${escapeHtml(r.companyName)}</td><td>${escapeHtml(r.groupName)}</td><td>${BATCH_LABELS[r.effectiveBatch]}</td><td style="${r.status === 'ABSENT' ? 'color:#b91c1c;font-weight:900' : ''}"><strong>${STATUS_LABELS[r.status]}</strong></td></tr>`).join('')}
           </tbody>
         </table>
         <div style="margin-top:26px;display:flex;justify-content:space-between;font-weight:700">
@@ -3491,7 +3735,7 @@
       ctx.fillRect(24, 174, w - 48, 52);
       ctx.fillStyle = '#f4efe8';
       ctx.font = 'bold 20px Cairo, Tahoma, sans-serif';
-      ctx.fillText(`مقرر: ${stats.onDuty}  |  حاضر: ${stats.present}  |  إجازة: ${stats.leave}  |  غير فعال: ${stats.inactive}  |  غياب: ${stats.absent}  |  الجاهزية: ${stats.readiness}%`, w - 44, 207);
+      ctx.fillText(`القوة: ${stats.onDuty}/${stats.total}  |  حاضر: ${stats.present}  |  غياب: ${stats.absent}  |  غياب مشروع: ${stats.excused}  |  حالة أخرى: ${stats.other}`, w - 44, 207);
 
       let y = 242;
       ctx.fillStyle = '#243835';
@@ -3514,7 +3758,7 @@
         ctx.fillText(r.name.slice(0, 30), w - 88, y + 23);
         ctx.fillText(r.companyName.slice(0, 18), w - 450, y + 23);
         ctx.fillText(r.groupName.slice(0, 18), w - 680, y + 23);
-        ctx.fillStyle = r.status === 'PRESENT' ? '#86efac' : (r.status === 'INACTIVE' || r.status === 'ABSENT') ? '#ef4444' : '#7dd3fc';
+        ctx.fillStyle = r.status === 'PRESENT' ? '#86efac' : (r.status === 'ABSENT' ? '#ef4444' : (r.status === 'EXCUSED' ? '#7dd3fc' : '#fcd34d'));
         ctx.font = 'bold 16px Cairo, Tahoma, sans-serif';
         ctx.fillText(STATUS_LABELS[r.status], w - 940, y + 23);
         y += rowH;
@@ -3717,6 +3961,10 @@
     }
 
     function switchTab(tabId, bypassPin = false) {
+      if (isViewerMode() && tabId !== 'attendance') {
+        showToast('صلاحية المشاهد محصورة بمشاهدة صفحة التفقد فقط');
+        return;
+      }
       if (tabId === 'settings' && !settingsUnlocked && !bypassPin) {
         openPinModal('SETTINGS');
         return;
@@ -4164,6 +4412,10 @@
       document.body.addEventListener('click', async (e) => {
         const btn = e.target.closest('[data-act]');
         if (!btn) return;
+        if (isViewerMode()) {
+          e.preventDefault();
+          return;
+        }
         const act = btn.dataset.act;
 
         if (act === 'set-st') {
@@ -4307,6 +4559,7 @@
 
       // Mark All Present
       document.getElementById('btn-mark-all').addEventListener('click', async () => {
+        if (isViewerMode()) { showToast('وضع المشاهدة فقط — التعديل غير مسموح'); return; }
         await persistState('تحضير جميع المقررين لليوم');
         if (!state.attendance[activeDate]) state.attendance[activeDate] = {};
         for (const p of getActivePersonnel()) {
@@ -4356,7 +4609,7 @@
           `━━━━━━━━━━━━━━`,
           ...visibleMetrics.map((m) => {
             const val = getMetricDisplayVal(m, stats);
-            const prefix = (m.key === 'inactive' || m.key === 'absent') ? '• 🔴 ' : '• ';
+            const prefix = (m.key === 'absent') ? '• 🔴 ' : '• ';
             return `${prefix}${m.label}: *${val}*`;
           })
         ];
@@ -4370,6 +4623,7 @@
 
       // Attendance Export Modal
       document.getElementById('btn-open-export').addEventListener('click', () => {
+        if (isViewerMode()) { showToast('المشاركة والتصدير محظوران لصلاحية المشاهد'); return; }
         const allowed = state.settings.user_role === 'OWNER' || state.settings.user_role === 'ADMIN';
         document.getElementById('export-role-warn').classList.toggle('hidden', allowed);
         document.getElementById('export-buttons').classList.toggle('hidden', !allowed);
@@ -4406,9 +4660,13 @@
         state.settings.user_name = document.getElementById('set-user-name').value.trim() || 'شيخ أبو سعيد';
         state.settings.user_role = document.getElementById('set-user-role').value;
         state.settings.app_download_url = document.getElementById('set-download-url').value.trim() || 'https://tafaqqud-130mm.vercel.app';
+        if (state.settings.user_role === 'VIEWER') {
+          sessionStorage.removeItem(SESSION_TOKEN_KEY);
+          settingsUnlocked = false;
+        }
         await dbPut('app_state', state);
         renderAll();
-        showToast('✓ تم حفظ الإعدادات');
+        showToast(state.settings.user_role === 'VIEWER' ? 'تم تفعيل وضع المشاهد المحمي (التفقد للعرض فقط)' : '✓ تم حفظ الإعدادات');
       });
 
       document.getElementById('btn-toggle-global-block').addEventListener('click', async () => {
@@ -4628,6 +4886,7 @@
 
       // Top Share App Arrow Button (immediate share with modal fallback)
       document.getElementById('btn-share-app-top').addEventListener('click', async () => {
+        if (isViewerMode()) { showToast('المشاركة محظورة لصلاحية المشاهد'); return; }
         const shareUrl = (state.settings && state.settings.app_download_url) || window.location.origin || 'https://tafaqqud-130mm.vercel.app';
         const title = state.settings.app_title || 'راصد | 130مم';
         if (navigator.share) {
@@ -4966,6 +5225,71 @@
           showToast('✓ تم حذف الجهاز من القائمة');
         }
       });
+
+      // Viewer Owner PIN Unlock & Privacy Shield Resume
+      document.getElementById('btn-viewer-owner-unlock').addEventListener('click', () => openPinModal('UNLOCK_BLOCK'));
+      document.getElementById('btn-resume-viewer').addEventListener('click', () => {
+        document.getElementById('viewer-privacy-shield').classList.add('hidden');
+      });
+
+      // Strict Anti-Copy, Anti-ContextMenu, Anti-Print & Anti-Screenshot Deterrence for VIEWER Mode
+      for (const evtName of ['contextmenu', 'copy', 'cut', 'dragstart', 'selectstart']) {
+        document.addEventListener(evtName, (e) => {
+          if (!isViewerMode()) return;
+          if (evtName === 'selectstart' && e.target.matches('input, select')) return;
+          e.preventDefault();
+        });
+      }
+
+      document.addEventListener('keydown', (e) => {
+        if (!isViewerMode()) return;
+        const key = (e.key || '').toLowerCase();
+        const isPrintScr = key === 'printscreen' || e.keyCode === 44;
+        const isBlockedCombo =
+          isPrintScr ||
+          key === 'f12' ||
+          ((e.ctrlKey || e.metaKey) && ['p', 's', 'c', 'u', 'a'].includes(key)) ||
+          ((e.ctrlKey || e.metaKey) && e.shiftKey && ['s', 'i', 'j', 'c', '3', '4', '5'].includes(key));
+        if (isBlockedCombo) {
+          e.preventDefault();
+          e.stopPropagation();
+          if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText('').catch(() => {});
+          }
+          triggerViewerPrivacyShield('⛔ يُمنع التقاط لقطة شاشة أو الطباعة أو النسخ في وضع المشاهد.');
+        }
+      }, true);
+
+      document.addEventListener('keyup', (e) => {
+        if (!isViewerMode()) return;
+        if ((e.key || '').toLowerCase() === 'printscreen' || e.keyCode === 44) {
+          if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText('').catch(() => {});
+          }
+          triggerViewerPrivacyShield('⛔ تم اكتشاف محاولة التقاط شاشة — المحتوى محمي.');
+        }
+      }, true);
+
+      document.addEventListener('visibilitychange', () => {
+        if (isViewerMode() && document.hidden) {
+          triggerViewerPrivacyShield('🔒 تم إخفاء الشاشة لحماية البيانات أثناء التبديل أو محاولة الالتقاط.');
+        }
+      });
+
+      window.addEventListener('blur', () => {
+        if (isViewerMode()) {
+          triggerViewerPrivacyShield('🔒 المحتوى محمي — اضغط «العودة للعرض» للمتابعة.');
+        }
+      });
+
+      window.addEventListener('beforeprint', (e) => {
+        if (isViewerMode()) {
+          e.preventDefault();
+          triggerViewerPrivacyShield('⛔ الطباعة محظورة بصلاحية المشاهد.');
+        }
+      });
+
+      setInterval(() => { if (isViewerMode()) renderViewerWatermark(); }, 30000);
 
       window.addEventListener('online', () => { renderHeader(); syncAccessControlFromCloud(true); });
       window.addEventListener('offline', renderHeader);
