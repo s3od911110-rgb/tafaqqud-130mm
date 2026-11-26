@@ -6,7 +6,9 @@
   <meta name="theme-color" content="#152121" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-  <title>تفقد دوام الـ130مم</title>
+  <meta name="apple-mobile-web-app-title" content="راصد | 130مم" />
+  <meta name="application-name" content="راصد | 130مم" />
+  <title>راصد | 130مم</title>
   <link rel="manifest" href="/manifest.webmanifest" />
   <link rel="icon" href="/icons/eagle-192.png" type="image/png" />
   <link rel="apple-touch-icon" href="/icons/eagle-192.png" />
@@ -244,13 +246,13 @@
     th { background: var(--bg-elevated); color: var(--gold-light); font-weight: 800; }
     tr:last-child td { border-bottom: none; }
 
-    /* Bottom Nav (6 Tabs) */
+    /* Bottom Nav (5 Unified Tabs) */
     .bottom-nav {
       position: fixed; bottom: 0; left: 0; right: 0; z-index: 40;
       background: rgba(12, 20, 20, 0.97);
       backdrop-filter: blur(12px);
       border-top: 1px solid var(--border);
-      display: grid; grid-template-columns: repeat(6, 1fr);
+      display: grid; grid-template-columns: repeat(5, 1fr);
       padding: 5px 2px calc(5px + env(safe-area-inset-bottom));
     }
     .nav-btn {
@@ -493,6 +495,66 @@
       .rcfg-row { grid-template-columns: auto 1fr 68px 36px auto; gap: 4px; }
     }
 
+
+    /* v7 Additions: Unread Badge, In-App Notification Banner, Pinned Officers, Undo Accordion, Targeted Chat */
+    .nav-btn { position: relative; }
+    .nav-badge {
+      position: absolute; top: 1px; right: 16%;
+      min-width: 17px; height: 17px; padding: 0 4px;
+      border-radius: 999px; background: #ef4444; color: #fff;
+      font-size: 10px; font-weight: 900; display: inline-flex;
+      align-items: center; justify-content: center;
+      box-shadow: 0 0 0 2px #0c1414;
+    }
+    #inapp-notif-banner {
+      position: fixed; top: 12px; left: 50%; transform: translateX(-50%);
+      width: min(94vw, 480px); z-index: 9800;
+      background: linear-gradient(135deg, #1b2f2c, #101d1c);
+      border: 1.5px solid var(--gold); border-radius: 14px;
+      padding: 11px 13px; box-shadow: 0 14px 36px rgba(0,0,0,.72);
+      display: flex; align-items: flex-start; justify-content: space-between; gap: 10px;
+      animation: slideDownNotif .22s ease;
+    }
+    @keyframes slideDownNotif {
+      from { opacity: 0; transform: translate(-50%, -14px); }
+      to   { opacity: 1; transform: translate(-50%, 0); }
+    }
+    .comp-cmd-pinned {
+      order: -10;
+      background: linear-gradient(135deg, rgba(205,186,161,.16), rgba(14,23,23,.9));
+      border: 1.5px solid var(--border-strong);
+      border-right: 4px solid #eab308;
+      border-radius: 12px;
+      margin-bottom: 6px;
+      overflow: hidden;
+    }
+    .comp-cmd-pinned-head {
+      background: rgba(205,186,161,.14);
+      padding: 8px 10px;
+      display: flex; justify-content: space-between; align-items: center; gap: 6px; flex-wrap: wrap;
+      border-bottom: 1px solid var(--border);
+    }
+    .wa-target-strip {
+      background: #12201e; border-bottom: 1px solid var(--border);
+      padding: 6px 12px; display: flex; justify-content: space-between; align-items: center; gap: 6px; flex-wrap: wrap;
+      font-size: 11.5px;
+    }
+    .wa-badge-row { display: flex; gap: 4px; flex-wrap: wrap; margin-bottom: 4px; }
+    .recipient-pick-list {
+      max-height: 220px; overflow-y: auto; display: grid; gap: 5px;
+      padding: 6px; background: rgba(10,17,16,.75);
+      border: 1px solid var(--border); border-radius: 10px;
+    }
+    .recipient-pick-item {
+      display: flex; align-items: center; justify-content: space-between; gap: 8px;
+      padding: 6px 8px; border-radius: 8px; background: var(--bg-panel);
+      border: 1px solid var(--border); font-size: 12.5px; cursor: pointer;
+    }
+    .undo-acc-list {
+      max-height: 270px; overflow-y: auto; display: flex; flex-direction: column; gap: 5px;
+    }
+    .btn-icon:disabled { opacity: 0.35; cursor: not-allowed; }
+
     /* Print / Official PDF */
     #print-sheet { display: none; }
     @media print {
@@ -569,7 +631,7 @@
           <svg width="30" height="30" viewBox="0 0 256 256"><path d="M30,120L41,119L57,102L59,103L58,106L34,132L41,132L47,129L63,108L65,109L65,111L40,144L49,143L54,138L70,113L72,114L46,156L53,155L58,152L78,117L80,118L80,120L62,153L66,153L72,150L86,119L88,120L88,123L76,151L82,150L85,147L95,121L97,122L88,149L95,147L98,143L103,123L105,122L106,126L101,146L107,142L109,131L111,129L116,136L115,140L104,152L104,156L97,164L80,165L80,170L84,166L87,166L88,168L85,171L87,173L87,170L93,166L99,172L101,170L98,166L103,160L109,159L117,154L117,158L97,185L106,183L109,180L114,168L117,167L118,169L108,191L116,189L119,184L121,172L124,169L125,175L123,182L123,191L125,193L130,192L130,195L134,189L131,174L132,169L135,171L137,184L140,189L148,191L138,169L139,167L142,168L147,180L150,183L160,185L138,156L139,154L153,160L158,166L155,170L157,173L157,171L163,166L166,167L170,173L171,171L168,168L169,166L172,166L176,169L176,165L161,165L153,157L153,153L141,139L144,129L146,128L149,142L152,145L156,146L150,125L151,123L154,124L157,139L161,147L168,149L159,124L160,122L162,122L171,147L175,150L180,151L168,123L168,120L170,119L184,150L190,153L194,153L176,120L176,118L178,117L197,151L201,154L209,156L186,120L184,114L187,114L204,141L211,144L216,144L192,113L191,109L194,109L211,131L221,131L197,104L198,102L215,119L226,120L183,76L179,74L165,75L163,77L163,88L160,95L149,102L141,102L138,100L136,80L132,77L123,76L112,81L112,86L115,84L119,84L121,86L121,92L117,101L107,102L102,100L95,93L93,87L93,77L90,74L76,74L72,76Z M145,58L148,61L145,67L150,66L153,70L153,66L158,63L154,61L153,57L151,59Z M98,63L103,65L103,70L107,66L112,67L109,63L111,58L106,59L103,56L103,60Z M121,55L125,59L124,64L128,61L133,64L132,58L136,55L131,55L128,50L126,55Z" fill="#cdbaa1" /></svg>
         </div>
         <div>
-          <div class="brand-title" id="hdr-title">تفقد دوام الـ130مم</div>
+          <div class="brand-title" id="hdr-title">راصد | 130مم</div>
           <div class="brand-sub" id="hdr-unit">الكتيبة الأولى مدفعية 130مم</div>
         </div>
       </div>
@@ -582,7 +644,8 @@
             <line x1="12" y1="2" x2="12" y2="15"/>
           </svg>
         </button>
-        <button class="btn btn-icon" id="btn-undo-top" title="تراجع عن آخر عملية">↶</button>
+        <button class="btn btn-icon" id="btn-undo-top" title="تراجع خطوة للخلف">↶</button>
+        <button class="btn btn-icon" id="btn-redo-top" title="إعادة خطوة للأمام">↷</button>
       </div>
     </header>
 
@@ -602,7 +665,7 @@
       <section id="tab-attendance" class="tab-view">
         <div class="card shift-banner">
           <div>
-            <div style="font-size:15px;font-weight:900;color:var(--gold-light)" id="shift-headline">الوجبة أ — اليوم 1 من 10</div>
+            <div style="font-size:15px;font-weight:900;color:var(--gold-light)" id="shift-headline">المناوبة أ — اليوم 1 من 10</div>
             <div class="shift-meta">
               <span class="pill gold" id="shift-remaining">متبقي 10 أيام</span>
               <span class="pill" id="shift-crews-lbl">المناوبون اليوم حسب الهيكلية المعتمدة</span>
@@ -666,45 +729,32 @@
         </div>
       </section>
 
-      <!-- TAB 3: PERSONNEL & FULL FORCE CONTROL (القوة) -->
-      <section id="tab-personnel" class="tab-view hidden">
-        <div class="card">
-          <div class="card-title">
-            <span>🪖 إدارة القوة والتشكيل الكامل (<span id="roster-count">0</span> فرد)</span>
-            <div style="display:flex;gap:6px;flex-wrap:wrap">
-              <button class="btn btn-primary btn-sm" id="btn-add-battalion">+ إدراج كتيبة</button>
-              <button class="btn btn-ok btn-sm" id="btn-add-company">+ إضافة سرية</button>
-              <button class="btn btn-info btn-sm" id="btn-add-person">+ إضافة فرد</button>
-            </div>
-          </div>
-
-          <!-- Active Battalion Summary + Edit/Delete -->
-          <div id="active-bat-card" class="person-card" style="border-color:var(--border-strong);background:rgba(205,186,161,.08)"></div>
-
-          <div class="filters">
-            <input id="roster-search" class="input-field" placeholder="ابحث باسم فرد، جماعة، رقم ذاتي، اختصاص..." />
-            <select id="roster-company" class="input-field"></select>
-          </div>
-
-          <!-- Hierarchical Editable Force View: Companies -> Groups (10 members) -> Members -->
-          <div id="force-tree-list"></div>
-        </div>
-      </section>
-
-      <!-- TAB 4: HIERARCHY & AUTO-SHIFT ROSTER (الهيكلية) -->
+      <!-- TAB 3: UNIFIED HIERARCHY & FORCE MANAGEMENT (الهيكلية والقوة) -->
       <section id="tab-hierarchy" class="tab-view hidden">
         <div class="card" style="border-color:var(--border-strong)">
           <div class="card-title">
-            <span>🏛️ الهيكلية التنظيمية واعتماد المناوبات التلقائي</span>
-            <div style="display:flex;gap:6px;flex-wrap:wrap">
-              <button class="btn btn-primary btn-sm" id="btn-auto-shifts">⚡ فرز المناوبات تلقائياً (أ / ب)</button>
-              <button class="btn btn-ok btn-sm" id="btn-commit-shifts">✓ اعتماد التشكيل للتفقد</button>
-              <button class="btn btn-sm" id="btn-share-hierarchy-img">📸 مشاركة صورة الهيكلية</button>
+            <span>🏛️ الهيكلية والقوة (<span id="roster-count">0</span> فرد)</span>
+            <div style="display:flex;gap:5px;flex-wrap:wrap">
+              <button class="btn btn-primary btn-xs" id="btn-add-battalion">+ إدراج كتيبة</button>
+              <button class="btn btn-ok btn-xs" id="btn-add-company">+ إضافة سرية</button>
+              <button class="btn btn-info btn-xs" id="btn-add-person">+ إضافة فرد</button>
             </div>
           </div>
+
           <div class="kpi-grid" id="hierarchy-shift-summary"></div>
-          <div style="font-size:12px;color:var(--text-muted)">
-            💡 انقر على شارة الوجبة بجانب أي جماعة أو فرد داخل الهيكلية لتبديل مناوبته فوراً (الوجبة أ ↔ الوجبة ب ↔ دوام دائم)، أو اضغط <strong>فرز المناوبات تلقائياً</strong> لتوزيع متوازن 50/50.
+
+          <div class="filters" style="margin-top:8px;margin-bottom:8px">
+            <input id="roster-search" class="input-field" placeholder="ابحث باسم فرد، ضابط، جماعة، رقم ذاتي، اختصاص..." />
+            <select id="roster-company" class="input-field"></select>
+          </div>
+
+          <div style="display:flex;gap:6px;flex-wrap:wrap;align-items:center">
+            <button class="btn btn-primary btn-xs" id="btn-auto-shifts">⚡ فرز المناوبات تلقائياً (أ / ب)</button>
+            <button class="btn btn-ok btn-xs" id="btn-commit-shifts">✓ اعتماد التشكيل للتفقد</button>
+            <button class="btn btn-xs" id="btn-share-hierarchy-img">📸 مشاركة صورة الهيكلية</button>
+          </div>
+          <div style="font-size:11.5px;color:var(--text-muted);margin-top:6px">
+            💡 اضغط على شارة المناوبة بجانب أي جماعة أو فرد لتبديلها فوراً (المناوبة أ ↔ المناوبة ب ↔ دوام إداري). لوحة ضباط السرية مثبتة دائماً في مقدمة كل سرية.
           </div>
         </div>
 
@@ -724,9 +774,21 @@
                 <div style="font-size:11px;color:#86efac" id="wa-sub-status">الكتيبة الأولى مدفعية 130مم • مشفّر ومزامن</div>
               </div>
             </div>
-            <div style="display:flex;gap:5px;align-items:center">
+            <div style="display:flex;gap:4px;align-items:center;flex-wrap:wrap">
+              <button class="btn btn-xs" id="btn-enable-notifs" title="تفعيل إشعارات الرسائل">🔔 إشعارات</button>
+              <button class="btn btn-primary btn-xs" id="btn-open-notify-msg" title="إرسال رسالة نصية للأعضاء مع إشعار">📢 إرسال للأعضاء</button>
               <span class="pill gold" id="chat-count">0 رسالة</span>
               <button class="btn btn-danger btn-xs hidden" id="btn-clear-chat" title="مسح الشات لدى الجميع (للمالك فقط)">🗑 مسح للجميع</button>
+            </div>
+          </div>
+          <div class="wa-target-strip">
+            <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap">
+              <span style="color:var(--text-muted)">توجيه الرسالة السريعة:</span>
+              <button class="pill clickable gold" id="btn-quick-target-pick" title="اضغط لاختيار الكل أو تحديد يدوي">📢 الكل ▾</button>
+            </div>
+            <div style="display:flex;gap:4px">
+              <button class="btn btn-xs btn-primary" id="btn-chat-flt-all">كل الرسائل</button>
+              <button class="btn btn-xs" id="btn-chat-flt-mine">الموجهة لي</button>
             </div>
           </div>
           <div class="wa-messages" id="chat-list"></div>
@@ -761,11 +823,11 @@
             </div>
             <div class="row-2">
               <div>
-                <label class="label">تاريخ بداية الدورة (الوجبة أ)</label>
+                <label class="label">تاريخ بداية الدورة (المناوبة أ)</label>
                 <input id="set-shift-start" type="date" class="input-field" />
               </div>
               <div>
-                <label class="label">أيام الدوام / الإجازة لكل وجبة</label>
+                <label class="label">أيام الدوام / الإجازة لكل مناوبة</label>
                 <input id="set-shift-days" type="number" min="1" max="30" class="input-field" />
               </div>
             </div>
@@ -880,8 +942,7 @@
               <select id="layout-target-page" class="input-field">
                 <option value="attendance">التفقد</option>
                 <option value="readiness">الجاهزية</option>
-                <option value="personnel">القوة</option>
-                <option value="hierarchy">الهيكلية</option>
+                <option value="hierarchy">الهيكلية والقوة</option>
                 <option value="chat">التواصل</option>
               </select>
             </div>
@@ -999,21 +1060,57 @@
           </div>
         </div>
 
-        <div class="card">
-          <div class="card-title"><span>↶ سجل التراجع السريع (آخر 5 تعديلات)</span></div>
-          <div id="undo-history-list"></div>
+        <div class="acc-card" id="undo-main-acc">
+          <div class="acc-header" data-act="toggle-undo-main">
+            <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
+              <span class="acc-toggle-btn">▾</span>
+              <div>
+                <div style="font-size:14px;font-weight:900;color:var(--gold-light)">↶ سجل التراجع والإعادة (حتى 200 خطوة)</div>
+                <div class="person-meta" id="undo-summary-meta">للخلف: 0 / 200 • للأمام: 0 / 200</div>
+              </div>
+            </div>
+            <div style="display:flex;gap:4px;flex-wrap:wrap">
+              <button type="button" class="btn btn-primary btn-xs" id="btn-undo-step-set">↶ للخلف</button>
+              <button type="button" class="btn btn-info btn-xs" id="btn-redo-step-set">↷ للأمام</button>
+              <button type="button" class="btn btn-danger btn-xs" id="btn-clear-undo-history">🗑 حذف السجل</button>
+            </div>
+          </div>
+          <div class="acc-body">
+            <div class="sub-acc" id="undo-back-acc">
+              <div class="sub-acc-head" data-act="toggle-undo-back">
+                <div style="display:flex;align-items:center;gap:6px">
+                  <span class="acc-toggle-btn" style="width:22px;height:22px;font-size:10px">▾</span>
+                  <strong style="font-size:12.5px;color:var(--gold-light)">↶ خطوات التراجع للخلف (<span id="undo-back-count">0</span> / 200)</strong>
+                </div>
+              </div>
+              <div class="sub-acc-body">
+                <div id="undo-history-list" class="undo-acc-list"></div>
+              </div>
+            </div>
+
+            <div class="sub-acc collapsed" id="undo-fwd-acc">
+              <div class="sub-acc-head" data-act="toggle-undo-fwd">
+                <div style="display:flex;align-items:center;gap:6px">
+                  <span class="acc-toggle-btn" style="width:22px;height:22px;font-size:10px">▾</span>
+                  <strong style="font-size:12.5px;color:var(--info)">↷ خطوات الإعادة للأمام (<span id="undo-fwd-count">0</span> / 200)</strong>
+                </div>
+              </div>
+              <div class="sub-acc-body">
+                <div id="redo-history-list" class="undo-acc-list"></div>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
     </main>
   </div>
 
-  <!-- BOTTOM NAV (6 TABS) -->
+  <!-- BOTTOM NAV (5 TABS) -->
   <nav class="bottom-nav">
     <button class="nav-btn active" data-tab="attendance"><span class="ico">📋</span><span>التفقد</span></button>
     <button class="nav-btn" data-tab="readiness"><span class="ico">⚡</span><span>الجاهزية</span></button>
-    <button class="nav-btn" data-tab="personnel"><span class="ico">🪖</span><span>القوة</span></button>
-    <button class="nav-btn" data-tab="hierarchy"><span class="ico">🏛️</span><span>الهيكلية</span></button>
-    <button class="nav-btn" data-tab="chat"><span class="ico">🎙️</span><span>التواصل</span></button>
+    <button class="nav-btn" data-tab="hierarchy"><span class="ico">🏛️</span><span>الهيكلية والقوة</span></button>
+    <button class="nav-btn" data-tab="chat"><span class="ico">🎙️</span><span>التواصل</span><span id="chat-unread-badge" class="nav-badge hidden">0</span></button>
     <button class="nav-btn" data-tab="settings"><span class="ico">⚙️</span><span>الإعدادات</span></button>
   </nav>
 
@@ -1053,10 +1150,9 @@
           <div>
             <label class="label">مناوبة قائد الكتيبة</label>
             <select id="hq-commander-batch" class="input-field">
-              <option value="NO_SHIFT">دون دوام</option>
-              <option value="PERMANENT">دوام دائم</option>
               <option value="A">المناوبة أ</option>
               <option value="B">المناوبة ب</option>
+              <option value="ADMIN">دوام إداري</option>
             </select>
           </div>
           <div>
@@ -1072,10 +1168,9 @@
           <div>
             <label class="label">مناوبة رئيس الأركان</label>
             <select id="hq-chief-batch" class="input-field">
-              <option value="NO_SHIFT">دون دوام</option>
-              <option value="PERMANENT">دوام دائم</option>
               <option value="A">المناوبة أ</option>
               <option value="B">المناوبة ب</option>
+              <option value="ADMIN">دوام إداري</option>
             </select>
           </div>
           <div>
@@ -1159,8 +1254,8 @@
           <div>
             <label class="label">نظام الدوام</label>
             <select id="cm-has-crews" class="input-field">
-              <option value="true">مناوبات 10/10 (وجبة أ / ب)</option>
-              <option value="false">دوام دائم (بدون طواقم)</option>
+              <option value="true">مناوبات 10/10 (المناوبة أ / ب)</option>
+              <option value="false">دوام إداري</option>
             </select>
           </div>
         </div>
@@ -1206,12 +1301,11 @@
             <input id="gm-leader" class="input-field" placeholder="اسم قائد الجماعة" />
           </div>
           <div>
-            <label class="label">الوجبة / المناوبة</label>
+            <label class="label">المناوبة / الدوام</label>
             <select id="gm-batch" class="input-field">
               <option value="A">المناوبة أ</option>
               <option value="B">المناوبة ب</option>
-              <option value="PERMANENT">دوام دائم</option>
-              <option value="NO_SHIFT">دون دوام</option>
+              <option value="ADMIN">دوام إداري</option>
             </select>
           </div>
         </div>
@@ -1303,8 +1397,7 @@
               <option value="INHERIT">تلقائي (يتبع الجماعة)</option>
               <option value="A">المناوبة أ</option>
               <option value="B">المناوبة ب</option>
-              <option value="PERMANENT">دوام دائم</option>
-              <option value="NO_SHIFT">دون دوام</option>
+              <option value="ADMIN">دوام إداري</option>
             </select>
           </div>
           <div style="display:flex;align-items:flex-end;padding-bottom:6px">
@@ -1323,6 +1416,68 @@
     </div>
   </div>
 
+  <!-- TARGETED MEMBER MESSAGE & NOTIFICATION MODAL -->
+  <div id="notify-msg-modal" class="modal-backdrop hidden">
+    <div class="modal modal-lg">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px">
+        <strong style="color:var(--gold-light)">📢 إرسال رسالة نصية للأعضاء مع إشعار</strong>
+        <button class="btn btn-sm" data-close="notify-msg-modal">✕</button>
+      </div>
+      <form id="notify-msg-form" class="form-grid">
+        <div>
+          <label class="label">تحديد المستلمين:</label>
+          <div style="display:flex;gap:8px;flex-wrap:wrap">
+            <label style="flex:1;min-width:150px;display:flex;align-items:center;gap:6px;background:var(--bg-card);border:1px solid var(--border-strong);border-radius:10px;padding:8px 10px;cursor:pointer;font-size:12.5px;font-weight:700">
+              <input type="radio" name="nm-mode" value="ALL" id="nm-mode-all" checked />
+              <span>📢 تحديد الكل (جميع الأعضاء)</span>
+            </label>
+            <label style="flex:1;min-width:150px;display:flex;align-items:center;gap:6px;background:var(--bg-card);border:1px solid var(--border-strong);border-radius:10px;padding:8px 10px;cursor:pointer;font-size:12.5px;font-weight:700">
+              <input type="radio" name="nm-mode" value="MANUAL" id="nm-mode-manual" />
+              <span>☑️ تحديد يدوي للأعضاء</span>
+            </label>
+          </div>
+        </div>
+
+        <div id="nm-manual-wrap" class="hidden form-grid">
+          <div style="display:flex;gap:6px;align-items:center;flex-wrap:wrap">
+            <input id="nm-search" class="input-field" style="flex:1;min-width:160px" placeholder="ابحث عن عضو أو جهاز..." />
+            <button type="button" class="btn btn-ok btn-xs" id="btn-nm-select-all">✓ تحديد الكل</button>
+            <button type="button" class="btn btn-xs" id="btn-nm-clear-all">✕ إلغاء الكل</button>
+            <span class="pill gold" id="nm-selected-count">0 محدد</span>
+          </div>
+          <div id="nm-recipients-list" class="recipient-pick-list"></div>
+        </div>
+
+        <div class="row-2">
+          <div>
+            <label class="label">أهمية الإشعار</label>
+            <select id="nm-priority" class="input-field">
+              <option value="NORMAL">إشعار عادي</option>
+              <option value="HIGH">هام ⚑</option>
+              <option value="URGENT">عاجل وفوري 🚨</option>
+            </select>
+          </div>
+          <div style="display:flex;align-items:flex-end;padding-bottom:6px">
+            <label style="display:flex;align-items:center;gap:7px;font-size:12.5px;font-weight:700;cursor:pointer">
+              <input type="checkbox" id="nm-enable-notif" checked />
+              <span>🔔 إرسال مع إشعار وصوت تنبيه</span>
+            </label>
+          </div>
+        </div>
+
+        <div>
+          <label class="label">نص الرسالة للأعضاء</label>
+          <textarea id="nm-text" rows="3" class="input-field" placeholder="اكتب نص الرسالة أو التعميم الميداني هنا..." required></textarea>
+        </div>
+
+        <div style="display:flex;gap:8px;justify-content:flex-end;flex-wrap:wrap">
+          <button type="button" class="btn btn-sm" id="btn-nm-apply-quick">تثبيت المستلمين للشات فقط</button>
+          <button type="submit" class="btn btn-primary">📤 إرسال الرسالة والإشعار الآن</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
   <!-- SHARE APP DOWNLOAD LINK MODAL -->
   <div id="share-app-modal" class="modal-backdrop hidden">
     <div class="modal">
@@ -1332,7 +1487,7 @@
       </div>
       <div style="text-align:center;margin-bottom:10px">
         <svg width="46" height="46" viewBox="0 0 256 256"><path d="M30,120L41,119L57,102L59,103L58,106L34,132L41,132L47,129L63,108L65,109L65,111L40,144L49,143L54,138L70,113L72,114L46,156L53,155L58,152L78,117L80,118L80,120L62,153L66,153L72,150L86,119L88,120L88,123L76,151L82,150L85,147L95,121L97,122L88,149L95,147L98,143L103,123L105,122L106,126L101,146L107,142L109,131L111,129L116,136L115,140L104,152L104,156L97,164L80,165L80,170L84,166L87,166L88,168L85,171L87,173L87,170L93,166L99,172L101,170L98,166L103,160L109,159L117,154L117,158L97,185L106,183L109,180L114,168L117,167L118,169L108,191L116,189L119,184L121,172L124,169L125,175L123,182L123,191L125,193L130,192L130,195L134,189L131,174L132,169L135,171L137,184L140,189L148,191L138,169L139,167L142,168L147,180L150,183L160,185L138,156L139,154L153,160L158,166L155,170L157,173L157,171L163,166L166,167L170,173L171,171L168,168L169,166L172,166L176,169L176,165L161,165L153,157L153,153L141,139L144,129L146,128L149,142L152,145L156,146L150,125L151,123L154,124L157,139L161,147L168,149L159,124L160,122L162,122L171,147L175,150L180,151L168,123L168,120L170,119L184,150L190,153L194,153L176,120L176,118L178,117L197,151L201,154L209,156L186,120L184,114L187,114L204,141L211,144L216,144L192,113L191,109L194,109L211,131L221,131L197,104L198,102L215,119L226,120L183,76L179,74L165,75L163,77L163,88L160,95L149,102L141,102L138,100L136,80L132,77L123,76L112,81L112,86L115,84L119,84L121,86L121,92L117,101L107,102L102,100L95,93L93,87L93,77L90,74L76,74L72,76Z M145,58L148,61L145,67L150,66L153,70L153,66L158,63L154,61L153,57L151,59Z M98,63L103,65L103,70L107,66L112,67L109,63L111,58L106,59L103,56L103,60Z M121,55L125,59L124,64L128,61L133,64L132,58L136,55L131,55L128,50L126,55Z" fill="#cdbaa1" /></svg>
-        <div style="font-size:14px;font-weight:800;color:var(--gold-light);margin-top:4px" id="share-app-name">تفقد دوام الـ130مم</div>
+        <div style="font-size:14px;font-weight:800;color:var(--gold-light);margin-top:4px" id="share-app-name">راصد | 130مم</div>
       </div>
       <label class="label">رابط التنزيل والتثبيت المباشر:</label>
       <input id="share-app-url-input" class="input-field" readonly style="direction:ltr;text-align:left;font-size:12.5px;margin-bottom:10px" />
@@ -1363,6 +1518,21 @@
   </div>
 
   <div id="print-sheet"></div>
+  <!-- IN-APP REAL-TIME NOTIFICATION BANNER -->
+  <div id="inapp-notif-banner" class="hidden">
+    <div style="flex:1;min-width:0">
+      <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-bottom:3px">
+        <span style="font-size:12.5px;font-weight:900;color:var(--gold-light)" id="inapp-notif-title">🔔 رسالة جديدة</span>
+        <span class="pill gold" id="inapp-notif-prio" style="font-size:10px">إشعار</span>
+      </div>
+      <div id="inapp-notif-body" style="font-size:12.5px;color:var(--text-main);line-height:1.45;word-break:break-word"></div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:4px;flex-shrink:0">
+      <button class="btn btn-primary btn-xs" id="btn-open-notif-chat">فتح</button>
+      <button class="btn btn-xs" id="btn-close-notif-banner">✕</button>
+    </div>
+  </div>
+
   <div id="toast" class="toast hidden"></div>
 
   <script>
@@ -1384,13 +1554,20 @@
       INACTIVE: 'غير فعال',
       ABSENT: 'غياب'
     };
+    const MAX_UNDO_STEPS = 200;
+    const LAST_NOTIF_KEY = 'rased_last_notif_id_v1';
     const BATCH_LABELS = {
       A: 'المناوبة أ',
       B: 'المناوبة ب',
-      PERMANENT: 'دوام دائم',
-      NO_SHIFT: 'دون دوام',
+      ADMIN: 'دوام إداري',
       INHERIT: 'يتبع الجماعة'
     };
+    function normalizeBatch(b, allowInherit = false) {
+      if (allowInherit && b === 'INHERIT') return 'INHERIT';
+      if (b === 'A' || b === 'B' || b === 'ADMIN') return b;
+      if (b === 'PERMANENT' || b === 'NO_SHIFT') return 'ADMIN';
+      return allowInherit ? 'INHERIT' : 'A';
+    }
     const SESSION_TOKEN_KEY = 'tafaqqud_session_token_v1';
     const collapsedComps = new Set();
     const collapsedGroups = new Set();
@@ -1415,7 +1592,7 @@
       return {
         schemaVersion: 2,
         settings: {
-          app_title: 'تفقد دوام الـ130مم',
+          app_title: 'راصد | 130مم',
           unit_name: 'الكتيبة الأولى مدفعية 130مم',
           active_battalion_id: batId,
           shift_start: '2026-11-24',
@@ -1457,8 +1634,8 @@
             code: '130-1',
             commander: 'قائد الكتيبة الأولى مدفعية 130',
             chief_of_staff: 'رئيس أركان الكتيبة الأولى مدفعية 130',
-            commander_batch: 'PERMANENT',
-            chief_batch: 'PERMANENT',
+            commander_batch: 'ADMIN',
+            chief_batch: 'ADMIN',
             notes: 'ثكنة اللواء 137'
           }
         ],
@@ -1470,7 +1647,7 @@
           { id: 'comp_4', battalion_id: batId, code: '4', name: 'سرية التأمين الإداري', commander: '', has_crews: true }
         ],
         groups: [
-          { id: 'grp_0_1', battalion_id: batId, company_id: 'comp_0', name: 'جماعة القيادة والأركان', leader: 'قائد الكتيبة الأولى مدفعية 130', shift_batch: 'PERMANENT', capacity: 10 },
+          { id: 'grp_0_1', battalion_id: batId, company_id: 'comp_0', name: 'جماعة القيادة والأركان', leader: 'قائد الكتيبة الأولى مدفعية 130', shift_batch: 'ADMIN', capacity: 10 },
           { id: 'grp_1_1', battalion_id: batId, company_id: 'comp_1', name: 'الجماعة الأولى', leader: 'رئيس الطاقم الأول', shift_batch: 'A', capacity: 10 },
           { id: 'grp_1_2', battalion_id: batId, company_id: 'comp_1', name: 'الجماعة الثانية', leader: '', shift_batch: 'B', capacity: 10 },
           { id: 'grp_2_1', battalion_id: batId, company_id: 'comp_2', name: 'الجماعة الأولى', leader: '', shift_batch: 'A', capacity: 10 },
@@ -1480,14 +1657,15 @@
           { id: 'grp_4_1', battalion_id: batId, company_id: 'comp_4', name: 'جماعة الإدارة والتأمين', leader: 'مجد محمد رضوان الموسى', shift_batch: 'A', capacity: 10 }
         ],
         personnel: [
-          { id: 'p_1', battalion_id: batId, company_id: 'comp_0', group_id: 'grp_0_1', serial: 'c137001', name: 'قائد الكتيبة الأولى مدفعية 130', rank: 'قائد كتيبة', job: 'قائد كتيبة', is_leader: true, shift_batch: 'PERMANENT', phone: '', notes: '' },
+          { id: 'p_1', battalion_id: batId, company_id: 'comp_0', group_id: 'grp_0_1', serial: 'c137001', name: 'قائد الكتيبة الأولى مدفعية 130', rank: 'قائد كتيبة', job: 'قائد كتيبة', is_leader: true, shift_batch: 'ADMIN', phone: '', notes: '' },
           { id: 'p_2', battalion_id: batId, company_id: 'comp_4', group_id: 'grp_4_1', serial: 'c137903', name: 'مجد محمد رضوان الموسى', rank: 'إداري', job: 'مستثمر حاسوب', is_leader: true, shift_batch: 'INHERIT', phone: '', notes: '' },
           { id: 'p_3', battalion_id: batId, company_id: 'comp_1', group_id: 'grp_1_1', serial: 'c137101', name: 'رئيس الطاقم الأول — السرية 1', rank: 'قائد جماعة', job: 'قائد مدفع', is_leader: true, shift_batch: 'INHERIT', phone: '', notes: '' },
           { id: 'p_4', battalion_id: batId, company_id: 'comp_1', group_id: 'grp_1_2', serial: 'c137102', name: 'عنصر الجماعة الثانية — السرية 1', rank: 'فرد', job: 'رامي', is_leader: false, shift_batch: 'INHERIT', phone: '', notes: '' }
         ],
         attendance: {},
         chat: [],
-        undoStack: []
+        undoStack: [],
+        redoStack: []
       };
     }
 
@@ -1508,23 +1686,66 @@
           }
         }
         const mergedSettings = { ...def.settings, ...(raw.settings || {}) };
-        if (!Array.isArray(mergedSettings.readinessMetrics) || !mergedSettings.readinessMetrics.length) {
-          mergedSettings.readinessMetrics = def.settings.readinessMetrics;
+        if (!mergedSettings.app_title || mergedSettings.app_title === 'تفقد دوام الـ130مم') {
+          mergedSettings.app_title = 'راصد | 130مم';
+        }
+        if (Array.isArray(raw.settings && raw.settings.readinessMetrics) && raw.settings.readinessMetrics.length) {
+          const defByKey = Object.fromEntries(def.settings.readinessMetrics.map((m) => [m.key, m]));
+          const seenKeys = new Set();
+          const normalizedMetrics = [];
+          for (const m of raw.settings.readinessMetrics) {
+            if (!m || !m.key || seenKeys.has(m.key)) continue;
+            seenKeys.add(m.key);
+            const fallback = defByKey[m.key] || { label: m.label || m.key, color: '#cdbaa1' };
+            normalizedMetrics.push({
+              key: m.key,
+              label: m.label || fallback.label,
+              enabled: m.enabled === false ? false : true,
+              color: (m.color && m.color.startsWith('#')) ? m.color : fallback.color,
+              manualValue: m.manualValue !== undefined ? String(m.manualValue) : ''
+            });
+          }
+          for (const dm of def.settings.readinessMetrics) {
+            if (!seenKeys.has(dm.key)) normalizedMetrics.push({ ...dm });
+          }
+          mergedSettings.readinessMetrics = normalizedMetrics;
+        } else {
+          mergedSettings.readinessMetrics = def.settings.readinessMetrics.map((m) => ({ ...m }));
         }
         const mergedLayouts = { ...def.settings.pageLayouts };
-        for (const pKey of ['attendance', 'readiness', 'personnel', 'hierarchy', 'chat']) {
+        for (const pKey of ['attendance', 'readiness', 'hierarchy', 'chat']) {
           mergedLayouts[pKey] = {
             ...def.settings.pageLayouts[pKey],
             ...((raw.settings && raw.settings.pageLayouts && raw.settings.pageLayouts[pKey]) || {})
           };
         }
         mergedSettings.pageLayouts = mergedLayouts;
+
+        const normBattalions = (raw.battalions || []).map((b) => ({
+          ...b,
+          commander_batch: normalizeBatch(b.commander_batch || 'ADMIN', false),
+          chief_batch: normalizeBatch(b.chief_batch || 'ADMIN', false)
+        }));
+        const normGroups = (raw.groups || []).map((g) => ({
+          ...g,
+          shift_batch: normalizeBatch(g.shift_batch || 'A', false)
+        }));
+        const normPersonnel = (raw.personnel || []).map((p) => ({
+          ...p,
+          shift_batch: normalizeBatch(p.shift_batch || 'INHERIT', true)
+        }));
+
         return {
           ...def,
           ...raw,
+          battalions: normBattalions,
+          groups: normGroups,
+          personnel: normPersonnel,
           settings: mergedSettings,
           accessControl: { ...def.accessControl, ...(raw.accessControl || {}) },
-          attendance: migratedAtt
+          attendance: migratedAtt,
+          undoStack: Array.isArray(raw.undoStack) ? raw.undoStack.slice(0, MAX_UNDO_STEPS) : [],
+          redoStack: Array.isArray(raw.redoStack) ? raw.redoStack.slice(0, MAX_UNDO_STEPS) : []
         };
       }
 
@@ -1552,8 +1773,8 @@
       for (const c of companies) {
         if (!c.has_crews) {
           const gid = 'grp_' + c.code + '_perm';
-          groups.push({ id: gid, battalion_id: batId, company_id: c.id, name: 'جماعة ' + c.name, leader: '', shift_batch: 'PERMANENT', capacity: 10 });
-          groupKeyMap[c.id + '|PERMANENT'] = gid;
+          groups.push({ id: gid, battalion_id: batId, company_id: c.id, name: 'جماعة ' + c.name, leader: '', shift_batch: 'ADMIN', capacity: 10 });
+          groupKeyMap[c.id + '|ADMIN'] = gid;
         } else {
           const gA = 'grp_' + c.code + '_a';
           const gB = 'grp_' + c.code + '_b';
@@ -1651,22 +1872,27 @@
       });
     }
 
+    function captureSnapshot(label) {
+      return {
+        id: Date.now() + Math.floor(Math.random() * 1000),
+        label: label || 'تعديل',
+        time: new Date().toLocaleTimeString('ar-SY', { hour: '2-digit', minute: '2-digit', second: '2-digit' }),
+        data: JSON.stringify({
+          settings: state.settings,
+          battalions: state.battalions,
+          companies: state.companies,
+          groups: state.groups,
+          personnel: state.personnel,
+          attendance: state.attendance
+        })
+      };
+    }
+
     async function persistState(undoLabel) {
       if (undoLabel) {
-        const snap = {
-          id: Date.now(),
-          label: undoLabel,
-          time: new Date().toLocaleTimeString('ar-SY', { hour: '2-digit', minute: '2-digit' }),
-          data: JSON.stringify({
-            settings: state.settings,
-            battalions: state.battalions,
-            companies: state.companies,
-            groups: state.groups,
-            personnel: state.personnel,
-            attendance: state.attendance
-          })
-        };
-        state.undoStack = [snap, ...(state.undoStack || [])].slice(0, 5);
+        const snap = captureSnapshot(undoLabel);
+        state.undoStack = [snap, ...(state.undoStack || [])].slice(0, MAX_UNDO_STEPS);
+        state.redoStack = [];
       }
       await dbPut('app_state', state);
     }
@@ -1728,18 +1954,17 @@
     }
 
     function resolvePersonBatch(person) {
-      if (person.shift_batch && person.shift_batch !== 'INHERIT') return person.shift_batch;
+      if (person.shift_batch && person.shift_batch !== 'INHERIT') return normalizeBatch(person.shift_batch, false);
       const grp = state.groups.find((g) => g.id === person.group_id);
-      if (grp && grp.shift_batch) return grp.shift_batch;
+      if (grp && grp.shift_batch) return normalizeBatch(grp.shift_batch, false);
       const comp = state.companies.find((c) => c.id === person.company_id);
-      if (comp && comp.has_crews === false) return 'PERMANENT';
+      if (comp && comp.has_crews === false) return 'ADMIN';
       return 'A';
     }
 
     function isScheduledOnDuty(person, dateIso) {
       const eff = resolvePersonBatch(person);
-      if (eff === 'NO_SHIFT') return false;
-      if (eff === 'PERMANENT') return true;
+      if (eff === 'ADMIN') return true;
       const shift = getShiftInfo(dateIso);
       return eff === shift.activeBatch;
     }
@@ -1873,20 +2098,21 @@
             if (Array.isArray(metaObj.cloudChat)) {
               const resetTs = state.accessControl.chatResetAt ? Date.parse(state.accessControl.chatResetAt) : 0;
               const localIds = new Set((state.chat || []).map((m) => String(m.id)));
-              let added = false;
+              const newlyArrived = [];
               for (const cm of metaObj.cloudChat) {
                 if (!cm || !cm.id) continue;
                 if (resetTs && Number(cm.id) <= resetTs) continue;
                 if (!localIds.has(String(cm.id))) {
                   state.chat.push(cm);
                   localIds.add(String(cm.id));
-                  added = true;
+                  newlyArrived.push(cm);
                 }
               }
-              if (added) {
+              if (newlyArrived.length) {
                 state.chat.sort((a, b) => Number(a.id) - Number(b.id));
-                state.chat = state.chat.slice(-120);
+                state.chat = state.chat.slice(-150);
                 renderChat();
+                handleIncomingChatNotifications(newlyArrived);
               }
             }
           }
@@ -1919,7 +2145,7 @@
         const pureList = (state.accessControl.registeredDevices || []).filter((d) => d && d.deviceId && !d.__meta);
         const cloudChat = (state.chat || [])
           .filter((m) => m && !m.audio && m.text)
-          .slice(-60);
+          .slice(-80);
         const payloadDevices = [
           {
             __meta: true,
@@ -1958,10 +2184,37 @@
     let currentActiveTab = 'attendance';
 
     function getReadinessMetricsList() {
+      const defList = buildDefaultState().settings.readinessMetrics;
       if (state && state.settings && Array.isArray(state.settings.readinessMetrics) && state.settings.readinessMetrics.length) {
-        return state.settings.readinessMetrics;
+        return state.settings.readinessMetrics.map((m) => ({
+          ...m,
+          enabled: m.enabled === false ? false : true
+        }));
       }
-      return buildDefaultState().settings.readinessMetrics;
+      return defList.map((m) => ({ ...m }));
+    }
+
+    function readMetricsFromCustomizerDOM() {
+      const base = getReadinessMetricsList().map((x) => ({ ...x }));
+      const rows = document.querySelectorAll('#readiness-cfg-list [data-ridx]');
+      if (!rows.length) return base;
+      rows.forEach((row) => {
+        const i = Number(row.dataset.ridx);
+        if (base[i]) {
+          base[i].enabled = Boolean(row.querySelector('.rcfg-en').checked);
+          base[i].label = row.querySelector('.rcfg-lbl').value.trim() || base[i].label;
+          base[i].manualValue = row.querySelector('.rcfg-manual').value.trim();
+          base[i].color = row.querySelector('.rcfg-col').value || base[i].color;
+        }
+      });
+      return base;
+    }
+
+    async function commitReadinessMetrics(showMsg = false) {
+      state.settings.readinessMetrics = readMetricsFromCustomizerDOM();
+      await dbPut('app_state', state);
+      renderReadiness();
+      if (showMsg) showToast('✓ تم حفظ وتطبيق حالات ومؤشرات كشف الجاهزية');
     }
 
     function getMetricDisplayVal(metric, stats) {
@@ -1973,13 +2226,25 @@
       return metric.key === 'readiness' ? `${rawVal}%` : String(rawVal);
     }
 
+    function getCompanyMetricCell(metricKey, r) {
+      if (metricKey === 'total') return { val: String(r.total), style: '' };
+      if (metricKey === 'onDuty') return { val: String(r.duty), style: '' };
+      if (metricKey === 'present') return { val: String(r.present), style: 'color:var(--ok);font-weight:800' };
+      if (metricKey === 'leave') return { val: String(r.leave), style: 'color:var(--info)' };
+      if (metricKey === 'sick') return { val: String(r.sick), style: 'color:var(--warn)' };
+      if (metricKey === 'inactive') return { val: String(r.inactive), style: `color:${r.inactive ? '#ef4444' : 'var(--text-muted)'};font-weight:900` };
+      if (metricKey === 'absent') return { val: String(r.absent), style: `color:${r.absent ? '#dc2626' : 'var(--text-muted)'};font-weight:800` };
+      if (metricKey === 'readiness') return { val: `${r.pct}%`, pill: true, style: '' };
+      return { val: '-', style: '' };
+    }
+
     function renderReadinessCustomizer() {
       const wrap = document.getElementById('readiness-cfg-list');
       if (!wrap) return;
       const metrics = getReadinessMetricsList();
       wrap.innerHTML = metrics.map((m, idx) => `
-        <div class="rcfg-row" data-ridx="${idx}">
-          <input type="checkbox" class="rcfg-en" ${m.enabled !== false ? 'checked' : ''} title="إظهار / إخفاء" />
+        <div class="rcfg-row" data-ridx="${idx}" style="${m.enabled === false ? 'opacity:0.55' : ''}">
+          <input type="checkbox" class="rcfg-en" ${m.enabled === false ? '' : 'checked'} title="إظهار / إخفاء" />
           <input class="input-field rcfg-lbl" value="${escapeHtml(m.label)}" placeholder="اسم الحالة" style="padding:5px 8px;font-size:12.5px" />
           <input class="input-field rcfg-manual" value="${escapeHtml(m.manualValue || '')}" placeholder="تلقائي" title="قيمة يدوية اختيارية" style="padding:5px 6px;font-size:12px;text-align:center" />
           <input type="color" class="rcfg-col" value="${(m.color && m.color.startsWith('#')) ? m.color : '#cdbaa1'}" style="width:34px;height:30px;padding:1px;border:1px solid var(--border);border-radius:6px;background:transparent;cursor:pointer" />
@@ -2042,7 +2307,7 @@
     }
 
     function applyLayoutStyles() {
-      const pages = ['attendance', 'readiness', 'personnel', 'hierarchy', 'chat'];
+      const pages = ['attendance', 'readiness', 'hierarchy', 'chat'];
       for (const p of pages) {
         const el = document.getElementById('tab-' + p);
         if (!el) continue;
@@ -2068,6 +2333,7 @@
       document.getElementById('hdr-unit').textContent = bat ? bat.name : state.settings.unit_name;
       const clearBtn = document.getElementById('btn-clear-chat');
       if (clearBtn) clearBtn.classList.toggle('hidden', !hasValidOwnerSession());
+      updateTopUndoRedoButtons();
 
       const net = document.getElementById('net-pill');
       if (navigator.onLine) {
@@ -2155,7 +2421,7 @@
       document.getElementById('active-date').value = activeDate;
       document.getElementById('shift-headline').textContent = `${shift.batchLabel} — اليوم ${shift.dayInBatch} من ${shift.daysPerBatch}`;
       document.getElementById('shift-remaining').textContent = `متبقي ${shift.remaining} أيام للتبديل`;
-      document.getElementById('shift-crews-lbl').textContent = `المناوبون اليوم: ${shift.batchLabel} + الدوام الدائم`;
+      document.getElementById('shift-crews-lbl').textContent = `المناوبون اليوم: ${shift.batchLabel} + الدوام الإداري`;
 
       const stats = computeStats();
       document.getElementById('kpi-bar').innerHTML = `
@@ -2227,19 +2493,18 @@
 
     function renderReadiness() {
       const stats = computeStats();
-      const metrics = getReadinessMetricsList();
-      const lblByKey = Object.fromEntries(metrics.map((m) => [m.key, m.label]));
+      const visibleMetrics = getReadinessMetricsList().filter((m) => m.enabled !== false);
 
-      document.getElementById('readiness-kpi-bar').innerHTML = metrics
-        .filter((m) => m.enabled !== false)
-        .map((m) => {
-          const displayVal = getMetricDisplayVal(m, stats);
-          const isDanger = m.key === 'inactive' || m.key === 'absent';
-          return `<div class="kpi" style="${isDanger ? 'border-color:rgba(239,68,68,.5)' : ''}">
-            <div class="kpi-val" style="color:${escapeHtml(m.color || '#e7d8c2')}">${escapeHtml(displayVal)}</div>
-            <div class="kpi-lbl" style="${isDanger ? 'color:#fca5a5' : ''}">${escapeHtml(m.label)}</div>
-          </div>`;
-        }).join('');
+      document.getElementById('readiness-kpi-bar').innerHTML = visibleMetrics.length
+        ? visibleMetrics.map((m) => {
+            const displayVal = getMetricDisplayVal(m, stats);
+            const isDanger = m.key === 'inactive' || m.key === 'absent';
+            return `<div class="kpi" style="${isDanger ? 'border-color:rgba(239,68,68,.5)' : ''}">
+              <div class="kpi-val" style="color:${escapeHtml(m.color || '#e7d8c2')}">${escapeHtml(displayVal)}</div>
+              <div class="kpi-lbl" style="${isDanger ? 'color:#fca5a5' : ''}">${escapeHtml(m.label)}</div>
+            </div>`;
+          }).join('')
+        : '<div style="grid-column:1/-1;text-align:center;color:var(--text-muted);font-size:12px;padding:10px">تم إخفاء جميع المؤشرات من الإعدادات.</div>';
 
       const rows = getReadinessCompanyRows();
       document.getElementById('readiness-table-wrap').innerHTML = `
@@ -2247,28 +2512,18 @@
           <thead>
             <tr>
               <th>السرية</th>
-              <th>${escapeHtml(lblByKey.total || 'إجمالي القوة')}</th>
-              <th>${escapeHtml(lblByKey.onDuty || 'مقرر اليوم')}</th>
-              <th>${escapeHtml(lblByKey.present || 'حاضر فعال')}</th>
-              <th>${escapeHtml(lblByKey.leave || 'إجازة')}</th>
-              <th>${escapeHtml(lblByKey.sick || 'مرضية')}</th>
-              <th style="color:#fca5a5">${escapeHtml(lblByKey.inactive || 'غير فعال')}</th>
-              <th>${escapeHtml(lblByKey.absent || 'غياب')}</th>
-              <th>${escapeHtml(lblByKey.readiness || 'الجاهزية')}</th>
+              ${visibleMetrics.map((m) => `<th style="${m.key === 'inactive' || m.key === 'absent' ? 'color:#fca5a5' : ''}">${escapeHtml(m.label)}</th>`).join('')}
             </tr>
           </thead>
           <tbody>
             ${rows.map((r) => `
               <tr>
                 <td><strong>${escapeHtml(r.name)}</strong></td>
-                <td>${r.total}</td>
-                <td>${r.duty}</td>
-                <td style="color:var(--ok);font-weight:800">${r.present}</td>
-                <td style="color:var(--info)">${r.leave}</td>
-                <td style="color:var(--warn)">${r.sick}</td>
-                <td style="color:${r.inactive ? '#ef4444' : 'var(--text-muted)'};font-weight:900">${r.inactive}</td>
-                <td style="color:${r.absent ? '#dc2626' : 'var(--text-muted)'};font-weight:800">${r.absent}</td>
-                <td><span class="pill gold">${r.pct}%</span></td>
+                ${visibleMetrics.map((m) => {
+                  const cell = getCompanyMetricCell(m.key, r);
+                  if (cell.pill) return `<td><span class="pill gold">${escapeHtml(cell.val)}</span></td>`;
+                  return `<td style="${cell.style}">${escapeHtml(cell.val)}</td>`;
+                }).join('')}
               </tr>
             `).join('')}
           </tbody>
@@ -2292,241 +2547,166 @@
         : '<div style="color:var(--ok);font-weight:700;padding:8px">✓ كامل القوة المقررة حاضرة وجاهزة 100% دون غياب أو حالات غير فعالة.</div>';
     }
 
-    // TAB 3: FULL FORCE MANAGEMENT (BATTALIONS -> COMPANIES -> GROUPS (10 MEMBERS) -> MEMBERS)
-    function renderForceManagement() {
-      const bat = getActiveBattalion();
-      const people = getActivePersonnel();
-      const comps = getActiveCompanies();
-      const grps = getActiveGroups();
-      document.getElementById('roster-count').textContent = people.length;
-
-      document.getElementById('active-bat-card').innerHTML = bat ? `
-        <div class="person-top">
-          <div>
-            <div class="person-name" style="color:var(--gold-light)">🏛️ ${escapeHtml(bat.name)} ${bat.code ? '(' + escapeHtml(bat.code) + ')' : ''}</div>
-            <div class="person-meta">
-              القائد: ${escapeHtml(bat.commander || 'غير محدد')} • السرايا: ${comps.length} • الجماعات: ${grps.length} • القوة: ${people.length} فرد
-              ${bat.notes ? ' • ' + escapeHtml(bat.notes) : ''}
-            </div>
-          </div>
-          <div style="display:flex;gap:5px;flex-wrap:wrap">
-            <button class="btn btn-sm" data-act="edit-bat" data-id="${bat.id}">✎ تعديل الكتيبة</button>
-            ${state.battalions.length > 1 ? `<button class="btn btn-danger btn-sm" data-act="del-bat" data-id="${bat.id}">حذف</button>` : ''}
-          </div>
-        </div>
-      ` : '';
-
-      const q = (document.getElementById('roster-search').value || '').trim().toLowerCase();
-      const compFlt = document.getElementById('roster-company').value || 'ALL';
-      const visibleComps = comps.filter((c) => compFlt === 'ALL' || c.id === compFlt);
-
-      const treeEl = document.getElementById('force-tree-list');
-      if (!visibleComps.length) {
-        treeEl.innerHTML = '<div style="text-align:center;color:var(--text-muted);padding:20px">لا توجد سرايا بعد. اضغط «+ إضافة سرية» للبدء.</div>';
-        return;
-      }
-
-      treeEl.innerHTML = visibleComps.map((c) => {
-        const compGroups = grps.filter((g) => g.company_id === c.id);
-        const compPeople = people.filter((p) => p.company_id === c.id);
-        const ungrouped = compPeople.filter((p) => !compGroups.some((g) => g.id === p.group_id));
-
-        const groupsHtml = compGroups.map((g) => {
-          let gMembers = compPeople.filter((p) => p.group_id === g.id);
-          if (q) {
-            const gMatches = g.name.toLowerCase().includes(q) || (g.leader || '').toLowerCase().includes(q);
-            if (!gMatches) {
-              gMembers = gMembers.filter((p) => `${p.name} ${p.serial || ''} ${p.job || ''} ${p.rank || ''} ${p.phone || ''}`.toLowerCase().includes(q));
-              if (!gMembers.length) return '';
-            }
-          }
-          const cap = g.capacity || 10;
-          const totalInG = compPeople.filter((p) => p.group_id === g.id).length;
-          const batchCls = g.shift_batch === 'A' ? 'green' : g.shift_batch === 'B' ? 'blue' : 'gold';
-
-          return `
-            <div class="group-block">
-              <div class="group-head">
-                <div>
-                  <strong style="color:var(--gold-light);font-size:13px">👥 ${escapeHtml(g.name)}</strong>
-                  <span class="pill ${batchCls}" style="margin-right:4px">${BATCH_LABELS[g.shift_batch] || 'الوجبة أ'}</span>
-                  <span class="pill">${totalInG} / ${cap} أفراد</span>
-                  ${g.leader ? `<div class="person-meta">قائد الجماعة: ${escapeHtml(g.leader)}</div>` : ''}
-                </div>
-                <div style="display:flex;gap:4px;flex-wrap:wrap">
-                  <button class="btn btn-primary btn-xs" data-act="bulk-group" data-id="${g.id}">✎ تعديل الكل</button>
-                  <button class="btn btn-ok btn-xs" data-act="add-person-grp" data-comp="${c.id}" data-grp="${g.id}">+ فرد</button>
-                  ${totalInG < cap ? `<button class="btn btn-info btn-xs" data-act="fill-group-10" data-id="${g.id}">+ إكمال لـ ${cap}</button>` : ''}
-                  <button class="btn btn-xs" data-act="edit-group" data-id="${g.id}">⚙️</button>
-                  <button class="btn btn-danger btn-xs" data-act="del-group" data-id="${g.id}">🗑</button>
-                </div>
-              </div>
-              <div class="group-members">
-                ${gMembers.length ? gMembers.map((p, idx) => `
-                  <div class="member-row">
-                    <div>
-                      <div style="font-size:13px;font-weight:800">${idx + 1}. ${p.is_leader ? '★ ' : ''}${escapeHtml(p.name)}</div>
-                      <div class="person-meta">
-                        ${p.rank ? escapeHtml(p.rank) + ' • ' : ''}${escapeHtml(p.job || 'بدون مسمى')}
-                        ${p.serial ? ' • ' + escapeHtml(p.serial) : ''}
-                        ${p.phone ? ' • 📞 ' + escapeHtml(p.phone) : ''}
-                      </div>
-                    </div>
-                    <div style="display:flex;gap:4px">
-                      <button class="btn btn-xs" data-act="edit-person" data-id="${p.id}">تعديل</button>
-                      <button class="btn btn-danger btn-xs" data-act="del-person" data-id="${p.id}">حذف</button>
-                    </div>
-                  </div>
-                `).join('') : '<div style="font-size:12px;color:var(--text-muted);padding:6px;text-align:center">الجماعة فارغة — اضغط «+ إكمال لـ 10» أو «+ فرد».</div>'}
-              </div>
-            </div>
-          `;
-        }).join('');
-
-        const ungroupedFiltered = q
-          ? ungrouped.filter((p) => `${p.name} ${p.serial || ''} ${p.job || ''} ${p.rank || ''}`.toLowerCase().includes(q))
-          : ungrouped;
-
-        const ungroupedHtml = `
-          <div class="comp-cmd-group">
-            <div class="group-head" style="background:rgba(205,186,161,.14)">
-              <div>
-                <strong style="font-size:12.5px;color:var(--gold-light)">⭐ قيادة السرية والضباط (خارج الجماعات: ${ungroupedFiltered.length})</strong>
-              </div>
-              <div style="display:flex;gap:4px;flex-wrap:wrap">
-                <button class="btn btn-xs" data-act="bulk-comp-officers" data-comp="${c.id}">✎ تعديل الكل</button>
-                <button class="btn btn-primary btn-xs" data-act="add-comp-officer" data-comp="${c.id}">+ إضافة ضابط للسرية</button>
-              </div>
-            </div>
-            <div class="group-members">
-              ${ungroupedFiltered.length ? ungroupedFiltered.map((p, idx) => `
-                <div class="member-row">
-                  <div>
-                    <div style="font-size:13px;font-weight:800">${idx + 1}. ★ ${escapeHtml(p.name)}</div>
-                    <div class="person-meta">${p.rank ? escapeHtml(p.rank) + ' • ' : ''}${escapeHtml(p.job || 'ضابط قيادة سرية')} ${p.serial ? '• ' + escapeHtml(p.serial) : ''}</div>
-                  </div>
-                  <div style="display:flex;gap:4px">
-                    <button class="btn btn-xs" data-act="edit-person" data-id="${p.id}">تعديل</button>
-                    <button class="btn btn-danger btn-xs" data-act="del-person" data-id="${p.id}">حذف</button>
-                  </div>
-                </div>
-              `).join('') : '<div style="font-size:11.5px;color:var(--text-muted);text-align:center;padding:6px">لا يوجد ضباط مسجلون في قيادة السرية — اضغط «+ إضافة ضابط للسرية».</div>'}
-            </div>
-          </div>
-        `;
-
-        return `
-          <div class="comp-block">
-            <div class="comp-head">
-              <div>
-                <div style="font-size:14.5px;font-weight:900;color:var(--gold-light)">🛡️ ${escapeHtml(c.name)}</div>
-                <div class="person-meta">
-                  القائد: ${escapeHtml(c.commander || 'غير محدد')} • ${c.has_crews ? 'مناوبات 10/10' : 'دوام دائم'} • ${compGroups.length} جماعات • ${compPeople.length} فرد
-                </div>
-              </div>
-              <div style="display:flex;gap:5px;flex-wrap:wrap">
-                <button class="btn btn-primary btn-xs" data-act="add-group" data-comp="${c.id}">+ إضافة جماعة (10 أفراد)</button>
-                <button class="btn btn-xs" data-act="edit-comp" data-id="${c.id}">تعديل السرية</button>
-                <button class="btn btn-danger btn-xs" data-act="del-comp" data-id="${c.id}">حذف</button>
-              </div>
-            </div>
-            <div class="comp-body">
-              ${groupsHtml || (!ungroupedHtml ? '<div style="font-size:12px;color:var(--text-muted);text-align:center;padding:10px">لا توجد جماعات في هذه السرية بعد — اضغط «+ إضافة جماعة (10 أفراد)».</div>' : '')}
-              ${ungroupedHtml}
-            </div>
-          </div>
-        `;
-      }).join('');
-    }
+    let chatFilterMode = 'ALL';
+    let quickChatTarget = { mode: 'ALL', targets: [] };
+    let unreadChatCount = 0;
 
     function batchBadgeClass(b) {
-      if (b === 'A') return 'green';
-      if (b === 'B') return 'blue';
-      if (b === 'NO_SHIFT') return 'red';
+      const nb = normalizeBatch(b, false);
+      if (nb === 'A') return 'green';
+      if (nb === 'B') return 'blue';
       return 'gold';
     }
 
-    // TAB 4: HIERARCHY & AUTO-SHIFT ROSTER (الهيكلية — سدائل قابلة للطي + قيادة الكتيبة مستقلة)
+    // UNIFIED TAB 3: HIERARCHY & FULL FORCE MANAGEMENT (الهيكلية والقوة — لوحة الضباط مثبتة أولاً في كل سرية)
     function renderHierarchy() {
       const bat = getActiveBattalion();
-      const comps = getActiveCompanies().filter((c) => c.code !== '0' && !c.name.includes('قيادة الكتيبة'));
-      const validCompIds = new Set(comps.map((c) => c.id));
-      const grps = getActiveGroups().filter((g) => validCompIds.has(g.company_id));
+      const allComps = getActiveCompanies().filter((c) => c.code !== '0' && !c.name.includes('قيادة الكتيبة'));
+      const validCompIds = new Set(allComps.map((c) => c.id));
+      const allGrps = getActiveGroups().filter((g) => validCompIds.has(g.company_id));
       const people = getActivePersonnel();
       const shift = getShiftInfo(activeDate);
 
-      let cntA = 0, cntB = 0, cntP = 0, cntNo = 0;
+      const rosterCountEl = document.getElementById('roster-count');
+      if (rosterCountEl) rosterCountEl.textContent = people.length;
+
+      let cntA = 0, cntB = 0, cntAdmin = 0;
       for (const p of people) {
         const b = resolvePersonBatch(p);
         if (b === 'A') cntA++;
         else if (b === 'B') cntB++;
-        else if (b === 'NO_SHIFT') cntNo++;
-        else cntP++;
+        else cntAdmin++;
       }
       const todayDuty = people.filter((p) => isScheduledOnDuty(p, activeDate)).length;
 
       document.getElementById('hierarchy-shift-summary').innerHTML = `
         <div class="kpi"><div class="kpi-val" style="color:var(--ok)">${cntA}</div><div class="kpi-lbl">المناوبة أ</div></div>
         <div class="kpi"><div class="kpi-val" style="color:var(--info)">${cntB}</div><div class="kpi-lbl">المناوبة ب</div></div>
-        <div class="kpi"><div class="kpi-val" style="color:var(--gold)">${cntP}</div><div class="kpi-lbl">دوام دائم</div></div>
-        <div class="kpi"><div class="kpi-val" style="color:#fca5a5">${cntNo}</div><div class="kpi-lbl">دون دوام</div></div>
+        <div class="kpi"><div class="kpi-val" style="color:var(--gold)">${cntAdmin}</div><div class="kpi-lbl">دوام إداري</div></div>
         <div class="kpi"><div class="kpi-val" style="color:var(--gold-light)">${todayDuty}</div><div class="kpi-lbl">مناوبو اليوم (${shift.batchLabel})</div></div>
       `;
 
       const canvasEl = document.getElementById('hierarchy-canvas');
       if (!bat) { canvasEl.innerHTML = ''; return; }
 
-      const cmdBatch = bat.commander_batch || 'PERMANENT';
-      const chiefBatch = bat.chief_batch || 'PERMANENT';
+      const q = ((document.getElementById('roster-search') && document.getElementById('roster-search').value) || '').trim().toLowerCase();
+      const compFlt = (document.getElementById('roster-company') && document.getElementById('roster-company').value) || 'ALL';
+      const visibleComps = allComps.filter((c) => compFlt === 'ALL' || c.id === compFlt);
 
-      const branchesHtml = comps.map((c) => {
-        const cGroups = grps.filter((g) => g.company_id === c.id);
+      const cmdBatch = normalizeBatch(bat.commander_batch || 'ADMIN', false);
+      const chiefBatch = normalizeBatch(bat.chief_batch || 'ADMIN', false);
+
+      const branchesHtml = visibleComps.map((c) => {
+        const cGroups = allGrps.filter((g) => g.company_id === c.id);
         const cPeople = people.filter((p) => p.company_id === c.id);
-        const isCompCollapsed = collapsedComps.has(c.id);
+        const cmdOfficersAll = cPeople.filter((p) => !cGroups.some((g) => g.id === p.group_id));
+        const cmdOfficers = q
+          ? cmdOfficersAll.filter((p) => `${p.name} ${p.rank || ''} ${p.job || ''} ${p.serial || ''} ${p.phone || ''}`.toLowerCase().includes(q))
+          : cmdOfficersAll;
 
-        const groupsHtml = cGroups.map((g) => {
-          const gPeople = cPeople.filter((p) => p.group_id === g.id);
-          const isGrpCollapsed = collapsedGroups.has(g.id);
-          const bCls = batchBadgeClass(g.shift_batch);
+        const compNameMatch = q && `${c.name} ${c.commander || ''}`.toLowerCase().includes(q);
+        const groupsRendered = [];
 
-          return `
+        for (const g of cGroups) {
+          const allGPeople = cPeople.filter((p) => p.group_id === g.id);
+          let gPeople = allGPeople;
+          const gMatch = q && `${g.name} ${g.leader || ''}`.toLowerCase().includes(q);
+          if (q && !compNameMatch && !gMatch) {
+            gPeople = allGPeople.filter((p) => `${p.name} ${p.rank || ''} ${p.job || ''} ${p.serial || ''} ${p.phone || ''}`.toLowerCase().includes(q));
+            if (!gPeople.length) continue;
+          }
+          const isGrpCollapsed = q ? false : collapsedGroups.has(g.id);
+          const cap = g.capacity || 10;
+          const nb = normalizeBatch(g.shift_batch || 'A', false);
+          const bCls = batchBadgeClass(nb);
+
+          groupsRendered.push(`
             <div class="sub-acc ${isGrpCollapsed ? 'collapsed' : ''}">
               <div class="sub-acc-head" data-act="toggle-grp" data-id="${g.id}">
                 <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap">
                   <span class="acc-toggle-btn" style="width:24px;height:24px;font-size:11px">▾</span>
-                  <strong style="font-size:13px;color:var(--gold-light)">${escapeHtml(g.name)}</strong>
-                  <span style="font-size:11px;color:var(--text-muted)">(${gPeople.length}/${g.capacity || 10})</span>
-                  <button class="pill clickable ${bCls}" data-act="cycle-group-batch" data-id="${g.id}" title="تبديل المناوبة">${BATCH_LABELS[g.shift_batch] || 'المناوبة أ'} ↻</button>
+                  <strong style="font-size:13px;color:var(--gold-light)">👥 ${escapeHtml(g.name)}</strong>
+                  <span style="font-size:11px;color:var(--text-muted)">(${allGPeople.length}/${cap})</span>
+                  <button class="pill clickable ${bCls}" data-act="cycle-group-batch" data-id="${g.id}" title="تبديل المناوبة">${BATCH_LABELS[nb]} ↻</button>
                 </div>
-                <div style="display:flex;gap:4px;align-items:center">
+                <div style="display:flex;gap:4px;align-items:center;flex-wrap:wrap">
+                  <button class="btn btn-primary btn-xs" data-act="bulk-group" data-id="${g.id}" title="تعديل جماعي">✎ الكل</button>
                   <button class="btn btn-ok btn-xs" data-act="add-person-grp" data-comp="${c.id}" data-grp="${g.id}">+ فرد</button>
-                  <button class="btn btn-xs" data-act="edit-group" data-id="${g.id}">✎</button>
-                  <button class="btn btn-danger btn-xs" data-act="del-group" data-id="${g.id}">🗑</button>
+                  ${allGPeople.length < cap ? `<button class="btn btn-info btn-xs" data-act="fill-group-10" data-id="${g.id}">+ إكمال لـ ${cap}</button>` : ''}
+                  <button class="btn btn-xs" data-act="edit-group" data-id="${g.id}" title="إعدادات الجماعة">⚙️</button>
+                  <button class="btn btn-danger btn-xs" data-act="del-group" data-id="${g.id}" title="حذف الجماعة">🗑</button>
                 </div>
               </div>
               <div class="sub-acc-body">
                 ${g.leader ? `<div style="font-size:11.5px;color:var(--gold);padding:0 4px">★ قائد الجماعة: ${escapeHtml(g.leader)}</div>` : ''}
-                ${gPeople.map((p) => {
+                ${gPeople.map((p, idx) => {
                   const eff = resolvePersonBatch(p);
                   const pCls = batchBadgeClass(eff);
                   return `
                     <div class="org-member ${p.is_leader ? 'is-leader' : ''}">
-                      <div>
-                        <strong>${p.is_leader ? '★ ' : ''}${escapeHtml(p.name)}</strong>
-                        <span style="color:var(--text-muted)">${p.job ? ' — ' + escapeHtml(p.job) : ''}</span>
+                      <div style="min-width:0">
+                        <div>
+                          <strong>${idx + 1}. ${p.is_leader ? '★ ' : ''}${escapeHtml(p.name)}</strong>
+                          <span style="color:var(--text-muted)">${p.job ? ' — ' + escapeHtml(p.job) : ''}</span>
+                        </div>
+                        ${(p.rank || p.serial || p.phone) ? `<div class="person-meta" style="margin-top:2px">${[p.rank, p.serial, p.phone ? '📞 ' + p.phone : ''].filter(Boolean).map(escapeHtml).join(' • ')}</div>` : ''}
                       </div>
-                      <div style="display:flex;gap:4px;align-items:center">
+                      <div style="display:flex;gap:4px;align-items:center;flex-shrink:0">
                         <button class="pill clickable ${pCls}" style="font-size:10px;padding:2px 6px" data-act="cycle-person-batch" data-id="${p.id}" title="تبديل مناوبة الفرد">${BATCH_LABELS[eff]}</button>
-                        <button class="btn btn-xs" data-act="edit-person" data-id="${p.id}">✎</button>
-                        <button class="btn btn-danger btn-xs" data-act="del-person" data-id="${p.id}">✕</button>
+                        <button class="btn btn-xs" data-act="edit-person" data-id="${p.id}" title="تعديل الفرد">✎</button>
+                        <button class="btn btn-danger btn-xs" data-act="del-person" data-id="${p.id}" title="حذف الفرد">✕</button>
                       </div>
                     </div>
                   `;
-                }).join('') || '<div style="font-size:11.5px;color:var(--text-muted);text-align:center;padding:4px">لا يوجد أفراد في الجماعة — اضغط «+ فرد».</div>'}
+                }).join('') || '<div style="font-size:11.5px;color:var(--text-muted);text-align:center;padding:6px">الجماعة فارغة — اضغط «+ إكمال لـ 10» أو «+ فرد».</div>'}
               </div>
             </div>
-          `;
-        }).join('');
+          `);
+        }
+
+        if (q && !compNameMatch && !cmdOfficers.length && !groupsRendered.length) {
+          return '';
+        }
+
+        const isCompCollapsed = q ? false : collapsedComps.has(c.id);
+        const officersToShow = (q && !compNameMatch) ? cmdOfficers : cmdOfficersAll;
+
+        // PINNED FIRST IN EVERY COMPANY: Officers & Company Command Panel (order: -10)
+        const pinnedOfficersHtml = `
+          <div class="comp-cmd-pinned">
+            <div class="comp-cmd-pinned-head">
+              <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap">
+                <strong style="font-size:12.5px;color:var(--gold-light)">⭐ قيادة السرية والضباط (${cmdOfficersAll.length})</strong>
+                <span class="pill gold" style="font-size:10px">📌 مثبتة بالأعلى</span>
+              </div>
+              <div style="display:flex;gap:4px;flex-wrap:wrap">
+                <button class="btn btn-xs" data-act="bulk-comp-officers" data-comp="${c.id}">✎ تعديل الكل</button>
+                <button class="btn btn-primary btn-xs" data-act="add-comp-officer" data-comp="${c.id}">+ إضافة ضابط</button>
+              </div>
+            </div>
+            <div class="sub-acc-body">
+              ${officersToShow.map((p, idx) => {
+                const eff = resolvePersonBatch(p);
+                return `
+                  <div class="org-member is-leader">
+                    <div style="min-width:0">
+                      <div>
+                        <strong>${idx + 1}. ★ ${escapeHtml(p.name)}</strong>
+                        <span style="color:var(--text-muted)">${p.job ? ' — ' + escapeHtml(p.job) : ''}</span>
+                      </div>
+                      ${(p.rank || p.serial || p.phone) ? `<div class="person-meta" style="margin-top:2px">${[p.rank, p.serial, p.phone ? '📞 ' + p.phone : ''].filter(Boolean).map(escapeHtml).join(' • ')}</div>` : ''}
+                    </div>
+                    <div style="display:flex;gap:4px;align-items:center;flex-shrink:0">
+                      <button class="pill clickable ${batchBadgeClass(eff)}" style="font-size:10px;padding:2px 6px" data-act="cycle-person-batch" data-id="${p.id}" title="تبديل مناوبة الضابط">${BATCH_LABELS[eff]}</button>
+                      <button class="btn btn-xs" data-act="edit-person" data-id="${p.id}">✎</button>
+                      <button class="btn btn-danger btn-xs" data-act="del-person" data-id="${p.id}">✕</button>
+                    </div>
+                  </div>
+                `;
+              }).join('') || '<div style="font-size:11.5px;color:var(--text-muted);text-align:center;padding:5px">لا يوجد ضباط في قيادة السرية — اضغط «+ إضافة ضابط».</div>'}
+            </div>
+          </div>
+        `;
 
         return `
           <div class="acc-card ${isCompCollapsed ? 'collapsed' : ''}">
@@ -2535,50 +2715,22 @@
                 <span class="acc-toggle-btn">▾</span>
                 <div>
                   <div style="font-size:14px;font-weight:900;color:var(--gold-light)">🛡️ ${escapeHtml(c.name)}</div>
-                  <div class="person-meta">القائد: ${escapeHtml(c.commander || 'غير محدد')} • ${cGroups.length} جماعات • ${cPeople.length} فرد</div>
+                  <div class="person-meta">القائد: ${escapeHtml(c.commander || 'غير محدد')} • ${c.has_crews ? 'مناوبات 10/10' : 'دوام إداري'} • ${cGroups.length} جماعات • ${cPeople.length} فرد</div>
                 </div>
               </div>
               <div style="display:flex;gap:4px;flex-wrap:wrap">
                 <button class="btn btn-primary btn-xs" data-act="add-group" data-comp="${c.id}">+ جماعة</button>
-                <button class="btn btn-xs" data-act="edit-comp" data-id="${c.id}">✎</button>
+                <button class="btn btn-xs" data-act="edit-comp" data-id="${c.id}">✎ تعديل</button>
                 <button class="btn btn-danger btn-xs" data-act="del-comp" data-id="${c.id}">🗑</button>
               </div>
             </div>
             <div class="acc-body">
-              ${(() => {
-                const cmdOfficers = cPeople.filter((p) => !cGroups.some((g) => g.id === p.group_id));
-                return `
-                  <div class="comp-cmd-group" style="margin-bottom:4px">
-                    <div class="sub-acc-head" style="background:rgba(205,186,161,.14)">
-                      <strong style="font-size:12.5px;color:var(--gold-light)">⭐ قيادة السرية والضباط (${cmdOfficers.length})</strong>
-                      <button class="btn btn-primary btn-xs" data-act="add-comp-officer" data-comp="${c.id}">+ ضابط</button>
-                    </div>
-                    <div class="sub-acc-body">
-                      ${cmdOfficers.map((p) => {
-                        const eff = resolvePersonBatch(p);
-                        return `
-                          <div class="org-member is-leader">
-                            <div>
-                              <strong>★ ${escapeHtml(p.name)}</strong>
-                              <span style="color:var(--text-muted)">${p.job ? ' — ' + escapeHtml(p.job) : ''}</span>
-                            </div>
-                            <div style="display:flex;gap:4px;align-items:center">
-                              <button class="pill clickable ${batchBadgeClass(eff)}" style="font-size:10px;padding:2px 6px" data-act="cycle-person-batch" data-id="${p.id}">${BATCH_LABELS[eff]}</button>
-                              <button class="btn btn-xs" data-act="edit-person" data-id="${p.id}">✎</button>
-                              <button class="btn btn-danger btn-xs" data-act="del-person" data-id="${p.id}">✕</button>
-                            </div>
-                          </div>
-                        `;
-                      }).join('') || '<div style="font-size:11px;color:var(--text-muted);text-align:center;padding:4px">لا يوجد ضباط قيادة سرية بعد</div>'}
-                    </div>
-                  </div>
-                `;
-              })()}
-              ${groupsHtml || '<div style="font-size:12px;color:var(--text-muted);text-align:center;padding:8px">لا توجد جماعات في هذه السرية — اضغط «+ جماعة».</div>'}
+              ${pinnedOfficersHtml}
+              ${groupsRendered.join('') || '<div style="font-size:12px;color:var(--text-muted);text-align:center;padding:8px">لا توجد جماعات مطابقة في هذه السرية — اضغط «+ جماعة».</div>'}
             </div>
           </div>
         `;
-      }).join('');
+      }).filter(Boolean).join('');
 
       canvasEl.innerHTML = `
         <div class="cmd-hq-box">
@@ -2586,13 +2738,14 @@
             <div style="display:flex;align-items:center;gap:8px">
               <svg width="32" height="32" viewBox="0 0 256 256"><path d="${EAGLE_PATH}" fill="#cdbaa1" /></svg>
               <div>
-                <div style="font-size:16px;font-weight:900;color:var(--gold-light)">${escapeHtml(bat.name)}</div>
-                <div style="font-size:11px;color:var(--text-muted)">قيادة الكتيبة (مستقلة — لا تُحتسب سرية أو جماعة)</div>
+                <div style="font-size:16px;font-weight:900;color:var(--gold-light)">${escapeHtml(bat.name)} ${bat.code ? '(' + escapeHtml(bat.code) + ')' : ''}</div>
+                <div style="font-size:11px;color:var(--text-muted)">قيادة الكتيبة (مستقلة — لا تُحتسب سرية أو جماعة)${bat.notes ? ' • ' + escapeHtml(bat.notes) : ''}</div>
               </div>
             </div>
             <div style="display:flex;gap:5px;flex-wrap:wrap">
               <button class="btn btn-xs" data-act="open-cmd-hq">✎ تعديل القيادة</button>
               <button class="btn btn-xs" data-act="edit-bat" data-id="${bat.id}">✎ الكتيبة</button>
+              ${state.battalions.length > 1 ? `<button class="btn btn-danger btn-xs" data-act="del-bat" data-id="${bat.id}">🗑 حذف الكتيبة</button>` : ''}
               <button class="btn btn-primary btn-xs" data-act="add-comp-quick">+ سرية</button>
             </div>
           </div>
@@ -2613,32 +2766,216 @@
             </div>
           </div>
           <div style="margin-top:9px;display:flex;gap:6px;flex-wrap:wrap;align-items:center">
-            <span class="pill gold">${comps.length} سرايا</span>
-            <span class="pill">${grps.length} جماعات</span>
+            <span class="pill gold">${allComps.length} سرايا</span>
+            <span class="pill">${allGrps.length} جماعات</span>
             <span class="pill">${people.length} فرد</span>
             <button class="btn btn-xs" data-act="expand-all-acc">▼ فتح كل السدائل</button>
             <button class="btn btn-xs" data-act="collapse-all-acc">▲ طي كل السدائل</button>
           </div>
         </div>
-        <div class="org-branches">${branchesHtml}</div>
+        <div class="org-branches">${branchesHtml || '<div class="card" style="text-align:center;color:var(--text-muted)">لا توجد سرايا أو نتائج مطابقة للبحث.</div>'}</div>
       `;
     }
 
+    function renderForceManagement() {
+      renderHierarchy();
+    }
+
+    // TARGETED MESSAGING & NOTIFICATION HELPERS
+    function isMessageTargetedToMe(m) {
+      if (!m) return false;
+      if (!m.targetMode || m.targetMode === 'ALL') return true;
+      const myName = (state.settings.user_name || '').trim().toLowerCase();
+      const targets = Array.isArray(m.targets) ? m.targets : [];
+      return targets.some((t) => {
+        const tid = (t.id || '').toLowerCase();
+        const tname = (t.name || '').trim().toLowerCase();
+        return (tid && tid === MY_DEVICE_ID.toLowerCase()) || (myName && tname && tname === myName);
+      });
+    }
+
+    function playNotifChime(urgent = false) {
+      try {
+        const AudioCtx = window.AudioContext || window.webkitAudioContext;
+        if (!AudioCtx) return;
+        const ctx = new AudioCtx();
+        const now = ctx.currentTime;
+        const notes = urgent ? [880, 1175, 880] : [740, 988];
+        notes.forEach((freq, idx) => {
+          const osc = ctx.createOscillator();
+          const gain = ctx.createGain();
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(freq, now + idx * 0.14);
+          gain.gain.setValueAtTime(0.08, now + idx * 0.14);
+          gain.gain.exponentialRampToValueAtTime(0.001, now + idx * 0.14 + 0.13);
+          osc.connect(gain);
+          gain.connect(ctx.destination);
+          osc.start(now + idx * 0.14);
+          osc.stop(now + idx * 0.14 + 0.14);
+        });
+      } catch (_) {}
+    }
+
+    function updateUnreadBadge() {
+      const b = document.getElementById('chat-unread-badge');
+      if (!b) return;
+      b.textContent = unreadChatCount > 99 ? '99+' : String(unreadChatCount);
+      b.classList.toggle('hidden', unreadChatCount <= 0);
+    }
+
+    function showInAppNotificationBanner(msg) {
+      const banner = document.getElementById('inapp-notif-banner');
+      if (!banner) return;
+      const prioMap = { NORMAL: 'إشعار', HIGH: 'هام ⚑', URGENT: 'عاجل 🚨' };
+      const prioEl = document.getElementById('inapp-notif-prio');
+      document.getElementById('inapp-notif-title').textContent = `🔔 رسالة من ${msg.sender || 'القيادة'}`;
+      prioEl.textContent = prioMap[msg.priority] || 'إشعار';
+      prioEl.className = 'pill ' + (msg.priority === 'URGENT' ? 'red' : (msg.priority === 'HIGH' ? 'blue' : 'gold'));
+      document.getElementById('inapp-notif-body').textContent = msg.text || 'رسالة صوتية جديدة';
+      banner.classList.remove('hidden');
+      clearTimeout(window.__inAppNotifTimer);
+      window.__inAppNotifTimer = setTimeout(() => banner.classList.add('hidden'), 7000);
+    }
+
+    async function fireSystemNotification(msg) {
+      if (!('Notification' in window) || Notification.permission !== 'granted') return;
+      const title = `${state.settings.app_title || 'راصد | 130مم'} — ${msg.sender || 'القيادة'}`;
+      const body = msg.text || 'وصلت رسالة جديدة في غرفة التواصل';
+      try {
+        if ('serviceWorker' in navigator) {
+          const reg = await navigator.serviceWorker.getRegistration();
+          if (reg && reg.showNotification) {
+            await reg.showNotification(title, { body, icon: '/icons/eagle-192.png', dir: 'rtl', lang: 'ar', tag: 'rased-msg-' + msg.id });
+            return;
+          }
+        }
+        new Notification(title, { body, icon: '/icons/eagle-192.png', dir: 'rtl', lang: 'ar' });
+      } catch (_) {}
+    }
+
+    function handleIncomingChatNotifications(newMsgs) {
+      const lastSeen = Number(localStorage.getItem(LAST_NOTIF_KEY) || '0');
+      let maxId = lastSeen;
+      let latestForMe = null;
+      let countForMe = 0;
+
+      for (const m of newMsgs) {
+        const mid = Number(m.id) || 0;
+        if (mid > maxId) maxId = mid;
+        if (mid <= lastSeen) continue;
+        if (m.senderDeviceId && m.senderDeviceId === MY_DEVICE_ID) continue;
+        if (!isMessageTargetedToMe(m)) continue;
+        if (m.notify === false) continue;
+        countForMe++;
+        latestForMe = m;
+      }
+
+      if (maxId > lastSeen) localStorage.setItem(LAST_NOTIF_KEY, String(maxId));
+      if (latestForMe) {
+        if (currentActiveTab !== 'chat') {
+          unreadChatCount += countForMe;
+          updateUnreadBadge();
+        }
+        playNotifChime(latestForMe.priority === 'URGENT');
+        showInAppNotificationBanner(latestForMe);
+        fireSystemNotification(latestForMe);
+      }
+    }
+
+    function getAllSelectableRecipients() {
+      const map = new Map();
+      const addRec = (id, name, sub) => {
+        const cleanName = (name || '').trim();
+        if (!cleanName) return;
+        const key = (id || cleanName).toLowerCase();
+        if (!map.has(key)) map.set(key, { id: id || cleanName, name: cleanName, sub });
+      };
+      (state.accessControl.approvedDevices || []).forEach((d) => addRec(d.deviceId, d.userName || d.deviceId, `جهاز معتمد • ${d.deviceId}`));
+      (state.accessControl.registeredDevices || []).forEach((d) => {
+        if (d && d.deviceId && !d.__meta) addRec(d.deviceId, d.userName || d.deviceId, `جهاز متصل • ${d.deviceId}`);
+      });
+      getActivePersonnel().forEach((p) => {
+        const c = state.companies.find((x) => x.id === p.company_id);
+        addRec(p.id, p.name, `${c ? c.name : ''}${p.job ? ' • ' + p.job : ''}`);
+      });
+      return Array.from(map.values());
+    }
+
+    function renderRecipientPickerList() {
+      const wrap = document.getElementById('nm-recipients-list');
+      if (!wrap) return;
+      const q = ((document.getElementById('nm-search') && document.getElementById('nm-search').value) || '').trim().toLowerCase();
+      const all = getAllSelectableRecipients();
+      const selectedIds = new Set((quickChatTarget.targets || []).map((t) => t.id));
+      const filtered = q ? all.filter((r) => `${r.name} ${r.sub || ''}`.toLowerCase().includes(q)) : all;
+
+      wrap.innerHTML = filtered.length
+        ? filtered.map((r) => `
+            <label class="recipient-pick-item">
+              <div style="display:flex;align-items:center;gap:8px;min-width:0">
+                <input type="checkbox" class="nm-rec-chk" data-rid="${escapeHtml(r.id)}" data-rname="${escapeHtml(r.name)}" ${selectedIds.has(r.id) ? 'checked' : ''} />
+                <div style="min-width:0">
+                  <div style="font-weight:800;color:var(--text-main)">${escapeHtml(r.name)}</div>
+                  <div class="person-meta">${escapeHtml(r.sub || '')}</div>
+                </div>
+              </div>
+            </label>
+          `).join('')
+        : '<div style="text-align:center;color:var(--text-muted);font-size:12px;padding:12px">لا يوجد أعضاء مطابقون للبحث.</div>';
+
+      const cntEl = document.getElementById('nm-selected-count');
+      if (cntEl) cntEl.textContent = `${selectedIds.size} محدد`;
+    }
+
+    function updateQuickTargetPill() {
+      const btn = document.getElementById('btn-quick-target-pick');
+      if (!btn) return;
+      if (quickChatTarget.mode === 'MANUAL' && quickChatTarget.targets.length) {
+        btn.textContent = `☑️ مخصّص (${quickChatTarget.targets.length} عضو) ▾`;
+        btn.className = 'pill clickable blue';
+      } else {
+        btn.textContent = '📢 الكل ▾';
+        btn.className = 'pill clickable gold';
+      }
+    }
+
     function renderChat() {
-      document.getElementById('chat-count').textContent = `${state.chat.length} رسالة`;
+      const allMsgs = state.chat || [];
+      const visible = chatFilterMode === 'MINE' ? allMsgs.filter((m) => isMessageTargetedToMe(m)) : allMsgs;
+      document.getElementById('chat-count').textContent = `${visible.length} رسالة`;
+      updateQuickTargetPill();
+
+      const notifBtn = document.getElementById('btn-enable-notifs');
+      if (notifBtn && 'Notification' in window) {
+        notifBtn.textContent = Notification.permission === 'granted' ? '🔔 الإشعارات مفعلة' : '🔔 تفعيل الإشعارات';
+      }
+
       const el = document.getElementById('chat-list');
       const me = (state.settings.user_name || '').trim();
-      el.innerHTML = state.chat.map((m) => {
-        const isMe = m.sender === me;
+      el.innerHTML = visible.map((m) => {
+        const isMe = (m.senderDeviceId && m.senderDeviceId === MY_DEVICE_ID) || m.sender === me;
+        const targetLabel = (m.targetMode === 'MANUAL' && Array.isArray(m.targets) && m.targets.length)
+          ? `👤 إلى: ${m.targets.slice(0, 3).map((t) => t.name).join('، ')}${m.targets.length > 3 ? ` (+${m.targets.length - 3})` : ''}`
+          : '📢 للجميع';
+        const prioBadge = m.priority === 'URGENT'
+          ? '<span class="pill red" style="font-size:10px;padding:1px 6px">🚨 عاجل</span>'
+          : (m.priority === 'HIGH' ? '<span class="pill blue" style="font-size:10px;padding:1px 6px">⚑ هام</span>' : '');
+        const notifBadge = m.notify ? '<span class="pill gold" style="font-size:10px;padding:1px 6px">🔔 إشعار</span>' : '';
+
         return `
-          <div class="wa-bubble ${isMe ? 'me' : 'other'}">
+          <div class="wa-bubble ${isMe ? 'me' : 'other'}" style="${m.priority === 'URGENT' ? 'border-color:rgba(239,68,68,.7)' : ''}">
             ${!isMe ? `<div class="wa-sender">${escapeHtml(m.sender)} • ${ROLE_LABELS[m.role] || m.role}</div>` : ''}
+            <div class="wa-badge-row">
+              <span class="pill" style="font-size:10px;padding:1px 6px">${escapeHtml(targetLabel)}</span>
+              ${prioBadge}
+              ${notifBadge}
+            </div>
             ${m.text ? `<div class="wa-text">${escapeHtml(m.text)}</div>` : ''}
             ${m.audio ? `<audio controls src="${m.audio}" style="width:100%;height:34px;margin-top:6px"></audio>` : ''}
             <div class="wa-meta">${escapeHtml(m.time)} ${isMe ? '✓✓' : ''}</div>
           </div>
         `;
-      }).join('') || '<div style="text-align:center;color:var(--text-muted);padding:28px;font-size:13px">لا توجد رسائل بعد. ابدأ المراسلة النصية أو الصوتية الآن.</div>';
+      }).join('') || '<div style="text-align:center;color:var(--text-muted);padding:28px;font-size:13px">لا توجد رسائل بعد. استخدم الشريط بالأسفل أو زر «📢 إرسال للأعضاء» لإرسال رسالة مع إشعار.</div>';
       el.scrollTop = el.scrollHeight;
     }
 
@@ -2695,25 +3032,34 @@
                 <strong style="color:#fecaca">🚫 ${escapeHtml(b.target)}</strong>
                 <div class="person-meta">${escapeHtml(b.reason || 'بدون سبب')} • ${escapeHtml(b.blockedAt || '')}</div>
               </div>
-              <button class="btn btn-ok btn-xs" data-act="unban-target" data-id="${b.id}">فك الحظر</button>
+              <div style="display:flex;gap:4px;flex-wrap:wrap">
+                <button class="btn btn-ok btn-xs" data-act="unban-target" data-id="${b.id}">✓ فك الحظر</button>
+                <button class="btn btn-danger btn-xs" data-act="delete-banned" data-id="${b.id}" data-target="${escapeHtml(b.target || '')}">🗑 حذف المحظور</button>
+              </div>
             </div>
           `).join('')
         : '<div style="font-size:12px;color:var(--text-muted)">لا يوجد أشخاص أو أجهزة محظورة حالياً.</div>';
 
-      const devs = ac.registeredDevices || [];
+      const devs = (ac.registeredDevices || []).filter((d) => d && d.deviceId && !d.__meta);
       document.getElementById('registered-devices-wrap').innerHTML = devs.length
         ? devs.map((d) => {
             const isMe = d.deviceId === MY_DEVICE_ID;
-            const isBanned = blocked.some((b) => (b.target || '').toLowerCase() === (d.deviceId || '').toLowerCase());
+            const banEntry = blocked.find((b) => (b.target || '').toLowerCase() === (d.deviceId || '').toLowerCase());
             return `
               <div class="member-row" style="margin-bottom:5px">
                 <div>
                   <strong>${escapeHtml(d.userName || 'مستخدم')}</strong> ${isMe ? '<span class="pill gold">جهازي</span>' : ''}
                   <div class="person-meta">${escapeHtml(d.deviceId)} • ${ROLE_LABELS[d.role] || d.role} • آخر ظهور: ${escapeHtml(d.lastSeen || '')}</div>
                 </div>
-                ${!isMe ? (isBanned
-                  ? `<span class="pill red">محظور</span>`
-                  : `<button class="btn btn-danger btn-xs" data-act="quick-ban-dev" data-dev="${escapeHtml(d.deviceId)}" data-name="${escapeHtml(d.userName || '')}">🚫 حظر</button>`)
+                ${!isMe ? (banEntry
+                  ? `<div style="display:flex;gap:4px;align-items:center">
+                       <span class="pill red">محظور</span>
+                       <button class="btn btn-danger btn-xs" data-act="delete-banned" data-id="${banEntry.id}" data-target="${escapeHtml(d.deviceId)}">🗑 حذف المحظور</button>
+                     </div>`
+                  : `<div style="display:flex;gap:4px">
+                       <button class="btn btn-danger btn-xs" data-act="quick-ban-dev" data-dev="${escapeHtml(d.deviceId)}" data-name="${escapeHtml(d.userName || '')}">🚫 حظر</button>
+                       <button class="btn btn-xs" data-act="delete-device-rec" data-dev="${escapeHtml(d.deviceId)}" title="إزالة من القائمة">🗑</button>
+                     </div>`)
                 : ''}
               </div>
             `;
@@ -2739,17 +3085,7 @@
         ? `مرتبط مع Supabase: ${env.VITE_SUPABASE_URL}`
         : 'يعمل في الوضع المحلي المستقل (Offline-First).';
 
-      document.getElementById('undo-history-list').innerHTML = (state.undoStack || []).length
-        ? state.undoStack.map((u, idx) => `
-            <div class="member-row" style="margin-bottom:5px">
-              <div>
-                <div style="font-size:12.5px;font-weight:700">${escapeHtml(u.label)}</div>
-                <div class="person-meta">${escapeHtml(u.time)}</div>
-              </div>
-              ${idx === 0 ? '<button class="btn btn-xs btn-primary" data-act="do-undo">تراجع الآن</button>' : ''}
-            </div>
-          `).join('')
-        : '<div style="color:var(--text-muted);font-size:12px">لا توجد تعديلات مسجلة للتراجع بعد.</div>';
+      renderUndoRedoPanel();
     }
 
     function renderAll() {
@@ -2757,7 +3093,6 @@
       populateCompanySelects();
       renderAttendance();
       renderReadiness();
-      renderForceManagement();
       renderHierarchy();
       renderChat();
       if (settingsUnlocked) renderSettings();
@@ -2848,7 +3183,7 @@
           col: (m.color && m.color.startsWith('#')) ? m.color : '#cdbaa1',
           isDanger: m.key === 'inactive' || m.key === 'absent'
         }));
-      const boxW = (w - 48 - (kpis.length - 1) * 10) / kpis.length;
+      const boxW = kpis.length ? ((w - 48 - (kpis.length - 1) * 10) / kpis.length) : (w - 48);
       kpis.forEach((k, idx) => {
         const x = w - 24 - (idx + 1) * boxW - idx * 10;
         ctx.fillStyle = '#182625';
@@ -2865,43 +3200,43 @@
         ctx.fillText(k.lbl, x + boxW / 2, 242);
       });
 
-      // Readiness Table
+      // Readiness Table (honoring enabled metrics dynamically)
       let y = 278;
+      const visibleMetrics = getReadinessMetricsList().filter((m) => m.enabled !== false);
       ctx.fillStyle = '#233735';
       ctx.fillRect(24, y, w - 48, 44);
-      ctx.fillStyle = '#e7d8c2';
-      ctx.font = 'bold 18px Cairo, Tahoma, sans-serif';
+      ctx.font = 'bold 17px Cairo, Tahoma, sans-serif';
       ctx.textAlign = 'right';
-      const cols = [
-        { lbl: 'السرية', x: w - 40 },
-        { lbl: 'القوة', x: w - 340 },
-        { lbl: 'مقرر', x: w - 430 },
-        { lbl: 'حاضر', x: w - 520 },
-        { lbl: 'إجازة', x: w - 620 },
-        { lbl: 'مرضية', x: w - 720 },
-        { lbl: 'غير فعال', x: w - 820, col: '#fca5a5' },
-        { lbl: 'غياب', x: w - 940 },
-        { lbl: 'الجاهزية', x: w - 1030 }
-      ];
-      cols.forEach((c) => {
-        ctx.fillStyle = c.col || '#e7d8c2';
-        ctx.fillText(c.lbl, c.x, y + 29);
+      const compColX = w - 40;
+      ctx.fillStyle = '#e7d8c2';
+      ctx.fillText('السرية', compColX, y + 29);
+
+      const dynStart = w - 330;
+      const dynSpan = Math.max(200, dynStart - 56);
+      const colStep = visibleMetrics.length ? (dynSpan / visibleMetrics.length) : dynSpan;
+      const dynCols = visibleMetrics.map((m, idx) => ({
+        key: m.key,
+        lbl: m.label,
+        col: (m.color && m.color.startsWith('#')) ? m.color : '#e7d8c2',
+        x: Math.round(dynStart - idx * colStep)
+      }));
+      dynCols.forEach((c) => {
+        ctx.fillStyle = (c.key === 'inactive' || c.key === 'absent') ? '#fca5a5' : '#e7d8c2';
+        ctx.fillText(c.lbl.slice(0, 12), c.x, y + 29);
       });
 
       y += 44;
       compRows.forEach((r, idx) => {
         ctx.fillStyle = idx % 2 === 0 ? '#152121' : '#1a2928';
         ctx.fillRect(24, y, w - 48, rowH);
-        ctx.font = 'bold 17px Cairo, Tahoma, sans-serif';
-        ctx.fillStyle = '#f4efe8'; ctx.fillText(r.name.slice(0, 24), cols[0].x, y + 27);
-        ctx.fillStyle = '#cbd5e1'; ctx.fillText(String(r.total), cols[1].x, y + 27);
-        ctx.fillText(String(r.duty), cols[2].x, y + 27);
-        ctx.fillStyle = '#86efac'; ctx.fillText(String(r.present), cols[3].x, y + 27);
-        ctx.fillStyle = '#7dd3fc'; ctx.fillText(String(r.leave), cols[4].x, y + 27);
-        ctx.fillStyle = '#fcd34d'; ctx.fillText(String(r.sick), cols[5].x, y + 27);
-        ctx.fillStyle = r.inactive ? '#ef4444' : '#64748b'; ctx.fillText(String(r.inactive), cols[6].x, y + 27);
-        ctx.fillStyle = r.absent ? '#dc2626' : '#64748b'; ctx.fillText(String(r.absent), cols[7].x, y + 27);
-        ctx.fillStyle = '#cdbaa1'; ctx.fillText(r.pct + '%', cols[8].x, y + 27);
+        ctx.font = 'bold 16px Cairo, Tahoma, sans-serif';
+        ctx.fillStyle = '#f4efe8';
+        ctx.fillText(r.name.slice(0, 22), compColX, y + 27);
+        dynCols.forEach((c) => {
+          const cell = getCompanyMetricCell(c.key, r);
+          ctx.fillStyle = c.col;
+          ctx.fillText(cell.val, c.x, y + 27);
+        });
         y += rowH;
       });
 
@@ -2938,7 +3273,7 @@
       // Footer
       ctx.fillStyle = '#9eb0ab';
       ctx.font = '15px Cairo, Tahoma, sans-serif';
-      ctx.fillText(`منظم الكشف: ${state.settings.user_name}  |  نظام تفقد دوام الـ130مم`, w - 36, h - 24);
+      ctx.fillText(`منظم الكشف: ${state.settings.user_name}  |  نظام راصد | 130مم`, w - 36, h - 24);
 
       return new Promise((resolve) => canvas.toBlob(resolve, 'image/png'));
     }
@@ -2951,15 +3286,36 @@
       const people = getActivePersonnel();
 
       const lines = [];
-      for (const c of comps) {
-        lines.push({ type: 'COMP', text: `🛡️ ${c.name}  —  القائد: ${c.commander || 'غير محدد'} (${people.filter((p) => p.company_id === c.id).length} فرد)` });
+      if (bat) {
+        lines.push({
+          type: 'COMP',
+          text: `★ قيادة الكتيبة — قائد الكتيبة: ${bat.commander || 'غير محدد'} | رئيس الأركان: ${bat.chief_of_staff || 'غير محدد'}`
+        });
+      }
+      const realComps = comps.filter((c) => c.code !== '0' && !c.name.includes('قيادة الكتيبة'));
+      for (const c of realComps) {
+        const cPeople = people.filter((p) => p.company_id === c.id);
         const cGrps = grps.filter((g) => g.company_id === c.id);
+        lines.push({ type: 'COMP', text: `🛡️ ${c.name}  —  القائد: ${c.commander || 'غير محدد'} (${cPeople.length} فرد)` });
+        const cmdOfficers = cPeople.filter((p) => !cGrps.some((g) => g.id === p.group_id));
+        if (cmdOfficers.length) {
+          lines.push({ type: 'GRP', text: `⭐ قيادة السرية والضباط (${cmdOfficers.length})`, batch: 'ADMIN' });
+          cmdOfficers.forEach((p, idx) => {
+            lines.push({
+              type: 'MEM',
+              text: `${idx + 1}. ★ ${p.name}${p.job ? ' — ' + p.job : ''}${p.serial ? ' (' + p.serial + ')' : ''}`,
+              batch: resolvePersonBatch(p),
+              leader: true
+            });
+          });
+        }
         for (const g of cGrps) {
-          const gPeople = people.filter((p) => p.group_id === g.id);
+          const gPeople = cPeople.filter((p) => p.group_id === g.id);
+          const nb = normalizeBatch(g.shift_batch || 'A', false);
           lines.push({
             type: 'GRP',
-            text: `👥 ${g.name} [${BATCH_LABELS[g.shift_batch]}] — القائد: ${g.leader || '-'} (${gPeople.length}/${g.capacity || 10})`,
-            batch: g.shift_batch
+            text: `👥 ${g.name} [${BATCH_LABELS[nb]}] — القائد: ${g.leader || '-'} (${gPeople.length}/${g.capacity || 10})`,
+            batch: nb
           });
           gPeople.forEach((p, idx) => {
             lines.push({
@@ -3016,7 +3372,7 @@
 
       ctx.fillStyle = '#9eb0ab';
       ctx.font = '15px Cairo, Tahoma, sans-serif';
-      ctx.fillText(`التاريخ: ${activeDate}  |  نظام تفقد دوام الـ130مم`, w - 36, h - 20);
+      ctx.fillText(`التاريخ: ${activeDate}  |  نظام راصد | 130مم`, w - 36, h - 20);
 
       return new Promise((resolve) => canvas.toBlob(resolve, 'image/png'));
     }
@@ -3065,7 +3421,7 @@
               <Cell ss:StyleID="hdr"><Data ss:Type="String">الاسم الكامل</Data></Cell>
               <Cell ss:StyleID="hdr"><Data ss:Type="String">السرية</Data></Cell>
               <Cell ss:StyleID="hdr"><Data ss:Type="String">الجماعة</Data></Cell>
-              <Cell ss:StyleID="hdr"><Data ss:Type="String">الوجبة</Data></Cell>
+              <Cell ss:StyleID="hdr"><Data ss:Type="String">المناوبة</Data></Cell>
               <Cell ss:StyleID="hdr"><Data ss:Type="String">الاختصاص</Data></Cell>
               <Cell ss:StyleID="hdr"><Data ss:Type="String">الحالة</Data></Cell>
             </Row>
@@ -3095,7 +3451,7 @@
           القوة: ${stats.total} | مقرر: ${stats.onDuty} | حاضر: ${stats.present} | إجازة: ${stats.leave} | <span style="color:#b91c1c">غير فعال: ${stats.inactive}</span> | غياب: ${stats.absent} | الجاهزية: ${stats.readiness}%
         </div>
         <table>
-          <thead><tr><th>#</th><th>الرقم الذاتي</th><th>الاسم</th><th>السرية</th><th>الجماعة</th><th>الوجبة</th><th>الحالة</th></tr></thead>
+          <thead><tr><th>#</th><th>الرقم الذاتي</th><th>الاسم</th><th>السرية</th><th>الجماعة</th><th>المناوبة</th><th>الحالة</th></tr></thead>
           <tbody>
             ${rows.map((r, i) => `<tr><td>${i + 1}</td><td>${escapeHtml(r.serial || '-')}</td><td>${escapeHtml(r.name)}</td><td>${escapeHtml(r.companyName)}</td><td>${escapeHtml(r.groupName)}</td><td>${BATCH_LABELS[r.effectiveBatch]}</td><td style="${r.status === 'INACTIVE' || r.status === 'ABSENT' ? 'color:#b91c1c;font-weight:900' : ''}"><strong>${STATUS_LABELS[r.status]}</strong></td></tr>`).join('')}
           </tbody>
@@ -3201,7 +3557,7 @@
       const existingCount = state.groups.filter((g) => g.company_id === (grp ? grp.company_id : companyId)).length;
       document.getElementById('gm-name').value = grp ? grp.name : `الجماعة ${existingCount + 1}`;
       document.getElementById('gm-leader').value = grp ? (grp.leader || '') : '';
-      document.getElementById('gm-batch').value = grp ? grp.shift_batch : (comp && !comp.has_crews ? 'PERMANENT' : (existingCount % 2 === 0 ? 'A' : 'B'));
+      document.getElementById('gm-batch').value = grp ? grp.shift_batch : (comp && !comp.has_crews ? 'ADMIN' : (existingCount % 2 === 0 ? 'A' : 'B'));
       document.getElementById('gm-capacity').value = grp ? (grp.capacity || 10) : 10;
       document.getElementById('gm-autofill-wrap').classList.toggle('hidden', Boolean(grp));
       document.getElementById('group-modal').classList.remove('hidden');
@@ -3314,7 +3670,7 @@
         rank: item.rank,
         job: item.role,
         is_leader: true,
-        shift_batch: 'PERMANENT',
+        shift_batch: 'ADMIN',
         phone: '',
         notes: 'قيادة السرية'
       }));
@@ -3373,24 +3729,110 @@
       if (tabId === 'settings') renderSettings();
       if (tabId === 'hierarchy') renderHierarchy();
       if (tabId === 'readiness') renderReadiness();
+      if (tabId === 'chat') {
+        unreadChatCount = 0;
+        updateUnreadBadge();
+        renderChat();
+      }
     }
 
-    async function performUndo() {
+    function updateTopUndoRedoButtons() {
+      const ub = document.getElementById('btn-undo-top');
+      const rb = document.getElementById('btn-redo-top');
+      if (ub) ub.disabled = !(state.undoStack && state.undoStack.length);
+      if (rb) rb.disabled = !(state.redoStack && state.redoStack.length);
+    }
+
+    function renderUndoRedoPanel() {
+      const undoArr = state.undoStack || [];
+      const redoArr = state.redoStack || [];
+      const metaEl = document.getElementById('undo-summary-meta');
+      const backCnt = document.getElementById('undo-back-count');
+      const fwdCnt = document.getElementById('undo-fwd-count');
+      if (metaEl) metaEl.textContent = `للخلف: ${undoArr.length} / ${MAX_UNDO_STEPS} • للأمام: ${redoArr.length} / ${MAX_UNDO_STEPS}`;
+      if (backCnt) backCnt.textContent = String(undoArr.length);
+      if (fwdCnt) fwdCnt.textContent = String(redoArr.length);
+
+      const uWrap = document.getElementById('undo-history-list');
+      if (uWrap) {
+        uWrap.innerHTML = undoArr.length
+          ? undoArr.map((u, idx) => `
+              <div class="member-row">
+                <div>
+                  <div style="font-size:12px;font-weight:700">${idx + 1}. ${escapeHtml(u.label)}</div>
+                  <div class="person-meta">${escapeHtml(u.time)}</div>
+                </div>
+                <button class="btn btn-xs ${idx === 0 ? 'btn-primary' : ''}" data-act="undo-to" data-steps="${idx + 1}">↶ العودة</button>
+              </div>
+            `).join('')
+          : '<div style="color:var(--text-muted);font-size:12px;text-align:center;padding:6px">لا توجد خطوات تراجع للخلف بعد.</div>';
+      }
+
+      const rWrap = document.getElementById('redo-history-list');
+      if (rWrap) {
+        rWrap.innerHTML = redoArr.length
+          ? redoArr.map((r, idx) => `
+              <div class="member-row">
+                <div>
+                  <div style="font-size:12px;font-weight:700">${idx + 1}. ${escapeHtml(r.label)}</div>
+                  <div class="person-meta">${escapeHtml(r.time)}</div>
+                </div>
+                <button class="btn btn-xs ${idx === 0 ? 'btn-info' : ''}" data-act="redo-to" data-steps="${idx + 1}">↷ تقدم</button>
+              </div>
+            `).join('')
+          : '<div style="color:var(--text-muted);font-size:12px;text-align:center;padding:6px">لا توجد خطوات إعادة للأمام.</div>';
+      }
+      updateTopUndoRedoButtons();
+    }
+
+    async function performUndo(steps = 1) {
       if (!state.undoStack || !state.undoStack.length) {
-        showToast('لا توجد عملية للتراجع عنها');
+        showToast('لا توجد خطوات للتراجع للخلف');
         return;
       }
-      const last = state.undoStack.shift();
-      const restored = JSON.parse(last.data);
-      state.settings = restored.settings;
-      state.battalions = restored.battalions;
-      state.companies = restored.companies;
-      state.groups = restored.groups;
-      state.personnel = restored.personnel;
-      state.attendance = restored.attendance;
+      const n = Math.min(Math.max(1, Number(steps) || 1), state.undoStack.length);
+      let lastLabel = '';
+      for (let i = 0; i < n; i++) {
+        const snap = state.undoStack.shift();
+        if (!snap) break;
+        lastLabel = snap.label;
+        state.redoStack = [captureSnapshot(snap.label), ...(state.redoStack || [])].slice(0, MAX_UNDO_STEPS);
+        const restored = JSON.parse(snap.data);
+        state.settings = restored.settings;
+        state.battalions = restored.battalions;
+        state.companies = restored.companies;
+        state.groups = restored.groups;
+        state.personnel = restored.personnel;
+        state.attendance = restored.attendance;
+      }
       await dbPut('app_state', state);
       renderAll();
-      showToast(`تم التراجع: ${last.label}`);
+      showToast(n === 1 ? `↶ تم التراجع: ${lastLabel}` : `↶ تم التراجع ${n} خطوات للخلف`);
+    }
+
+    async function performRedo(steps = 1) {
+      if (!state.redoStack || !state.redoStack.length) {
+        showToast('لا توجد خطوات للإعادة للأمام');
+        return;
+      }
+      const n = Math.min(Math.max(1, Number(steps) || 1), state.redoStack.length);
+      let lastLabel = '';
+      for (let i = 0; i < n; i++) {
+        const snap = state.redoStack.shift();
+        if (!snap) break;
+        lastLabel = snap.label;
+        state.undoStack = [captureSnapshot(snap.label), ...(state.undoStack || [])].slice(0, MAX_UNDO_STEPS);
+        const restored = JSON.parse(snap.data);
+        state.settings = restored.settings;
+        state.battalions = restored.battalions;
+        state.companies = restored.companies;
+        state.groups = restored.groups;
+        state.personnel = restored.personnel;
+        state.attendance = restored.attendance;
+      }
+      await dbPut('app_state', state);
+      renderAll();
+      showToast(n === 1 ? `↷ تمت الإعادة للأمام: ${lastLabel}` : `↷ تم التقدم ${n} خطوات للأمام`);
     }
 
     // SUPABASE SNAPSHOT SYNC
@@ -3552,7 +3994,7 @@
           state.battalions = state.battalions.map((b) => (b.id === id ? { ...b, name, code, commander, chief_of_staff: chiefOfStaff, notes } : b));
         } else {
           const newBatId = uid('bat');
-          state.battalions.push({ id: newBatId, name, code, commander, chief_of_staff: chiefOfStaff, commander_batch: 'PERMANENT', chief_batch: 'PERMANENT', notes });
+          state.battalions.push({ id: newBatId, name, code, commander, chief_of_staff: chiefOfStaff, commander_batch: 'ADMIN', chief_batch: 'ADMIN', notes });
           const compLines = document.getElementById('bm-companies').value.split('\n').map((s) => s.trim()).filter(Boolean);
           const autoGroups = document.getElementById('bm-auto-groups').checked;
 
@@ -3628,7 +4070,7 @@
               company_id: newCompId,
               name: gName,
               leader: '',
-              shift_batch: hasCrews ? (gi % 2 === 0 ? 'A' : 'B') : 'PERMANENT',
+              shift_batch: hasCrews ? (gi % 2 === 0 ? 'A' : 'B') : 'ADMIN',
               capacity: gSize || 10
             });
             if (gSize > 0) {
@@ -3795,8 +4237,8 @@
         } else if (act === 'cycle-group-batch') {
           const g = state.groups.find((x) => x.id === btn.dataset.id);
           if (!g) return;
-          await persistState(`تبديل وجبة ${g.name}`);
-          const order = ['A', 'B', 'PERMANENT', 'NO_SHIFT'];
+          await persistState(`تبديل مناوبة ${g.name}`);
+          const order = ['A', 'B', 'ADMIN'];
           g.shift_batch = order[(order.indexOf(g.shift_batch) + 1) % order.length];
           await dbPut('app_state', state);
           renderAll();
@@ -3806,7 +4248,7 @@
           if (!p) return;
           await persistState(`تعديل مناوبة ${p.name}`);
           const curEff = resolvePersonBatch(p);
-          const order = ['A', 'B', 'PERMANENT', 'NO_SHIFT'];
+          const order = ['A', 'B', 'ADMIN'];
           p.shift_batch = order[(order.indexOf(curEff) + 1) % order.length];
           await dbPut('app_state', state);
           renderAll();
@@ -3841,7 +4283,7 @@
           const cGrps = state.groups.filter((g) => g.company_id === c.id);
           for (const g of cGrps) {
             if (!c.has_crews) {
-              g.shift_batch = 'PERMANENT';
+              g.shift_batch = 'ADMIN';
             } else {
               g.shift_batch = toggle % 2 === 0 ? 'A' : 'B';
               toggle++;
@@ -3850,11 +4292,11 @@
           // Reset member overrides inside rotational companies to inherit group shift
           state.personnel
             .filter((p) => p.company_id === c.id)
-            .forEach((p) => { p.shift_batch = c.has_crews ? 'INHERIT' : 'PERMANENT'; });
+            .forEach((p) => { p.shift_batch = c.has_crews ? 'INHERIT' : 'ADMIN'; });
         }
         await dbPut('app_state', state);
         renderAll();
-        showToast('✓ تم فرز المناوبات تلقائياً بالتوازن بين الوجبة أ والوجبة ب');
+        showToast('✓ تم فرز المناوبات تلقائياً بالتوازن بين المناوبة أ والمناوبة ب');
       });
 
       document.getElementById('btn-commit-shifts').addEventListener('click', async () => {
@@ -3907,18 +4349,16 @@
         const bat = getActiveBattalion();
         const stats = computeStats();
         const shift = getShiftInfo(activeDate);
+        const visibleMetrics = getReadinessMetricsList().filter((m) => m.enabled !== false);
         const lines = [
           `*كشف الجاهزية — ${bat ? bat.name : state.settings.unit_name}*`,
           `📅 التاريخ: ${activeDate} (${shift.batchLabel} — اليوم ${shift.dayInBatch}/${shift.daysPerBatch})`,
           `━━━━━━━━━━━━━━`,
-          `• إجمالي القوة: ${stats.total}`,
-          `• المقرر بالدوام: ${stats.onDuty}`,
-          `• الحاضرون (فعّال): ${stats.present}`,
-          `• الإجازات: ${stats.leave}`,
-          `• المرضية: ${stats.sick}`,
-          `• 🔴 غير فعال: ${stats.inactive}`,
-          `• الغياب: ${stats.absent}`,
-          `• نسبة الجاهزية: *${stats.readiness}%*`
+          ...visibleMetrics.map((m) => {
+            const val = getMetricDisplayVal(m, stats);
+            const prefix = (m.key === 'inactive' || m.key === 'absent') ? '• 🔴 ' : '• ';
+            return `${prefix}${m.label}: *${val}*`;
+          })
         ];
         try {
           await navigator.clipboard.writeText(lines.join('\n'));
@@ -3959,7 +4399,7 @@
       // Settings & Access Control Actions
       document.getElementById('btn-save-settings').addEventListener('click', async () => {
         await persistState('تعديل الإعدادات العامة');
-        state.settings.app_title = document.getElementById('set-title').value.trim() || 'تفقد دوام الـ130مم';
+        state.settings.app_title = document.getElementById('set-title').value.trim() || 'راصد | 130مم';
         state.settings.unit_name = document.getElementById('set-unit').value.trim() || 'الكتيبة الأولى مدفعية 130مم';
         state.settings.shift_start = document.getElementById('set-shift-start').value || '2026-11-24';
         state.settings.shift_days = Math.max(1, Number(document.getElementById('set-shift-days').value) || 10);
@@ -4132,24 +4572,24 @@
           const bat = getActiveBattalion();
           if (!bat) return;
           document.getElementById('hq-commander').value = bat.commander || '';
-          document.getElementById('hq-commander-batch').value = bat.commander_batch || 'PERMANENT';
+          document.getElementById('hq-commander-batch').value = normalizeBatch(bat.commander_batch || 'ADMIN', false);
           document.getElementById('hq-chief').value = bat.chief_of_staff || '';
-          document.getElementById('hq-chief-batch').value = bat.chief_batch || 'PERMANENT';
+          document.getElementById('hq-chief-batch').value = normalizeBatch(bat.chief_batch || 'ADMIN', false);
           document.getElementById('cmd-hq-modal').classList.remove('hidden');
         } else if (act === 'cycle-hq-cmd') {
           const bat = getActiveBattalion();
           if (!bat) return;
           await persistState('تغيير مناوبة قائد الكتيبة');
-          const ord = ['PERMANENT', 'A', 'B', 'NO_SHIFT'];
-          bat.commander_batch = ord[(ord.indexOf(bat.commander_batch || 'PERMANENT') + 1) % ord.length];
+          const ord = ['A', 'B', 'ADMIN'];
+          bat.commander_batch = ord[(ord.indexOf(normalizeBatch(bat.commander_batch || 'ADMIN', false)) + 1) % ord.length];
           await dbPut('app_state', state);
           renderHierarchy();
         } else if (act === 'cycle-hq-chief') {
           const bat = getActiveBattalion();
           if (!bat) return;
           await persistState('تغيير مناوبة رئيس أركان الكتيبة');
-          const ord = ['PERMANENT', 'A', 'B', 'NO_SHIFT'];
-          bat.chief_batch = ord[(ord.indexOf(bat.chief_batch || 'PERMANENT') + 1) % ord.length];
+          const ord = ['A', 'B', 'ADMIN'];
+          bat.chief_batch = ord[(ord.indexOf(normalizeBatch(bat.chief_batch || 'ADMIN', false)) + 1) % ord.length];
           await dbPut('app_state', state);
           renderHierarchy();
         } else if (act === 'approve-dev') {
@@ -4189,7 +4629,7 @@
       // Top Share App Arrow Button (immediate share with modal fallback)
       document.getElementById('btn-share-app-top').addEventListener('click', async () => {
         const shareUrl = (state.settings && state.settings.app_download_url) || window.location.origin || 'https://tafaqqud-130mm.vercel.app';
-        const title = state.settings.app_title || 'تفقد دوام الـ130مم';
+        const title = state.settings.app_title || 'راصد | 130مم';
         if (navigator.share) {
           try {
             await navigator.share({ title, text: `رابط تنزيل وتثبيت تطبيق ${title}:`, url: shareUrl });
@@ -4205,7 +4645,7 @@
 
       document.getElementById('btn-share-app-native').addEventListener('click', async () => {
         const shareUrl = document.getElementById('share-app-url-input').value;
-        const title = state.settings.app_title || 'تفقد دوام الـ130مم';
+        const title = state.settings.app_title || 'راصد | 130مم';
         if (navigator.share) {
           try {
             await navigator.share({ title, text: `رابط تنزيل وتثبيت تطبيق ${title}:`, url: shareUrl });
@@ -4243,12 +4683,12 @@
           document.getElementById('pm-rank').value = 'ضابط';
           document.getElementById('pm-job').value = 'ضابط';
           document.getElementById('pm-is-leader').checked = true;
-          document.getElementById('pm-batch').value = 'PERMANENT';
+          document.getElementById('pm-batch').value = 'ADMIN';
         } else if (act === 'bulk-comp-officers') {
           openBulkCompanyOfficersModal(btn.dataset.comp);
         } else if (act === 'move-rm-up' || act === 'move-rm-down') {
           const idx = Number(btn.dataset.idx);
-          const list = getReadinessMetricsList();
+          const list = readMetricsFromCustomizerDOM();
           const target = act === 'move-rm-up' ? idx - 1 : idx + 1;
           if (target < 0 || target >= list.length) return;
           const tmp = list[idx];
@@ -4261,22 +4701,18 @@
         }
       });
 
-      // Readiness Metrics Customizer Save/Reset
-      document.getElementById('btn-save-readiness-cfg').addEventListener('click', async () => {
-        const base = getReadinessMetricsList().map((x) => ({ ...x }));
-        document.querySelectorAll('#readiness-cfg-list [data-ridx]').forEach((row) => {
-          const i = Number(row.dataset.ridx);
-          if (base[i]) {
-            base[i].enabled = row.querySelector('.rcfg-en').checked;
-            base[i].label = row.querySelector('.rcfg-lbl').value.trim() || base[i].label;
-            base[i].manualValue = row.querySelector('.rcfg-manual').value.trim();
-            base[i].color = row.querySelector('.rcfg-col').value || base[i].color;
+      // Readiness Metrics Customizer Live Auto-Save + Explicit Save/Reset
+      document.getElementById('readiness-cfg-list').addEventListener('change', async (e) => {
+        if (e.target.matches('.rcfg-en, .rcfg-col, .rcfg-lbl, .rcfg-manual')) {
+          await commitReadinessMetrics(false);
+          const row = e.target.closest('.rcfg-row');
+          if (row && e.target.matches('.rcfg-en')) {
+            row.style.opacity = e.target.checked ? '1' : '0.55';
           }
-        });
-        state.settings.readinessMetrics = base;
-        await dbPut('app_state', state);
-        renderReadiness();
-        showToast('✓ تم حفظ وتطبيق تعديلات حالات كشف الجاهزية');
+        }
+      });
+      document.getElementById('btn-save-readiness-cfg').addEventListener('click', async () => {
+        await commitReadinessMetrics(true);
       });
 
       document.getElementById('btn-reset-readiness-cfg').addEventListener('click', async () => {
@@ -4344,7 +4780,7 @@
       document.getElementById('btn-apply-layout-all').addEventListener('click', async () => {
         const page = document.getElementById('layout-target-page').value || 'attendance';
         const src = { ...ensurePageLayout(page) };
-        for (const p of ['attendance', 'readiness', 'personnel', 'hierarchy', 'chat']) {
+        for (const p of ['attendance', 'readiness', 'hierarchy', 'chat']) {
           state.settings.pageLayouts[p] = { ...src };
         }
         await dbPut('app_state', state);
@@ -4361,25 +4797,204 @@
         showToast('تمت إعادة الصفحة المختارة للقياس الافتراضي');
       });
 
+      // Top Redo button + Settings Undo/Redo 200-step buttons + Clear History
+      document.getElementById('btn-redo-top').addEventListener('click', () => performRedo(1));
+      document.getElementById('btn-undo-step-set').addEventListener('click', (e) => { e.stopPropagation(); performUndo(1); });
+      document.getElementById('btn-redo-step-set').addEventListener('click', (e) => { e.stopPropagation(); performRedo(1); });
+      document.getElementById('btn-clear-undo-history').addEventListener('click', async (e) => {
+        e.stopPropagation();
+        if (!confirm('هل تريد حذف سجل التراجع والإعادة بالكامل؟')) return;
+        state.undoStack = [];
+        state.redoStack = [];
+        await dbPut('app_state', state);
+        renderUndoRedoPanel();
+        showToast('✓ تم حذف سجل التراجع بالكامل');
+      });
+
+      // In-App Notification Banner Buttons
+      document.getElementById('btn-open-notif-chat').addEventListener('click', () => {
+        document.getElementById('inapp-notif-banner').classList.add('hidden');
+        switchTab('chat');
+      });
+      document.getElementById('btn-close-notif-banner').addEventListener('click', () => {
+        document.getElementById('inapp-notif-banner').classList.add('hidden');
+      });
+
+      // Notification Permission Button & Chat Filter Buttons
+      document.getElementById('btn-enable-notifs').addEventListener('click', async () => {
+        if (!('Notification' in window)) {
+          showToast('الإشعارات الداخلية مفعلة (متصفحك لا يدعم إشعارات النظام)');
+          return;
+        }
+        const perm = await Notification.requestPermission();
+        renderChat();
+        showToast(perm === 'granted' ? '✓ تم تفعيل إشعارات الرسائل بنجاح' : 'تم رفض إذن إشعارات النظام — ستصلك الإشعارات داخل التطبيق');
+      });
+
+      document.getElementById('btn-chat-flt-all').addEventListener('click', () => {
+        chatFilterMode = 'ALL';
+        document.getElementById('btn-chat-flt-all').className = 'btn btn-xs btn-primary';
+        document.getElementById('btn-chat-flt-mine').className = 'btn btn-xs';
+        renderChat();
+      });
+      document.getElementById('btn-chat-flt-mine').addEventListener('click', () => {
+        chatFilterMode = 'MINE';
+        document.getElementById('btn-chat-flt-mine').className = 'btn btn-xs btn-primary';
+        document.getElementById('btn-chat-flt-all').className = 'btn btn-xs';
+        renderChat();
+      });
+
+      // Targeted Member Message & Notification Modal
+      function openNotifyMsgModal() {
+        document.getElementById('nm-mode-all').checked = quickChatTarget.mode !== 'MANUAL';
+        document.getElementById('nm-mode-manual').checked = quickChatTarget.mode === 'MANUAL';
+        document.getElementById('nm-manual-wrap').classList.toggle('hidden', quickChatTarget.mode !== 'MANUAL');
+        document.getElementById('nm-search').value = '';
+        renderRecipientPickerList();
+        document.getElementById('notify-msg-modal').classList.remove('hidden');
+      }
+      document.getElementById('btn-open-notify-msg').addEventListener('click', openNotifyMsgModal);
+      document.getElementById('btn-quick-target-pick').addEventListener('click', openNotifyMsgModal);
+
+      document.querySelectorAll('input[name="nm-mode"]').forEach((r) => {
+        r.addEventListener('change', () => {
+          const isManual = document.getElementById('nm-mode-manual').checked;
+          document.getElementById('nm-manual-wrap').classList.toggle('hidden', !isManual);
+          if (isManual) renderRecipientPickerList();
+        });
+      });
+
+      document.getElementById('nm-search').addEventListener('input', renderRecipientPickerList);
+
+      document.getElementById('nm-recipients-list').addEventListener('change', (e) => {
+        if (!e.target.matches('.nm-rec-chk')) return;
+        const rid = e.target.dataset.rid;
+        const rname = e.target.dataset.rname;
+        const list = (quickChatTarget.targets || []).filter((t) => t.id !== rid);
+        if (e.target.checked) list.push({ id: rid, name: rname });
+        quickChatTarget.targets = list;
+        document.getElementById('nm-selected-count').textContent = `${list.length} محدد`;
+      });
+
+      document.getElementById('btn-nm-select-all').addEventListener('click', () => {
+        quickChatTarget.targets = getAllSelectableRecipients().map((r) => ({ id: r.id, name: r.name }));
+        renderRecipientPickerList();
+      });
+
+      document.getElementById('btn-nm-clear-all').addEventListener('click', () => {
+        quickChatTarget.targets = [];
+        renderRecipientPickerList();
+      });
+
+      document.getElementById('btn-nm-apply-quick').addEventListener('click', () => {
+        quickChatTarget.mode = document.getElementById('nm-mode-manual').checked ? 'MANUAL' : 'ALL';
+        if (quickChatTarget.mode === 'MANUAL' && !quickChatTarget.targets.length) {
+          showToast('اختر عضواً واحداً على الأقل أو اختر تحديد الكل');
+          return;
+        }
+        updateQuickTargetPill();
+        document.getElementById('notify-msg-modal').classList.add('hidden');
+        showToast(quickChatTarget.mode === 'ALL' ? 'تم ضبط التوجيه: للجميع' : `تم ضبط التوجيه لـ ${quickChatTarget.targets.length} عضو`);
+      });
+
+      document.getElementById('notify-msg-form').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const mode = document.getElementById('nm-mode-manual').checked ? 'MANUAL' : 'ALL';
+        const text = document.getElementById('nm-text').value.trim();
+        if (!text) return;
+        if (mode === 'MANUAL' && !(quickChatTarget.targets && quickChatTarget.targets.length)) {
+          showToast('يرجى تحديد عضو واحد على الأقل أو اختيار «تحديد الكل»');
+          return;
+        }
+        quickChatTarget.mode = mode;
+        const priority = document.getElementById('nm-priority').value || 'NORMAL';
+        const notify = document.getElementById('nm-enable-notif').checked;
+        await sendTextChat({ text, targetMode: mode, targets: [...(quickChatTarget.targets || [])], priority, notify });
+        document.getElementById('nm-text').value = '';
+        document.getElementById('notify-msg-modal').classList.add('hidden');
+        showToast(mode === 'ALL' ? '✓ تم إرسال الرسالة والإشعار لجميع الأعضاء' : `✓ تم إرسال الرسالة والإشعار لـ ${quickChatTarget.targets.length} عضو`);
+      });
+
+      // Delegated Actions: Undo/Redo Accordions, Jump to Step, Delete Banned, Delete Device Record
+      document.body.addEventListener('click', async (e) => {
+        if (e.target.closest('button') && e.target.closest('[data-act="toggle-undo-main"],[data-act="toggle-undo-back"],[data-act="toggle-undo-fwd"]')) {
+          return;
+        }
+        const el = e.target.closest('[data-act]');
+        if (!el) return;
+        const act = el.dataset.act;
+
+        if (act === 'toggle-undo-main') {
+          document.getElementById('undo-main-acc').classList.toggle('collapsed');
+        } else if (act === 'toggle-undo-back') {
+          document.getElementById('undo-back-acc').classList.toggle('collapsed');
+        } else if (act === 'toggle-undo-fwd') {
+          document.getElementById('undo-fwd-acc').classList.toggle('collapsed');
+        } else if (act === 'undo-to') {
+          await performUndo(Number(el.dataset.steps) || 1);
+        } else if (act === 'redo-to') {
+          await performRedo(Number(el.dataset.steps) || 1);
+        } else if (act === 'delete-banned') {
+          const banId = el.dataset.id;
+          const target = (el.dataset.target || '').trim().toLowerCase();
+          if (!confirm(`تأكيد حذف المحظور (${el.dataset.target || banId}) نهائياً من السجل؟`)) return;
+          state.accessControl.blockedDevices = (state.accessControl.blockedDevices || []).filter((b) => b.id !== banId);
+          if (target) {
+            state.accessControl.registeredDevices = (state.accessControl.registeredDevices || []).filter(
+              (d) => (d.deviceId || '').toLowerCase() !== target && (d.userName || '').trim().toLowerCase() !== target
+            );
+            state.accessControl.pendingApprovals = (state.accessControl.pendingApprovals || []).filter(
+              (p) => (p.deviceId || '').toLowerCase() !== target && (p.userName || '').trim().toLowerCase() !== target
+            );
+            state.accessControl.approvedDevices = (state.accessControl.approvedDevices || []).filter(
+              (a) => (a.deviceId || '').toLowerCase() !== target && (a.userName || '').trim().toLowerCase() !== target
+            );
+          }
+          await dbPut('app_state', state);
+          await pushAccessControlToCloud();
+          renderAccessControl();
+          showToast('✓ تم حذف المحظور من السجل بنجاح');
+        } else if (act === 'delete-device-rec') {
+          const dev = (el.dataset.dev || '').toLowerCase();
+          if (!confirm('حذف هذا الجهاز من قائمة الأجهزة المتصلة؟')) return;
+          state.accessControl.registeredDevices = (state.accessControl.registeredDevices || []).filter(
+            (d) => (d.deviceId || '').toLowerCase() !== dev
+          );
+          await dbPut('app_state', state);
+          await pushAccessControlToCloud();
+          renderAccessControl();
+          showToast('✓ تم حذف الجهاز من القائمة');
+        }
+      });
+
       window.addEventListener('online', () => { renderHeader(); syncAccessControlFromCloud(true); });
       window.addEventListener('offline', renderHeader);
     }
 
-    async function sendTextChat() {
+    async function sendTextChat(customOpts = null) {
       const inp = document.getElementById('chat-input');
-      const text = inp.value.trim();
+      const text = customOpts ? (customOpts.text || '').trim() : inp.value.trim();
       if (!text) return;
-      state.chat.push({
+      const targetMode = customOpts ? customOpts.targetMode : quickChatTarget.mode;
+      const targets = customOpts ? (customOpts.targets || []) : (quickChatTarget.targets || []);
+      const msg = {
         id: Date.now(),
         sender: state.settings.user_name,
+        senderDeviceId: MY_DEVICE_ID,
         role: state.settings.user_role,
         text,
+        targetMode: (targetMode === 'MANUAL' && targets.length) ? 'MANUAL' : 'ALL',
+        targets: (targetMode === 'MANUAL' && targets.length) ? targets : [],
+        notify: customOpts ? Boolean(customOpts.notify) : true,
+        priority: customOpts ? (customOpts.priority || 'NORMAL') : 'NORMAL',
         time: new Date().toLocaleTimeString('ar-SY', { hour: '2-digit', minute: '2-digit' })
-      });
-      inp.value = '';
+      };
+      state.chat.push(msg);
+      localStorage.setItem(LAST_NOTIF_KEY, String(msg.id));
+      if (!customOpts) inp.value = '';
       await dbPut('app_state', state);
       renderChat();
-      pushAccessControlToCloud(true);
+      await pushAccessControlToCloud(true);
     }
 
     async function toggleVoiceRecord() {
@@ -4429,7 +5044,7 @@
       bindEvents();
       renderAll();
       syncAccessControlFromCloud(true);
-      setInterval(() => syncAccessControlFromCloud(false), 30000);
+      setInterval(() => syncAccessControlFromCloud(false), 15000);
       if ('serviceWorker' in navigator) {
         navigator.serviceWorker.register('/sw.js').catch(() => {});
       }
