@@ -1,15 +1,24 @@
 {
+  "id": "/rased-130mm-app",
   "name": "راصد | 130مم",
-  "short_name": "راصد | 130مم",
-  "description": "نظام التفقد والهيكلية والمناوبات والجاهزية الميدانية (Offline-First PWA)",
-  "start_url": "/",
+  "short_name": "راصد 130مم",
+  "description": "منظومة التفقد والهيكلية والمناوبات والجاهزية الميدانية والتواصل الفوري للكتيبة الأولى مدفعية 130مم",
+  "start_url": "/index.html?source=pwa",
   "scope": "/",
   "display": "standalone",
+  "display_override": [
+    "standalone",
+    "minimal-ui"
+  ],
   "orientation": "portrait",
   "dir": "rtl",
   "lang": "ar",
   "background_color": "#131e1d",
   "theme_color": "#152121",
+  "categories": [
+    "productivity",
+    "utilities"
+  ],
   "icons": [
     {
       "src": "/icons/eagle-192.png",

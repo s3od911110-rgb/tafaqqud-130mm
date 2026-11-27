@@ -11,6 +11,14 @@ const envPayload = {
   VITE_OFFLINE_PIN_HASH: (
     process.env.VITE_OFFLINE_PIN_HASH ||
     'a037a7dfaf26abe1265bd5d51447be3bb1fdaef7c4c7a14bcf0d819818fb80b0'
+  ).trim(),
+  VITE_SUPERVISOR_PIN_HASH: (
+    process.env.VITE_SUPERVISOR_PIN_HASH ||
+    '158a323a7ba44870f23d96f1516dd70aa48e9a72db4ebb026b0a89e212a208ab'
+  ).trim(),
+  VITE_VIEWER_PIN_HASH: (
+    process.env.VITE_VIEWER_PIN_HASH ||
+    '0ffe1abd1a08215353c233d6e009613e95eec4253832a761af28ff37ac5a150c'
   ).trim()
 };
 
@@ -29,4 +37,13 @@ for (const file of ['manifest.webmanifest', 'sw.js']) {
   }
 }
 
-console.log('Build v2.6.0 completed successfully -> dist/');
+const wellKnownSrc = path.resolve(root, 'public/.well-known');
+const wellKnownDst = path.resolve(distDir, '.well-known');
+if (fs.existsSync(wellKnownSrc)) {
+  fs.mkdirSync(wellKnownDst, { recursive: true });
+  for (const item of fs.readdirSync(wellKnownSrc)) {
+    fs.copyFileSync(path.join(wellKnownSrc, item), path.join(wellKnownDst, item));
+  }
+}
+
+console.log('Build v2.7.0 completed successfully -> dist/');
