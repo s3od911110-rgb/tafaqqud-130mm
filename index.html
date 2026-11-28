@@ -41,7 +41,10 @@
       margin: 0; padding: 0;
       background: radial-gradient(circle at top center, #1d2e2b 0%, var(--bg-deep) 62%);
       color: var(--text-main);
-      font-family: 'Cairo', system-ui, -apple-system, 'Segoe UI', Tahoma, sans-serif;
+      font-family: 'Cairo', 'Noto Sans Arabic', system-ui, -apple-system, 'Segoe UI', Tahoma, Arial, sans-serif;
+      -webkit-text-size-adjust: 100%;
+      text-size-adjust: 100%;
+      font-synthesis-weight: none;
       min-height: 100vh;
       overflow-x: hidden;
     }
@@ -686,8 +689,11 @@
       display: none !important;
     }
     body.viewer-locked .app-shell { padding-bottom: 24px; }
-    body.viewer-locked #global-battalion-select {
-      pointer-events: none; opacity: 0.85;
+    body.viewer-locked #global-battalion-select,
+    body.viewer-locked #active-date {
+      pointer-events: none !important;
+      opacity: 0.85;
+      cursor: default !important;
     }
     body.viewer-locked .st-btn {
       pointer-events: none !important;
@@ -966,7 +972,7 @@
       <div style="margin-bottom:8px">
         <svg width="54" height="54" viewBox="0 0 256 256"><path d="M30,120L41,119L57,102L59,103L58,106L34,132L41,132L47,129L63,108L65,109L65,111L40,144L49,143L54,138L70,113L72,114L46,156L53,155L58,152L78,117L80,118L80,120L62,153L66,153L72,150L86,119L88,120L88,123L76,151L82,150L85,147L95,121L97,122L88,149L95,147L98,143L103,123L105,122L106,126L101,146L107,142L109,131L111,129L116,136L115,140L104,152L104,156L97,164L80,165L80,170L84,166L87,166L88,168L85,171L87,173L87,170L93,166L99,172L101,170L98,166L103,160L109,159L117,154L117,158L97,185L106,183L109,180L114,168L117,167L118,169L108,191L116,189L119,184L121,172L124,169L125,175L123,182L123,191L125,193L130,192L130,195L134,189L131,174L132,169L135,171L137,184L140,189L148,191L138,169L139,167L142,168L147,180L150,183L160,185L138,156L139,154L153,160L158,166L155,170L157,173L157,171L163,166L166,167L170,173L171,171L168,168L169,166L172,166L176,169L176,165L161,165L153,157L153,153L141,139L144,129L146,128L149,142L152,145L156,146L150,125L151,123L154,124L157,139L161,147L168,149L159,124L160,122L162,122L171,147L175,150L180,151L168,123L168,120L170,119L184,150L190,153L194,153L176,120L176,118L178,117L197,151L201,154L209,156L186,120L184,114L187,114L204,141L211,144L216,144L192,113L191,109L194,109L211,131L221,131L197,104L198,102L215,119L226,120L183,76L179,74L165,75L163,77L163,88L160,95L149,102L141,102L138,100L136,80L132,77L123,76L112,81L112,86L115,84L119,84L121,86L121,92L117,101L107,102L102,100L95,93L93,87L93,77L90,74L76,74L72,76Z M145,58L148,61L145,67L150,66L153,70L153,66L158,63L154,61L153,57L151,59Z M98,63L103,65L103,70L107,66L112,67L109,63L111,58L106,59L103,56L103,60Z M121,55L125,59L124,64L128,61L133,64L132,58L136,55L131,55L128,50L126,55Z" fill="#cdbaa1" /></svg>
       </div>
-      <div class="gate-sec-badge">🛡️ حماية مشفّرة v2.7 • راصد | 130مم</div>
+      <div class="gate-sec-badge">🛡️ حماية مشفّرة v2.8 • راصد | 130مم</div>
       <div style="font-size:18px;font-weight:900;color:var(--gold-light);margin-bottom:4px">بوابة الدخول المحمية</div>
       <p style="font-size:11.5px;color:var(--text-muted);line-height:1.55;margin:0 0 10px">
         اختر صلاحية الدخول وأدخل الرمز الخاص بك (رمز المشاهد للتفقد فقط، رمز المشرف لبقية الصفحات، ورمز المالك المستقل للتحكم الكامل).
@@ -2185,17 +2191,42 @@
       if (b === 'PERMANENT' || b === 'NO_SHIFT') return 'ADMIN';
       return allowInherit ? 'INHERIT' : 'A';
     }
-    const SESSION_TOKEN_KEY = 'rased_owner_proof_v9';
-    const SUPERVISOR_SESSION_KEY = 'rased_supervisor_proof_v27';
-    const VIEWER_SESSION_KEY = 'rased_viewer_proof_v9';
-    const ACTIVE_PIN_KEY = 'rased_active_pin_hash_v27';
+    const SESSION_TOKEN_KEY = 'rased_owner_proof_v28';
+    const SUPERVISOR_SESSION_KEY = 'rased_supervisor_proof_v28';
+    const VIEWER_SESSION_KEY = 'rased_viewer_proof_v28';
+    const ACTIVE_PIN_KEY = 'rased_active_pin_hash_v28';
     const SUPERVISOR_PIN_LOCAL_KEY = 'tafaqqud_sup_pin_sha256';
     const VIEWER_PIN_LOCAL_KEY = 'tafaqqud_view_pin_sha256';
     const STEALTH_LOCAL_KEY = 'rased_owner_stealth_v27';
     const SOUND_CFG_KEY = 'rased_sound_cfg_v27';
     const THEME_KEY = 'rased_theme_v2';
+    const LOCAL_LAYOUTS_KEY = 'rased_local_layouts_v28';
     const OFFLINE_SYNC_FLAG = 'rased_offline_sync_pending_v27';
     const UNDO_STORE_KEY = 'app_undo_store';
+    let lastRenderedChatSig = '';
+
+    // Persistent device-bound auth store (prevents Android WebView / APK random logouts)
+    const authStore = {
+      get(k) {
+        try { return localStorage.getItem(k) || sessionStorage.getItem(k) || ''; } catch { return ''; }
+      },
+      set(k, v) {
+        try { localStorage.setItem(k, v); } catch {}
+        try { sessionStorage.setItem(k, v); } catch {}
+      },
+      remove(k) {
+        try { localStorage.removeItem(k); } catch {}
+        try { sessionStorage.removeItem(k); } catch {}
+      }
+    };
+
+    function getLocalIsoDate() {
+      const d = new Date();
+      const y = d.getFullYear();
+      const m = String(d.getMonth() + 1).padStart(2, '0');
+      const day = String(d.getDate()).padStart(2, '0');
+      return `${y}-${m}-${day}`;
+    }
     let verifiedOwnerProof = '';
     let verifiedSupervisorProof = '';
     let verifiedViewerProof = '';
@@ -2483,7 +2514,7 @@
 
     let db = null;
     let state = buildDefaultState();
-    let activeDate = new Date().toISOString().slice(0, 10);
+    let activeDate = getLocalIsoDate();
     let settingsUnlocked = false;
     let pinModalMode = 'SETTINGS'; // 'SETTINGS' | 'UNLOCK_BLOCK'
     let mediaRecorder = null;
@@ -2787,9 +2818,18 @@
       SoundFX.playNav();
     }
 
-    function getSupabaseHeaders(extra = {}) {
+    function getSupabaseUrl() {
       const env = window.__TAFAQ_ENV__ || {};
-      const key = (env.VITE_SUPABASE_ANON_KEY || '').trim();
+      return String(env.VITE_SUPABASE_URL || '').trim().replace(/\/+$/, '');
+    }
+
+    function getSupabaseKey() {
+      const env = window.__TAFAQ_ENV__ || {};
+      return String(env.VITE_SUPABASE_ANON_KEY || '').replace(/[\r\n\s]+/g, '').trim();
+    }
+
+    function getSupabaseHeaders(extra = {}) {
+      const key = getSupabaseKey();
       const headers = { 'apikey': key, ...extra };
       // فقط إذا كان المفتاح JWT قياسياً نضيف Authorization: Bearer لمنع خطأ 401 Invalid JWT مع sb_publishable_
       if (key.startsWith('eyJ') && key.split('.').length === 3) {
@@ -2804,15 +2844,16 @@
     }
 
     async function supabaseRpc(fnName, params = {}) {
-      const env = window.__TAFAQ_ENV__ || {};
-      if (!env.VITE_SUPABASE_URL || !env.VITE_SUPABASE_ANON_KEY) {
+      const supaUrl = getSupabaseUrl();
+      const supaKey = getSupabaseKey();
+      if (!supaUrl || !supaKey) {
         return { ok: false, error: 'ENV_MISSING', detail: 'لم يتم ضبط VITE_SUPABASE_URL أو VITE_SUPABASE_ANON_KEY' };
       }
       if (!navigator.onLine) {
         return { ok: false, error: 'OFFLINE', detail: 'لا يوجد اتصال بالإنترنت' };
       }
       try {
-        const res = await fetch(`${env.VITE_SUPABASE_URL}/rest/v1/rpc/${fnName}`, {
+        const res = await fetch(`${supaUrl}/rest/v1/rpc/${fnName}`, {
           method: 'POST',
           headers: getSupabaseHeaders({ 'Content-Type': 'application/json' }),
           body: JSON.stringify(params)
@@ -2841,10 +2882,11 @@
       autoSyncTimer = setTimeout(() => { flushAutoCloudSync(true); }, 650);
     }
 
-    async function flushAutoCloudSync(silent = true) {
+    async function flushAutoCloudSync(silent = true, forceSync = false) {
       if (!hasValidOwnerSession() && !hasValidSupervisorSession()) return false;
-      const env = window.__TAFAQ_ENV__ || {};
-      if (!env.VITE_SUPABASE_URL || !env.VITE_SUPABASE_ANON_KEY) {
+      const supaUrl = getSupabaseUrl();
+      const supaKey = getSupabaseKey();
+      if (!supaUrl || !supaKey) {
         setSyncPillState('offline', 'الوضع المحلي (Supabase غير مضبوط)');
         return false;
       }
@@ -2853,8 +2895,9 @@
         setSyncPillState('offline', 'بانتظار عودة الإنترنت للمزامنة التلقائية');
         return false;
       }
-      const pinHash = sessionStorage.getItem(ACTIVE_PIN_KEY) || '';
+      const pinHash = authStore.get(ACTIVE_PIN_KEY) || '';
       const cleanSettings = { ...state.settings, user_role: 'VIEWER' };
+      delete cleanSettings.pageLayouts;
       const payloadObj = {
         schemaVersion: 2,
         settings: cleanSettings,
@@ -2869,7 +2912,8 @@
         p_device_id: MY_DEVICE_ID,
         p_pin_hash: pinHash,
         p_payload: payloadObj,
-        p_expected_revision: cloudRevision
+        p_expected_revision: cloudRevision,
+        p_force: Boolean(forceSync)
       });
 
       if (rpcRes && rpcRes.ok) {
@@ -2881,9 +2925,16 @@
         return true;
       }
 
+      if (rpcRes && rpcRes.error === 'REVISION_BEHIND') {
+        await pullSnapshotCloud(true);
+        setSyncPillState('synced', 'تم جلب أحدث نسخة من السحابة لحماية البيانات');
+        if (!silent) showToast('✓ تم جلب أحدث نسخة من السحابة أولاً لحماية البيانات');
+        return true;
+      }
+
       // Fallback للمشروع القديم إذا لم يُنفَّذ SQL v2.7.0 بعد
       try {
-        const res = await fetch(`${env.VITE_SUPABASE_URL}/rest/v1/app_snapshots`, {
+        const res = await fetch(`${getSupabaseUrl()}/rest/v1/app_snapshots`, {
           method: 'POST',
           headers: getSupabaseHeaders({ 'Content-Type': 'application/json', 'Prefer': 'resolution=merge-duplicates' }),
           body: JSON.stringify({
@@ -2964,8 +3015,17 @@
       if (stPill) stPill.classList.toggle('hidden', !(owner && ownerStealthMode));
       if (unlockBtn) unlockBtn.classList.toggle('hidden', owner);
 
+      const dateInp = document.getElementById('active-date');
+      if (dateInp) {
+        dateInp.disabled = viewer;
+        dateInp.readOnly = viewer;
+        dateInp.tabIndex = viewer ? -1 : 0;
+      }
+
       if (viewer) {
         settingsUnlocked = false;
+        activeDate = getLocalIsoDate();
+        if (dateInp) dateInp.value = activeDate;
         // إخفاء ومسح محتوى باقي الصفحات عن المشاهد نهائياً
         for (const tid of ['readiness-kpi-bar', 'readiness-table-wrap', 'readiness-exceptions', 'hierarchy-canvas', 'chat-list']) {
           const el = document.getElementById(tid);
@@ -3041,15 +3101,15 @@
     }
 
     function hasValidOwnerSession() {
-      const stored = sessionStorage.getItem(SESSION_TOKEN_KEY);
+      const stored = authStore.get(SESSION_TOKEN_KEY);
       return Boolean(verifiedOwnerProof && stored && stored === verifiedOwnerProof);
     }
     function hasValidSupervisorSession() {
-      const stored = sessionStorage.getItem(SUPERVISOR_SESSION_KEY);
+      const stored = authStore.get(SUPERVISOR_SESSION_KEY);
       return Boolean(verifiedSupervisorProof && stored && stored === verifiedSupervisorProof);
     }
     function hasValidViewerSession() {
-      const stored = sessionStorage.getItem(VIEWER_SESSION_KEY);
+      const stored = authStore.get(VIEWER_SESSION_KEY);
       return Boolean(verifiedViewerProof && stored && stored === verifiedViewerProof);
     }
 
@@ -3061,10 +3121,10 @@
       verifiedSupervisorProof = '';
       verifiedViewerProof = '';
       supervisorSettingsApproved = true;
-      sessionStorage.setItem(SESSION_TOKEN_KEY, proof);
-      sessionStorage.setItem(ACTIVE_PIN_KEY, h);
-      sessionStorage.removeItem(SUPERVISOR_SESSION_KEY);
-      sessionStorage.removeItem(VIEWER_SESSION_KEY);
+      authStore.set(SESSION_TOKEN_KEY, proof);
+      authStore.set(ACTIVE_PIN_KEY, h);
+      authStore.remove(SUPERVISOR_SESSION_KEY);
+      authStore.remove(VIEWER_SESSION_KEY);
       state.settings.user_role = 'OWNER';
       if (!state.settings.user_name) state.settings.user_name = 'أبو سعيد';
     }
@@ -3078,10 +3138,10 @@
       verifiedViewerProof = '';
       supervisorSettingsApproved = Boolean(settingsApproved);
       settingsUnlocked = Boolean(settingsApproved);
-      sessionStorage.setItem(SUPERVISOR_SESSION_KEY, proof);
-      sessionStorage.setItem(ACTIVE_PIN_KEY, h);
-      sessionStorage.removeItem(SESSION_TOKEN_KEY);
-      sessionStorage.removeItem(VIEWER_SESSION_KEY);
+      authStore.set(SUPERVISOR_SESSION_KEY, proof);
+      authStore.set(ACTIVE_PIN_KEY, h);
+      authStore.remove(SESSION_TOKEN_KEY);
+      authStore.remove(VIEWER_SESSION_KEY);
       state.settings.user_role = 'ADMIN';
       if (displayName) state.settings.user_name = displayName;
       else if (!state.settings.user_name) state.settings.user_name = 'مشرف';
@@ -3095,17 +3155,17 @@
       verifiedSupervisorProof = '';
       supervisorSettingsApproved = false;
       settingsUnlocked = false;
-      sessionStorage.setItem(VIEWER_SESSION_KEY, proof);
-      sessionStorage.setItem(ACTIVE_PIN_KEY, vHash);
-      sessionStorage.removeItem(SESSION_TOKEN_KEY);
-      sessionStorage.removeItem(SUPERVISOR_SESSION_KEY);
+      authStore.set(VIEWER_SESSION_KEY, proof);
+      authStore.set(ACTIVE_PIN_KEY, vHash);
+      authStore.remove(SESSION_TOKEN_KEY);
+      authStore.remove(SUPERVISOR_SESSION_KEY);
       state.settings.user_role = 'VIEWER';
       if (displayName) state.settings.user_name = displayName;
     }
 
     async function restoreVerifiedSession() {
-      const activePin = sessionStorage.getItem(ACTIVE_PIN_KEY) || '';
-      const storedOwner = sessionStorage.getItem(SESSION_TOKEN_KEY);
+      const activePin = authStore.get(ACTIVE_PIN_KEY) || '';
+      const storedOwner = authStore.get(SESSION_TOKEN_KEY);
       const ownerHash = activePin || getExpectedOwnerPinHash();
       if (storedOwner && ownerHash) {
         const expectedProof = await computeOwnerProof(ownerHash);
@@ -3117,9 +3177,9 @@
         }
       }
       verifiedOwnerProof = '';
-      sessionStorage.removeItem(SESSION_TOKEN_KEY);
+      authStore.remove(SESSION_TOKEN_KEY);
 
-      const storedSup = sessionStorage.getItem(SUPERVISOR_SESSION_KEY);
+      const storedSup = authStore.get(SUPERVISOR_SESSION_KEY);
       const supHash = activePin || getExpectedSupervisorPinHash();
       if (storedSup && supHash) {
         const expectedSupProof = await computeSupervisorProof(supHash);
@@ -3130,9 +3190,9 @@
         }
       }
       verifiedSupervisorProof = '';
-      sessionStorage.removeItem(SUPERVISOR_SESSION_KEY);
+      authStore.remove(SUPERVISOR_SESSION_KEY);
 
-      const storedViewer = sessionStorage.getItem(VIEWER_SESSION_KEY);
+      const storedViewer = authStore.get(VIEWER_SESSION_KEY);
       const vHash = activePin || getExpectedViewerPinHash();
       if (storedViewer && vHash) {
         const expectedVProof = await computeViewerProof(vHash);
@@ -3143,7 +3203,7 @@
         }
       }
       verifiedViewerProof = '';
-      sessionStorage.removeItem(VIEWER_SESSION_KEY);
+      authStore.remove(VIEWER_SESSION_KEY);
       state.settings.user_role = 'VIEWER';
     }
 
@@ -3155,10 +3215,10 @@
       supervisorSettingsApproved = false;
       settingsUnlocked = false;
       viewerAutoPulled = false;
-      sessionStorage.removeItem(SESSION_TOKEN_KEY);
-      sessionStorage.removeItem(SUPERVISOR_SESSION_KEY);
-      sessionStorage.removeItem(VIEWER_SESSION_KEY);
-      sessionStorage.removeItem(ACTIVE_PIN_KEY);
+      authStore.remove(SESSION_TOKEN_KEY);
+      authStore.remove(SUPERVISOR_SESSION_KEY);
+      authStore.remove(VIEWER_SESSION_KEY);
+      authStore.remove(ACTIVE_PIN_KEY);
       clearSensitiveDomWhileLocked();
       evaluateBlockStatus();
       if (showMsg) showToast('🔒 تم قفل التطبيق بنجاح');
@@ -3300,7 +3360,7 @@
 
       // 2) إذا كان المستخدم هو المالك: اجلب كامل لوحة التحكم وسجل التدقيق عبر RPC المحصّنة
       if (hasValidOwnerSession()) {
-        const pinHash = sessionStorage.getItem(ACTIVE_PIN_KEY) || '';
+        const pinHash = authStore.get(ACTIVE_PIN_KEY) || '';
         const ctrl = await supabaseRpc('rpc_owner_get_control_state', { p_owner_pin_hash: pinHash });
         if (ctrl && ctrl.ok) {
           ownerControlSnapshot = ctrl;
@@ -3356,7 +3416,7 @@
 
     async function pushAccessControlToCloud(silent = false) {
       if (!hasValidOwnerSession()) return;
-      const pinHash = sessionStorage.getItem(ACTIVE_PIN_KEY) || '';
+      const pinHash = authStore.get(ACTIVE_PIN_KEY) || '';
       const res = await supabaseRpc('rpc_owner_manage_device', {
         p_owner_pin_hash: pinHash,
         p_action: 'set_config',
@@ -3375,7 +3435,7 @@
       const env = window.__TAFAQ_ENV__ || {};
       if (!env.VITE_SUPABASE_URL || !env.VITE_SUPABASE_ANON_KEY || !navigator.onLine) return;
       try {
-        const res = await fetch(`${env.VITE_SUPABASE_URL}/rest/v1/app_chat_messages?select=*&order=created_at.asc&limit=150`, {
+        const res = await fetch(`${getSupabaseUrl()}/rest/v1/app_chat_messages?select=*&order=created_at.asc&limit=150`, {
           headers: getSupabaseHeaders()
         });
         if (!res.ok) return;
@@ -3408,7 +3468,7 @@
       if (!env.VITE_SUPABASE_URL || !env.VITE_SUPABASE_ANON_KEY) return;
       if (realtimeChannel || !window.supabase || !window.supabase.createClient) return;
       try {
-        realtimeClient = window.supabase.createClient(env.VITE_SUPABASE_URL, env.VITE_SUPABASE_ANON_KEY, {
+        realtimeClient = window.supabase.createClient(getSupabaseUrl(), getSupabaseKey(), {
           auth: { persistSession: false, autoRefreshToken: false }
         });
         realtimeChannel = realtimeClient
@@ -3453,9 +3513,10 @@
       try {
         const myRole = hasValidOwnerSession() ? 'OWNER' : (hasValidSupervisorSession() ? 'ADMIN' : 'VIEWER');
         const myName = state.settings.user_name || (myRole === 'OWNER' ? 'أبو سعيد' : (myRole === 'ADMIN' ? 'مشرف' : 'مشاهد'));
+        const localLayouts = state.settings && state.settings.pageLayouts ? JSON.parse(JSON.stringify(state.settings.pageLayouts)) : undefined;
         state = migrateState({
           ...incoming,
-          settings: { ...(incoming.settings || {}), user_role: myRole, user_name: myName },
+          settings: { ...(incoming.settings || {}), ...(localLayouts ? { pageLayouts: localLayouts } : {}), user_role: myRole, user_name: myName },
           chat: state.chat,
           undoStack: state.undoStack,
           redoStack: state.redoStack,
@@ -4213,6 +4274,9 @@
 
       const el = document.getElementById('chat-list');
       const me = (state.settings.user_name || '').trim();
+      const chatSig = `${chatFilterMode}|${me}|` + visible.map((m) => `${m.id}:${m.text || ''}:${m.audio ? 1 : 0}`).join(',');
+      if (chatSig === lastRenderedChatSig && el.children.length > 0) return;
+      lastRenderedChatSig = chatSig;
       el.innerHTML = visible.map((m) => {
         const isMe = (m.senderDeviceId && m.senderDeviceId === MY_DEVICE_ID) || m.sender === me;
         const targetLabel = (m.targetMode === 'MANUAL' && Array.isArray(m.targets) && m.targets.length)
@@ -5254,7 +5318,11 @@
         showToast('المزامنة محصورة بصلاحية المالك والمشرفين');
         return;
       }
-      await flushAutoCloudSync(false);
+      const hc = await supabaseRpc('rpc_health_check', {});
+      if (hc && hc.ok) {
+        setCloudDiagnostic(`✓ اتصال السحابة سليم (v${hc.version || '2.8'}) • الصوتيات: ${hc.voice_bucket_ready ? 'جاهزة' : 'تحتاج تفعيل'} • الإصدار السحابي: #${hc.snapshot_revision}`);
+      }
+      await flushAutoCloudSync(false, true);
     }
 
     async function pullSnapshotCloud(silent = false) {
@@ -5264,7 +5332,7 @@
         return;
       }
       try {
-        const res = await fetch(`${env.VITE_SUPABASE_URL}/rest/v1/app_snapshots?id=eq.primary_130mm&select=payload,revision,updated_at`, {
+        const res = await fetch(`${getSupabaseUrl()}/rest/v1/app_snapshots?id=eq.primary_130mm&select=payload,revision,updated_at`, {
           headers: getSupabaseHeaders()
         });
         if (!res.ok) {
@@ -5325,6 +5393,7 @@
           if (pinModalMode === 'UNLOCK_BLOCK') {
             await saveAppStateFast(false);
             await syncAccessControlFromCloud(false);
+            await pullSnapshotCloud(true);
             await fetchCloudChatHistory(false);
             startRealtimeEngine();
             renderAll();
@@ -5366,6 +5435,12 @@
 
       // Date & Filters
       document.getElementById('active-date').addEventListener('change', (e) => {
+        if (isViewerMode()) {
+          activeDate = getLocalIsoDate();
+          e.target.value = activeDate;
+          showToast('تغيير التاريخ غير مسموح لصلاحية المشاهد');
+          return;
+        }
         activeDate = e.target.value || activeDate;
         renderAll();
       });
@@ -5660,7 +5735,7 @@
         } else if (act === 'do-undo') {
           await performUndo();
         } else if (act === 'unban-target') {
-          const pinHash = sessionStorage.getItem(ACTIVE_PIN_KEY) || '';
+          const pinHash = authStore.get(ACTIVE_PIN_KEY) || '';
           await supabaseRpc('rpc_owner_manage_device', { p_owner_pin_hash: pinHash, p_action: 'unblock', p_target_device_id: btn.dataset.id });
           await syncAccessControlFromCloud(false);
           SoundFX.playClick();
@@ -5669,7 +5744,7 @@
           const dev = btn.dataset.dev;
           const nm = btn.dataset.name;
           if (!confirm(`تأكيد حظر الجهاز ${dev} (${nm}) من استخدام التطبيق؟`)) return;
-          const pinHash = sessionStorage.getItem(ACTIVE_PIN_KEY) || '';
+          const pinHash = authStore.get(ACTIVE_PIN_KEY) || '';
           await supabaseRpc('rpc_owner_manage_device', { p_owner_pin_hash: pinHash, p_action: 'block', p_target_device_id: dev, p_reason: `حظر جهاز ${nm}` });
           await syncAccessControlFromCloud(false);
           SoundFX.playClick();
@@ -5826,7 +5901,7 @@
         if (!hasValidOwnerSession()) return;
         SoundFX.playClick();
         const nextVal = !ownerStealthMode;
-        const pinHash = sessionStorage.getItem(ACTIVE_PIN_KEY) || '';
+        const pinHash = authStore.get(ACTIVE_PIN_KEY) || '';
         const res = await supabaseRpc('rpc_owner_set_stealth', {
           p_device_id: MY_DEVICE_ID,
           p_owner_pin_hash: pinHash,
@@ -5844,7 +5919,7 @@
       // Supervisor Settings Access Request Modal Buttons
       document.getElementById('btn-req-sup-settings').addEventListener('click', async () => {
         SoundFX.playClick();
-        const pinHash = sessionStorage.getItem(ACTIVE_PIN_KEY) || '';
+        const pinHash = authStore.get(ACTIVE_PIN_KEY) || '';
         const stEl = document.getElementById('sup-settings-req-status');
         const res = await supabaseRpc('rpc_request_settings_access', {
           p_device_id: MY_DEVICE_ID,
@@ -5879,7 +5954,7 @@
         state.settings.user_role = document.getElementById('set-user-role').value;
         state.settings.app_download_url = document.getElementById('set-download-url').value.trim() || 'https://tafaqqud-130mm.vercel.app';
         if (state.settings.user_role === 'VIEWER') {
-          sessionStorage.removeItem(SESSION_TOKEN_KEY);
+          authStore.remove(SESSION_TOKEN_KEY);
           settingsUnlocked = false;
         }
         await saveAppStateFast(true);
@@ -5899,7 +5974,7 @@
         const target = document.getElementById('ban-target-input').value.trim();
         const reason = document.getElementById('ban-reason-input').value.trim();
         if (!target) { showToast('أدخل اسم الشخص أو معرّف الجهاز أولاً'); return; }
-        const pinHash = sessionStorage.getItem(ACTIVE_PIN_KEY) || '';
+        const pinHash = authStore.get(ACTIVE_PIN_KEY) || '';
         await supabaseRpc('rpc_owner_manage_device', { p_owner_pin_hash: pinHash, p_action: 'block', p_target_device_id: target, p_reason: reason });
         document.getElementById('ban-target-input').value = '';
         document.getElementById('ban-reason-input').value = '';
@@ -5929,7 +6004,7 @@
           showToast('⚠️ يجب أن يكون رمز المالك مختلفاً تماماً عن رمز المشرفين والمشاهدين');
           return;
         }
-        const curOwnerHash = sessionStorage.getItem(ACTIVE_PIN_KEY) || getExpectedOwnerPinHash();
+        const curOwnerHash = authStore.get(ACTIVE_PIN_KEY) || getExpectedOwnerPinHash();
         const rpcRes = await supabaseRpc('rpc_owner_update_pins', {
           p_owner_pin_hash: curOwnerHash,
           p_new_owner_hash: newHash
@@ -5952,7 +6027,7 @@
           showToast('⚠️ رمز المشرفين يجب أن يختلف عن رمز المالك ورمز المشاهدين');
           return;
         }
-        const curOwnerHash = sessionStorage.getItem(ACTIVE_PIN_KEY) || getExpectedOwnerPinHash();
+        const curOwnerHash = authStore.get(ACTIVE_PIN_KEY) || getExpectedOwnerPinHash();
         const rpcRes = await supabaseRpc('rpc_owner_update_pins', {
           p_owner_pin_hash: curOwnerHash,
           p_new_supervisor_hash: newHash
@@ -5975,7 +6050,7 @@
           showToast('⚠️ رمز المشاهدين يجب أن يختلف عن رمز المالك ورمز المشرفين');
           return;
         }
-        const curOwnerHash = sessionStorage.getItem(ACTIVE_PIN_KEY) || getExpectedOwnerPinHash();
+        const curOwnerHash = authStore.get(ACTIVE_PIN_KEY) || getExpectedOwnerPinHash();
         const rpcRes = await supabaseRpc('rpc_owner_update_pins', {
           p_owner_pin_hash: curOwnerHash,
           p_new_viewer_hash: newHash
@@ -6100,6 +6175,7 @@
           await issueOwnerSession(res.hex);
           await saveAppStateFast(false);
           await syncAccessControlFromCloud(false);
+          await pullSnapshotCloud(true);
           await fetchCloudChatHistory(false);
           startRealtimeEngine();
           renderAll();
@@ -6233,7 +6309,7 @@
           return;
         }
         if (!confirm('تأكيد مسح الشات (النصي والصوتي) لدى الجميع نهائياً؟')) return;
-        const pinHash = sessionStorage.getItem(ACTIVE_PIN_KEY) || '';
+        const pinHash = authStore.get(ACTIVE_PIN_KEY) || '';
         const res = await supabaseRpc('rpc_clear_chat', { p_owner_pin_hash: pinHash });
         state.chat = [];
         await saveAppStateFast(false);
@@ -6295,21 +6371,21 @@
           renderHierarchy();
         } else if (act === 'approve-sup-settings') {
           const dev = el.dataset.dev;
-          const pinHash = sessionStorage.getItem(ACTIVE_PIN_KEY) || '';
+          const pinHash = authStore.get(ACTIVE_PIN_KEY) || '';
           const r = await supabaseRpc('rpc_owner_decide_settings', { p_owner_pin_hash: pinHash, p_target_device_id: dev, p_approve: true });
           await syncAccessControlFromCloud(false);
           SoundFX.playClick();
           showToast(r && r.ok ? `✓ تمت الموافقة للمشرف (${dev}) على دخول الإعدادات` : `خطأ: ${(r && r.error) || ''}`);
         } else if (act === 'revoke-sup-settings') {
           const dev = el.dataset.dev;
-          const pinHash = sessionStorage.getItem(ACTIVE_PIN_KEY) || '';
+          const pinHash = authStore.get(ACTIVE_PIN_KEY) || '';
           const r = await supabaseRpc('rpc_owner_decide_settings', { p_owner_pin_hash: pinHash, p_target_device_id: dev, p_approve: false });
           await syncAccessControlFromCloud(false);
           SoundFX.playClick();
           showToast(r && r.ok ? `🔒 تم سحب إذن الإعدادات من المشرف (${dev})` : `خطأ: ${(r && r.error) || ''}`);
         } else if (act === 'approve-dev') {
           const dev = el.dataset.dev;
-          const pinHash = sessionStorage.getItem(ACTIVE_PIN_KEY) || '';
+          const pinHash = authStore.get(ACTIVE_PIN_KEY) || '';
           await supabaseRpc('rpc_owner_manage_device', { p_owner_pin_hash: pinHash, p_action: 'approve', p_target_device_id: dev });
           await syncAccessControlFromCloud(false);
           SoundFX.playClick();
@@ -6317,14 +6393,14 @@
         } else if (act === 'reject-dev') {
           const dev = el.dataset.dev;
           const nm = el.dataset.name || dev;
-          const pinHash = sessionStorage.getItem(ACTIVE_PIN_KEY) || '';
+          const pinHash = authStore.get(ACTIVE_PIN_KEY) || '';
           await supabaseRpc('rpc_owner_manage_device', { p_owner_pin_hash: pinHash, p_action: 'block', p_target_device_id: dev, p_reason: `رفض طلب دخول ${nm}` });
           await syncAccessControlFromCloud(false);
           SoundFX.playClick();
           showToast('تم رفض الجهاز وإضافته لقائمة الحظر');
         } else if (act === 'revoke-approve') {
           const dev = el.dataset.dev;
-          const pinHash = sessionStorage.getItem(ACTIVE_PIN_KEY) || '';
+          const pinHash = authStore.get(ACTIVE_PIN_KEY) || '';
           await supabaseRpc('rpc_owner_manage_device', { p_owner_pin_hash: pinHash, p_action: 'block', p_target_device_id: dev, p_reason: 'سحب الاعتماد بأمر المالك' });
           await syncAccessControlFromCloud(false);
           SoundFX.playClick();
@@ -6658,7 +6734,7 @@
               (a) => (a.deviceId || '').toLowerCase() !== target && (a.userName || '').trim().toLowerCase() !== target
             );
           }
-          const pinHash = sessionStorage.getItem(ACTIVE_PIN_KEY) || '';
+          const pinHash = authStore.get(ACTIVE_PIN_KEY) || '';
           await supabaseRpc('rpc_owner_manage_device', { p_owner_pin_hash: pinHash, p_action: 'delete', p_target_device_id: el.dataset.target || banId });
           await syncAccessControlFromCloud(false);
           SoundFX.playClick();
@@ -6666,7 +6742,7 @@
         } else if (act === 'delete-device-rec') {
           const dev = el.dataset.dev || '';
           if (!confirm('حذف هذا الجهاز من قائمة الأجهزة المتصلة؟')) return;
-          const pinHash = sessionStorage.getItem(ACTIVE_PIN_KEY) || '';
+          const pinHash = authStore.get(ACTIVE_PIN_KEY) || '';
           await supabaseRpc('rpc_owner_manage_device', { p_owner_pin_hash: pinHash, p_action: 'delete', p_target_device_id: dev });
           await syncAccessControlFromCloud(false);
           SoundFX.playClick();
@@ -6725,9 +6801,14 @@
       });
 
       window.addEventListener('blur', () => {
-        if (isViewerMode()) {
-          triggerViewerPrivacyShield('🔒 المحتوى محمي — اضغط «العودة للعرض» للمتابعة.');
-        }
+        if (!isViewerMode()) return;
+        const activeTag = (document.activeElement && document.activeElement.tagName || '').toUpperCase();
+        if (activeTag === 'SELECT' || activeTag === 'INPUT') return;
+        setTimeout(() => {
+          if (isViewerMode() && document.hidden) {
+            triggerViewerPrivacyShield('🔒 المحتوى محمي — اضغط «العودة للعرض» للمتابعة.');
+          }
+        }, 180);
       });
 
       window.addEventListener('beforeprint', (e) => {
@@ -6761,7 +6842,7 @@
       const priority = isCustom ? (customOpts.priority || 'NORMAL') : 'NORMAL';
       const notify = isCustom ? Boolean(customOpts.notify) : true;
       const senderName = state.settings.user_name || (hasValidOwnerSession() ? 'أبو سعيد' : 'مشرف');
-      const pinHash = sessionStorage.getItem(ACTIVE_PIN_KEY) || '';
+      const pinHash = authStore.get(ACTIVE_PIN_KEY) || '';
 
       if (!isCustom && inp) inp.value = '';
       SoundFX.playClick();
@@ -6860,27 +6941,29 @@
 
           const durationSec = Math.max(1, Math.round((Date.now() - voiceStartTs) / 1000));
           const finalType = (mediaRecorder && mediaRecorder.mimeType) || mimeType || 'audio/webm';
-          const ext = finalType.includes('mp4') ? 'm4a' : (finalType.includes('ogg') ? 'ogg' : 'webm');
-          const blob = new Blob(voiceChunks, { type: finalType });
+          const cleanMime = finalType.split(';')[0].trim() || 'audio/webm';
+          const ext = cleanMime.includes('mp4') || cleanMime.includes('m4a') ? 'm4a' : (cleanMime.includes('ogg') ? 'ogg' : 'webm');
+          const blob = new Blob(voiceChunks, { type: cleanMime });
           voiceChunks = [];
           if (!blob.size) { showToast('التسجيل فارغ — أعد المحاولة'); return; }
 
           const senderName = state.settings.user_name || (hasValidOwnerSession() ? 'أبو سعيد' : 'مشرف');
-          const pinHash = sessionStorage.getItem(ACTIVE_PIN_KEY) || '';
-          const env = window.__TAFAQ_ENV__ || {};
+          const pinHash = authStore.get(ACTIVE_PIN_KEY) || '';
+          const supaUrl = getSupabaseUrl();
+          const supaKey = getSupabaseKey();
           let audioUrlToSave = '';
 
-          if (env.VITE_SUPABASE_URL && env.VITE_SUPABASE_ANON_KEY && navigator.onLine) {
+          if (supaUrl && supaKey && navigator.onLine) {
             showToast('⏳ جارٍ رفع وإرسال الرسالة الصوتية للجميع...');
             const filePath = `voice_${MY_DEVICE_ID}_${Date.now()}.${ext}`;
             try {
-              const upRes = await fetch(`${env.VITE_SUPABASE_URL}/storage/v1/object/voice-notes/${filePath}`, {
+              const upRes = await fetch(`${supaUrl}/storage/v1/object/voice-notes/${filePath}`, {
                 method: 'POST',
-                headers: getSupabaseHeaders({ 'Content-Type': finalType, 'x-upsert': 'false' }),
+                headers: getSupabaseHeaders({ 'Content-Type': cleanMime, 'x-upsert': 'true' }),
                 body: blob
               });
               if (upRes.ok) {
-                audioUrlToSave = `${env.VITE_SUPABASE_URL}/storage/v1/object/public/voice-notes/${filePath}`;
+                audioUrlToSave = `${supaUrl}/storage/v1/object/public/voice-notes/${filePath}`;
               } else if (blob.size <= 350 * 1024) {
                 // بديل ذكي: إذا لم تكن حاوية voice-notes منشأة بعد وكان المقطع صغيراً نرسله كـ DataURL ليصل للجميع
                 audioUrlToSave = await blobToDataUrl(blob);
@@ -7006,9 +7089,12 @@
             });
           });
         }).catch(() => {});
-        let reloaded = false;
+        let swUpdatedNotified = false;
         navigator.serviceWorker.addEventListener('controllerchange', () => {
-          if (!reloaded) { reloaded = true; window.location.reload(); }
+          if (!swUpdatedNotified) {
+            swUpdatedNotified = true;
+            showToast('✓ تم تحديث منظومة راصد للنسخة v2.8.0 بنجاح');
+          }
         });
       }
     }

@@ -3,7 +3,7 @@
   "outputDirectory": "dist",
   "rewrites": [
     {
-      "source": "/((?!icons/|\\.well-known/|sw\\.js|manifest\\.webmanifest).*)",
+      "source": "/((?!icons/|\\.well-known/|sw\\.js|manifest\\.webmanifest|favicon\\.ico).*)",
       "destination": "/index.html"
     }
   ],
@@ -30,6 +30,24 @@
         {
           "key": "Strict-Transport-Security",
           "value": "max-age=63072000; includeSubDomains; preload"
+        }
+      ]
+    },
+    {
+      "source": "/",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "no-cache, no-store, must-revalidate"
+        }
+      ]
+    },
+    {
+      "source": "/index.html",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "no-cache, no-store, must-revalidate"
         }
       ]
     },
